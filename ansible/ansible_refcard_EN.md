@@ -1,0 +1,2 @@
+# Ansible RefCard
+*Version française*
