@@ -3,7 +3,7 @@
 
 RefCard for Ansible usage.
 
-Written by Germain LEFEBVRE by December 2018 for Ansible v2.7 usage.
+Written by Germain LEFEBVRE on December 2018 for Ansible v2.7 usage.
 
 
 **Table of Contents**
@@ -21,7 +21,7 @@ Written by Germain LEFEBVRE by December 2018 for Ansible v2.7 usage.
 1. [Ansible Modules](#ansible-modules)
 1. [Ansible Vault](#ansible-vault)
 
-   
+
 
 ### Context
 
@@ -215,7 +215,7 @@ A playbook is the gathering between hosts where will be applied tasks.
 ## Ansible Variables
 ### Variable Definition
 
-A Ansible variable is defined in *group_vars*, *host_vars*, *host_vars* and is called in Jinja Templating way : `{{ my_variable }}`. You can call variables everywhere in Ansible (tasks, variables, template, ...)
+A Ansible variable is defined in *group_vars*, *host_vars*, *role vars*, *CLI vars* and is called in Jinja Templating way : `{{ my_variable }}`. You can call variables everywhere in Ansible (tasks, variables, template, ...)
 
 ### Variable Typology
 
@@ -457,6 +457,33 @@ Only `import_role` works for including a whole role in a playbook using tags on 
       name: example
 ```
 
+## Ansible Options
+Ansible offre des possibilités plus avancées qui aident à la vérification, au débuggage et poussent sur le plan non destructif des exécutions.
+
+### Filter with Inventory
+Option `--limit` or `-l` filters playbook runtime by server (host or alias), inventory groups and understand the exclusions.
+```
+ansible-playbook -i hosts.yml playbook.yml --limit 'linux,!debian'
+```
+
+### Filter by Tag
+Option `--tag` or `-t` filters playbook tasks on tags set through attribut `tags:` on Plays and Tasks. Exclusion is possible on Tag filter.
+```
+ansible-playbook -i host.yml playbook.yml --tags 'config,service,!reload'
+```
+
+### Run in Dry-Run
+Option `--check` runs playbook without applying any modification on server and reveals the state for every Task (ok, changed, failed). Dry-Run mode make verifications easy.
+```
+ansible-playbook -i host.yml playbook.yml --check
+```
+Dry-Run mode is not plenty compatible with shell module because no state is returned on running shell scripts or commands.
+
+### Mode Differences
+Option `--diff` show differences between Ansible and Server sides and is closely linked to files (copy, template modules). Differences mode is a good way to see changes on servers.
+```
+ansible-playbook -i host.yml playbook.yml --diff
+```
 
 ## Ansible Modules
 ### Location
