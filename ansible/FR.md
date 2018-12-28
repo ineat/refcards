@@ -10,7 +10,7 @@ Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
 1. [Version Ansible à jour](#version-ansible-à-jour)
 1. [Définitions des objets](#définitions-des-objets)
 1. [Configuration de Ansible](#configuration-de-ansible)
-1. [Commandes AdHoc](#commandes-adhoc)
+1. [Commandes AdHoc](#ansible-adhoc-commands)
 1. [Ansible Inventories](#ansible-inventories)
 1. [Ansible Tasks](#ansible-tasks)
 1. [Ansible Playbooks](#ansible-playbooks)
@@ -102,7 +102,7 @@ Les Handlers sont des actions appelées lors qu'elles sont déclenchées par des
 Les Modules sont des scripts écrits en Python qui constituent les tâches. Une tâche appelle un module à l'aide du YAML qui sera ensuite exécuté sur le serveur distant. Les modules permettent d'uniformiser les actions à appliquer.
 
 
-## Ansible Configuration
+## Configuration de Ansible
 Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorité suivante (laplus forte valeur en premier) :
 * Variables d'environnements
 * ansible.cfg (répertoire courant)
