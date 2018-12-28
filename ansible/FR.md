@@ -103,7 +103,7 @@ Les Modules sont des scripts écrits en Python qui constituent les tâches. Une 
 
 
 ## Ansible Configuration
-Ansible peut être configuré à l'aide de fichiers ou de variablesd'environnement système. La configuration suivra l'ordre de priorité suivante (laplus forte valeur en premier) :
+Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorité suivante (laplus forte valeur en premier) :
 * Variables d'environnements
 * ansible.cfg (répertoire courant)
 * ~/.ansible.cfg (utilisateur courant)
@@ -429,7 +429,7 @@ Seul l'appel `import_playbook` permet d'inclure un Playbook entier dans un autre
 ```
 
 ### Inclusion d'un rôle
-Les appels `import_role` et `include_role` permettent d'inclure des tâche sd'un rôle. This will include the whole role `example`.
+Les appels `import_role` et `include_role` permettent d'inclure des tâches d'un rôle. This will include the whole role `example`.
 ```yaml
 - hosts: [redhat]
   tasks:
