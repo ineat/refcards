@@ -409,6 +409,12 @@ Fichier Task `roles/example/tasks/main.yml`
 
 
 ## Import de Playbooks, Tasks et Roles
+### Inclusion d'un playbook
+Seul l'appel `import_playbook` permet d'inclure un Playbook entier dans un autre.
+```yaml
+- import_playbook: install_apache.yml
+```
+
 ### Inclusion de tâches
 Les appels `import_task` et `include_task` permettent d'inclure des tâches.
 ```yaml
@@ -420,20 +426,16 @@ Les appels `import_task` et `include_task` permettent d'inclure des tâches.
 Les 2 méthodes ont des particularités.
 
 ### Inclusion de tâches en filtrant par tag
-Seule l'appel `import_tasks` permet d'inclure des tâches et de les filtrer à l'aide de Tags.
-
-### Inclusion d'un playbook
-Seul l'appel `import_playbook` permet d'inclure un Playbook entier dans un autre.
-```yaml
-- import_playbook: install_apache.yml
-```
+Seule l'appel `import_tasks` permet d'inclure des tâches et de les filtrer à l'aide de Tags. **Important** : Les appels `include_tasks` nécessitent de comporter les tags à propager, sinon les tâches ne s'exécuteront pas.
 
 ### Inclusion d'un rôle
-Les appels `import_role` et `include_role` permettent d'inclure des tâches d'un rôle. This will include the whole role `example`.
+Les appels `import_role` et `include_role` permettent d'inclure des tâches d'un rôle.
 ```yaml
 - hosts: [redhat]
   tasks:
   - import_role:
+      name: example
+  - include_role:
       name: example
 ```
 
@@ -446,10 +448,10 @@ L'appel `include_role` permet d'inclure une partie d'un rôle en embarquant son 
       name: example
       tasks_from: install
 ```
-Ceci appelle le rôle `example` au travers du fichier de tâche `install.yml`.
+Ceci appelle le rôle `example` au travers du fichier de tâche `install.yml` inclus dans le rôle.
 
-### Inclusion de tâches en filtrant par tag
-Seul l'appel `include_role` permet d'inclure un rôle tout en posant un filtre avec des tags.
+### Inclusion de rôle en filtrant par tag
+Seul l'appel `import_role` permet d'inclure un rôle tout en posant un filtre avec des tags. **Important** : Les appels `include_role` nécessitent de comporter les tags à propager, sinon les tâches ne s'exécuteront pas.
 ```yaml
 - hosts: [redhat]
   tasks:
@@ -469,7 +471,7 @@ ansible-playbook -i hosts.yml playbook.yml --limit 'linux,!debian'
 ### Filtre par Tag
 L'option `--tag` ou `-t` filtre l'exécution du Playbook par tag stipulés dans l'attribut `tags:` des Plays et Tasks. L'exclusion est possible sur le filtre par Tag.
 ```
-ansible-playbook -i host.yml playbook.yml --tags 'config,service,!reload'
+ansible-playbook -i host.yml playbook.yml --tags 'config,service' --skip-tags 'reload'
 ```
 
 ### Mode Dry-Run
