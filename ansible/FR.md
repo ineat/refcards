@@ -7,8 +7,8 @@ Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
 
 **Sommaire**
 1. [Contexte](#context)
-1. [Version Ansible à jour](#version-ansible-a-jour)
-1. [Définitions des objets](#definitions-des-objets)
+1. [Version Ansible à jour](#version-ansible-à-jour)
+1. [Définitions des objets](#définitions-des-objets)
 1. [Configuration de Ansible](#configuration-de-ansible)
 1. [Commandes AdHoc](#commandes-adhoc)
 1. [Ansible Inventories](#ansible-inventories)
@@ -71,34 +71,34 @@ Ansible met à dispo des guides de portage pour aider à rester à jour :
 * [Ansible 2.7 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.7.html)
 
 ## Définitions des objets
-### Ansible Facts
+### Facts
 Les Facts sont des variables utilisées par Ansible pour persiter des données entre les machine et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
 
-### Ansible Hosts
+### Hosts
 Les Hosts sont les serveurs joignable par le Master Ansible sur lesquels sont appliqués les actions.
 
-### Ansible Inventories
+### Inventories
 Les Inventories comportent la liste des serveurs identifiées par IP/FQDN et organisés dans des groups. Les groupes peuvent être constitués de serveurs ou de groupes de serveurs. Les serveurs peuvent être aliasés pour faciliter la lisibilité globale.
 
-### Ansible Tasks
+### Tasks
 Les Tasks sont des actions exécutées sur les serveurs distants. Les tâches sont écrites en YAML. La structure descriptive des actions permet de faciliter la lecture, d'unifier d'homogénéiser l'écriture.
 
-### Ansible Variables
+### Variables
 Les Variables apportent la possibilité de modifier les valeurs au sein des tâches. Elles puevent avoir une portée locale à une séquence ou un portée globale à tous les playbooks.
 
-### Ansible Plays
+### Plays
 Les Plays sont des séquences d'action, elles des tâches et des inventaires. Ils permettent d'appliquer une liste de tâches sur un ensemble de serveurs.
 
-### Ansible Playbooks
+### Playbooks
 Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont les fichiers lancés avec la commande ansible-playbook.
 
-### Ansible Roles
+### Roles
 Les Roles sont des regroupements de tâches servants dans un même but. Ils sont appelés par les playbooks et permettent une meilleure lisibilité et facilité d'écriture. Les Roles ont pour vocation de devenir génériques, réutilisables et personnalisables grace aux variables.
 
-### Ansible Handlers
+### Handlers
 Les Handlers sont des actions appelées lors qu'elles sont déclenchées par des tâches. Le déclenchement se fait à l'exécution d'une tâche, mais son exécution s'effectue à la fin de la séquence d'actions.
 
-### Ansible Modules
+### Modules
 Les Modules sont des scripts écrits en Python qui constituent les tâches. Une tâche appelle un module à l'aide du YAML qui sera ensuite exécuté sur le serveur distant. Les modules permettent d'uniformiser les actions à appliquer.
 
 
