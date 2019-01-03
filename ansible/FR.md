@@ -26,7 +26,7 @@ Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
    
 
 ### Context
-Voici la liste des versions des paquets utilisés pou rréaliser la Refcard.
+Voici la liste des versions des paquets utilisés pour réaliser la RefCard.
 
 Distribution et version :
 ```sh
@@ -62,7 +62,7 @@ ansible 2.7.1
 Ansible dévoile leur Roadmap pour la v2.7 : [https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html](https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html)
 
 
-Ansible met à dispo des guides de portage pour aider à rester à jour :
+Ansible met à disposition des guides de portage pour aider à rester à jour :
 * [Ansible 2.0 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.0.html)
 * [Ansible 2.3 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.3.html)
 * [Ansible 2.4 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.4.html)
@@ -72,38 +72,38 @@ Ansible met à dispo des guides de portage pour aider à rester à jour :
 
 ## Définitions des objets
 ### Facts
-Les Facts sont des variables utilisées par Ansible pour persiter des données entre les machine et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
+Les Facts sont des variables utilisées par Ansible pour persiter des données entre les machines et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
 
 ### Hosts
-Les Hosts sont les serveurs joignable par le Master Ansible sur lesquels sont appliqués les actions.
+Les Hosts sont les serveurs joignable par le Master Ansible sur lesquels sont appliquées les actions.
 
 ### Inventories
-Les Inventories comportent la liste des serveurs identifiées par IP/FQDN et organisés dans des groups. Les groupes peuvent être constitués de serveurs ou de groupes de serveurs. Les serveurs peuvent être aliasés pour faciliter la lisibilité globale.
+Les Inventories comportent la liste des serveurs identifiés par IP/FQDN et organisés dans des groupes. Les groupes peuvent être constitués de serveurs ou de groupes de serveurs. Les serveurs peuvent être aliasés pour faciliter la lisibilité globale.
 
 ### Tasks
 Les Tasks sont des actions exécutées sur les serveurs distants. Les tâches sont écrites en YAML. La structure descriptive des actions permet de faciliter la lecture, d'unifier d'homogénéiser l'écriture.
 
 ### Variables
-Les Variables apportent la possibilité de modifier les valeurs au sein des tâches. Elles puevent avoir une portée locale à une séquence ou un portée globale à tous les playbooks.
+Les Variables apportent la possibilité de modifier les valeurs au sein des tâches. Elles puevent avoir une portée locale à une séquence ou une portée globale à tous les playbooks.
 
 ### Plays
-Les Plays sont des séquences d'action, elles des tâches et des inventaires. Ils permettent d'appliquer une liste de tâches sur un ensemble de serveurs.
+Les Plays sont des séquences d'actions, comportent des tâches et des inventaires. Ils permettent d'appliquer une liste de tâches sur un ensemble de serveurs.
 
 ### Playbooks
 Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont les fichiers lancés avec la commande ansible-playbook.
 
 ### Roles
-Les Roles sont des regroupements de tâches servants dans un même but. Ils sont appelés par les playbooks et permettent une meilleure lisibilité et facilité d'écriture. Les Roles ont pour vocation de devenir génériques, réutilisables et personnalisables grace aux variables.
+Les Roles sont des regroupements de tâches servant dans un même but. Ils sont appelés par les playbooks et permettent une meilleure lisibilité et facilité d'écriture. Les Roles ont pour vocation de devenir génériques, réutilisables et personnalisables grace aux variables.
 
 ### Handlers
-Les Handlers sont des actions appelées lors qu'elles sont déclenchées par des tâches. Le déclenchement se fait à l'exécution d'une tâche, mais son exécution s'effectue à la fin de la séquence d'actions.
+Les Handlers sont des actions appelées lorsqu'elles sont déclenchées par des tâches. Le déclenchement se fait à l'exécution d'une tâche, mais son exécution s'effectue à la fin de la séquence d'actions.
 
 ### Modules
 Les Modules sont des scripts écrits en Python qui constituent les tâches. Une tâche appelle un module à l'aide du YAML qui sera ensuite exécuté sur le serveur distant. Les modules permettent d'uniformiser les actions à appliquer.
 
 
 ## Configuration de Ansible
-Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorité suivante (laplus forte valeur en premier) :
+Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorité suivante (la plus forte valeur en premier) :
 * Variables d'environnements
 * ansible.cfg (répertoire courant)
 * ~/.ansible.cfg (utilisateur courant)
@@ -111,7 +111,7 @@ Ansible peut être configuré à l'aide de fichiers ou de variables d'environnem
 
 
 ## Ansible AdHoc Commands
-Les comandes AdHoc sont lancées à la volée sans travail ni configuration préalable. Elles permettent de lancer des actions simples sur l'ensemble des serveurs.
+Les commandes AdHoc sont lancées à la volée sans travail ni configuration préalable. Elles permettent de lancer des actions simples sur l'ensemble des serveurs.
 Il est nécessaire de lui passer en argument les serveurs (ou groupe de serveurs), le module à lancer (-m) et ses arguments (-a).
 ```sh
 ansible localhost -m ping
@@ -126,7 +126,7 @@ ansible redhat -i inventories/hosts -m shell -a 'uptime'
 
 ## Ansible Inventories
 Les inventaires rassemblent les tâches et roles à appliquer sur des serveurs ou groupes de serveurs.
-Ils sont généralement organisés par environnement pour utiliser toute la puissances des variables et notamment des gorup_vars.
+Ils sont généralement organisés par environnement pour utiliser toute la puissance des variables et notamment des group_vars.
 Définition d'un inventaire :
 ```yaml
 server.domain.fr
@@ -156,7 +156,7 @@ win01
 
 
 ## Ansible Tasks
-Une tâche Ansible est définie par une structure descriptive en YAML. L'objet suivant liste les options d'une tâche, seul l'utilisation des modules est indispensable.
+Une tâche Ansible est définie par une structure descriptive en YAML. L'objet suivant liste les options d'une tâche, seule l'utilisation des modules est indispensable.
 
 Définition de Task :
 ```yaml
@@ -224,7 +224,7 @@ Un Playbook permet d'appliquer des tâches sur les serveurs de l'inventaire.
 ## Ansible Variables
 ### Variable Definition
 
-Une variable Ansible peut est définie à plusieurs endroits, notamment dans les *group_vars*, *host_vars*, *role vars*, *CLI vars* and est appelée à l'aide du Templating Jinja : `{{ my_variable }}`. Les variables peuvent être appelées dans tous les ojets Ansible (tasks, variables, template, ...).
+Une variable Ansible peut être définie à plusieurs endroits, notamment dans les *group_vars*, *host_vars*, *role vars*, *CLI vars* et est appelée à l'aide du Templating Jinja : `{{ my_variable }}`. Les variables peuvent être appelées dans tous les objets Ansible (tasks, variables, template, ...).
 
 ### Variable Typology
 
@@ -246,7 +246,7 @@ my_dict:
 ```
 
 ### Variable precedence
-Les variables Ansible peuvent être déinies à plusieurs endroits comme `group_vars`, `playbooks`, `roles`, etc... et sont évaluées par priorité. Voici la liste des priorité en commençant par la plus faible priorité :
+Les variables Ansible peuvent être définies à plusieurs endroits comme `group_vars`, `playbooks`, `roles`, etc... et sont évaluées par priorité. Voici la liste des priorités en commençant par la plus faible :
 ```
 Valeur en ligne de commande
 Valeur par default du rôle
@@ -274,7 +274,7 @@ Extra vars eargument des CLI (-e)
 
 
 ## Ansible Plays
-Une liste conséquente d'attributs d'un Play Ansible au sien d'un Playbook :
+Une liste conséquente d'attributs d'un Play Ansible au sein d'un Playbook :
 ```yaml
 - hosts: webservers
   accelerate: no
@@ -358,7 +358,7 @@ Liste des fichiers potentiels et leurs fonctions au sein du rôle :
 * `my-role/defaults/main.yml` définit les variables par défaut du rôle,
 * `my-role/files/file` est un fichier (sans variables Jinja) à copier sur le serveur distant,
 * `my-role/handlers/main.yml` définit les Handlers déclenchables,
-* `my-role/tasks/main.yml` est le fichier de tâche par défaut appelé à l'appel du rôle,
+* `my-role/tasks/main.yml` est le fichier de tâches par défaut appelé à l'appel du rôle,
 * `my-role/templates/template.yml.j2` est un fichier (avec variables Jinja) à copier,
 * `my-role/vars/main.yml` définit les variables à surcharger.
 
@@ -392,7 +392,7 @@ Fichier Task `roles/example/tasks/main.yml`.
     dest: /etc/httpd/conf/httpd.conf
   notify: Restart Apache
 ```
-Le Handler `Restart Apache` sera déclenché à l'exécution de la Task `copy` (état *changed).
+Le Handler `Restart Apache` sera déclenché à l'exécution de la Task `copy` (état *changed*).
 
 #### Variables par défaut du rôle
 Ficheir Variables `roles/example/defaults/main.yml`
@@ -463,7 +463,7 @@ Seul l'appel `import_role` permet d'inclure un rôle tout en posant un filtre av
 Ansible offre des possibilités plus avancées qui aident à la vérification, au débuggage et poussent sur le plan non destructif des exécutions.
 
 ### Filtre sur l'inventaire
-L'option `--limit` ou `-l` filtre l'exécution du Playbook par serveur (host ou alias), groups de l'inventaire et interpête parfaitement les exclusion.
+L'option `--limit` ou `-l` filtre l'exécution du Playbook par serveur (host ou alias), groupe de l'inventaire et interpête parfaitement les exclusions.
 ```
 ansible-playbook -i hosts.yml playbook.yml --limit 'linux,!debian'
 ```
@@ -475,7 +475,7 @@ ansible-playbook -i host.yml playbook.yml --tags 'config,service' --skip-tags 'r
 ```
 
 ### Mode Dry-Run
-L'option `--check` déroule le Playbook sans effectuer la modification coté serveur et projette l'état qu'il de l'action (ok, changed, failed). Le mode Dry-Run est un bon moyen de tester la robustesse des scripts Ansible.
+L'option `--check` déroule le Playbook sans effectuer la modification coté serveur et projette l'état de l'action (*ok*, *changed*, *failed*). Le mode Dry-Run est un bon moyen de tester la robustesse des scripts Ansible.
 ```
 ansible-playbook -i host.yml playbook.yml --check
 ```
@@ -489,7 +489,7 @@ ansible-playbook -i host.yml playbook.yml --diff
 
 ## Ansible Modules
 ### Emplacement
-Le modules peut être stocké à plusieurs endroits :
+Le module peut être stocké à plusieurs endroits :
 * En local (répertoire courant) : Créer le Module Ansible où sont lancés les Playbooks dans le répertoire `library`.
 * Coté Serveur (tous les utilisateurs) : Définir le chemin des modules dans l'attriubt `library` du fichier `ansible.cfg`.
 ```ini
@@ -619,10 +619,10 @@ Ansible est en premier lieu un outil de déploiement permettant d'homogénéiser
 ### Vérifications
 Ansible peut cependant être utilisé pour une toute autre utilisation.
 L'implémentation du mode Dry-Run permet de vérifier l'état des serveurs sans apporter de modifications.
-Il devient facile de l'utiliser comme outil de vérification dans le but de contrôler tout changements opérés sur les serveurs.
+Il devient facile de l'utiliser comme outil de vérification dans le but de contrôler tous changements opérés sur les serveurs.
 
 ### Idempotence
 L'idempotence est la facultée d'une action à ne pas appliquer de changement quand il n'est pas nécessaire.
-La répétabilité de l'action ne doit pas être destructrice (état changed) et doit remontée quant à sa bonne configuration (état ok).
+La répétabilité de l'action ne doit pas être destructrice (état *changed*) et doit remonter quant à sa bonne configuration (état *ok*).
 
-Un playbook est idempotent dès lors qu'il ne provoque plus d'état `changed`à son passage. L'idempotence est dite parfaite quand, à un instant t, les actions sont changeantes sur le premier lancement et ne le sont plus sur tous les suivants.
+Un playbook est idempotent dès lors qu'il ne provoque plus d'état *changed* à son passage. L'idempotence est dite parfaite quand, à un instant t, les actions sont changeantes sur le premier lancement et ne le sont plus sur tous les suivants.
