@@ -59,7 +59,7 @@ ansible 2.7.1
 
 
 ## Version Ansible à jour
-Ansible dévoile leur Roadmap pour la v2.7 : [https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html](https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html)
+Ansible dévoile sa Roadmap pour la v2.7 : [https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html](https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html)
 
 
 Ansible met à disposition des guides de portage pour aider à rester à jour :
@@ -75,13 +75,13 @@ Ansible met à disposition des guides de portage pour aider à rester à jour :
 Les Facts sont des variables utilisées par Ansible pour persiter des données entre les machines et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
 
 ### Hosts
-Les Hosts sont les serveurs joignable par le Master Ansible sur lesquels sont appliquées les actions.
+Les Hosts sont les serveurs joignables par le Master Ansible sur lesquels sont appliquées les actions.
 
 ### Inventories
 Les Inventories comportent la liste des serveurs identifiés par IP/FQDN et organisés dans des groupes. Les groupes peuvent être constitués de serveurs ou de groupes de serveurs. Les serveurs peuvent être aliasés pour faciliter la lisibilité globale.
 
 ### Tasks
-Les Tasks sont des actions exécutées sur les serveurs distants. Les tâches sont écrites en YAML. La structure descriptive des actions permet de faciliter la lecture, d'unifier d'homogénéiser l'écriture.
+Les Tasks sont des actions exécutées sur les serveurs distants. Les tâches sont écrites en YAML. La structure descriptive des actions permet de faciliter la lecture, d'unifier et d'homogénéiser l'écriture.
 
 ### Variables
 Les Variables apportent la possibilité de modifier les valeurs au sein des tâches. Elles puevent avoir une portée locale à une séquence ou une portée globale à tous les playbooks.
@@ -90,7 +90,7 @@ Les Variables apportent la possibilité de modifier les valeurs au sein des tâc
 Les Plays sont des séquences d'actions, comportent des tâches et des inventaires. Ils permettent d'appliquer une liste de tâches sur un ensemble de serveurs.
 
 ### Playbooks
-Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont les fichiers lancés avec la commande ansible-playbook.
+Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont des fichiers lancés avec la commande ansible-playbook.
 
 ### Roles
 Les Roles sont des regroupements de tâches servant dans un même but. Ils sont appelés par les playbooks et permettent une meilleure lisibilité et facilité d'écriture. Les Roles ont pour vocation de devenir génériques, réutilisables et personnalisables grace aux variables.
@@ -426,7 +426,7 @@ Les appels `import_task` et `include_task` permettent d'inclure des tâches.
 Les 2 méthodes ont des particularités.
 
 ### Inclusion de tâches en filtrant par tag
-Seule l'appel `import_tasks` permet d'inclure des tâches et de les filtrer à l'aide de Tags. **Important** : Les appels `include_tasks` nécessitent de comporter les tags à propager, sinon les tâches ne s'exécuteront pas.
+Seul l'appel `import_tasks` permet d'inclure des tâches et de les filtrer à l'aide de Tags. **Important** : Les appels `include_tasks` nécessitent de comporter les tags à propager, sinon les tâches ne s'exécuteront pas.
 
 ### Inclusion d'un rôle
 Les appels `import_role` et `include_role` permettent d'inclure des tâches d'un rôle.
@@ -475,7 +475,7 @@ ansible-playbook -i host.yml playbook.yml --tags 'config,service' --skip-tags 'r
 ```
 
 ### Mode Dry-Run
-L'option `--check` déroule le Playbook sans effectuer la modification coté serveur et projette l'état de l'action (*ok*, *changed*, *failed*). Le mode Dry-Run est un bon moyen de tester la robustesse des scripts Ansible.
+L'option `--check` déroule le Playbook sans effectuer la modification côté serveur et projette l'état de l'action (*ok*, *changed*, *failed*). Le mode Dry-Run est un bon moyen de tester la robustesse des scripts Ansible.
 ```
 ansible-playbook -i host.yml playbook.yml --check
 ```
