@@ -571,34 +571,34 @@ def process(self):
 
 ### Vault Configuration
 
-La configuration du Password dans Ansible Vault se fait sous plusieurs angles :
+La configuration du mot de passe dans Ansible Vault se fait sous plusieurs angles :
 * Attribut `vault_password_file` dans le fichier `ansible.cfg`,
 * Variable environnement `ANSIBLE_VAULT_PASSWORD_FILE`,
-* Argument de commande `--vault-password-file` ou `--vault-id` avec le fichier contenant le Password,
-* Argument de commande `--ask-vault-pass` pour demander le Password.
+* Argument de commande `--vault-password-file` ou `--vault-id` avec le fichier contenant le mot de passe,
+* Argument de commande `--ask-vault-pass` pour demander le mot de passe.
 
 
 ### Vault Fichier
-Un fichier peut être verrouillé complètement.
+Un fichier peut être encrypté complètement.
 ```
 ansible-vault create foo.yml
 ansible-vault encrypt foo.yml
 ```
 
-Une fois verrouillé, il est possible de le lire ou le déverrouiller.
+Une fois encrypté, il est possible de le lire ou le décrypter.
 ```
 ansible-vault view foo.yml
 ansible-vault decrypt foo.yml
 ```
 
 ### Vault Variables
-Une variable peut être verrouillée, au lieu du fichier, pour faciliter l'accès au fichier en clair sans dévoiler les valeurs sensibles.
+Une variable peut être encryptée, au lieu du fichier, pour faciliter l'accès au fichier en clair sans dévoiler les valeurs sensibles.
 ```
 ansible-vault encrypt_string --name 'mykey' 'mysecret'
 ```
 
 ### Ansible avec Vault
-La configuration du Password dans le système est important pour utiliser Ansible sans stipuler le Password à chaque commande.
+La configuration du mot de passe dans le système est importante pour utiliser Ansible le stipuler à chaque commande.
 
 Si ce n'est pas le cas, il est nécessaire de l'inclure dans la commande.
 ```
@@ -608,7 +608,7 @@ ansible-playbook --vault-id dev@dfile-dev-password site.yml
 ansible-playbook --vault-id prod@prompt site.yml
 ```
 
-Il est également possible de fournir plusieurs Password pour dérouler les actions sur plusieurs environnements sans changer la commande entre les plateformes.
+Il est également possible de fournir plusieurs mots de passe pour dérouler les actions sur plusieurs environnements sans changer la commande entre les plateformes.
 ```
 ansible-playbook --vault-id dev@dev-password --vault-id prod@prompt site.yml
 ```
