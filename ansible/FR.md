@@ -103,7 +103,7 @@ Les Modules sont des scripts écrits en Python qui constituent les tâches. Une 
 
 
 ## Configuration de Ansible
-Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorité suivante (la plus forte valeur en premier) :
+Ansible peut être configuré à l'aide de fichiers ou de variables d'environnement système. La configuration suivra l'ordre de priorités suivantes (la plus forte valeur en premier) :
 * Variables d'environnements
 * ansible.cfg (répertoire courant)
 * ~/.ansible.cfg (utilisateur courant)
@@ -255,7 +255,7 @@ Inventaire global group_vars/all
 Playook group_vars/all
 Inventaires group_vars/*
 Playbook group_vars/*
-inventory file or script host vars
+Fichier d'inventaire ou script host vars
 Inventaire host_vars/*
 Playbook host_vars/*
 Facts serveur / set_facts en cache
@@ -269,7 +269,7 @@ Import de variables include_vars
 Facts set_facts / Variables register
 Paramètres de rôle and inclusion include_role
 Import des paramètres
-Extra vars eargument des CLI (-e)
+Extra vars argument des CLI (-e)
 ```
 
 
@@ -496,7 +496,7 @@ Le module peut être stocké à plusieurs endroits :
 library = /usr/share/my_modules/
 ```
 
-### Instanciation de la Class du Module
+### Instanciation de la Classe du Module
 Le module à appeler correspond au nom du fichier du Module : `./library/myansiblemodule.py`.
 La Classe du Module doit à minima comporter un constructeur et une méthode d'appel, ici `def process()`.
 ```python
@@ -549,7 +549,7 @@ def process(self):
 ```
 
 ### Activation du mode Dry-Run
-Pour utiliser le mode Dry-Run, il faut activer l'option `supports_check_mode` dans le Classe.
+Pour utiliser le mode Dry-Run, il faut activer l'option `supports_check_mode` dans la Classe.
 ```python
 def main():
     MyAnsibleModule(
@@ -619,7 +619,7 @@ Ansible est en premier lieu un outil de déploiement permettant d'homogénéiser
 ### Vérifications
 Ansible peut cependant être utilisé pour une toute autre utilisation.
 L'implémentation du mode Dry-Run permet de vérifier l'état des serveurs sans apporter de modifications.
-Il devient facile de l'utiliser comme outil de vérification dans le but de contrôler tous changements opérés sur les serveurs.
+Il devient facile de l'utiliser comme outil de vérification dans le but de contrôler tout changement opéré sur les serveurs.
 
 ### Idempotence
 L'idempotence est la facultée d'une action à ne pas appliquer de changement quand il n'est pas nécessaire.
