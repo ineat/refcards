@@ -22,8 +22,9 @@ Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
 1. [Ansible Modules](#ansible-modules)
 1. [Ansible Vault](#ansible-vault)
 1. [Extension par utilisation](#extension-par-utilisation)
+1. [Pense-bête](#pense-bete)
 
-   
+ 
 
 ### Context
 Voici la liste des versions des paquets utilisés pour réaliser la RefCard.
@@ -626,3 +627,10 @@ L'idempotence est la facultée d'une action à ne pas appliquer de changement qu
 La répétabilité de l'action ne doit pas être destructrice (état *changed*) et doit remonter quant à sa bonne configuration (état *ok*).
 
 Un playbook est idempotent dès lors qu'il ne provoque plus d'état *changed* à son passage. L'idempotence est dite parfaite quand, à un instant t, les actions sont changeantes sur le premier lancement et ne le sont plus sur tous les suivants.
+
+
+## Pense-bête
+```
+groups['my-group'] | map('extract', hostvars, ['ansible_host'])
+
+```

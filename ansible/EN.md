@@ -20,6 +20,7 @@ Written by Germain LEFEBVRE on December 2018 for Ansible v2.7 usage.
 1. [Ansible Roles](#ansible-roles)
 1. [Ansible Modules](#ansible-modules)
 1. [Ansible Vault](#ansible-vault)
+1. [Reminder](#reminder)
 
 
 
@@ -612,3 +613,7 @@ You can also provide multiple vault resolvers to roll on multiple environments. 
 ansible-playbook --vault-id dev@dev-password --vault-id prod@prompt site.yml
 ```
 
+## Reminder
+```
+groups['my-group'] | map('extract', hostvars, ['ansible_host'])
+```
