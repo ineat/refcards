@@ -72,7 +72,7 @@ Ansible met à disposition des guides de portage pour aider à rester à jour :
 
 ## Définitions des objets
 ### Facts
-Les Facts sont des variables utilisées par Ansible pour persiter des données entre les machines et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
+Les Facts sont des variables utilisées par Ansible pour persister des données entre les machines et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
 
 ### Hosts
 Les Hosts sont les serveurs joignables par le Master Ansible sur lesquels sont appliquées les actions.
