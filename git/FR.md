@@ -1046,7 +1046,7 @@ Git utilise d'autre référence de ce type comme
 
 ### Index
 
-L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimenté par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
+L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimentée par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
 
 ### Le répertoire de travail (WD)
 
