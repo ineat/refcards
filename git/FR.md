@@ -625,7 +625,7 @@ Le message du commit doit être structuré comme suit:
 ```shell
 git help everyday
 ```
-Un guide step-by-step d'un usage de Git à la journée
+Un guide step-by-step d'un usage de Git à la journée.
 
 #### WD & Index
 
@@ -652,6 +652,11 @@ Indique à Git que les modifications sur le fichier seront ajoutées plus tard. 
 #### Commit
 
 ```shell
+git commit --fixup <commit>
+```
+Crée un commit de `fixup` destiné à être intégré dans le commit `<commit>` lors d'un `rebase -i --autosquash`. 
+
+```shell
 git cherry-pick <ref>
 ```
 Applique la référence d'objet (commits, branche, etc) à la branche courante en créant un nouveau commit.
@@ -660,6 +665,19 @@ Applique la référence d'objet (commits, branche, etc) à la branche courante e
 git revert <commit>  
 ```
 Joue les modifications du commit dans *le sens inverse* et en crée un nouveau commit. Pratique pour annuler les changements sur une branche partagée.
+
+#### Branches
+
+```shell
+git rebase -i <commit>~ --autosquash
+```
+Permet de retoucher l'historique de commits, du commit `<commit>` à la `HEAD`. cf [Rebase interactif](#rebasage-interactif).
+
+```shell
+git rebase --onto <nouvelle branche> <ancienne branche> <branche courante>
+```
+Permet de changer la branche de rattachement de la branche courante. cf [Rebase --onto](#rebase---onto).
+
 
 #### Autour du commit
 
