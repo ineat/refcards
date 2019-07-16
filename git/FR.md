@@ -220,9 +220,9 @@ git status
 Liste toutes les modifications qui n'ont pas encore été commitées.
 
 ```shell
-git diff # WD vs HEAD
-git diff --staged # index vs HEAD
-git diff HEAD # WD & index vs HEAD
+git diff # WD vs index
+git diff --staged # index vs HEAD (last commit)
+git diff HEAD # WD & index vs HEAD (last commit)
 git diff <sha1-commit1> <sha1-commit2> # commit1 vs commit2
 ```
 Affiche les différences entre deux références d'objet.
@@ -1083,7 +1083,7 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à notre relecteur : Kelsey Rider.
+Merci à nos relecteurs : Kelsey Rider, Antoine Caron.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
