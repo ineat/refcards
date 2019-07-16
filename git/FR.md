@@ -1083,7 +1083,7 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq.
+Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
