@@ -152,12 +152,12 @@ Git gère trois états dans lesquels les fichiers peuvent résider : **modifié*
 
 ![areas](assets/areas.png)
 
-*Répertoire de travail, zone d’index et répertoire Git.*
+*Répertoire de travail (WD), zone d’index et répertoire Git.*
 
 Crédit : [Git-scm](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git)
 
 
-* **Le répertoire de travail** est une extraction unique d’une version du projet. Ces fichiers sont extraits depuis la base de données compressée dans le répertoire Git et placés sur le disque pour pouvoir être utilisés ou modifiés. 
+* **Le répertoire de travail** (nommé **WD** par la suite) est une extraction unique d’une version du projet. Ces fichiers sont extraits depuis la base de données compressée dans le répertoire Git et placés sur le disque pour pouvoir être utilisés ou modifiés. 
 * **La zone d’index** est un simple fichier, généralement situé dans le répertoire Git, qui stocke les informations concernant ce qui fera partie du prochain instantané (*commit*). On l’appelle aussi des fois la zone de préparation.
 * **Le répertoire Git** est l’endroit où Git stocke les méta-données et la base de données des objets de votre projet. C’est la partie la plus importante de Git, et c’est ce qui est copié lorsque vous clonez un dépôt depuis une autre source.
 
