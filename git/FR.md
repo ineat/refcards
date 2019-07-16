@@ -49,7 +49,7 @@ Créé en 2005 (à l'initiative de Linus Torvalds, le créateur de Linux), ce no
 Depuis sa naissance en 2005, Git a évolué et mûri pour être facile à utiliser tout en conservant ses qualités initiales. La communauté l'a très rapidement adopté et c'est aujourd'hui l'outil de référence pour le versionning de fichiers :
 
 ![git_trends](assets/git_trends.png)
-Credit : [GitPrime](https://blog.gitprime.com/git-didnt-beat-svn-github-did)
+Credits : [GitPrime](https://blog.gitprime.com/git-didnt-beat-svn-github-did)
 
 ## Principes de fonctionnement
 
@@ -86,7 +86,7 @@ Il n’est rien de plus qu’un morceau de données binaires. Il ne fait référ
 ![blob](assets/object-tree.png)
 
 Un **tree** est comme un répertoire — il référence une liste d’autres « tree » et/ou d’autres « blobs » (i.e. fichiers et sous-répertoires).
-Il permet de reconstituer la hiérarchie des fichiers d'un instantanée (*commit*)
+Il permet de reconstituer la hiérarchie des fichiers d'un instantané (*commit*)
 
 > La commande `git ls-tree` permet d'examiner le contenu d'un tree (de manière plus détaillée qu'un `git show` )
 
@@ -94,9 +94,9 @@ Il permet de reconstituer la hiérarchie des fichiers d'un instantanée (*commit
 
 ![blob](assets/object-commit.png)
 
-Un « commit » pointe vers un unique "tree" et le marque afin de représenter le projet à un certain point dans le temps. Il contient des méta-informations à propos de ce point dans le temps, comme une description, un timestamp, l’auteur du contenu depuis le dernier commit, un pointeur vers le (ou les) dernier(s) commit(s), etc.
+Un « commit » pointe vers un unique « tree » et le marque afin de représenter le projet à un certain point dans le temps. Il contient des méta-informations à propos de ce point dans le temps, comme une description, un timestamp, l’auteur·trice du contenu depuis le dernier commit, un pointeur vers le (ou les) dernier(s) commit(s), etc.
 
-Notez qu’un « commit » ne contient pas d’information à propos de ce qui a été modifié ; tous les changements sont calculés en comparant les contenus du « tree » référencé dans ce « commit » avec le « tree » associé au(x) parent(s) du « commit »
+Notez qu’un « commit » ne contient pas d’information à propos de ce qui a été modifié ; tous les changements sont calculés en comparant les contenus du « tree » référencés dans ce « commit » avec le « tree » associé au(x) parent(s) du « commit »
 
 > La commande `git show` ou `git log --pretty=raw`permet d'examiner vos « commits » favoris
 
@@ -391,7 +391,7 @@ Publie les commits de la branche spécifiée sur le dépôt distant (`-u` défin
 ```shell
 git init <nom du projet>
 ```
-Création d'un nouveau dépôt local (`.git/`) avec le nom donnée.
+Création d'un nouveau dépôt local (`.git/`) avec le nom donné.
 
 ```shell
 git clone <url du dépôt distant>
@@ -459,11 +459,11 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
 
 > Utilisez les workflows et les conventions de nommage de branches détaillées dans le chapitre [Workflow de branches et conventions](#workflow-de-branches-et-conventions)
 
-1. Synchronisez la branche initiale avec la version du dépôt distant : `git pull origin <référence à l'instantanné de départ>`
+1. Synchronisez la branche initiale avec la version du dépôt distant : `git pull origin <référence à l'instantané de départ>`
 
     Exemple : `git pull origin develop` 
 
-2. Créez votre nouvelle branche depuis un instantané (généralement une autre branche) : `git checkout -b <nom de votre branche> <référence à l'instantanné de départ>`
+2. Créez votre nouvelle branche depuis un instantané (généralement une autre branche) : `git checkout -b <nom de votre branche> <référence à l'instantané de départ>`
 
     Exemples : 
     * `git checkout -b <type>/<branch description> develop`
@@ -1083,7 +1083,7 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à nos relecteurs : Kelsey Rider, Antoine Caron.
+Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
