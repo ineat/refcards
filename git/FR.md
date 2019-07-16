@@ -897,7 +897,7 @@ Lors des phases de développements, il arrive régulièrement que des branches s
 
 ![git-rebase-onto](assets/git_rebase_onto_init.svg)
 
-Certaines de ses branches de développement peuvent évoluer indépendamment les unes des autres. Voici un des cas les plus fréquent :
+Certaines de ces branches de développement peuvent évoluer indépendamment les unes des autres. Voici un des cas les plus fréquents :
 
 - la branche `develop` évolue. De nouveaux commits sont poussés (correctifs, fonctionnalités fusionnées, etc)
 - l'équipe en charge de la branche `feat/A` décide de *rebaser* sa branche avec `develop` (rappelez vous, le `git rebase` ré-écrit généralement l'historique)
@@ -933,14 +933,14 @@ Il arrive parfois que la commande `split` du `git add -p` ne parvienne pas à di
 Voici comment utiliser le mode **edition** :
 
 L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées par un symbole (i.e. `context`)
-* `-` indique une une ligne supprimée
+* `-` indique une ligne supprimée
     * Si vous ne voulez pas que cette ligne supprimée soit indexée, passez le `context` de `-` à `' '`
 * `+` indique une ligne ajoutée
     * Si vous ne voulez pas que cette ligne ajoutée soit indexée, supprimez la
 * une ligne modifiée possède deux lignes : l'ancienne (`-`) et la nouvelle (`+`)
     * Si vous ne voulez pas que cette ligne modifiée soit indexée, supprimez la ligne indiquée par `+` et passez le `context` de la ligne supprimée de `-` à `' '`
 
-> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leur état pour ce `add -p` en suivant les explications ci-dessus.
+> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leurs états pour ce `add -p` en suivant les explications ci-dessus.
 > P.S : Il est important de ne pas toucher aux lignes du fichier non modifiées
 
 ### Le remisage
@@ -972,7 +972,7 @@ Si vous éditez le fichier en conflit, vous découvrirez comment Git gère les m
 
 - A vous de faire votre choix et de supprimer les modifications obsolètes.
 
-**Fusionner** ses modifications via ses marqueurs peut se révéler laborieux. Il existe des outils pour vous aider à gérer les conflits de manière plus visuelle.
+**Fusionner** ses modifications via ces marqueurs peut se révéler laborieux. Il existe des outils pour vous aider à gérer les conflits de manière plus visuelle.
 
 * Consultez la liste des [outils de merge supportés]((https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffguitool)) par défaut par Git.
 
@@ -1004,7 +1004,7 @@ Le reflog vous permet de revenir sur les commits même s'ils ne sont pas référ
 
 ## Utiliser une plateforme de versionning
 
-Une plateforme de versionning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bugs tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
+Une plateforme de versionning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bugs tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui intéragiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
 
 ### Configurer votre authentification sur la plateforme
 
@@ -1039,7 +1039,7 @@ L'authentification entre votre poste et la plateforme sera effectuée grâce à 
 
 ### Soumettre une demande de fusion de branche
 
-Dépendant de la plateforme que vous utilisez, la terminologie et le workflow sera différent mais les concepts et principes restent les mêmes
+Dépendant de la plateforme que vous utilisez, la terminologie et le workflow seront différents mais les concepts et principes restent les mêmes
 
 En vous basant sur le chapitre [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-git) :
 
@@ -1056,19 +1056,19 @@ En vous basant sur le chapitre [Workflow type d'un développement avec Git](#wor
 ### HEAD
 
 `HEAD` est un pointeur sur la référence de la branche actuelle, qui est à son tour un pointeur sur le dernier commit réalisé sur cette branche. Ceci signifie que `HEAD` sera le parent du prochain commit à créer. C’est généralement plus simple de penser `HEAD` comme l’instantané de votre dernière validation.
-Git utilise d'autre référence de ce type comme 
-* `ORIG_HEAD`: état de la `HEAD` avant un `git reset``
+Git utilise d'autres références de ce type comme 
+* `ORIG_HEAD`: état de la `HEAD` avant un `git reset`
 * `FETCH_HEAD` : état de la branche que vous venez de mettre à jour (via `git fetch`)
 * `MERGE_HEAD` : état de la branche après un `git merge`
 * `CHERRY_PICK_HEAD` : état de la branche après un `git cherry-pick`
 
 ### Index
 
-L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimenté par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
+L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimentée par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
 
 ### Le répertoire de travail (WD)
 
-Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il faut penser le répertoire de travail comme un bac à sable où vous pouvez essayer vos modifications avant de les transférer dans votre index puis le valider dans votre historique, ou les jeter à la poubelle (`clean`).
+Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il faut penser le répertoire de travail comme un bac à sable où vous pouvez essayer vos modifications avant de les transférer dans votre index puis les valider dans votre historique, ou les jeter à la poubelle (`clean`).
 
 ## Références
 
