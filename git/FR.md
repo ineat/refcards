@@ -220,9 +220,9 @@ git status
 Liste toutes les modifications qui n'ont pas encore été commitées.
 
 ```shell
-git diff # WD vs HEAD
-git diff --staged # index vs HEAD
-git diff HEAD # WD & index vs HEAD
+git diff # WD vs index
+git diff --staged # index vs HEAD(last commit)
+git diff HEAD # WD vs HEAD(last commit)
 git diff <sha1-commit1> <sha1-commit2> # commit1 vs commit2
 ```
 Affiche les différences entre deux références d'objet.
