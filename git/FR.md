@@ -939,7 +939,7 @@ L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées pa
 * une ligne modifiée possède deux lignes : l'ancienne (`-`) et la nouvelle (`+`)
     * Si vous ne voulez pas que cette ligne modifiée soit indexée, supprimez la ligne indiquée par `+` et passez le `context` de la ligne supprimée de `-` à `' '`
 
-> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leur état pour ce `add -p` en suivant les explications ci-dessus.
+> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leurs états pour ce `add -p` en suivant les explications ci-dessus.
 > P.S : Il est important de ne pas toucher aux lignes du fichier non modifiées !
 
 ### Le remisage
