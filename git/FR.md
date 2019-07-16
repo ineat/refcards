@@ -61,7 +61,7 @@ Pour utiliser Git de manière optimale, il est nécessaire de comprendre comment
 
 #### Le **SHA-1**
 
-Git manipule des objets qui sont identifiés et vérifiés par une chaine de contrôle **unique** sur 40 caractères (empreinte SHA-1).
+Git manipule des objets qui sont identifiés et vérifiés par une chaîne de contrôle **unique** sur 40 caractères (empreinte SHA-1).
 Concept très important, cette empreinte est calculée en fonction du contenu du fichier ou de la structure du répertoire considéré. 
 
 Une empreinte SHA-1 ressemble à ceci :
@@ -116,7 +116,7 @@ $>tree
 2 directories, 3 files
 ```
 
-Elle sera géré par Git de cette manière :
+Elle sera gérée par Git de cette manière :
 
 ![example](assets/objects-example.png)
 
@@ -138,8 +138,8 @@ Contrairement aux autres systèmes, l'historisation des changements et les opér
 
 ### Rien n'est perdu avec Git
 
-Généralement, Git ne fait qu’ajouter des données
-Quand vous réalisez des actions dans Git, la quasi-totalité d’entre elles ne font qu’ajouter des données dans la base de données de Git. Il est très difficile de faire réaliser au système des actions qui ne soient pas réversibles ou de lui faire effacer des données d’une quelconque manière. Par contre, comme dans la plupart des systèmes de gestion de version, vous pouvez perdre ou corrompre des modifications qui n’ont pas encore été entrées en base ; mais dès que vous avez validé un instantané dans Git, il est très difficile de le perdre, spécialement si en plus vous synchronisez votre base de données locale avec un dépôt distant.
+Généralement, Git ne fait qu’ajouter des données.
+Quand vous réalisez des actions dans Git, la quasi-totalité d’entre elles ne fait qu’ajouter des données dans la base de données de Git. Il est très difficile de faire réaliser au système des actions qui ne soient pas réversibles ou de lui faire effacer des données d’une quelconque manière. Par contre, comme dans la plupart des systèmes de gestion de version, vous pouvez perdre ou corrompre des modifications qui n’ont pas encore été entrées en base ; mais dès que vous avez validé un instantané dans Git, il est très difficile de le perdre, spécialement si en plus vous synchronisez votre base de données locale avec un dépôt distant.
 
 ### Les trois états
 
@@ -175,8 +175,8 @@ L’utilisation standard de Git se déroule en 3 étapes :
 * Un commit = une tâche (cf [Ajout interactif](#ajout-interactif))
 * Préférez l'indexation de lignes (**hunks**) plutôt que de fichiers (cf [Ajout interactif](#ajout-interactif))
 * Utilisez les conventions de commits (cf [Conventions de commits](#conventions-de-commits))
-* Retravaillez votre historique de branche avant de le proposer pour qu'il soit intégré (cf [Rebase interactif](#rebase-interactif))
-* Ne pas ré-écrire un historique publié sur une branche distante collaborative
+* Retravaillez votre historique de branche avant de la proposer pour qu'elle soit intégrée (cf [Rebase interactif](#rebase-interactif))
+* Ne pas réécrire un historique publié sur une branche distante collaborative
 
 ### Qui ? Quoi ? Comment ?
 
@@ -187,7 +187,7 @@ L’utilisation standard de Git se déroule en 3 étapes :
 
 #### Je suis développeur
 
-* Je ne sais pas par où commencer ... : cf [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-Git)
+* Je ne sais pas par où commencer : cf [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-Git)
 * Ma branche n'est pas à jour avec la branche `develop` : cf [Rebasage de branche](#rebasage-de-branche)
 * Je viens de mettre ma branche à jour et cette dernière a des conflits : cf [Gestion des conflits](#Gestion-des-conflits)
 * J'ai besoin de réécrire (nettoyer) l'historique de ma branche : cf [Rebasage interactif](#Rebase-interactif)
@@ -240,7 +240,7 @@ Permet de consulter le contenu d'un objet.
 ```shell
 git reflog
 ```
-Affiche l'historique de tous ce qu'il s'est passé sur votre dépôt local. Ajoutez l'option `--relative-date` pour ajouter une notion temporelle.
+Affiche l'historique de tout ce qu'il s'est passé sur votre dépôt local. Ajoutez l'option `--relative-date` pour ajouter une notion temporelle.
 
 #### Indexation et annulation
 
@@ -374,7 +374,7 @@ Fusionne (**par le dessus**) les commits de la branche spécifiée sur la branch
 ```shell
 git rebase <branch name>
 ```
-**Ré-écrit** l'historique de commits de la branche courante en y rejouant, **par le dessous**, celui de la branche spécifiée.
+**Réécrit** l'historique de commits de la branche courante en y rejouant, **par le dessous**, celui de la branche spécifiée.
 
 ```shell
 git pull <remote> <branch>
@@ -426,7 +426,7 @@ Les éléments renseignés dans le `.gitignore` n'apparaitront plus dans le rés
 1. Créez un fichier `.gitignore` à la **racine** de votre projet
 2. Complétez le avec les **patterns** de fichiers à ignorer en vous basant sur les [modèles de développement](https://linux.die.net/man/7/glob). Voici quelques exemples :
     * `**/logs`: le double `*` cible tous les répertoires partout dans le dépôt local
-    * `*.log` : tous les fichiers qui finirons par `.log`
+    * `*.log` : tous les fichiers qui se terminent par `.log`
     * `!important.log` : le `!` permet d'ajouter des exceptions pour forcer la prise en compte de l'élément et invalider la règle générale
     * `debug.log` : par défaut, les modèles correspondent aux fichiers de tout répertoire
 3. Indexez et commitez votre fichier `.gitignore`
@@ -442,14 +442,13 @@ Si vous souhaitez ignorer un fichier que vous avez commité par le passé, vous 
 
 ```shell
 echo debug.log >> .gitignore
-git rm --cached debug.log
-rm 'debug.log'
+git rm debug.log
 git commit -m "chore(.gitgnore): Start ignoring debug.log"
 ```
 
 ## Workflow type d'un développement avec Git
 
-Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.
+Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.
 
 ![aday](assets/aday.svg)
 
@@ -464,7 +463,7 @@ Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens
 
     Exemple : `git pull origin develop` 
 
-2. Créez votre nouvelle branche depuis un instantanée (généralement une autre branche) : `git checkout -b <nom de votre branche> <référence à l'instantanné de départ>`
+2. Créez votre nouvelle branche depuis un instantané (généralement une autre branche) : `git checkout -b <nom de votre branche> <référence à l'instantanné de départ>`
 
     Exemples : 
     * `git checkout -b <type>/<branch description> develop`
@@ -489,7 +488,7 @@ Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens
 5. Créez un instantané (**commit**) contenant vos modifications dans l'index : `git commit`
     * Des conventions de commits doivent être appliquées. Se référer au chapitre [Conventions de commits](#conventions-de-commits)
     * Pour créer un message de commit sur une seule ligne : `git commit -m "<type>([optional scope]): <votre message sur 50 chars. max>"`
-    * Pour entrer dans le mode édition (et pouvoir saisir une entête, un corps et un pied de message): `git commit`
+    * Pour entrer dans le mode édition (et pouvoir saisir un en-tête, un corps et un pied de message): `git commit`
         > Utilisez alors le format
         >    
         > ```
@@ -509,7 +508,7 @@ Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens
         * `git reset <SHA-1 qui deviendra le dernier commit>`
         * `git reset HEAD~<nombre de commits à annuler>`
 6. Consultez l'historique des instantanés ou leurs contenus : `git lg` ou `git show <SHA-1 du commit>`
-7. Ré-itérez les étapes précédentes
+7. Réitérez les étapes précédentes
 
 À ce stade, tout ce que vous avez fait réside dans votre dépôt local (répertoire `.git/`) et y restera tant que vous n'aurez pas publié vos modifications.
 
@@ -524,27 +523,27 @@ Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens
 3. Effectuez une revue de votre historique : `git lg`
 4. Nettoyez votre historique en retravaillant les commits (fusionnez les commits liés par la même tâche ensemble par ex.) : 
     * Identifiez le nombre de commits propres à votre branche (de la `HEAD` au premier commit de votre branche)
-    * Effectuez une ré-écriture de commits sur ce nombre de commit : `git rebase -i --autosquash HEAD~<nombre de commits>`
-    * Referez vous au chapitre [Rebase interactif](#rebase-interactif) pour positionner les actions sur vos commits
+    * Effectuez une réécriture de commits sur ce nombre de commit : `git rebase -i --autosquash HEAD~<nombre de commits>`
+    * Référez-vous au chapître [Rebase interactif](#rebase-interactif) pour positionner les actions sur vos commits
     * Déroulez les étapes du `rebase` et résolvez les conflits potentiels 
         * Utilisez `git rebase --continue` après chaque résolution
         * Utilisez `git rebase --abort` si vous souhaitez annuler le `rebase`
     * Effectuez une nouvelle revue de votre historique : `git lg`
-        * Assurez vous que le commit parent de votre branche n'a pas été ré-écrit (**la référence à la branche initiale doit toujours apparaitre**)
+        * Assurez-vous que le commit parent de votre branche n'a pas été réécrit (**la référence à la branche initiale doit toujours apparaître**)
 4. Publiez votre branche sur le dépôt distant
-    * Si elle n'a pas encore été publiée ou que vous n'avez pas ré-écrit l'historique : `git push <remote> <branch name>`
-    * Si vous avez ré-écrit l'historique :
+    * Si elle n'a pas encore été publiée ou que vous n'avez pas réécrit l'historique : `git push <remote> <branch name>`
+    * Si vous avez réécrit l'historique :
         1. `git push <remote> <branch name> --force-with-lease`
         2. Prévenez vos équipiers que votre branche a été *force push* 
 5. Créez une [demande d'intégration de vos modifications sur l'une des branches du dépôt distant](#soumettre-une-demande-de-fusion-de-branche)
-    * ou faites [la fusion par vous même](#fusionnez-votre-branche) si votre organisation le permet 
+    * ou faites [la fusion par vous-même](#fusionnez-votre-branche) si votre organisation le permet 
 
 ## Workflow de branches et conventions
 
-Afin de maitriser efficacement le cycle de vie de vos développements, il est nécessaire d'imposer des règles et des process pour la gestion des branches de votre projet. Le workflow le plus courant est celui **de branche par fonctionnalité** :
+Afin de maîtriser efficacement le cycle de vie de vos développements, il est nécessaire d'imposer des règles et des processus pour la gestion des branches de votre projet. Le workflow le plus courant est celui **de branche par fonctionnalité** :
 
-* chaque fonctionnalité est développée dans une branche prévue à cet effet plutôt que dans la branche `master`. Grâce à cette encapsulation, plusieurs développeurs peuvent travailler aisément sur une même fonctionnalité sans modifier la base de code principale. Cela signifie également que la branche `master` ne contiendra jamais de code bogué : un avantage non négligeable pour les environnements d'intégration continue.
-* ce fonctionnement va permettre de proposer les modifications présentes sur une branche aux plateformes de versionning de manière isolée. Il est alors extrêmement facile pour votre équipe de donner du feedback sur le travail effectué.
+* Chaque fonctionnalité est développée dans une branche prévue à cet effet plutôt que dans la branche `master`. Grâce à cette encapsulation, plusieurs développeurs peuvent travailler aisément sur une même fonctionnalité sans modifier la base de code principale. Cela signifie également que la branche `master` ne contiendra jamais de code bogué : un avantage non négligeable pour les environnements d'intégration continue.
+* Ce fonctionnement va permettre de proposer les modifications présentes sur une branche aux plateformes de versionning de manière isolée. Il est alors extrêmement facile pour votre équipe de faire des retours sur le travail effectué.
 
 ### Gitflow
 
@@ -573,7 +572,7 @@ Partant de ce principe de base, [Vincent Driessen (nvie)](http://nvie.com/posts/
 
 ![gitflow_feature](assets/gitflow_feature.svg)
 
-> Il existe d'autres workflow de branches. Libre à vous de choisir (ou de mixer ?) celui qui convient le mieux à la taille et la maturité de votre équipe :
+> Il existe d'autres workflow de branches. Libre à vous de choisir (ou de mélanger ?) celui qui convient le mieux à la taille et la maturité de votre équipe :
 >    * [Atassian - Comparaison de workflows](https://fr.atlassian.com/git/tutorials/comparing-workflows)
 >    * [Github Flow](https://guides.github.com/introduction/flow/)
 >    * [Gitlab Flow](https://docs.gitlab.com/ee/workflow/gitlab_flow.html) 
@@ -750,12 +749,12 @@ Permet de lister les références du dépôt local.
         git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
     ```
 * `git config --global core.pager ''` : Désactive les `pager` pour toutes les commandes
-* `git config --global core.autocrlf true` : Convertis automatiquement les fins de ligne Windows en format Unix (et inversement)
+* `git config --global core.autocrlf true` : Convertit automatiquement les fins de ligne Windows en format Unix (et inversement)
 * `git config --global core.excludesFile <path/to/.gitignore>` : Permet de définir un `.gitignore` global
 * `git config --global alias.<name> "<definition>"` : Permet de définir un alias réutilisable
 
 ##### Commit
-* `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit.
+* `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit
 
 ##### Fetch
 * `git config --global git fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement
@@ -776,14 +775,14 @@ Permet de lister les références du dépôt local.
 
 ##### Autres
 * `git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'` : configure la commande à lancer lors de l'utilisation de `git difftool -t vscode`
-* `git config --global rerere.enabled true` : Active [`git-rerere`](https://git-scm.com/docs/git-rerere), i.e Git se souviendra de certaines résolutions de conflits et les ré-appliquera automatiquement dans les futures résolutions pour des conflits similaires 
+* `git config --global rerere.enabled true` : Active [`git-rerere`](https://git-scm.com/docs/git-rerere), i.e Git se souviendra de certaines résolutions de conflits et les réappliquera automatiquement dans les futures résolutions pour des conflits similaires 
 * `git config --global pager.branch false` : Permet de visualiser l'ensemble des branches en dehors du mode édition. L'attribut `pager` fonctionne pour d'autres commandes comme `tag`, `log`, `diff`, etc.
 
 ### Création de tag 
 
 Git vous donne la possibilité d'_étiqueter_ vos instantanés. Généralement on utilise cette fonctionnalité pour marquer les états de publication, c'est à dire les numéros de version des *releases* (livrables destinés a être déployés sur des environnements).
 
-1. Placez vous sur la branche où se trouve l'instantané que vous souhaitez étiqueter.
+1. Placez-vous sur la branche où se trouve l'instantané que vous souhaitez étiqueter.
 2. Invoquez la commande `git tag <numero du tag>`
     * Par défaut, le tag portera la description du commit annoté
     * Vous pouvez spécifier un message propre à votre tag grâce à l'option `-m` : `git tag -a <numero du tag> -m <libellé du tag>`
@@ -806,7 +805,7 @@ C'est la politique de fusion par défaut. Elle crée un nouveau commit ayant pou
 
 ![merge_init](assets/merge-commit.svg)
 
-> Un commit de *merge* sera créé par Git si le `fast-forward` n'est pas possible ou si l'option `no-ff` est explicitement passé au `git merge`
+> Un commit de *merge* sera créé par Git si le `fast-forward` n'est pas possible ou si l'option `no-ff` est explicitement passée au `git merge`
 
 * Utilisez le commit de *merge* uniquement pour mettre en évidence l'ajout d'une nouvelle fonctionnalité sur votre `develop`
 * Utilisez le *fast-forward* dans tous les autres cas 
@@ -817,7 +816,7 @@ Le `fast-forward` permet d'obtenir un historique **linéaire** après une fusion
 
 ![merge_ff](assets/merge-ff.svg)
 
-* Utilisez `git merge --ff-only` ou `git config --global merge.ff only` pour vous pré-munir d'un commit de *merge*.
+* Utilisez `git merge --ff-only` ou `git config --global merge.ff only` pour vous prémunir d'un commit de *merge*.
     * Pour rendre le `fast-forward` possible, utilisez le **rebasage** sur la branche à fusionner. 
 * Utilisez le `fast-forward` pour garder un historique de vos branches linéaire, propre et lisible.
 
@@ -853,7 +852,7 @@ Un commit vient d'être ajouté sur la `develop`, ce qui veut dire que la branch
 
 ![rebase-2](assets/rebase-2.svg)
 
-Il faut donc ici mettre à jour la branche `feat/A` par rapport à la `develop` grâce à la commande `git rebase`. C'est une mise à jour _par le dessous_ : c'est à dire que les nouveaux commits de la `develop` vont être joués sur la branche cible. Les commits existants (ceux de la branche `feat/A`) sont ré-écrits puisque **leurs commits parent changent**.
+Il faut donc ici mettre à jour la branche `feat/A` par rapport à la `develop` grâce à la commande `git rebase`. C'est une mise à jour _par le dessous_ : c'est à dire que les nouveaux commits de la `develop` vont être joués sur la branche cible. Les commits existants (ceux de la branche `feat/A`) sont réécrits puisque **leurs commits parent changent**.
 
 Le `git rebase` peut engendrer des conflits si des modifications sur des fichiers communs entrent en collision. Pour plus de détails sur cette partie consultez le chapitre [Gestion des conflits](#Gestion-des-conflits).
 
@@ -863,8 +862,8 @@ Le `git rebase` peut engendrer des conflits si des modifications sur des fichier
 
 Dans votre workflow de versionning, vous serez amené à créer plus de commits (commit de `fixup` ?) que de tâches à réaliser. A la fin de vos développements, vous **devez** retravailler l'historique de votre branche pour :
 * **fusionner** les commits qui concernent la même tâche
-* **ré-écrire** la description de vos commits si elle est incomplète/erronée 
-* **Supprimer** des commits si besoin
+* **réécrire** la description de vos commits si elle est incomplète/erronée 
+* **supprimer** des commits si besoin
 * bref, **proposer un historique propre et lisible** à votre équipe
 
 
@@ -885,11 +884,11 @@ Git vous propose une liste d'actions documentées dont voici les principales :
 - `squash` : permet de fusionner 2 commits et de modifier le message du commit final
 - `fixup`: permet de fusionner le contenu du commit dans le commit parent, sans garder le message de commit.
 - `drop` : permet de supprimer un commit et le code associé
-- `ré-organiser des commits` : vous pouvez ré-ordonner les commits de haut (**plus ancien**) en bas (**plus récent**). Indispensable pour le `fixup` ou le `squash` notamment, qui s'appliquent à un commit parent
+- `réorganiser des commits` : vous pouvez réordonner les commits de haut (**plus ancien**) en bas (**plus récent**). Indispensable pour le `fixup` ou le `squash` notamment, qui s'appliquent à un commit parent
 
-Vous devez positionner les commandes à la place des `pick` en fonction de ce que vous voulez faire. Git va ensuite dépiler l'ensemble des commandes et vous demander d'effectuer des actions quand nécessaire (saisie d'un nouveau message, résolution de conflits, etc).
+Vous devez positionner les commandes à la place des `pick` en fonction de ce que vous voulez faire. Git va ensuite dépiler l'ensemble des commandes et vous demander d'effectuer des actions quand nécessaires (saisie d'un nouveau message, résolution de conflits, etc).
 
-Il est important de noter que tous les commits concernés par le `rebase` seront ré-écrits, même ceux laissés tels quels.
+Il est important de noter que tous les commits concernés par le `rebase` seront réécrits, même ceux laissés tels quels.
 
 #### Rebase --onto
 
@@ -897,10 +896,10 @@ Lors des phases de développements, il arrive régulièrement que des branches s
 
 ![git-rebase-onto](assets/git_rebase_onto_init.svg)
 
-Certaines de ses branches de développement peuvent évoluer indépendamment les unes des autres. Voici un des cas les plus fréquent :
+Certaines de ces branches de développement peuvent évoluer indépendamment les unes des autres. Voici un des cas les plus fréquents :
 
 - la branche `develop` évolue. De nouveaux commits sont poussés (correctifs, fonctionnalités fusionnées, etc)
-- l'équipe en charge de la branche `feat/A` décide de *rebaser* sa branche avec `develop` (rappelez vous, le `git rebase` ré-écrit généralement l'historique)
+- l'équipe en charge de la branche `feat/A` décide de *rebaser* sa branche avec `develop` (rappelez-vous, le `git rebase` réécrit généralement l'historique)
 
 Cela donne la situation suivante :
 
@@ -930,10 +929,10 @@ Difficile de savoir à quoi correspondent ces lettres.
 
 Il arrive parfois que la commande `split` du `git add -p` ne parvienne pas à diviser les **hunks** en plus petites portions (généralement quand les modifications se suivent). Il est possible de passer en mode **edition** (`e`) afin de choisir manuellement quelle partie du fichier vous souhaitez indexer.
 
-Voici comment utiliser le mode **edition** :
+Voici comment utiliser le mode **édition** :
 
 L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées par un symbole (i.e. `context`)
-* `-` indique une une ligne supprimée
+* `-` indique une ligne supprimée
     * Si vous ne voulez pas que cette ligne supprimée soit indexée, passez le `context` de `-` à `' '`
 * `+` indique une ligne ajoutée
     * Si vous ne voulez pas que cette ligne ajoutée soit indexée, supprimez la
@@ -941,7 +940,7 @@ L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées pa
     * Si vous ne voulez pas que cette ligne modifiée soit indexée, supprimez la ligne indiquée par `+` et passez le `context` de la ligne supprimée de `-` à `' '`
 
 > L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leur état pour ce `add -p` en suivant les explications ci-dessus.
-> P.S : Il est important de ne pas toucher aux lignes du fichier non modifiées
+> P.S : Il est important de ne pas toucher aux lignes du fichier non modifiées !
 
 ### Le remisage
 
@@ -950,7 +949,7 @@ Git propose une commande `git stash` qui vous permet de mettre vos modifications
 Voici un cas d'utilisation où le `stash` est utile :
 
 - Vous êtes sur une branche, **feat/A**, et vous avez fait quelques modifications, encore présentes dans votre WD.
-- Vous devez faire un `git pull` ou un `git rebase develop`sur votre branche : Git refusera le **rebase** car vous avez encore des modifications dans votre WD.
+- Vous devez faire un `git pull` ou un `git rebase develop`sur votre branche : Git refusera car vous avez encore des modifications dans votre WD.
 
 1. Utilisez la commande `git stash` pour **remiser** temporairement vos modifications
 2. Une nouvelle entrée du `stash` est créée. Vous pouvez consulter la liste de vos `stash` via `git stash list`
@@ -958,7 +957,7 @@ Voici un cas d'utilisation où le `stash` est utile :
 3. Utilisez `git stash apply` pour appliquer le dernier `stash` créé sur votre WD
 
 > * Préférez le `git stash apply` au `git stash pop` pour conserver vos anciens stashs
-> * Faites le ménage via `git stash drop <stash>` si certains `stashs` ne sont plus utiles
+> * Faites le ménage via `git stash drop <stash>` si certains `stash`s ne sont plus utiles
 > * Utilisez `git stash apply <stash>` (exemple : `git stash apply stash@{0}`) pour appliquer votre `stash` au WD
 
 ### Gestion des conflits
@@ -972,11 +971,11 @@ Si vous éditez le fichier en conflit, vous découvrirez comment Git gère les m
 
 - A vous de faire votre choix et de supprimer les modifications obsolètes.
 
-**Fusionner** ses modifications via ses marqueurs peut se révéler laborieux. Il existe des outils pour vous aider à gérer les conflits de manière plus visuelle.
+**Fusionner** ses modifications via ces marqueurs peut se révéler laborieux. Il existe des outils pour vous aider à gérer les conflits de manière plus visuelle.
 
 * Consultez la liste des [outils de merge supportés]((https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffguitool)) par défaut par Git.
 
-Après avoir téléchargé l'outil de votre choix 
+Après avoir téléchargé l'outil de votre choix :
 1. Indiquer à Git comment l'utiliser : `git config --global merge.tool <tool>`.
     - Vous pouvez avoir plusieurs outils configurés et changer la valeur de `merge.tool` au besoin
 2. Si cet outil n'est pas déclaré dans votre `$PATH`, utilisez la configuration `git config --global  mergetool.<tool>.path <path>`
@@ -1004,7 +1003,7 @@ Le reflog vous permet de revenir sur les commits même s'ils ne sont pas référ
 
 ## Utiliser une plateforme de versionning
 
-Une plateforme de versionning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bugs tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
+Une plateforme de versionning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bug tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
 
 ### Configurer votre authentification sur la plateforme
 
@@ -1015,12 +1014,12 @@ Vous pouvez contacter les serveurs distants de deux façons :
 En saisissant votre identifiant et votre mot de passe (à chaque `push` ou `fetch`) 
 
 - Définissez la configuration `git config --global credential.helper cache` pour éviter la re-saisie
-- Vous pouvez définir un **personal-access-tokens** qui sera associé à votre compte et **remplacera** votre mot de passe lors de la saisie :
+- Vous pouvez définir un **personal-access-token** qui sera associé à votre compte et **remplacera** votre mot de passe lors de la saisie :
 > Ce **personal-access-token** doit être utilisé par vos outils de CI/CD afin de ne pas utiliser directement votre mot de passe de compte
 
-    * Pour Github : https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
-    * Pour Gitlab : https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html
-    * Pour Bitbucket : https://confluence.atlassian.com/bitbucketserver/personal-access-tokens-939515499.html
+* Pour Github : https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line
+* Pour Gitlab : https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html
+* Pour Bitbucket : https://confluence.atlassian.com/bitbucketserver/personal-access-tokens-939515499.html
 
 #### Via SSH
 
@@ -1028,7 +1027,7 @@ L'authentification entre votre poste et la plateforme sera effectuée grâce à 
 
 1. Générez votre clé SSH si vous n'en avez pas déjà une depuis un terminal (`Git Bash` par défaut) : `ssh-keygen -t rsa -b 4096 -C "<your email>"`
 2. Laissez le chemin de génération par défaut : `~/.ssh/id_rsa`
-3. Saisissez (_ou non_) une **passphrase** ( qui vous sera demandée à chaque `push` ou `fetch`) 
+3. Saisissez (_ou non_) une **passphrase** (qui vous sera demandée à chaque `push` ou `fetch`) 
     - Sous Mac, votre **passphrase** est sauvegardée automatiquement à la première saisie
     - Pour les autres systèmes, il est nécessaire d'ajouter votre clé au **ssh-agent** : `ssh-add ~/.ssh/id_rsa`
 4. Déclarez votre clé SSH publique (`cat ~/.ssh/id_rsa.pub`) sur votre plateforme :
@@ -1039,9 +1038,9 @@ L'authentification entre votre poste et la plateforme sera effectuée grâce à 
 
 ### Soumettre une demande de fusion de branche
 
-Dépendant de la plateforme que vous utilisez, la terminologie et le workflow sera différent mais les concepts et principes restent les mêmes
+Dépendant de la plateforme que vous utilisez, la terminologie et le workflow sera différents mais les concepts et principes restent les mêmes.
 
-En vous basant sur le chapitre [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-git) :
+En vous basant sur le chapître [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-git) :
 
 1. Effectuez vos développements sur une branche dédiée en vous assurant que la branche de départ _reste toujours synchronisée_
 2. Publiez votre branche sur le dépôt distant
@@ -1056,19 +1055,19 @@ En vous basant sur le chapitre [Workflow type d'un développement avec Git](#wor
 ### HEAD
 
 `HEAD` est un pointeur sur la référence de la branche actuelle, qui est à son tour un pointeur sur le dernier commit réalisé sur cette branche. Ceci signifie que `HEAD` sera le parent du prochain commit à créer. C’est généralement plus simple de penser `HEAD` comme l’instantané de votre dernière validation.
-Git utilise d'autre référence de ce type comme 
-* `ORIG_HEAD`: état de la `HEAD` avant un `git reset``
+Git utilise d'autres références de ce type comme 
+* `ORIG_HEAD`: état de la `HEAD` avant un `git reset`
 * `FETCH_HEAD` : état de la branche que vous venez de mettre à jour (via `git fetch`)
 * `MERGE_HEAD` : état de la branche après un `git merge`
 * `CHERRY_PICK_HEAD` : état de la branche après un `git cherry-pick`
 
 ### Index
 
-L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimenté par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
+L’index est la zone qui contient les modifications du prochain commit que vous ferez. C'est la « zone de préparation » alimentée par `git add`. C’est ce que Git examine lorsque vous lancez `git commit`.
 
 ### Le répertoire de travail (WD)
 
-Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il faut penser le répertoire de travail comme un bac à sable où vous pouvez essayer vos modifications avant de les transférer dans votre index puis le valider dans votre historique, ou les jeter à la poubelle (`clean`).
+Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il faut penser le répertoire de travail comme un bac à sable où vous pouvez essayer vos modifications avant de les transférer dans votre index puis les valider dans votre historique, ou les jeter à la poubelle (`clean`).
 
 ## Références
 
@@ -1084,7 +1083,7 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à tous nos relecteurs.
+Merci à notre relecteur : Kelsey Rider.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
