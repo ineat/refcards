@@ -61,6 +61,7 @@ Co-écrit par Lucas Declercq & Paul Delafosse
 | **Ctrl + Shift + V**| Colle le texte dans le buffer                                     |
 | **Ctrl + R**        | :heart_eyes: Recherche une commande dans l'historique                 |
 | **Alt + L**         | Liste les fichiers du dossier actuel                        |
+| **Alt + H**         | Affiche le man de la commande en cours d'édition                          |
 | **Ctrl + L**        | Nettoie le terminal                       |
 | **Ctrl + X** puis **Ctrl + E**        | :heart_eyes: Ouvre la commande en cours dans l'éditeur par défaut                      |
 | **Entrée** puis **~** puis **.** |:heart_eyes:  Quitte une session SSH bloquée|
