@@ -49,11 +49,9 @@ Créé en 2005 (à l'initiative de Linus Torvalds, le créateur de Linux), ce no
 Depuis sa naissance en 2005, Git a évolué et mûri pour être facile à utiliser tout en conservant ses qualités initiales. La communauté l'a très rapidement adopté et c'est aujourd'hui l'outil de référence pour le versionning de fichiers :
 
 ![git_trends](assets/git_trends.png)
-Credits : [GitPrime](https://blog.gitprime.com/git-didnt-beat-svn-github-did)
+Crédits : [GitPrime](https://blog.gitprime.com/git-didnt-beat-svn-github-did)
 
 ## Principes de fonctionnement
-
->  [Inspiration : Git - Rudiments](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git)
 
 Pour utiliser Git de manière optimale, il est nécessaire de comprendre comment il fonctionne pour versionner vos fichiers.
 
@@ -154,7 +152,7 @@ Git gère trois états dans lesquels les fichiers peuvent résider : **modifié*
 
 *Répertoire de travail (WD), zone d’index et répertoire Git.*
 
-Crédit : [Git-scm](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git)
+Crédits : [Git-scm](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git)
 
 
 * **Le répertoire de travail** (nommé **WD** par la suite) est une extraction unique d’une version du projet. Ces fichiers sont extraits depuis la base de données compressée dans le répertoire Git et placés sur le disque pour pouvoir être utilisés ou modifiés. 
@@ -167,6 +165,11 @@ L’utilisation standard de Git se déroule en 3 étapes :
 3. vous **validez**, ce qui a pour effet de basculer les instantanés des fichiers de l’index dans *la base de données du répertoire Git*.
 
 ![areas_ineat](assets/areas_ineat.svg)
+
+
+>  [Inspiration : Git - Rudiments](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git)
+>
+>  [Crédits : Git-book](https://alexgirard.com/git-book/intro/modele-objet-git/)
 
 ## Cheat Sheet
 ### Règles & bonnes pratiques
@@ -493,9 +496,9 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
         >    
         > ```
         > <type>[optional scope]: <description>
-        > 
+        > <BLANK LINE>
         > [optional body]
-        > 
+        > <BLANK LINE>
         > [optional footer]
         > ```
     * Pour embarquer vos modifications dans le commit précédent (`HEAD`) : `git commit --amend`
@@ -581,7 +584,7 @@ Partant de ce principe de base, [Vincent Driessen (nvie)](http://nvie.com/posts/
 ## Conventions de commits
 
 Avec l'adoption croissante de l'outil auprès des communautés OSS notamment, un besoin d'uniformisation de la description des commits s'est rapidement fait sentir.
-Impulsée par les équipes Angular notamment, une convention de commit a rapidement fait l'unanimité et est à présent décrite [sous forme d'une spécification](https://www.conventionalcommits.org/)
+Impulsée par les équipes Angular notamment, une convention de commit a rapidement fait l'unanimité et est à présent décrite [sous forme d'une spécification](https://www.conventionalcommits.org/).
 
  Cette spécification fournit un ensemble simple de règles pour créer un historique de commit explicite et lisible. Cette convention est liée à [SemVer](https://semver.org/), en décrivant les fonctionnalités, les correctifs et les modifications importantes apportées aux messages de commit.
 
@@ -607,7 +610,7 @@ Le message du commit doit être structuré comme suit:
     - Peut contenir le bloc `BREAKING CHANGE` :  introduit un changement cassant l’API (cela est en corrélation avec MAJOR en SemVer)
 - **footer** :  références de problèmes supplémentaires concernant les modifications du code (Fixes #13)
     - Doit commencer par une ligne vide
-    - Ne peut contenir que `BREAKING CHANGE`, des liens externes, des références de publication et d’autres méta-informations.
+    - Ne peut contenir que `BREAKING CHANGE`, des liens externes, des références de publication et d’autres méta-informations
 
 > * Vous pouvez retrouver des exemples de commits sur [https://www.conventionalcommits.org](https://www.conventionalcommits.org) 
 > * Vous pouvez générer automatiquement un CHANGELOG issue de vos commits, basés sur ces conventions : [Conventional-changelog](https://github.com/conventional-changelog)
