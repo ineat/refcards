@@ -44,7 +44,7 @@ Créé en 2005 (à l'initiative de Linus Torvalds, le créateur de Linux), ce no
 * conception simple
 * support pour les développements non linéaires (milliers de branches parallèles)
 * complètement distribué 
-* capacité à gérer efficacement des projets d’envergure tels que le noyau Linux (vitesse et compacité des données).
+* capacité à gérer efficacement des projets d’envergure tels que le noyau Linux (vitesse et compacité des données)
 
 Depuis sa naissance en 2005, Git a évolué et mûri pour être facile à utiliser tout en conservant ses qualités initiales. La communauté l'a très rapidement adopté et c'est aujourd'hui l'outil de référence pour le versionning de fichiers :
 
@@ -84,7 +84,7 @@ Il n’est rien de plus qu’un morceau de données binaires. Il ne fait référ
 ![blob](assets/object-tree.png)
 
 Un **tree** est comme un répertoire — il référence une liste d’autres « tree » et/ou d’autres « blobs » (i.e. fichiers et sous-répertoires).
-Il permet de reconstituer la hiérarchie des fichiers d'un instantané (*commit*)
+Il permet de reconstituer la hiérarchie des fichiers d'un instantané (*commit*).
 
 > La commande `git ls-tree` permet d'examiner le contenu d'un tree (de manière plus détaillée qu'un `git show` )
 
@@ -94,7 +94,7 @@ Il permet de reconstituer la hiérarchie des fichiers d'un instantané (*commit*
 
 Un « commit » pointe vers un unique « tree » et le marque afin de représenter le projet à un certain point dans le temps. Il contient des méta-informations à propos de ce point dans le temps, comme une description, un timestamp, l’auteur·trice du contenu depuis le dernier commit, un pointeur vers le (ou les) dernier(s) commit(s), etc.
 
-Notez qu’un « commit » ne contient pas d’information à propos de ce qui a été modifié ; tous les changements sont calculés en comparant les contenus du « tree » référencés dans ce « commit » avec le « tree » associé au(x) parent(s) du « commit »
+Notez qu’un « commit » ne contient pas d’information à propos de ce qui a été modifié ; tous les changements sont calculés en comparant les contenus du « tree » référencés dans ce « commit » avec le « tree » associé au(x) parent(s) du « commit ».
 
 > La commande `git show` ou `git log --pretty=raw`permet d'examiner vos « commits » favoris
 
@@ -145,7 +145,7 @@ Quand vous réalisez des actions dans Git, la quasi-totalité d’entre elles ne
 
 Git gère trois états dans lesquels les fichiers peuvent résider : **modifié**, **indexé** et **validé**
 * **Modifié** : signifie que vous avez modifié le fichier mais qu’il n’a pas encore été validé en base
-* **Indexé** : signifie que vous avez marqué un fichier modifié dans sa version actuelle pour qu’il fasse partie du prochain instantané (*commit*) du projet.
+* **Indexé** : signifie que vous avez marqué un fichier modifié dans sa version actuelle pour qu’il fasse partie du prochain instantané (*commit*) du projet
 * **Validé** : signifie que les données sont stockées en sécurité dans votre base de données locale
 
 ![areas](assets/areas.png)
@@ -160,9 +160,9 @@ Crédits : [Git-scm](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudime
 * **Le répertoire Git** est l’endroit où Git stocke les méta-données et la base de données des objets de votre projet. C’est la partie la plus importante de Git, et c’est ce qui est copié lorsque vous clonez un dépôt depuis une autre source.
 
 L’utilisation standard de Git se déroule en 3 étapes :
-1. vous **modifiez** des fichiers dans votre *répertoire de travail* ;
-2. vous **indexez** les fichiers modifiés, ce qui ajoute des instantanés de ces fichiers dans *la zone d’index* ;
-3. vous **validez**, ce qui a pour effet de basculer les instantanés des fichiers de l’index dans *la base de données du répertoire Git*.
+1. vous **modifiez** des fichiers dans votre *répertoire de travail*
+2. vous **indexez** les fichiers modifiés, ce qui ajoute des instantanés de ces fichiers dans *la zone d’index*
+3. vous **validez**, ce qui a pour effet de basculer les instantanés des fichiers de l’index dans *la base de données du répertoire Git*
 
 ![areas_ineat](assets/areas_ineat.svg)
 
@@ -352,17 +352,17 @@ Rejoue les modifications **inverses** du commit ciblé et crée un nouveau commi
 ```shell
 git remote -v
 ```
-Liste l'ensemble des dépôts distants configurés
+Liste l'ensemble des dépôts distants configurés.
 
 ```shell
 git remote show <remote>
 ```
-Affiche les détails sur le dépôt distant
+Affiche les détails sur le dépôt distant.
 
 ```shell
 git remote add <remote> <url>
 ```
-Ajoute un dépôt distant
+Ajoute un dépôt distant.
 
 ```shell
 git fetch <remote> <branch>
@@ -490,7 +490,7 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
     * Pour annuler des ajouts à l'index (repasser vos modifications dans le WD) : `git reset`
 5. Créez un instantané (**commit**) contenant vos modifications dans l'index : `git commit`
     * Des conventions de commits doivent être appliquées. Se référer au chapitre [Conventions de commits](#conventions-de-commits)
-    * Pour créer un message de commit sur une seule ligne : `git commit -m "<type>([optional scope]): <votre message sur 50 chars. max>"`
+    * Pour créer un message de commit sur une seule ligne : `git commit -m "<type>(<optional scope>): <votre message sur 50 chars. max>"`
     * Pour entrer dans le mode édition (et pouvoir saisir un en-tête, un corps et un pied de message): `git commit`
         > Utilisez alors le format
         >    
@@ -588,7 +588,7 @@ Impulsée par les équipes Angular notamment, une convention de commit a rapidem
 
  Cette spécification fournit un ensemble simple de règles pour créer un historique de commit explicite et lisible. Cette convention est liée à [SemVer](https://semver.org/), en décrivant les fonctionnalités, les correctifs et les modifications importantes apportées aux messages de commit.
 
-Le message du commit doit être structuré comme suit:
+Le message du commit doit être structuré comme suit :
 
 ```
 <type>(<optional scope>): <subject> 
@@ -751,41 +751,41 @@ Permet de lister les références du dépôt local.
     ```shell
         git config --global core.editor "'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
     ```
-* `git config --global core.pager ''` : Désactive les `pager` pour toutes les commandes
-* `git config --global core.autocrlf true` : Convertit automatiquement les fins de ligne Windows en format Unix (et inversement)
-* `git config --global core.excludesFile <path/to/.gitignore>` : Permet de définir un `.gitignore` global
-* `git config --global alias.<name> "<definition>"` : Permet de définir un alias réutilisable
+* `git config --global core.pager ''` : Désactive les `pager` pour toutes les commandes.
+* `git config --global core.autocrlf true` : Convertit automatiquement les fins de ligne Windows en format Unix (et inversement).
+* `git config --global core.excludesFile <path/to/.gitignore>` : Permet de définir un `.gitignore` global.
+* `git config --global alias.<name> "<definition>"` : Permet de définir un alias réutilisable.
 
 ##### Commit
-* `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit
+* `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit.
 
 ##### Fetch
-* `git config --global git fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement
+* `git config --global git fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement.
 
 ##### Pull
-* `git config --global pull.rebase merges` : Conserve les commits de *merge* quand ils existent sur la branche d'où viennent les modifications
+* `git config --global pull.rebase merges` : Conserve les commits de *merge* quand ils existent sur la branche d'où viennent les modifications.
 
 ##### Merge
-* `git config --global merge.ff only` : n'autorise que les fusions en **fast-forward** (pour se pré-munir des commits de *merge*)
-* `git config --global merge.tool kdiff3` : configure l'outil `kdiff3` pour la résolution de conflits
-    * `git config --global diff.tool kdiff3` : configure l'outil `kdiff3` pour l'affichage des différences
-* `git config --global mergetool.keepBackup false` : supprime les fichiers `.orig` après la résolution des conflits
-* `git config --global mergetool.keepTemporaries false` : supprime les fichiers temporaires après la résolution des conflits
+* `git config --global merge.ff only` : N'autorise que les fusions en **fast-forward** (pour se pré-munir des commits de *merge*).
+* `git config --global merge.tool kdiff3` : Configure l'outil `kdiff3` pour la résolution de conflits.
+    * `git config --global diff.tool kdiff3` : Configure l'outil `kdiff3` pour l'affichage des différences.
+* `git config --global mergetool.keepBackup false` : Supprime les fichiers `.orig` après la résolution des conflits.
+* `git config --global mergetool.keepTemporaries false` : Supprime les fichiers temporaires après la résolution des conflits.
 
 ##### Rebase
-* `git config --global rebase.autosquash true` : positionne les commits de `fixup` automatiquement lors d'un `rebase -i` (option `--autosquash`)
-* `git config --global rebase.autoStash true` : `stash` les modifications de votre WD avant un `pull`, et applique ce stash juste après
+* `git config --global rebase.autosquash true` : Positionne les commits de `fixup` automatiquement lors d'un `rebase -i` (option `--autosquash`).
+* `git config --global rebase.autoStash true` : `stash` les modifications de votre WD avant un `pull`, et applique ce `stash` juste après.
 
 ##### Autres
-* `git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'` : configure la commande à lancer lors de l'utilisation de `git difftool -t vscode`
-* `git config --global rerere.enabled true` : Active [`git-rerere`](https://git-scm.com/docs/git-rerere), i.e Git se souviendra de certaines résolutions de conflits et les réappliquera automatiquement dans les futures résolutions pour des conflits similaires 
+* `git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'` : Configure la commande à lancer lors de l'utilisation de `git difftool -t vscode`.
+* `git config --global rerere.enabled true` : Active [`git-rerere`](https://git-scm.com/docs/git-rerere), i.e Git se souviendra de certaines résolutions de conflits et les réappliquera automatiquement dans les futures résolutions pour des conflits similaires .
 * `git config --global pager.branch false` : Permet de visualiser l'ensemble des branches en dehors du mode édition. L'attribut `pager` fonctionne pour d'autres commandes comme `tag`, `log`, `diff`, etc.
 
 ### Création de tag 
 
 Git vous donne la possibilité d'_étiqueter_ vos instantanés. Généralement on utilise cette fonctionnalité pour marquer les états de publication, c'est à dire les numéros de version des *releases* (livrables destinés a être déployés sur des environnements).
 
-1. Placez-vous sur la branche où se trouve l'instantané que vous souhaitez étiqueter.
+1. Placez-vous sur la branche où se trouve l'instantané que vous souhaitez étiqueter
 2. Invoquez la commande `git tag <numero du tag>`
     * Par défaut, le tag portera la description du commit annoté
     * Vous pouvez spécifier un message propre à votre tag grâce à l'option `-m` : `git tag -a <numero du tag> -m <libellé du tag>`
@@ -841,9 +841,9 @@ Le `fast-forward` permet d'obtenir un historique **linéaire** après une fusion
 Le rebasage (`rebase`) permet de synchroniser une branche (_par le dessous_) avec une autre. Très pratique pour bénéficier des mises à jour introduites depuis l'initiation de votre branche.
 
 Il existe 3 sortes de rebasage de branche : 
-* Le mode **standard** : rebaser (synchroniser) une branche par rapport à une autre.
-* Le mode **interactif** : permet de réécrire (retravailler) l'historique de la branche courante.
-* Le mode **onto** : permet de rattacher le premier commit d'une branche à la `HEAD` d'une autre branche. 
+* Le mode **standard** : rebaser (synchroniser) une branche par rapport à une autre
+* Le mode **interactif** : permet de réécrire (retravailler) l'historique de la branche courante
+* Le mode **onto** : permet de rattacher le premier commit d'une branche à la `HEAD` d'une autre branche
 
 Considérez que vous travaillez sur la branche `feat/A` :
 
@@ -908,7 +908,7 @@ Cela donne la situation suivante :
 
 ![git-rebase-onto](assets/git_rebase_onto_2.svg)
 
-- finalement, la branche `feat/B`, initiée depuis le commit `A2` de la branche `feat/A`, doit être fusionnée avant `feat/A` et n'a plus besoin des modifications introduites dans `feat/A`. 
+- finalement, la branche `feat/B`, initiée depuis le commit `A2` de la branche `feat/A`, doit être fusionnée avant `feat/A` et n'a plus besoin des modifications introduites dans `feat/A`
 
 Le `rebase --onto` permet de rattacher la branche courante à la `HEAD` d'une nouvelle branche en *déterminant les patchs depuis l'ancêtre commun des branches* : `git rebase --onto <nouvelle branche> <ancienne branche> <branche courante>`
 
@@ -969,17 +969,17 @@ Un ou plusieurs conflits peuvent apparaître pendant un `git merge`, `git rebase
 
 Si vous éditez le fichier en conflit, vous découvrirez comment Git gère les modifications :
 
-* `<<<<<<< HEAD` et `=======` encapsulent les modifications présentes initialement.
-* `=======` et `>>>>>>>` encapsulent les nouvelles modifications à intégrer.
+* `<<<<<<< HEAD` et `=======` encapsulent les modifications présentes initialement
+* `=======` et `>>>>>>>` encapsulent les nouvelles modifications à intégrer
 
-- A vous de faire votre choix et de supprimer les modifications obsolètes.
+- A vous de faire votre choix et de supprimer les modifications obsolètes
 
 **Fusionner** ses modifications via ces marqueurs peut se révéler laborieux. Il existe des outils pour vous aider à gérer les conflits de manière plus visuelle.
 
-* Consultez la liste des [outils de merge supportés]((https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffguitool)) par défaut par Git.
+* Consultez la liste des [outils de merge supportés]((https://git-scm.com/docs/git-config#Documentation/git-config.txt-diffguitool)) par défaut par Git
 
 Après avoir téléchargé l'outil de votre choix :
-1. Indiquer à Git comment l'utiliser : `git config --global merge.tool <tool>`.
+1. Indiquer à Git comment l'utiliser : `git config --global merge.tool <tool>`
     - Vous pouvez avoir plusieurs outils configurés et changer la valeur de `merge.tool` au besoin
 2. Si cet outil n'est pas déclaré dans votre `$PATH`, utilisez la configuration `git config --global  mergetool.<tool>.path <path>`
 3. Vous pouvez ne pas garder les fichiers temporaires générés par Git pendant et après le conflit :
@@ -1082,11 +1082,10 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 * [Merge vs Rebase](https://fr.atlassian.com/git/tutorials/merging-vs-rebasing)
 * [Git Reflog](https://fr.atlassian.com/git/tutorials/rewriting-history/git-reflog)
 
-## L'ours
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone, Pamela Rossignol, Emmanuel Peru.
+Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone, Pamela Rossignol, Emmanuel Peru, Clément Poissonnier.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
