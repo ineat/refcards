@@ -141,7 +141,7 @@ Quand vous réalisez des actions dans Git, la quasi-totalité d’entre elles ne
 
 ### Les trois états
 
-**Ce concept est primordiale**
+**Ce concept est primordial**
 
 Git gère trois états dans lesquels les fichiers peuvent résider : **modifié**, **indexé** et **validé**
 * **Modifié** : signifie que vous avez modifié le fichier mais qu’il n’a pas encore été validé en base
@@ -173,7 +173,7 @@ L’utilisation standard de Git se déroule en 3 étapes :
 
 ## Cheat Sheet
 ### Règles & bonnes pratiques
-* Créer une branche pour tout nouveau développement (cf [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
+* Créez une branche pour tout nouveau développement (cf [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
 * Préfixez le nom de votre branche par un **type** (cf [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
 * Un commit = une tâche (cf [Ajout interactif](#ajout-interactif))
 * Préférez l'indexation de lignes (**hunks**) plutôt que de fichiers (cf [Ajout interactif](#ajout-interactif))
@@ -495,11 +495,11 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
         > Utilisez alors le format
         >    
         > ```
-        > <type>[optional scope]: <description>
+        > <type>(<optional scope>): <description>
         > <BLANK LINE>
-        > [optional body]
+        > <optional body>
         > <BLANK LINE>
-        > [optional footer]
+        > <optional footer>
         > ```
     * Pour embarquer vos modifications dans le commit précédent (`HEAD`) : `git commit --amend`
         * et sans en modifier le message : `git commit --amend --no-edit`
@@ -527,7 +527,7 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
 4. Nettoyez votre historique en retravaillant les commits (fusionnez les commits liés par la même tâche ensemble par ex.) : 
     * Identifiez le nombre de commits propres à votre branche (de la `HEAD` au premier commit de votre branche)
     * Effectuez une réécriture de commits sur ce nombre de commit : `git rebase -i --autosquash HEAD~<nombre de commits>`
-    * Référez-vous au chapître [Rebase interactif](#rebase-interactif) pour positionner les actions sur vos commits
+    * Référez-vous au chapitre [Rebase interactif](#rebase-interactif) pour positionner les actions sur vos commits
     * Déroulez les étapes du `rebase` et résolvez les conflits potentiels 
         * Utilisez `git rebase --continue` après chaque résolution
         * Utilisez `git rebase --abort` si vous souhaitez annuler le `rebase`
@@ -576,7 +576,7 @@ Partant de ce principe de base, [Vincent Driessen (nvie)](http://nvie.com/posts/
 ![gitflow_feature](assets/gitflow_feature.svg)
 
 > Il existe d'autres workflow de branches. Libre à vous de choisir (ou de mélanger ?) celui qui convient le mieux à la taille et la maturité de votre équipe :
->    * [Atassian - Comparaison de workflows](https://fr.atlassian.com/git/tutorials/comparing-workflows)
+>    * [Atlassian - Comparaison de workflows](https://fr.atlassian.com/git/tutorials/comparing-workflows)
 >    * [Github Flow](https://guides.github.com/introduction/flow/)
 >    * [Gitlab Flow](https://docs.gitlab.com/ee/workflow/gitlab_flow.html) 
 
@@ -649,7 +649,7 @@ Déplace un fichier ou un répertoire. Les modifications sont ajoutées à l'ind
 ```shell
 git add -N <optional file>
 ```
-Indique à Git que les modifications sur le fichier seront ajoutées plus tard. **Indipensable** pour *indéxer* les nouveaux fichiers (sans leurs modifications) avant le `git add -p`.
+Indique à Git que les modifications sur le fichier seront ajoutées plus tard. **Indispensable** pour *indexer* les nouveaux fichiers (sans leurs modifications) avant le `git add -p`.
 
 #### Commit
 
@@ -832,7 +832,7 @@ Le `fast-forward` permet d'obtenir un historique **linéaire** après une fusion
     * Si des branches ont été initiées depuis la mise à jour de la branche :
         * Effectuez un **rebasage** de cette dernière sur les branches en question : `git rebase <nom de votre branche>` 
 3. Publiez le nouvel état de votre branche sur le dépôt distant : `git push`
-    * et des branches ayant été **rebasée** si besoin 
+    * et des branches ayant été **rebasées** si besoin 
 4. Supprimez la branche que vous venez de fusionner : `git branch -d <branch>`
     * Si elle est également présente sur le dépôt distant : `git push --delete <remote> <branch>`
 
@@ -855,7 +855,7 @@ Un commit vient d'être ajouté sur la `develop`, ce qui veut dire que la branch
 
 ![rebase-2](assets/rebase-2.svg)
 
-Il faut donc ici mettre à jour la branche `feat/A` par rapport à la `develop` grâce à la commande `git rebase`. C'est une mise à jour _par le dessous_ : c'est à dire que les nouveaux commits de la `develop` vont être joués sur la branche cible. Les commits existants (ceux de la branche `feat/A`) sont réécrits puisque **leurs commits parent changent**.
+Il faut donc ici mettre à jour la branche `feat/A` par rapport à la `develop` grâce à la commande `git rebase`. C'est une mise à jour _par le dessous_ : c'est à dire que les nouveaux commits de la `develop` vont être joués sur la branche cible. Les commits existants (ceux de la branche `feat/A`) sont réécrits puisque **leurs commits parents changent**.
 
 Le `git rebase` peut engendrer des conflits si des modifications sur des fichiers communs entrent en collision. Pour plus de détails sur cette partie consultez le chapitre [Gestion des conflits](#Gestion-des-conflits).
 
@@ -942,12 +942,12 @@ L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées pa
 * une ligne modifiée possède deux lignes : l'ancienne (`-`) et la nouvelle (`+`)
     * Si vous ne voulez pas que cette ligne modifiée soit indexée, supprimez la ligne indiquée par `+` et passez le `context` de la ligne supprimée de `-` à `' '`
 
-> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prise en compte, restaurez leurs états pour ce `add -p` en suivant les explications ci-dessus.
+> L'idée est de créer une version de vos modifications comme vous souhaitez les voir dans la zone d'index. Si des lignes modifiées ne doivent pas être prises en compte, restaurez leurs états pour ce `add -p` en suivant les explications ci-dessus.
 > P.S : Il est important de ne pas toucher aux lignes du fichier non modifiées !
 
 ### Le remisage
 
-Git propose une commande `git stash` qui vous permet de mettre vos modifications de coté et éviter de les balader dans le WD des autres branches.
+Git propose une commande `git stash` qui vous permet de mettre vos modifications de côté et éviter de les balader dans le WD des autres branches.
 
 Voici un cas d'utilisation où le `stash` est utile :
 
@@ -1026,7 +1026,7 @@ En saisissant votre identifiant et votre mot de passe (à chaque `push` ou `fetc
 
 #### Via SSH
 
-L'authentification entre votre poste et la plateforme sera effectuée grâce à votre clé public SSH, déclarée sur la plateforme.
+L'authentification entre votre poste et la plateforme sera effectuée grâce à votre clé SSH publique, déclarée sur la plateforme.
 
 1. Générez votre clé SSH si vous n'en avez pas déjà une depuis un terminal (`Git Bash` par défaut) : `ssh-keygen -t rsa -b 4096 -C "<your email>"`
 2. Laissez le chemin de génération par défaut : `~/.ssh/id_rsa`
@@ -1086,7 +1086,7 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 
 Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
-Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone.
+Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone, Pamela Rossignol, Emmanuel Peru.
 
 La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
 
