@@ -30,7 +30,7 @@ Co-écrit par Ludovic Dussart et Gabin Darras.
 15. [Le remisage](#le-remisage)
 16. [Gestion des conflits](#gestion-des-conflits)
 17. [Reflog (votre filet de secours)](#reflog-votre-filet-de-secours)
-18. [Utiliser une plateforme de versionning](#utiliser-une-plateforme-de-versionning)
+18. [Utiliser une plateforme de versioning](#utiliser-une-plateforme-de-versioning)
 19. [Glossaire](#glossaire)
 20. [Références](#références)
 21. [L'ours](#lours)
@@ -46,7 +46,7 @@ Créé en 2005 (à l'initiative de Linus Torvalds, le créateur de Linux), ce no
 * complètement distribué 
 * capacité à gérer efficacement des projets d’envergure tels que le noyau Linux (vitesse et compacité des données)
 
-Depuis sa naissance en 2005, Git a évolué et mûri pour être facile à utiliser tout en conservant ses qualités initiales. La communauté l'a très rapidement adopté et c'est aujourd'hui l'outil de référence pour le versionning de fichiers :
+Depuis sa naissance en 2005, Git a évolué et mûri pour être facile à utiliser tout en conservant ses qualités initiales. La communauté l'a très rapidement adopté et c'est aujourd'hui l'outil de référence pour le versioning de fichiers :
 
 ![git_trends](assets/git_trends.png)
 Crédits : [GitPrime](https://blog.gitprime.com/git-didnt-beat-svn-github-did)
@@ -86,7 +86,7 @@ Il n’est rien de plus qu’un morceau de données binaires. Il ne fait référ
 Un **tree** est comme un répertoire — il référence une liste d’autres « tree » et/ou d’autres « blobs » (i.e. fichiers et sous-répertoires).
 Il permet de reconstituer la hiérarchie des fichiers d'un instantané (*commit*).
 
-> La commande `git ls-tree` permet d'examiner le contenu d'un tree (de manière plus détaillée qu'un `git show` )
+> La commande `git ls-tree` permet d'examiner le contenu d'un tree (de manière plus détaillée qu'un `git show`)
 
 * Le **commit** (instantané)
 
@@ -96,7 +96,7 @@ Un « commit » pointe vers un unique « tree » et le marque afin de représent
 
 Notez qu’un « commit » ne contient pas d’information à propos de ce qui a été modifié ; tous les changements sont calculés en comparant les contenus du « tree » référencés dans ce « commit » avec le « tree » associé au(x) parent(s) du « commit ».
 
-> La commande `git show` ou `git log --pretty=raw`permet d'examiner vos « commits » favoris
+> La commande `git show` ou `git log --pretty=raw` permet d'examiner vos « commits » favoris
 
 ##### Exemple de représentation
 
@@ -157,7 +157,7 @@ Crédits : [Git-scm](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudime
 
 * **Le répertoire de travail** (nommé **WD** par la suite) est une extraction unique d’une version du projet. Ces fichiers sont extraits depuis la base de données compressée dans le répertoire Git et placés sur le disque pour pouvoir être utilisés ou modifiés. 
 * **La zone d’index** est un simple fichier, généralement situé dans le répertoire Git, qui stocke les informations concernant ce qui fera partie du prochain instantané (*commit*). On l’appelle aussi des fois la zone de préparation.
-* **Le répertoire Git** est l’endroit où Git stocke les méta-données et la base de données des objets de votre projet. C’est la partie la plus importante de Git, et c’est ce qui est copié lorsque vous clonez un dépôt depuis une autre source.
+* **Le répertoire Git** est l’endroit où Git stocke les métadonnées et la base de données des objets de votre projet. C’est la partie la plus importante de Git, et c’est ce qui est copié lorsque vous clonez un dépôt depuis une autre source.
 
 L’utilisation standard de Git se déroule en 3 étapes :
 1. vous **modifiez** des fichiers dans votre *répertoire de travail*
@@ -173,29 +173,29 @@ L’utilisation standard de Git se déroule en 3 étapes :
 
 ## Cheat Sheet
 ### Règles & bonnes pratiques
-* Créez une branche pour tout nouveau développement (cf [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
-* Préfixez le nom de votre branche par un **type** (cf [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
-* Un commit = une tâche (cf [Ajout interactif](#ajout-interactif))
-* Préférez l'indexation de lignes (**hunks**) plutôt que de fichiers (cf [Ajout interactif](#ajout-interactif))
-* Utilisez les conventions de commits (cf [Conventions de commits](#conventions-de-commits))
-* Retravaillez votre historique de branche avant de la proposer pour qu'elle soit intégrée (cf [Rebase interactif](#rebase-interactif))
+* Créez une branche pour tout nouveau développement (cf. [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
+* Préfixez le nom de votre branche par un **type** (cf. [Workflow de branches et conventions](#workflow-de-branches-et-conventions))
+* Un commit = une tâche (cf. [Ajout interactif](#ajout-interactif))
+* Préférez l'indexation de lignes (**hunks**) plutôt que de fichiers (cf. [Ajout interactif](#ajout-interactif))
+* Utilisez les conventions de commits (cf. [Conventions de commits](#conventions-de-commits))
+* Retravaillez votre historique de branche avant de la proposer pour qu'elle soit intégrée (cf. [Rebase interactif](#rebase-interactif))
 * Ne pas réécrire un historique publié sur une branche distante collaborative
 
 ### Qui ? Quoi ? Comment ?
 
-#### Je suis techlead
+#### Je suis tech lead
 
-* J'ai besoin de fusionner une `feature branch` sur `develop` : cf [Fusion de branche](#fusion-de-branche)
-* J'ai besoin *d'étiqueter* mon application : cf [Création de tag](#Création-de-tag)
+* J'ai besoin de fusionner une `feature branch` sur `develop` : cf. [Fusion de branche](#fusion-de-branche)
+* J'ai besoin *d'étiqueter* mon application : cf. [Création de tag](#Création-de-tag)
 
 #### Je suis développeur
 
-* Je ne sais pas par où commencer : cf [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-Git)
-* Ma branche n'est pas à jour avec la branche `develop` : cf [Rebasage de branche](#rebasage-de-branche)
-* Je viens de mettre ma branche à jour et cette dernière a des conflits : cf [Gestion des conflits](#Gestion-des-conflits)
-* J'ai besoin de réécrire (nettoyer) l'historique de ma branche : cf [Rebasage interactif](#Rebase-interactif)
-* J'ai fait une mauvaise manipulation et j'ai perdu mes modifications : cf [Reflog](#reflog-votre-filet-de-secours)
-* J'ai fini de travailler sur ma tâche et je dois la proposer à mon équipe : cf [Soumettre une demande de merge](#soumettre-une-demande-de-fusion-de-branche)
+* Je ne sais pas par où commencer : cf. [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-Git)
+* Ma branche n'est pas à jour avec la branche `develop` : cf. [Rebasage de branche](#rebasage-de-branche)
+* Je viens de mettre ma branche à jour et cette dernière a des conflits : cf. [Gestion des conflits](#Gestion-des-conflits)
+* J'ai besoin de réécrire (nettoyer) l'historique de ma branche : cf. [Rebasage interactif](#Rebase-interactif)
+* J'ai fait une mauvaise manipulation et j'ai perdu mes modifications : cf. [Reflog](#reflog-votre-filet-de-secours)
+* J'ai fini de travailler sur ma tâche et je dois la proposer à mon équipe : cf. [Soumettre une demande de merge](#soumettre-une-demande-de-fusion-de-branche)
 
 ### Commandes fréquentes
 #### Configuration
@@ -203,17 +203,17 @@ L’utilisation standard de Git se déroule en 3 étapes :
 ```shell
 git config --global -l
 ```
-Affiche toutes les configurations globales. Utilisez `--local` ou `--system` pour changer la scope.
+Affiche toutes les configurations globales. Utilisez `--local` ou `--system` pour changer le scope.
 
 ```shell
 git config --global -e
 ```
-Permet d'éditer les configurations globales. Utilisez `--local` ou `--system` pour changer la scope.
+Permet d'éditer les configurations globales. Utilisez `--local` ou `--system` pour changer le scope.
 
 ```shell
 git config --global <paramètre> <valeur>
 ```
-Permet de définir une configuration globale. Utilisez `--local` ou `--system` pour changer la scope.
+Permet de définir une configuration globale. Utilisez `--local` ou `--system` pour changer le scope.
 
 #### Autour du commit
 
@@ -367,7 +367,7 @@ Ajoute un dépôt distant.
 ```shell
 git fetch <remote> <branch>
 ```
-Met à jour l'état d'un dépôt distant dans votre dépôt local (mais ne met pas à jour le WD). Utilisez l'option `--all` pour mettre à jour tous les les états de tous les dépôts distants.
+Met à jour l'état d'un dépôt distant dans votre dépôt local (mais ne met pas à jour le WD). Utilisez l'option `--all` pour mettre à jour tous les états de tous les dépôts distants.
 
 ```shell
 git merge <branch name>
@@ -423,12 +423,12 @@ Définit un **alias** `lg` proposant une vue moins verbeuse et plus exploitable 
 >  [Inspiration : Atlassian - gitignore](https://fr.atlassian.com/git/tutorials/saving-changes/gitignore)
 
 
-Git offre un mécanisme pour **ignorer** des fichiers de votre espace de travail. Les fichiers à ignorer sont généralement des artefacts de build  (`target` sous Maven, `dist`ou `build` sous NPM par exemple) et des fichiers générés par la machine qui sont dérivés de votre dépôt de source ou qui ne devraient pas être commités (`/node_modules `, `/.idea`, le code compilé, etc).
+Git offre un mécanisme pour **ignorer** des fichiers de votre espace de travail. Les fichiers à ignorer sont généralement des artefacts de build  (`target` sous Maven, `dist` ou `build` sous NPM par exemple) et des fichiers générés par la machine qui sont dérivés de votre dépôt de source ou qui ne devraient pas être commités (`/node_modules `, `/.idea`, le code compilé, etc).
 Les éléments renseignés dans le `.gitignore` n'apparaitront plus dans le résultat des commandes `git status`, `git add`, etc.
 
 1. Créez un fichier `.gitignore` à la **racine** de votre projet
-2. Complétez le avec les **patterns** de fichiers à ignorer en vous basant sur les [modèles de développement](https://linux.die.net/man/7/glob). Voici quelques exemples :
-    * `**/logs`: le double `*` cible tous les répertoires partout dans le dépôt local
+2. Complétez-le avec les **patterns** de fichiers à ignorer en vous basant sur les [modèles de développement](https://linux.die.net/man/7/glob). Voici quelques exemples :
+    * `**/logs` : le double `*` cible tous les répertoires partout dans le dépôt local
     * `*.log` : tous les fichiers qui se terminent par `.log`
     * `!important.log` : le `!` permet d'ajouter des exceptions pour forcer la prise en compte de l'élément et invalider la règle générale
     * `debug.log` : par défaut, les modèles correspondent aux fichiers de tout répertoire
@@ -446,12 +446,12 @@ Si vous souhaitez ignorer un fichier que vous avez commité par le passé, vous 
 ```shell
 echo debug.log >> .gitignore
 git rm debug.log
-git commit -m "chore(.gitgnore): Start ignoring debug.log"
+git commit -m "chore(.gitignore): Start ignoring debug.log"
 ```
 
 ## Workflow type d'un développement avec Git
 
-Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.
+Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.
 
 ![aday](assets/aday.svg)
 
@@ -503,7 +503,7 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
         > ```
     * Pour embarquer vos modifications dans le commit précédent (`HEAD`) : `git commit --amend`
         * et sans en modifier le message : `git commit --amend --no-edit`
-    * Pour lier vos modifications à un des commits précédents (i.e si ces modifications concernent un commit déjà créé): `git commit --fixup=<SHA-1 du commit cible>`
+    * Pour lier vos modifications à un des commits précédents (i.e. si ces modifications concernent un commit déjà créé): `git commit --fixup=<SHA-1 du commit cible>`
 6. Annulez les instantanés créés si besoin
     * Pour modifier le dernier instantané et repasser ses modifications dans le WD : `git reset HEAD~`
         * Pour que ses modifications restent dans la zone d'index : `git reset --soft HEAD~`
@@ -546,7 +546,7 @@ Ce chapître a pour objectif de vous guider pas à pas dans vos usages quotidien
 Afin de maîtriser efficacement le cycle de vie de vos développements, il est nécessaire d'imposer des règles et des processus pour la gestion des branches de votre projet. Le workflow le plus courant est celui **de branche par fonctionnalité** :
 
 * Chaque fonctionnalité est développée dans une branche prévue à cet effet plutôt que dans la branche `master`. Grâce à cette encapsulation, plusieurs développeurs peuvent travailler aisément sur une même fonctionnalité sans modifier la base de code principale. Cela signifie également que la branche `master` ne contiendra jamais de code bogué : un avantage non négligeable pour les environnements d'intégration continue.
-* Ce fonctionnement va permettre de proposer les modifications présentes sur une branche aux plateformes de versionning de manière isolée. Il est alors extrêmement facile pour votre équipe de faire des retours sur le travail effectué.
+* Ce fonctionnement va permettre de proposer les modifications présentes sur une branche aux plateformes de versioning de manière isolée. Il est alors extrêmement facile pour votre équipe de faire des retours sur le travail effectué.
 
 ### Gitflow
 
@@ -673,12 +673,12 @@ Joue les modifications du commit dans *le sens inverse* et en crée un nouveau c
 ```shell
 git rebase -i <commit>~ --autosquash
 ```
-Permet de retoucher l'historique de commits, du commit `<commit>` à la `HEAD`. cf [Rebase interactif](#rebasage-interactif).
+Permet de retoucher l'historique de commits, du commit `<commit>` à la `HEAD`. cf. [Rebase interactif](#rebasage-interactif).
 
 ```shell
 git rebase --onto <nouvelle branche> <ancienne branche> <branche courante>
 ```
-Permet de changer la branche de rattachement de la branche courante. cf [Rebase --onto](#rebase---onto).
+Permet de changer la branche de rattachement de la branche courante. cf. [Rebase --onto](#rebase---onto).
 
 
 #### Autour du commit
@@ -729,7 +729,7 @@ git remote set-url <remote> <url> # git remote set-url origin git@github.com:ine
 Permet de redéfinir l'url d'un dépôt distant.
 
 ```shell
-git clone  -b <branch> --depth=<x> <url> <local dir>
+git clone -b <branch> --depth=<x> <url> <local dir>
 ```
 Clone uniquement les `<x>` commits de la branche `<branch>` du dépôt distant `<url>` dans un dossier local `<local dir>`.
 
@@ -825,7 +825,7 @@ Le `fast-forward` permet d'obtenir un historique **linéaire** après une fusion
 
 #### Fusionnez votre branche 
 
-1. Placez vous sur la branche qui va recevoir les nouvelles modifications : `git checkout <nom de la branche de réception>`
+1. Placez-vous sur la branche qui va recevoir les nouvelles modifications : `git checkout <nom de la branche de réception>`
 2. Fusionnez votre branche dessus en privilégiant le `fast-forward` : `git merge <type>/<branch description> --ff-only`
     * Résolvez les conflits si besoin
         * Invoquez `git merge --continue` après la résolution
@@ -863,7 +863,7 @@ Le `git rebase` peut engendrer des conflits si des modifications sur des fichier
 
 #### Rebase interactif
 
-Dans votre workflow de versionning, vous serez amené à créer plus de commits (commit de `fixup` ?) que de tâches à réaliser. A la fin de vos développements, vous **devez** retravailler l'historique de votre branche pour :
+Dans votre workflow de versioning, vous serez amené à créer plus de commits (commit de `fixup` ?) que de tâches à réaliser. A la fin de vos développements, vous **devez** retravailler l'historique de votre branche pour :
 * **fusionner** les commits qui concernent la même tâche
 * **réécrire** la description de vos commits si elle est incomplète/erronée 
 * **supprimer** des commits si besoin
@@ -883,9 +883,9 @@ Git vous propose une liste d'actions documentées dont voici les principales :
 
 - `pick` : laisser le commit inchangé
 - `reword` : permet de réécrire uniquement le message du commit 
-- `edit`: permet d'intégrer d'autres modifications au commit (équivaut au `git commit --amend`)
+- `edit` : permet d'intégrer d'autres modifications au commit (équivaut au `git commit --amend`)
 - `squash` : permet de fusionner 2 commits et de modifier le message du commit final
-- `fixup`: permet de fusionner le contenu du commit dans le commit parent, sans garder le message de commit.
+- `fixup` : permet de fusionner le contenu du commit dans le commit parent, sans garder le message de commit.
 - `drop` : permet de supprimer un commit et le code associé
 - `réorganiser des commits` : vous pouvez réordonner les commits de haut (**plus ancien**) en bas (**plus récent**). Indispensable pour le `fixup` ou le `squash` notamment, qui s'appliquent à un commit parent
 
@@ -938,7 +938,7 @@ L'éditeur Git vous propose l'ensemble des lignes **modifiées**, préfixées pa
 * `-` indique une ligne supprimée
     * Si vous ne voulez pas que cette ligne supprimée soit indexée, passez le `context` de `-` à `' '`
 * `+` indique une ligne ajoutée
-    * Si vous ne voulez pas que cette ligne ajoutée soit indexée, supprimez la
+    * Si vous ne voulez pas que cette ligne ajoutée soit indexée, supprimez-la
 * une ligne modifiée possède deux lignes : l'ancienne (`-`) et la nouvelle (`+`)
     * Si vous ne voulez pas que cette ligne modifiée soit indexée, supprimez la ligne indiquée par `+` et passez le `context` de la ligne supprimée de `-` à `' '`
 
@@ -952,7 +952,7 @@ Git propose une commande `git stash` qui vous permet de mettre vos modifications
 Voici un cas d'utilisation où le `stash` est utile :
 
 - Vous êtes sur une branche, **feat/A**, et vous avez fait quelques modifications, encore présentes dans votre WD.
-- Vous devez faire un `git pull` ou un `git rebase develop`sur votre branche : Git refusera car vous avez encore des modifications dans votre WD.
+- Vous devez faire un `git pull` ou un `git rebase develop` sur votre branche : Git refusera car vous avez encore des modifications dans votre WD.
 
 1. Utilisez la commande `git stash` pour **remiser** temporairement vos modifications
 2. Une nouvelle entrée du `stash` est créée. Vous pouvez consulter la liste de vos `stash` via `git stash list`
@@ -1004,9 +1004,9 @@ Le reflog vous permet de revenir sur les commits même s'ils ne sont pas référ
     * `git reset <reflog state>` (exemple : `git reset HEAD@{2}`)
 
 
-## Utiliser une plateforme de versionning
+## Utiliser une plateforme de versioning
 
-Une plateforme de versionning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bug tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
+Une plateforme de versioning s'appuie sur Git pour vous proposer un hébergement **décentralisé** de votre code source et bien d'autres fonctionnalités (WYSIWYG, bug tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes `fetch`, `pull` et `push`.
 
 ### Configurer votre authentification sur la plateforme
 
@@ -1043,7 +1043,7 @@ L'authentification entre votre poste et la plateforme sera effectuée grâce à 
 
 Dépendant de la plateforme que vous utilisez, la terminologie et le workflow seront différents mais les concepts et principes restent les mêmes.
 
-En vous basant sur le chapître [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-git) :
+En vous basant sur le chapitre [Workflow type d'un développement avec Git](#workflow-type-dun-développement-avec-git) :
 
 1. Effectuez vos développements sur une branche dédiée en vous assurant que la branche de départ _reste toujours synchronisée_
 2. Publiez votre branche sur le dépôt distant
@@ -1059,7 +1059,7 @@ En vous basant sur le chapître [Workflow type d'un développement avec Git](#wo
 
 `HEAD` est un pointeur sur la référence de la branche actuelle, qui est à son tour un pointeur sur le dernier commit réalisé sur cette branche. Ceci signifie que `HEAD` sera le parent du prochain commit à créer. C’est généralement plus simple de penser `HEAD` comme l’instantané de votre dernière validation.
 Git utilise d'autres références de ce type comme 
-* `ORIG_HEAD`: état de la `HEAD` avant un `git reset`
+* `ORIG_HEAD` : état de la `HEAD` avant un `git reset`
 * `FETCH_HEAD` : état de la branche que vous venez de mettre à jour (via `git fetch`)
 * `MERGE_HEAD` : état de la branche après un `git merge`
 * `CHERRY_PICK_HEAD` : état de la branche après un `git cherry-pick`
@@ -1087,7 +1087,7 @@ Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
 
 Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone, Pamela Rossignol, Emmanuel Peru, Clément Poissonnier.
 
-La direction artistique et les illustrations sont l'oeuvre de Jean-François Tranchida.
+La direction artistique et les illustrations sont l'œuvre de Jean-François Tranchida.
 
 > "Je ne suis qu'un sale égocentrique, donc j'appelle tous mes projets d'après ma propre personne. D'abord Linux, puis Git."
 > Linus Torvalds
