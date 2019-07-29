@@ -24,7 +24,13 @@ Ecrit par Mathias Deremer-Accettone
     * [Stocker des données : les sessions](#stocker-des-donnes--les-sessions)
     * [Stocker des données : les cookies](#stocker-des-donnes--les-cookies)
     * [Saisir des données : les formulaires](#saisir-des-donnes--les-formulaires)
-5. [Distribuer les services](#distribuer-les-services)
+6. [Distribuer les services](#distribuer-les-services)
+    * [Event Bus – Théorie](#event-bus---thorie)
+    * [Event Bus – En local](#event-bus---en-local)
+    * [Event Bus – En cluster](#event-bus--en-cluster)
+    * [Service Discovery - Théorie](#services-discovery---thorie)
+    * [Service Discovery - Mise en pratique](#services-discovery---mise-en-pratique)
+7. [Tester l'application](#tester-lapplication)
 
 
 ## Vertx, kesako ?
@@ -440,5 +446,133 @@ routingContext.request().getFormAttribute("radio1")
 Une autre méthode (__formAttributes__), également fournie par __HttpServerRequest__, offre la possibilité de récupérer l’ensemble des inputs sous la forme d’une __MultiMap__.
 
 ## Distribuer les services
+
+// IMAGE
+
+### Event Bus - Théorie
+
+Véritable système nerveux de Vertx, l’event bus permet à différentes entités d’une application de communiquer entre-elles via échanges de messages (entités qui peuvent se trouver ou non dans la même instance Vertx). Un des principaux intérêts est que les parties communicantes peuvent être écrites dans des langages différents, mais qu’il est également tout à fait envisageable de lier du code Javascript, exécuté dans un navigateur, à l’Event Bus (via __SockJs__ par exemple).
+L’envoi de messages sur le bus se fait sur une adresse, qui n’est ni plus ni moins qu’une simple chaine de caractères. Chaque __consumer__ (qui est généralement un verticle) reçoit et traite les messages en s’abonnant à cette adresse (modèle __publish / subscribe__). Il supporte aussi le modèle point à point et request/response. 
+On retrouve donc l’aspect « message oriented » du manifeste reactive. Ce bus va nous permettre de découpler les composants, et de profiter d’une scalabilité horizontale (un verticle du cluster va prendre le message).
+
+// IMAGE
+
+### Event Bus - En local
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Réception des messages (Abonnements)
+
+```java
+@Override
+public void start() {
+  // ...
+  vertx.eventBus().consumer( "address-A", message -> System.out.println(message.body()));
+}
+```
+
+Dans cet exemple on affiche le contenu du message réceptionné à l’adresse « address-A ».
+
+#### Envoi des messages
+
+La publication d’un message peut se faire de deux façons : 
+-	Via la méthode __publish__ -> l’ensemble des consommateurs abonnés à l’adresse traiterons le message (__modèle publish / subscribe__).
+-	Via la méthode __send__ -> un seul consommateur traitera le message même si d’autres sont abonnés à la même adresse (__modèle point to point__).
+Ces deux méthodes prennent en paramètre l’adresse de publication et le contenu du message.
+
+```java
+vertx.eventBus().publish("address-A", "Message content");
+vertx.eventBus().send("address-A", "Message content");
+```
+
+### Event Bus – En cluster
+
+Dans sa forme la plus simple, la communication inter-verticle se fait au sein de la même instance Vertx sans aucune complexité. Cependant dans le cas d’applications distribuées, plusieurs instances Vertx peuvent coexister sur le réseau et être exécutées sur des JVM différentes. Or chaque instance gère son propre Event Bus. Il est donc nécessaire de s’appuyer sur un Cluster Manager qui permettra de grouper les instances et constituer un seul Event Bus partagé.
+
+// IMAGE
+
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Mise en oeuvre
+
+```java
+//…
+  ClusterManager mng = new HazelcastClusterManager();
+  VertxOptions options = new VertxOptions().setClusterManager(mng);
+  Vertx.clusteredVertx(options, res -> {
+    if (res.succeeded()) {
+      Vertx vertx = res.result();
+      vertx.eventBus().publish("address-B", "Message content");
+    }});
+```
+
+On instancie un __HazelcastClusterManager__ qui sera ensuite utilisé pour initialiser le cluster. Si c’est un succès, la suite des opérations sera la même que pour une exécution locale. Vertx supporte d’autres Cluster Manager comme Zookeeper (__ZookeeperClusterManager__ du module __vertx-zookeeper__), Infinispan (__InfinispanClusterManager__ du module __vertx-infinispan__), Ignite (__IgniteClusterManager__ du module __vertx-ignite__).
+Qu'il soit local ou distribué l'event bus permet donc aux composants d'une application d'échanger facilement des données de manière asynchrone et non-bloquante, et ne nécessite pas l'intervention d'un broker de messages.
+
+### Services Discovery - Théorie
+
+Chaque entité d’un système peut être vue comme un service. Qu’il s’agisse de endpoints HTTP, de sources de données ou d’un proxy, chaque service peut être décrit et référencé dans annuaire dans le but d’être appelable par les autres services sans que ceux-ci n’aient connaissance de l’adresse de ce service. Tout comme pour l’Event Bus, ce mécanisme, appelé découverte de services, garantie donc une certaine __transparence de localisation__.
+
+// IMAGE
+
+Ce schéma illustre ce concept : les endpoints d’__Account Service__ (exposés par __Account Verticle__) sont référencés dans le__ Service Registry__. Ce dernier est observé et utilisé par le Customer Service pour récupérer l’adresse d’Account Service et donc déterminer comment appeler les endpoints exposés par __Account Verticle__. 
+Vertx propose ses propres classes permettant de monter un annuaire de service, mais offre également des connecteurs pour interagir avec d’autres solutions (Consul par exemple, via le client mis à disposition par __vertx-consul-client__).
+
+### Services Discovery - Mise en pratique
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Créer l'annuaire de services
+
+La création d’un annuaire de services avec Vertx implique l’instanciation d’un objet __ServiceDiscovery__ :
+
+```java
+ServiceDiscovery discovery = ServiceDiscovery.create(vertx);
+```
+
+#### Référencer un service dans l'annuaire
+
+La publication d’un service (ci-dessous un endpoint http) revient à ajouter un __Record__ dans l’annuaire. Chaque service référencé est caractérisé par un nom, une localisation, et optionnellement des métadonnées.
+
+```java
+Record record = HttpEndpoint.createRecord("service-name", "address", 8080, "/test");
+discovery.publish(record, ar -> {
+  if (ar.succeeded()) {
+    System.out.println("Service published");
+  }});
+```
+
+#### Rechercher un service dans l'annuaire
+
+Il est possible de rechercher des services en utilisant des filtres (applicables sur différentes caractéristiques d’un service) :
+
+```java
+discovery.getRecord(r -> r.getName().equals("service-name"), ar -> {
+  if (ar.succeeded()) {
+    System.out.println("Service found");
+  }});
+```
+
+L’appel au service pourra ensuite se faire comme suit (la méthode __getAs__ prenant en paramètre le type de service à récupérer) :
+
+```java
+if (ar.succeeded()) {
+    Record record = ar.result();
+    ServiceReference serviceReference = discovery.getReference(record);
+    HttpClient client = serviceReference.getAs(HttpClient.class);
+    client.get("http://address:port/resource").end();
+    // ...
+    serviceReference.release();
+}
+```
+
+## Tester L'application
 
 // IMAGE
