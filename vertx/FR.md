@@ -20,6 +20,11 @@ Ecrit par Mathias Deremer-Accettone
     * [Executer du code bloquant – Mise en pratique](#executer-du-code-bloquant---mise-en-pratique)
     * [Circuit Breaker](#circuit-breaker)
 5. [Vertx pour le web](#vertx-pour-le-web)
+    * [Servir des pages web](#servir-des-pages-web)
+    * [Stocker des données : les sessions](#stocker-des-donnes--les-sessions)
+    * [Stocker des données : les cookies](#stocker-des-donnes--les-cookies)
+    * [Saisir des données : les formulaires](#saisir-des-donnes--les-formulaires)
+5. [Distribuer les services](#distribuer-les-services)
 
 
 ## Vertx, kesako ?
@@ -304,5 +309,136 @@ breaker.executeWithFallback(future ->
 ```
 
 ## Vertx pour le web
+
+// IMAGE
+
+
+### Servir des pages web
+
+Solution idéale pour construire rapidement des APIs légères et réactives, Vertx permet également de servir du contenu HTML.
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Exposer des ressources statiques
+
+Servir des ressources statiques (comme les fichiers css ou les images) nécessite l’utilisation d’un __StaticHandler__ qui, en fonction des demandes, transmettra les fichiers stockés dans un répertoire du filesystem. Par défaut ce répertoire est __webroot__, mais il est tout à fait possible de pointer sur un autre répertoire via la méthode __setWebRoot__ du __StaticHandler__.
+
+```java
+router.route("/static/*").handler(StaticHandler.create());
+```
+
+#### Servir une page HTML
+
+Tout comme les réponses retournées par des APIs, servir du contenu HTML se fait avec __routingContext.response().end(…)__. Le contenu renvoyé ici est passé en paramètre de la méthode end et sera dans ce cas du code HTML.
+
+#### Le templating
+
+Plusieurs moteurs de templates peuvent être utilisés conjointement avec Vertx afin de rendre un contenu HTML (Thymeleaf, Freemarker, Jade, …).
+
+```java
+router.get("/page").handler(
+        routingContext -> {
+            ThymeleafTemplateEngine engine = ThymeleafTemplateEngine.create();
+            engine.render(routingContext, "templates", "page.html", res -> {
+                        if (res.succeeded()) {
+                            routingContext.response().end(res.result());
+                        }
+                    });
+});
+
+```
+
+Outre le __RoutingContext__, la méthode __render__ de __ThymeleafTemplateEngine__ prend en paramètre le nom du répertoire contenant les templates, le nom du template à utiliser et un handler à exécuter (en générale cet handler renverra le code HTML généré).
+
+### Stocker des données : les sessions
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Types de stockage
+
+Le stockage des données en session passe par la création d’une instance de __SessionStore__. Cette classe permet de spécifier le nom de la map qui contiendra les données de session.
+
+```java
+SessionStore sessionStore = LocalSessionStore.create(vertx, "map");
+``` 
+
+// IMAGE
+
+Dans sa forme la plus simple, le stockage se fait localement au sein d’un même serveur http. Cependant en production, plusieurs instances d’un même verticle peuvent exister au sein d’un même cluster. Les sessions sont donc amenées à être partagées entre plusieurs serveurs http. Dans ce cas de figure, il sera nécessaire d’utiliser __ClusturedSessionStore__ et non __LocalSessionStore__. Les sessions seront alors stockées dans une map distribuée. 
+
+__Bien que tout à fait faisable avec Vertx, le stockage des données en session est cependant à éviter : pour suivre les principes de scalabilité et de résilience il est conseillé de favoriser le stateless.__
+
+#### Accès aux données
+
+L’accès aux données de session suit le même schéma que l’accès au body des requêtes POST. On déclare le __SessionHandler__, qui sera associé au __router__.
+
+```java
+SessionHandler sessionHandler = SessionHandler.create(sessionStore);
+router.route().handler(sessionHandler);
+```
+
+L’accès aux données pourra alors être opéré par le biais d’un objet __Session__, obtenu via un appel au __RoutingContext__. Session se manipule comme une HashMap classique.
+
+```java
+Session session = routingContext.session();
+session.put("key", "value");
+```
+
+### Stocker des données : les cookies
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Mise en oeuvre
+
+De la même façon que pour les sessions, l’accès aux données stockées sous forme de cookies se fait par le biais d’un handler spécifique : __CookieHandler__.
+
+```java
+router.route().handler(CookieHandler.create());
+```
+
+Le __RoutingContext__ permettra de stocker de nouveaux cookies et de manipuler leurs données.
+
+```java
+routingContext.addCookie(Cookie.cookie("cookie-example", "value"));
+//...
+Cookie cookieExample = routingContext.getCookie("cookie-example");
+String value = cookieExample.getValue();
+```
+
+### Saisir des données : les formulaires.
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Créer le formulaire
+
+La création d’un formulaire exploitable par Vertx n’a pas de prérequis particuliers, seul l’attribut __name__ des inputs est essentiel : c’est avec son nom qu’on pourra rechercher un input et accéder à sa valeur. 
+
+```xml
+<form method="post">
+        <input type="radio" id="input1" name="radio1" value="A"/>
+        <input type="radio" id="input2" name="radio2" value="B"/>
+        <input type="radio" id="input3" name="radio3" value="C"/>
+</form>
+```
+
+#### Récupérer les données saisies
+
+Comme précisé dans la partie précédente le nom de l’input est important, car il permet de récupérer la valeur saisie avec la méthode __getFormAttribute__ de __HttpServerRequest__ (qui prend en paramètre le nom de l’input).
+
+```java
+routingContext.request().getFormAttribute("radio1")
+```
+
+Une autre méthode (__formAttributes__), également fournie par __HttpServerRequest__, offre la possibilité de récupérer l’ensemble des inputs sous la forme d’une __MultiMap__.
+
+## Distribuer les services
 
 // IMAGE
