@@ -31,6 +31,8 @@ Ecrit par Mathias Deremer-Accettone
     * [Service Discovery - Théorie](#services-discovery---thorie)
     * [Service Discovery - Mise en pratique](#services-discovery---mise-en-pratique)
 7. [Tester l'application](#tester-lapplication)
+    * [Les collections de tests avec Vertx Unit](#les-collections-de-tests-avec-vertx-unit)
+    * [Chaîner ses tests Vertx Unit](#chaner-ses-tests-vertx-unit)
 
 
 ## Vertx, kesako ?
@@ -574,5 +576,89 @@ if (ar.succeeded()) {
 ```
 
 ## Tester L'application
+
+// IMAGE
+
+### Les collections de tests avec Vertx Unit
+
+Vertx Unit est un module apporté par Vertx, se basant sur des frameworks de tests existants et permettant d’écrire des tests unitaires asynchrones.
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Ecrire une suite de tests
+
+En règle générale, tester son application revient à écrire un ensemble de cas de test. La classe __TestSuite__ simplifie cette démarche en apportant quelques méthodes utiles pour grouper ces cas de tests et séquencer leurs exécutions.
+
+##### Instancier une TestSuite
+
+La création d’un objet __TestSuite__ passe par un appel à la méthode __create__, prenant en paramètre une chaine de caractères (le nom que l’on souhaite donner à la __TestSuite__).
+
+```java
+TestSuite testSuite = TestSuite.create("test-suite-example");
+```
+
+##### Déclarer des tests
+
+L’instance de __TestSuite__ est utilisée pour déclarer des cas de test. La méthode __test__ prend en paramètre le nom du test, ainsi qu’un callback à exécuter.
+
+```java
+testSuite.test("test1", context -> {
+    //...
+});
+```
+
+##### Exécuter une test suite
+
+La classe __TestSuite__ dispose d’une méthode __run__, qui permet de lancer l’exécution.
+
+```java
+testSuite.run() ;
+```
+
+Il est également possible de passer des paramètres à cette méthode, et notamment une instance de __TestOptions__. Cette classe est notamment utilisée pour déclarer des « reporters » permettant d’exporter les résultats des tests vers des sorties diverses.
+
+```java
+ReportOptions fileReport = new ReportOptions().setTo("file:.").setFormat("simple");
+testSuite.run(new TestOptions().addReporter(consoleReport));
+```
+
+Dans l’exemple précédent, une instance de __ReportOptions__ permet de spécifier que la sortie d’exécution des tests sera un ensemble de fichiers (l’argument de __setTo__ aura alors la forme file:$DIRECTORY où $DIRECTORY sera remplacé par le chemin où seront sauvegarder les fichiers). Il est possible de spécifier d’autres sorties en changeant l’argument de la méthode __setTo__ par :
+-	console -> les résultats des tests seront affichés dans la console.
+-	bus :$ADDRESS -> exports sous forme de messages, envoyé sur un Event Bus (on remplacera $ADDRESS par l’adresse à laquelle on envoie les messages).
+-	Log :$LOGGER -> exports sous forme de logs (on remplacera $LOGGER par le nom du logger à utiliser).
+
+### Chaîner ses tests Vertx Unit
+
+Comme nous l’avons vu dans la partie précédente, l’écriture de cas de tests avec Vertx Unit est assez triviale. Mais ce module ne se limite pas à l’écriture de cas de tests autonomes : il est possible de construire de véritables scénarios en chaînant les cas de tests. 
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Mise en oeuvre
+
+L’enchainement logique des tests implique que ceux – ci puissent partager des objets. Pour cela les callbacks ont à disposition un __context__, s’utilisant comme une Hashmap. On peut donc stocker une donnée lors de l’exécution d’un cas de test, et l’utiliser durant l’exécution du suivant.
+
+```java
+testSuite.before(context -> {
+    context.put("result", 10);
+}).test("increase-result", context -> {
+    int newResult = ((int)context.get("result")) + 8;
+    context.assertEquals(newResult, 18);
+    context.put("result", newResult);
+}).test("divide-result", context -> {
+    int newResult = ((int)context.get("result")) / 2;
+    context.assertTrue(newResult < 10);
+    context.put("result", newResult);
+}).after(context -> {
+    //...
+});
+```
+
+Dans l’exemple précédent, on stocke dans le __context__ un entier "result" depuis le callback de la méthode __before__ (méthode utilisée pour initialiser une __TestSuite__ avant son exécution). La valeur de « result » est ensuite mise à jour, testée et restockée par le premier cas de test "increase-result". Le second cas de test "divide-result" sera lancé une fois que "increase-result" aura terminé son exécution et pourra à son tour exploiter la valeur de "result". C’est également l’objet __context__ qui fournit les méthodes d’assertions.
+
+## Déployer et administrer
 
 // IMAGE
