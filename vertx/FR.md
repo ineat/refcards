@@ -33,6 +33,17 @@ Ecrit par Mathias Deremer-Accettone
 7. [Tester l'application](#tester-lapplication)
     * [Les collections de tests avec Vertx Unit](#les-collections-de-tests-avec-vertx-unit)
     * [Chaîner ses tests Vertx Unit](#chaner-ses-tests-vertx-unit)
+8. [Déployer et Administrer](#dployer-et-administrer)
+    * [Le CLI Vertx](#le-cli-vertx)
+    * [Configurations et logs](#configurations-et-logs)
+    * [Déploiements rapide de l'application](#dploiement-rapide-de-lapplication)
+    * [Déploiements avancé et scalabilité](#dploiement-avanc-et-scalabilit)
+9. [Observabilité](#observabilit)
+    * [Contrôler l'état d'une application](#contrler-ltat-dune-application)
+    * [Exposer des indicateurs - Théorie](#exposer-des-indicateurs---thorie)
+    * [Exposer des indicateurs - Mise en pratique](#exposer-des-indicateurs---mise-en-pratique)
+10. [A propos d'Ineat](#a-propos-dineat)
+11. [Remerciements](#remerciements)
 
 
 ## Vertx, kesako ?
@@ -662,3 +673,268 @@ Dans l’exemple précédent, on stocke dans le __context__ un entier "result" d
 ## Déployer et administrer
 
 // IMAGE
+
+### Le CLI Vertx
+
+Vertx dispose d'une interface en ligne de commande très pratique permettant de lancer des verticles en précisant des options de déploiement.
+
+#### Installation
+
+1 - Installer une JDK 8 sur le poste de développement (impératif si on souhaite compiler des verticles écrits en Java).
+
+2 - Télécharger la dernière version de Vertx depuis https://vertx.io/download/.
+
+3 - Dézipper l'archive.
+
+4 - Ajouter le bin contenu dans le répertoire obtenu au PATH de la machine.
+
+#### Quelques commandes utiles
+
+- Compiler et déployer un verticle 
+```shell
+$ vertx run HelloVerticle.java
+```
+
+- Déployer 3 instances d'un verticle
+```shell
+$ vertx run HelloVerticle.java -instances 3
+```
+
+- Déployer un worker
+```shell
+$ vertx run HelloVerticle.java -worker
+```
+
+- Spécifier des configurations lors du déploiement
+```shell
+$ vertx run HelloVerticle.java -config /path/to/config.json
+```
+
+- Déployer un verticle dans un environnement clusterisé 
+```shell
+$ vertx run HelloVerticle.java -cluster
+```
+Vertx créera automatiquement un Event Bus pour permettre la communication inter-verticles.
+
+- Redéployer automatiquement à chaque modification
+```shell
+$ vertx run HelloVerticle --redeploy="**&#47;*.class" --launcher-class=io.vertx.core.Launcher
+```
+
+- Lancer un verticle en tâche de fond
+```shell
+$ vertx run HelloVerticle start — -vertx-id=hello-verticle
+```
+On utilisera list et stop pour lister et stopper les verticles.
+
+### Configurations et logs
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Configurations
+
+Vertx supporte différents types de sources de données depuis lesquelles il est possible d’extraire les configurations utilisables par nos applications, et notamment les __fichiers__ (JSON, YAML, …), les __variables d’environnements__, les __endpoints HTTP__ ou encore les __dépôts Git__. Pour d’accéder aux configurations stockées à la fois dans un fichier et dans des variables d’environnement, un objet __ConfigRetrieverOptions__ doit être défini :
+
+```java
+ConfigStoreOptions fileStore = new ConfigStoreOptions()
+  .setType("file")
+  .setConfig(new JsonObject().put("path", "config-file.json"));
+ConfigStoreOptions envStore = new ConfigStoreOptions().setType("env");
+ConfigRetrieverOptions options = new ConfigRetrieverOptions()
+  .addStore(fileStore)
+  .addStore(envStore);
+```
+
+Il sera ensuite utilisé pour récupérer un JsonObject contenant l’ensemble des configurations (à l’instar d’une HashMap, chaque valeur du JsonObject est accessible via une clé) :
+
+```java
+ConfigRetriever.create(vertx, options).getConfig(ar -> {
+  if (ar.succeeded()) {
+    JsonObject config = ar.result();
+  }});
+```
+
+#### Logs
+
+L’implémentation par défaut de l’API de logging fournie par Vertx s’appuie sur __java.util.logging__ (d’autres frameworks de logging tel-que Log4j sont également supportés). Au démarrage de l’application, Vertx ira scruter le fichier __vertx-default-jul-logging.properties__ situé sous __/src/main/resources__. Le logging se fera alors de façon très classique.
+
+```java
+Logger logger = LoggerFactory.getLogger("ExampleVerticle")
+//…
+logger.error("Error during Verticle initialization");
+```
+
+### Déploiement rapide de l'application
+
+Lors du build d’une application Vertx, un fat-jar est généré et peut être lancé via la commande __java -jar__. Cependant durant les phases de développement, cette méthode peut être assez contraignante. N’ayez crainte, il existe d’autres techniques pour construire, déployer et lancer des verticles.
+
+#### En utilisant le plugin maven
+
+La méthode la plus simple pour lancer localement une application Vertx est d’utiliser le plugin __vertx-maven-plugin__. Une fois ajouté au pom.xml, lancez la commande suivante pour démarrer l’application :
+```shell
+$ mvn vertx:start
+```
+Et pour la stopper :
+```shell
+$ mvn vertx:stop
+```
+
+#### En utilisant la classe Launcher de Vertx
+
+Vertx fournit la classe Launcher, utilisable avec __maven-shade-plugin__. Après avoir ajouté le plugin au pom.xml, il est nécessaire de spécifier dans sa configuration quelle sera la classe utilisée comme Launcher et quel est le verticle à lancer.
+
+```xml
+<manifestEntries>
+   <Main-Class>io.vertx.core.Launcher</Main-Class>
+   <Main-Verticle>ExampleVerticle</Main-Verticle>
+</manifestEntries>
+```
+
+#### Programmatiquement
+
+Les verticles sont déployables depuis le code de l’application :
+
+```java
+Vertx.vertx().deployVerticle(new ExampleVerticle());
+```
+
+### Déploiement avancé et scalabilité
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Préciser des options de déploiement
+
+Les __DeploymentOptions__ permettent de spécifier divers critères utilisés par Vertx lors du démarrage des verticles, notamment le ___nombre d’instances___ d’un même verticle.
+
+```java
+DeploymentOptions opts=new DeploymentOptions().setInstances(3);
+Vertx.vertx().deployVerticle(new ExampleVerticle(), opts);
+```
+
+Ici les trois instances d’__ExampleVerticle__ écouteront le port 8080. La redirection des requêtes sur telle ou telle instance est automatiquement réalisée par Vertx (stratégie __Round Robin__).
+
+#### Externaliser les options de déploiements
+
+Il possible de découpler les options de déploiements du déploiement à proprement parlé. En effet, les informations comme le nombre d’instances d’un verticle ne sont que des paramètres pouvant être centralisés dans un fichier de configuration Json.
+
+```json
+{
+  "main": "com.ineat.ExampleVerticle",
+  "instances": 3,
+  "worker": true
+}
+```
+
+Le toolkit d’Eclipse simplifie une nouvelle fois la vie du développeur en mettant à disposition la classe __ServiceFactory__ qui, une fois ajoutée à l’instance Vertx, se chargera de collecter les options de déploiement spécifiées dans le fichier de configuration.
+
+```java
+vertx.registerVerticleFactory(new ServiceVerticleFactory());
+```
+
+En supposant que le fichier contenant les options de déploiement d’__ExampleVerticle__ se nomme __config-example-service.json__, le déploiement se fera alors comme suit :
+
+```java
+vertx.deployVerticle("service:config-example-service");
+```
+
+## Observabilité
+
+// IMAGE
+
+### Contrôler l'état d'une application
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### HealthCheck
+
+Le principal intérêt d’un healthcheck est de pouvoir surveiller le statut de l’application. Il permet aussi de contrôler l’état des briques liées à cette application (autres services, bases de données, …) ce qui permettra d’établir un diagnostic précis en cas de panne et identifier quelle composant pose problème.
+
+// IMAGE
+
+Contrôler l’état de santé d’une application est facile grâce au __HealthCheckHandler__ (fournit par le module __vertx-health-check__). Cet handler est personnalisable puisqu’il est tout à fait possible d’ajouter des contrôles sous la forme de procédure en utilisant la méthode __register__ (prenant en paramètre une chaine qui permettra d’identifier cette procédure, et la procédure elle-même).
+
+```java
+HealthCheckHandler healthCheckHandler = HealthCheckHandler.create(vertx);
+healthCheckHandler.register("control-db", future -> {
+    dbClient.getConnection(connection -> {
+        if (connection.failed())
+            future.complete(Status.KO());
+        else
+            future.complete(Status.OK());
+});
+healthCheckHandler.register("control-payment-service", future -> {…});
+router.get("/health").handler(healthCheckHandler);
+```
+
+### Exposer des indicateurs - Théorie
+
+Les healthchecks sont des solutions fiables pour contrôler si une application est disponible. Cependant, il est possible d’aller plus loin en exposant des données utiles grâce aux métriques : la consommation CPU, la mémoire utilisée, le nombre de verticles déployés, …. __Micrometer__ est une solution parmi d’autres et pour laquelle Vertx fournit un module. Ainsi __vertx-micrometer-metrics__ contient tout le nécessaire pour remonter des métriques qui pourront être exploitées par des solutions comme __Prometheus__ ou __InfluxDb__, et présentées dans des dashboard __Grafana__.
+
+// IMAGE
+
+### Exposer des indicateurs - Mise en pratique
+
+#### Dépendances nécessaires
+
+// IMAGE
+
+#### Activer la récupération des métriques
+
+Afin d’autoriser la récupération de métriques Micrometer par Vertx, on spécifie les __VertxOptions__ nécessaires.
+
+```java
+Vertx vertx = Vertx.vertx(new VertxOptions().setMetricsOptions(
+        new MicrometerMetricsOptions()
+                .setPrometheusOptions(new VertxPrometheusOptions().setEnabled(true))
+                .setEnabled(true)));
+```
+
+#### Créer la route dédiée aux métriques
+
+La récupération des métriques peut se faire de diverses façons, la plus commune étant en appelant un endpoint dédié. Dans le cas où Prometheus est utilisé, le handler connecté à l’url __/metrics__ sera un __PrometheusScrapingHandler__. Lors d’instanciation de cet handler, il est possible de spécifier le nom la __MeterRegistry__ (objet auprès duquel les différentes sondes, appelées __Meter__, vont s’enregistrer). Si aucun nom n’est précisé, une registry par défaut sera créée.
+
+```java
+router.route("/metrics").handler(PrometheusScrapingHandler.create("user-metrics-registry")) ;
+```
+
+#### Référencement et utilisation des sondes
+
+Les sondes sont référencées dans une __MeterRegistry__ accessible depuis presque n’importe où dans le code grâce à la classe __BackendRegistries__, sa méthode __getNow__ pouvant prendre en paramètre le nom de la registry passé lors de la création du __PrometheusScrapingHandler__. Il est tout à fait envisageable de référencer et utiliser des sondes depuis les handlers (par exemple pour comptabiliser le nombre d’appels à un endpoint sur un intervalle de temps donné).
+
+```java
+MeterRegistry reg = BackendRegistries.getNow("user-metrics-registry");
+Counter counter = Counter.builder("user.api.number.calls").register(reg);
+//…
+counter.increment();
+```
+
+## A propos d'Ineat
+
+Convaincu que l’innovation constitue la meilleure réponse aux évolutions de notre société, Ineat a pour vocation de guider et accompagner les entreprises dans leur processus de transformation digitale en les aidants à s’approprier les nouvelles technologies. Acteur majeur de la transformation digitale, Ineat déploie, depuis sa création en 2006, un modèle marqué par son dynamisme.
+Le groupe Ineat réunit plus d’une quinzaine d’expertises métiers et est présent simultanément sur 3 continents. 
+
+Il compte aujourd’hui plus de 300 collaborateurs à travers le monde et a réalisé en 2018 un chiffre d’affaires de 21 millions d’euros. Boosté par une croissance annuelle de 30 %, le groupe envisage d’atteindre les 30 millions d’euros de chiffre d’affaires d’ici 2020.
+Ineat préserve un esprit familial qui privilégie toujours une vision à long terme. Six valeurs fondamentales sont partagées par tous les collaborateurs du groupe. Leviers de performance, ces six impératifs sont les piliers de notre engagement.
+
+- Souplesse
+- Plaisir
+- Innovation
+- Responsabilité 
+- Initiative
+- Transformation
+
+
+Ce guide a été écrit pas Mathias Deremer-Accettone
+
+Merci aux relecteurs : Emmanuel Peru, Ludovic Dussart, Mehdi Slimani, Lucas Declercq.
+
+La direction artistique et les illustrations sont l’oeuvre de Jean-François Tranchida.
+
+
+
