@@ -1,6 +1,6 @@
 # Contribution
 
-## Oganisation du repository
+## Organisation du repository
 Le repository comporte les RefCards concernant des technologies. Il doit exister un répertoire par Technologie. Si des besoins sont différents par technologie, des sous-répertoires au premier doivent petre créés.
 
 Le `README.md` liste toutes les technologies disponibles sur le repository. toute nouvelle technologie doit y être ajoutée avec le lien vers chacun des fichier de langue.
@@ -31,6 +31,8 @@ refcards
 │       └── FR.md
 └── etc...
 ```
+
+Le modèle de page pour créer une RefCard est disponible dans [.docs/template/FR.md](.docs/template/FR.md).
 
 ## Publication des modifications
 La contribution doit passer par une nouvelle branche du repository.
