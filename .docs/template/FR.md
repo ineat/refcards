@@ -1,26 +1,26 @@
-# Kubernetes RefCard
+# <Technologie> RefCard
 *Version française*
 
-RefCard d'utilisation de Kubernetes 1.15
+RefCard d'utilisation de <Technologie>
 
-Co-écrit par Germain Lefebvre et .
+Co-écrit par <Auteur 1> et <Auteur 2>.
 
 ## Sommaire
 
-1. [Présentation](#présentation)
+1. [Présentation](#presentation)
 2. [Principes de fonctionnement](#principes-de-fonctionnement)
 3. [Cheat Sheet](#cheat-sheet)
-    * [Règles & bonnes pratiques](#règles-bonnes-pratiques)
+    * [Règles & bonnes pratiques](#regles-bonnes-pratiques)
     * [Qui ? Quoi ? Comment ?](#qui--quoi--comment-)
-    * [Commandes fréquentes](#commandes-fréquentes)
-4. [Débuter avec un projet](#débuter-avec-un-projet)
+    * [Commandes fréquentes](#commandes-frequentes)
+4. [Débuter avec un projet](#debuter-avec-un-projet)
 5. [Configuration minimale](#configuration-minimale)
 
 [Pour aller plus loin](#pour-aller-plus-loin)
 
 10. [Plus de commandes](#plus-de-commandes)
 19. [Glossaire](#glossaire)
-20. [Références](#références)
+20. [Références](#references)
 21. [L'ours](#lours)
 
 ## Présentation
@@ -37,8 +37,6 @@ Co-écrit par Germain Lefebvre et .
 
 ### Plus de Commandes 
 
-#### blabla
-
 
 ## Glossaire
 
@@ -50,9 +48,10 @@ Co-écrit par Germain Lefebvre et .
 
 * []()
 
+## L'ours
 
-Ce guide a été écrit par Germain Lefebvre et .
+Ce guide a été écrit par <Auteur 1> et <Auteur 2>.
 
-Merci à nos relecteurs : . 
+Merci à nos relecteurs : <Relecteur 1>, <Relecteur 2>. 
 
 La direction artistique et les illustrations sont l'œuvre de Jean-François Tranchida.
