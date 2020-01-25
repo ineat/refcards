@@ -24,24 +24,29 @@ Ecrit par Mathias Deremer-Accettone
     * [Stocker des données : sessions](#stocker-des-donnes---sessions)
     * [Stocker des données : cookies](#stocker-des-donnes---cookies)
     * [Saisir des données : les formulaires](#saisir-des-donnes--les-formulaires)
-6. [Distribuer les services](#distribuer-les-services)
+6. [L'Event Bus, le système nerveux de Vertx](#levent-bus-le-systme-nerveux-de-vertx)
     * [Event Bus – Théorie](#event-bus---thorie)
     * [Event Bus – En local](#event-bus---en-local)
     * [Event Bus – En cluster](#event-bus--en-cluster)
-7. [Gérer efficacement les microservices](#gerer-efficacement-les-microservices)
+7. [Gérer efficacement les micro services](#gerer-efficacement-les-micro-services)
     * [Service Discovery - Théorie](#services-discovery---thorie)
     * [Service Discovery - Mise en pratique](#services-discovery---mise-en-pratique)
 8. [Tester l'application](#tester-lapplication)
     * [Les collections de tests avec Vertx Unit](#les-collections-de-tests-avec-vertx-unit)
     * [Chaîner ses tests Vertx Unit](#chaner-ses-tests-vertx-unit)
-9. [Déployer et administrer](#deployer-et-administrer)
+9. [Déployer et Administrer](#dployer-et-administrer)
     * [Le CLI Vertx](#le-cli-vertx)
     * [Configurations et logs](#configurations-et-logs)
+    * [Déploiement rapide de l'application](#dploiement-rapide-de-lapplication)
+    * [Déploiement avancé et scalabilité](#dploiement-avanc-et-scalabilit)
 10. [Observabilité](#observabilit)
-    * [Contrôler l'état d'une application](#contrler-l-etat-d-une-application)
-    * [Exposer des indicateurs : Théorie](#thorie)
-    * [Exposer des indicateurs : Mise en pratique](#mise-en-pratique)
-11. [Conclusion, références](#conclusion-references)
+    * [Contrôler l'état d'une application](#contrler-ltat-dune-application)
+    * [Exposer des indicateurs - Théorie](#exposer-des-indicateurs---thorie)
+    * [Exposer des indicateurs - Mise en pratique](#exposer-des-indicateurs---mise-en-pratique)
+11. [Conclusion](#references)
+12. [Références](#references)
+13. [A propos d'Ineat](#a-propos-dineat)
+14. [Remerciements](#remerciements)
 
 
 
@@ -337,7 +342,7 @@ Solution idéale pour construire rapidement des APIs légères et réactives, Ve
 
 #### Dépendances nécessaires
 
-// IMAGE
+![](./assets/web-page-dependances.png)
 
 #### Exposer des ressources statiques
 
@@ -349,32 +354,32 @@ router.route("/static/*").handler(StaticHandler.create());
 
 #### Servir une page HTML
 
-Tout comme les réponses retournées par des APIs, servir du contenu HTML se fait avec __routingContext.response().end(…)__. Le contenu renvoyé ici est passé en paramètre de la méthode end et sera dans ce cas du code HTML.
+Tout comme les réponses retournées par des APIs, servir du contenu HTML se fait
+avec __routingContext.response().end(...)__. Le contenu renvoyé ici est passé en paramètre de la méthode end et sera dans ce cas du code HTML.
 
 #### Le templating
 
-Plusieurs moteurs de templates peuvent être utilisés conjointement avec Vertx afin de rendre un contenu HTML (Thymeleaf, Freemarker, Jade, …).
+Plusieurs moteurs de templates peuvent être utilisés conjointement avec Vertx afin de rendre un contenu HTML (Thymeleaf, Freemarker, Jade, ...).
 
 ```java
-router.get("/page").handler(
-        routingContext -> {
-            ThymeleafTemplateEngine engine = ThymeleafTemplateEngine.create();
-            engine.render(routingContext, "templates", "page.html", res -> {
-                        if (res.succeeded()) {
-                            routingContext.response().end(res.result());
-                        }
-                    });
+router.get("/page").handler( 
+  routingContext -> {
+    ThymeleafTemplateEngine engine = ThymeleafTemplateEngine. create();
+    engine.render(routingContext, "templates", "page.html", res -> { 
+      if (res.succeeded()) {
+        routingContext.response().end(res.result());
+      } 
+    });
 });
-
 ```
 
-Outre le __RoutingContext__, la méthode __render__ de __ThymeleafTemplateEngine__ prend en paramètre le nom du répertoire contenant les templates, le nom du template à utiliser et un handler à exécuter (en générale cet handler renverra le code HTML généré).
+Outre le __RoutingContext__, la méthode __render__ de __ThymeleafTemplateEngine__ prend en paramètre le nom du répertoire contenant les templates, le nom du template à utiliser et un handler à exécuter (en général cet handler renverra le code HTML généré).
 
 ### Stocker des données : sessions
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/session-dependances.png" width="60%"/>
 
 #### Types de stockage
 
@@ -384,25 +389,25 @@ Le stockage des données en session passe par la création d’une instance de _
 SessionStore sessionStore = LocalSessionStore.create(vertx, "map");
 ``` 
 
-// IMAGE
+Dans sa forme la plus simple, le stockage se fait localement au sein d’un même serveur HTTP. Cependant en production, plusieurs instances d’un même verticle peuvent exister au sein d’un même cluster. Les sessions sont donc amenées à être partagées entre plusieurs serveurs HTTP. Dans ce cas de figure, il sera nécessaire d’utiliser __ClusturedSessionStore__ et non __LocalSessionStore__. Les sessions seront alors stockées dans une map distribuée.
 
-Dans sa forme la plus simple, le stockage se fait localement au sein d’un même serveur http. Cependant en production, plusieurs instances d’un même verticle peuvent exister au sein d’un même cluster. Les sessions sont donc amenées à être partagées entre plusieurs serveurs http. Dans ce cas de figure, il sera nécessaire d’utiliser __ClusturedSessionStore__ et non __LocalSessionStore__. Les sessions seront alors stockées dans une map distribuée. 
+_Bien que tout à fait faisable avec Vertx, le stockage des données en session est cependant
+à éviter : pour suivre les principes de scalabilité et de résilience il est conseillé de favoriser le stateless._
 
-__Bien que tout à fait faisable avec Vertx, le stockage des données en session est cependant à éviter : pour suivre les principes de scalabilité et de résilience il est conseillé de favoriser le stateless.__
+![](./assets/session-store-schema.png)
 
 #### Accès aux données
 
 L’accès aux données de session suit le même schéma que l’accès au body des requêtes POST. On déclare le __SessionHandler__, qui sera associé au __router__.
 
 ```java
-SessionHandler sessionHandler = SessionHandler.create(sessionStore);
-router.route().handler(sessionHandler);
+SessionHandler sessionHandler = SessionHandler.create(sessionStore); router.route().handler(sessionHandler);
 ```
 
-L’accès aux données pourra alors être opéré par le biais d’un objet __Session__, obtenu via un appel au __RoutingContext__. Session se manipule comme une HashMap classique.
+L’accès aux données pourra alors être opéré par le biais d’un objet __Session__, obtenu via un appel au __RoutingContext__. __Session__ se manipule comme une HashMap classique.
 
 ```java
-Session session = routingContext.session();
+Session session = routingContext.session(); 
 session.put("key", "value");
 ```
 
@@ -410,7 +415,7 @@ session.put("key", "value");
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/coockies-dependances.png" width="60%"/>
 
 #### Mise en oeuvre
 
@@ -423,9 +428,9 @@ router.route().handler(CookieHandler.create());
 Le __RoutingContext__ permettra de stocker de nouveaux cookies et de manipuler leurs données.
 
 ```java
-routingContext.addCookie(Cookie.cookie("cookie-example", "value"));
+routingContext.addCookie(Cookie.cookie("cookie-example", "value")); 
 //...
-Cookie cookieExample = routingContext.getCookie("cookie-example");
+Cookie cookieExample = routingContext.getCookie("cookie-example"); 
 String value = cookieExample.getValue();
 ```
 
@@ -433,17 +438,17 @@ String value = cookieExample.getValue();
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/coockies-dependances.png" width="60%"/>
 
 #### Créer le formulaire
 
-La création d’un formulaire exploitable par Vertx n’a pas de prérequis particuliers, seul l’attribut __name__ des inputs est essentiel : c’est avec son nom qu’on pourra rechercher un input et accéder à sa valeur. 
+La création d’un formulaire exploitable par Vertx n’a pas de prérequis particuliers, seul l’attribut __name__ des inputs est essentiel : c’est avec son nom qu’on pourra rechercher un input et accéder à sa valeur.
 
 ```xml
 <form method="post">
-        <input type="radio" id="input1" name="radio1" value="A"/>
-        <input type="radio" id="input2" name="radio2" value="B"/>
-        <input type="radio" id="input3" name="radio3" value="C"/>
+  <input type="radio" id="input1" name="radio1" value="A"/> 
+  <input type="radio" id="input2" name="radio2" value="B"/> 
+  <input type="radio" id="input3" name="radio3" value="C"/>
 </form>
 ```
 
@@ -457,23 +462,24 @@ routingContext.request().getFormAttribute("radio1")
 
 Une autre méthode (__formAttributes__), également fournie par __HttpServerRequest__, offre la possibilité de récupérer l’ensemble des inputs sous la forme d’une __MultiMap__.
 
-## Distribuer les services
-
-// IMAGE
+## L'Event Bus, le système nerveux de Vertx
 
 ### Event Bus - Théorie
 
-Véritable système nerveux de Vertx, l’event bus permet à différentes entités d’une application de communiquer entre-elles via échanges de messages (entités qui peuvent se trouver ou non dans la même instance Vertx). Un des principaux intérêts est que les parties communicantes peuvent être écrites dans des langages différents, mais qu’il est également tout à fait envisageable de lier du code Javascript, exécuté dans un navigateur, à l’Event Bus (via __SockJs__ par exemple).
-L’envoi de messages sur le bus se fait sur une adresse, qui n’est ni plus ni moins qu’une simple chaine de caractères. Chaque __consumer__ (qui est généralement un verticle) reçoit et traite les messages en s’abonnant à cette adresse (modèle __publish / subscribe__). Il supporte aussi le modèle point à point et request/response. 
-On retrouve donc l’aspect « message oriented » du manifeste reactive. Ce bus va nous permettre de découpler les composants, et de profiter d’une scalabilité horizontale (un verticle du cluster va prendre le message).
+Véritable système nerveux de Vertx, l’event bus permet à différentes entités d’une application de communiquer entre elles via échange de messages (entités qui peuvent se trouver, ou non, dans la même instance Vertx). Un des principaux intérêts est que les parties communicantes peuvent être écrites dans des langages différents, mais qu’il est également tout à fait envisageable de lier du code Javascript, exécuté dans un navigateur, à l’Event Bus (via __SockJs__ par exemple).
 
-// IMAGE
+L’envoi de messages sur le bus se fait sur une adresse, qui n’est ni plus ni moins qu’une simple chaine de caractères. Chaque __consumer__ (qui est généralement un verticle) reçoit et traite les messages en s’abonnant à cette adresse (modèle __publish / subscribe__).
+
+Il supporte aussi le modèle point à point et __request/response__.
+On retrouve donc l’aspect "message oriented" du manifeste reactive. Ce bus va nous permettre de découpler les composants, et de profiter d’une scalabilité horizontale (un verticle du cluster va traiter un message).
+
+![](./assets/eventbus-theorie-schema.png)
 
 ### Event Bus - En local
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/eventbus-local-dependances.png" width="60%"/>
 
 #### Réception des messages (Abonnements)
 
@@ -482,64 +488,67 @@ On retrouve donc l’aspect « message oriented » du manifeste reactive. Ce bus
 public void start() {
   // ...
   vertx.eventBus().consumer( "address-A", message -> System.out.println(message.body()));
-}
 ```
 
-Dans cet exemple on affiche le contenu du message réceptionné à l’adresse « address-A ».
+Dans cet exemple on affiche le contenu du message réceptionné à l’adresse "address-A".
 
 #### Envoi des messages
 
-La publication d’un message peut se faire de deux façons : 
--	Via la méthode __publish__ -> l’ensemble des consommateurs abonnés à l’adresse traiterons le message (__modèle publish / subscribe__).
--	Via la méthode __send__ -> un seul consommateur traitera le message même si d’autres sont abonnés à la même adresse (__modèle point to point__).
-Ces deux méthodes prennent en paramètre l’adresse de publication et le contenu du message.
+La publication d’un message peut se faire de deux façons :
+- Via la méthode __publish__ -> l’ensemble des consommateurs abonnés à l’adresse traitera le message (__modèle publish / subscribe__).
+- Via la méthode __send__ -> un seul consommateur traitera le message même si d’autres sont abonnés à la même adresse (__modèle point to point__).
+
+Ces deux méthodes prennent en paramètre l’adresse de publication et le contenu
+du message.
 
 ```java
-vertx.eventBus().publish("address-A", "Message content");
+vertx.eventBus().publish("address-A", "Message content"); 
 vertx.eventBus().send("address-A", "Message content");
 ```
 
 ### Event Bus – En cluster
 
-Dans sa forme la plus simple, la communication inter-verticle se fait au sein de la même instance Vertx sans aucune complexité. Cependant dans le cas d’applications distribuées, plusieurs instances Vertx peuvent coexister sur le réseau et être exécutées sur des JVM différentes. Or chaque instance gère son propre Event Bus. Il est donc nécessaire de s’appuyer sur un Cluster Manager qui permettra de grouper les instances et constituer un seul Event Bus partagé.
+Dans sa forme la plus simple, la communication inter-verticle se fait au sein de la même instance Vertx sans aucune complexité. Cependant dans le cas d’applications distribuées, plusieurs instances Vertx peuvent coexister sur le réseau et être exécutées sur des JVM différentes.
 
-// IMAGE
+Or chaque instance gère son propre Event Bus. Il est donc nécessaire de s’appuyer sur un Cluster Manager qui permettra de grouper les instances et de constituer un seul Event Bus partagé.
+
+![](./assets/eventbus-cluster-schema.png)
 
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/eventbus-cluster-dependances.png" width="80%"/>
 
 #### Mise en oeuvre
 
 ```java
-//…
-  ClusterManager mng = new HazelcastClusterManager();
-  VertxOptions options = new VertxOptions().setClusterManager(mng);
-  Vertx.clusteredVertx(options, res -> {
-    if (res.succeeded()) {
-      Vertx vertx = res.result();
-      vertx.eventBus().publish("address-B", "Message content");
-    }});
+//...
+ClusterManager mng = new HazelcastClusterManager();
+VertxOptions options = new VertxOptions().setClusterManager(mng); Vertx.clusteredVertx(options, res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result(); vertx.eventBus().publish("address-B", "Message content");
+  }
+});
 ```
 
-On instancie un __HazelcastClusterManager__ qui sera ensuite utilisé pour initialiser le cluster. Si c’est un succès, la suite des opérations sera la même que pour une exécution locale. Vertx supporte d’autres Cluster Manager comme Zookeeper (__ZookeeperClusterManager__ du module __vertx-zookeeper__), Infinispan (__InfinispanClusterManager__ du module __vertx-infinispan__), Ignite (__IgniteClusterManager__ du module __vertx-ignite__).
-Qu'il soit local ou distribué l'event bus permet donc aux composants d'une application d'échanger facilement des données de manière asynchrone et non-bloquante, et ne nécessite pas l'intervention d'un broker de messages.
+On instancie un __HazelcastClusterManager__ qui sera ensuite utilisé pour initialiser le cluster. Si c’est un succès, la suite des opérations sera la même que pour une exécution locale. Vertx supporte d’autres Cluster Manager comme Zookeeper (__ZookeeperClusterManager__ du module __vertx-zookeeper__), Infinispan (__InfinispanClusterManager__ du module __vertx-infinispan__), Ignite (__IgniteClusterManager__ du module __vertx-ignite__). Qu’il soit local ou distribué l’event bus permet donc aux composants d’une application d’échanger facilement des données de manière asynchrone et non-bloquante, et ne nécessite pas l’intervention d’un broker de messages.
+
+## Gérer efficacement les micro services
 
 ### Services Discovery - Théorie
 
-Chaque entité d’un système peut être vue comme un service. Qu’il s’agisse de endpoints HTTP, de sources de données ou d’un proxy, chaque service peut être décrit et référencé dans annuaire dans le but d’être appelable par les autres services sans que ceux-ci n’aient connaissance de l’adresse de ce service. Tout comme pour l’Event Bus, ce mécanisme, appelé découverte de services, garantie donc une certaine __transparence de localisation__.
+Chaque entité d’un système peut être vue comme un service. Qu’il s’agisse de endpoints HTTP, de sources de données ou d’un proxy, chaque service peut être décrit et référencé dans l’annuaire dans le but d’être appelable par les autres services sans que ceux-ci n’aient connaissance de l’adresse de ce service. Tout comme pour l’Event Bus, ce mécanisme, appelé découverte de services, garantit donc une certaine __transparence de localisation__.
 
-// IMAGE
+![](./assets/services-discovery-schema.png)
 
-Ce schéma illustre ce concept : les endpoints d’__Account Service__ (exposés par __Account Verticle__) sont référencés dans le__ Service Registry__. Ce dernier est observé et utilisé par le Customer Service pour récupérer l’adresse d’Account Service et donc déterminer comment appeler les endpoints exposés par __Account Verticle__. 
+Ce schéma illustre ce concept : les endpoints d’__Account Service__ (exposés par __Account Verticle__) sont référencés dans le Service Registry. Ce dernier est observé et utilisé par le Customer Service pour récupérer l’adresse d’Account Service et donc déterminer comment appeler les endpoints exposés par __Account Verticle__.
 Vertx propose ses propres classes permettant de monter un annuaire de service, mais offre également des connecteurs pour interagir avec d’autres solutions (Consul par exemple, via le client mis à disposition par __vertx-consul-client__).
 
 ### Services Discovery - Mise en pratique
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/services-discovery-dependances.png" width="60%"/>
 
 #### Créer l'annuaire de services
 
@@ -551,14 +560,15 @@ ServiceDiscovery discovery = ServiceDiscovery.create(vertx);
 
 #### Référencer un service dans l'annuaire
 
-La publication d’un service (ci-dessous un endpoint http) revient à ajouter un __Record__ dans l’annuaire. Chaque service référencé est caractérisé par un nom, une localisation, et optionnellement des métadonnées.
+La publication d’un service (ci-dessous un endpoint HTTP) revient à ajouter un __Record__ dans l’annuaire. Chaque service référencé est caractérisé par un nom, une localisation, et optionnellement des métadonnées.
 
 ```java
 Record record = HttpEndpoint.createRecord("service-name", "address", 8080, "/test");
 discovery.publish(record, ar -> {
-  if (ar.succeeded()) {
-    System.out.println("Service published");
-  }});
+  if (ar.succeeded()) { 
+    System.out.println("Service published"); 
+  }
+});
 ```
 
 #### Rechercher un service dans l'annuaire
@@ -567,27 +577,25 @@ Il est possible de rechercher des services en utilisant des filtres (applicables
 
 ```java
 discovery.getRecord(r -> r.getName().equals("service-name"), ar -> {
-  if (ar.succeeded()) {
-    System.out.println("Service found");
-  }});
+  if (ar.succeeded()) { 
+    System.out.println("Service found"); 
+  }
+});
 ```
 
 L’appel au service pourra ensuite se faire comme suit (la méthode __getAs__ prenant en paramètre le type de service à récupérer) :
 
 ```java
 if (ar.succeeded()) {
-    Record record = ar.result();
-    ServiceReference serviceReference = discovery.getReference(record);
-    HttpClient client = serviceReference.getAs(HttpClient.class);
-    client.get("http://address:port/resource").end();
-    // ...
-    serviceReference.release();
-}
+  Record record = ar.result();
+  ServiceReference serviceReference = discovery.getReference(record);
+  HttpClient client = serviceReference.getAs(HttpClient.class); 
+  client.get("HTTP://address:port/resource").end();
+  // ...
+  serviceReference.release();}
 ```
 
 ## Tester L'application
-
-// IMAGE
 
 ### Les collections de tests avec Vertx Unit
 
@@ -595,11 +603,11 @@ Vertx Unit est un module apporté par Vertx, se basant sur des frameworks de tes
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/tests-dependances.png" width="50%">
 
 #### Ecrire une suite de tests
 
-En règle générale, tester son application revient à écrire un ensemble de cas de test. La classe __TestSuite__ simplifie cette démarche en apportant quelques méthodes utiles pour grouper ces cas de tests et séquencer leurs exécutions.
+En règle générale, tester son application revient à écrire un ensemble de cas de tests. La classe __TestSuite__ simplifie cette démarche en apportant quelques méthodes utiles pour grouper ces cas de tests et séquencer leurs exécutions.
 
 ##### Instancier une TestSuite
 
@@ -611,64 +619,338 @@ TestSuite testSuite = TestSuite.create("test-suite-example");
 
 ##### Déclarer des tests
 
-L’instance de __TestSuite__ est utilisée pour déclarer des cas de test. La méthode __test__ prend en paramètre le nom du test, ainsi qu’un callback à exécuter.
+L’instance de __TestSuite__ est utilisée pour déclarer des cas de __test__. La méthode test prend en paramètre le nom du test, ainsi qu’un callback à exécuter.
 
 ```java
-testSuite.test("test1", context -> {
-    //...
+testSuite.test("test1", context -> { 
+   //...
 });
 ```
 
 ##### Exécuter une test suite
 
-La classe __TestSuite__ dispose d’une méthode __run__, qui permet de lancer l’exécution.
+La classe __TestSuite__ dispose d’une méthode run, qui permet de lancer l’exécution.
 
 ```java
 testSuite.run() ;
 ```
 
-Il est également possible de passer des paramètres à cette méthode, et notamment une instance de __TestOptions__. Cette classe est notamment utilisée pour déclarer des « reporters » permettant d’exporter les résultats des tests vers des sorties diverses.
+Il est également possible de passer des paramètres à cette méthode, et notamment une instance de __TestOptions__. Cette classe est entre autres utilisée pour déclarer des "reporters" permettant d’exporter les résultats des tests vers des sorties diverses.
 
 ```java
-ReportOptions fileReport = new ReportOptions().setTo("file:.").setFormat("simple");
-testSuite.run(new TestOptions().addReporter(consoleReport));
+ReportOptions fileReport = new ReportOptions().setTo("file:.").setFormat("simple"); 
+testSuite.run(new TestOptions().addReporter(fileReport));
 ```
 
-Dans l’exemple précédent, une instance de __ReportOptions__ permet de spécifier que la sortie d’exécution des tests sera un ensemble de fichiers (l’argument de __setTo__ aura alors la forme file:$DIRECTORY où $DIRECTORY sera remplacé par le chemin où seront sauvegarder les fichiers). Il est possible de spécifier d’autres sorties en changeant l’argument de la méthode __setTo__ par :
--	console -> les résultats des tests seront affichés dans la console.
--	bus :$ADDRESS -> exports sous forme de messages, envoyé sur un Event Bus (on remplacera $ADDRESS par l’adresse à laquelle on envoie les messages).
--	Log :$LOGGER -> exports sous forme de logs (on remplacera $LOGGER par le nom du logger à utiliser).
+Dans l’exemple précédent, une instance de __ReportOptions__ permet de spécifier que la sortie d’exécution des tests sera un ensemble de fichiers (l’argument de __setTo__ aura alors la forme __file:$DIRECTORY__ où $DIRECTORY sera remplacé par le chemin où seront sauvegardés les fichiers). Il est possible de spécifier d’autres sorties en changeant l’argument de la méthode __setTo__ par :
+- console > les résultats des tests seront affichés dans la console
+- bus :$ADDRESS > exports sous forme de messages, envoyé sur un Event Bus (on remplacera $ADDRESS par l’adresse à laquelle on envoie les messages)
+- Log :$LOGGER > exports sous forme de logs (on remplacera $LOGGER par le nom du logger à utiliser)
 
 ### Chaîner ses tests Vertx Unit
 
-Comme nous l’avons vu dans la partie précédente, l’écriture de cas de tests avec Vertx Unit est assez triviale. Mais ce module ne se limite pas à l’écriture de cas de tests autonomes : il est possible de construire de véritables scénarios en chaînant les cas de tests. 
+Comme nous l’avons vu dans la partie précédente, l’écriture de cas de tests avec Vertx Unit est assez triviale. Mais ce module ne se limite pas à l’écriture de cas de tests autonomes : il est possible de construire de véritables scénarios en chaînant les cas de tests.
 
 #### Dépendances nécessaires
 
-// IMAGE
+<img src="./assets/tests-dependances.png" width="50%">
 
 #### Mise en oeuvre
 
-L’enchainement logique des tests implique que ceux – ci puissent partager des objets. Pour cela les callbacks ont à disposition un __context__, s’utilisant comme une Hashmap. On peut donc stocker une donnée lors de l’exécution d’un cas de test, et l’utiliser durant l’exécution du suivant.
+L’enchainement logique des tests implique que ceux-ci puissent partager des objets. Pour cela les callbacks ont à disposition un __context__, s’utilisant comme une Hashmap. On peut donc stocker une donnée lors de l’exécution d’un cas de test, et l’utiliser durant l’exécution du suivant.
 
 ```java
-testSuite.before(context -> {
-    context.put("result", 10);
+testSuite.before(context -> { 
+  context.put("result", 10);
 }).test("increase-result", context -> {
-    int newResult = ((int)context.get("result")) + 8;
-    context.assertEquals(newResult, 18);
-    context.put("result", newResult);
+  int newResult = ((int)context.get("result")) + 8; 
+  context.assertEquals(newResult, 18); 
+  context.put("result", newResult);
 }).test("divide-result", context -> {
-    int newResult = ((int)context.get("result")) / 2;
-    context.assertTrue(newResult < 10);
-    context.put("result", newResult);
-}).after(context -> {
-    //...
+  int newResult = ((int)context.get("result")) / 2; 
+  context.assertTrue(newResult < 10); 
+  context.put("result", newResult);
+}).after(context -> { 
+  //...
 });
 ```
 
-Dans l’exemple précédent, on stocke dans le __context__ un entier "result" depuis le callback de la méthode __before__ (méthode utilisée pour initialiser une __TestSuite__ avant son exécution). La valeur de « result » est ensuite mise à jour, testée et restockée par le premier cas de test "increase-result". Le second cas de test "divide-result" sera lancé une fois que "increase-result" aura terminé son exécution et pourra à son tour exploiter la valeur de "result". C’est également l’objet __context__ qui fournit les méthodes d’assertions.
+Dans l’exemple précédent, on stocke dans le __context__ un entier "result" depuis le callback de la méthode __before__ (méthode utilisée pour initialiser une __TestSuite__ avant son exécution). La valeur de "result" est ensuite mise à jour, testée et restockée par le premier cas de test "increase-result". Le second cas de test "divide-result" sera lancé une fois que "increase-result" aura terminé son exécution et pourra à son tour exploiter la valeur de "result". C’est également l’objet __context__ qui fournit les méthodes d’assertions.
 
 ## Déployer et administrer
 
-// IMAGE
+### Le CLI Vertx
+
+Vertx dispose d’une interface en ligne de commande très pratique permettant de lancer des verticles en précisant des options de déploiement.
+
+#### Installation
+
+1 - Installer une JDK 8 sur le poste de développement (impératif si on souhaite compiler des verticles écrits en Java).
+
+2 - Télécharger la dernière version de Vertx depuis HTTPS://vertx.io/download/.
+
+3 - Dézipper l’archive.
+
+4 - Ajouter le bin contenu dans le répertoire obtenu au PATH de la machine.
+
+#### Quelques commandes utiles
+
+- Compiler et déployer un verticle 
+```shell
+$ vertx run HelloVerticle.java
+```
+
+- Déployer 3 instances d'un verticle
+```shell
+$ vertx run HelloVerticle.java -instances 3
+```
+
+- Déployer un worker
+```shell
+$ vertx run HelloVerticle.java -worker
+```
+
+- Spécifier des configurations lors du déploiement
+```shell
+$ vertx run HelloVerticle.java -config /path/to/config.json
+```
+
+- Déployer un verticle dans un environnement clusterisé 
+```shell
+$ vertx run HelloVerticle.java -cluster
+```
+Vertx créera automatiquement un Event Bus pour permettre la communication inter-verticles.
+
+- Redéployer automatiquement à chaque modification
+```shell
+$ vertx run HelloVerticle --redeploy="**&#47;*.class" --launcher-class=io.vertx.core.Launcher
+```
+L’option -redeploy prend ici en paramètre une regex Ant-style permettant d’indiquer l’ensemble de fichiers à observer.
+
+- Lancer un verticle en tâche de fond
+```shell
+$ vertx run HelloVerticle start — -vertx-id=hello-verticle
+```
+On utilisera list et stop pour lister et stopper les verticles.
+
+### Configurations et logs
+
+#### Dépendances nécessaires
+
+<img src="./assets/logs-dependances.png" width="50%">
+
+#### Configurations
+
+Vertx supporte différents types de sources de données depuis lesquelles il est possible d’extraire les configurations utilisables par nos applications, et notamment les __fichiers__ (JSON,YAML,...), les __variables d’environnement__,les __endpoints HTTP__ ou encore les __dépôts Git__. Pour d’accéder aux configurations stockées à la fois dans un fichier et dans des variables d’environnement, un objet __ConfigRetrieverOptions__ doit être défini :
+
+```java
+ConfigStoreOptions fileStore = new ConfigStoreOptions()
+  .setType("file")
+  .setConfig(new JsonObject().put("path", "config-file.json"));
+ConfigStoreOptions envStore = new ConfigStoreOptions().setType("env"); ConfigRetrieverOptions options = new ConfigRetrieverOptions()
+  .addStore(fileStore) 
+  .addStore(envStore);
+```
+
+Il sera ensuite utilisé pour récupérer un __JsonObject__ contenant l’ensemble des configurations (à l’instar d’une __HashMap__, chaque valeur du __JsonObject__ est accessible via une clé) :
+
+```java
+ConfigRetriever.create(vertx, options).getConfig(ar -> { 
+  if (ar.succeeded()) {
+    JsonObject config = ar.result(); 
+  }
+});
+```
+
+#### Logs
+
+L’implémentation par défaut de l’API de logging fournie par Vertx s’appuie sur __java.util.logging__ (d’autres frameworks de logging tel-que Log4j sont également supportés). Au démarrage de l’application, Vertx ira scruter le fichier __vertx-default-jul-logging.properties__ situé sous __/src/main/resources__. Le logging se fera alors de façon très classique.
+
+```java
+Logger logger = LoggerFactory.getLogger("ExampleVerticle") 
+//...
+logger.error("Error during Verticle initialization");
+```
+
+### Déploiement rapide de l'application
+
+Lors du build d’une application Vertx, un fat-jar est généré et peut être lancé via la commande __java -jar__. Cependant durant les phases de développement, cette méthode peut être assez contraignante. N’ayez crainte, il existe d’autres techniques pour construire, déployer et lancer des verticles.
+
+#### En utilisant le plugin maven
+
+La méthode la plus simple pour lancer localement une application Vertx est d’utiliser le plugin __vertx-maven-plugin__. Une fois ajouté au pom.xml, lancez la commande suivante pour démarrer l’application :
+
+```shell
+$ mvn vertx:start
+```
+Et pour la stopper :
+```shell
+$ mvn vertx:stop
+```
+
+#### En utilisant la classe Launcher de Vertx
+
+Vertx fournit la classe Launcher, utilisable avec __maven-shade-plugin__. Après avoir ajouté le plugin au pom.xml, il est nécessaire de spécifier dans sa configuration quelle sera la classe utilisée comme Launcher et quel est le verticle à lancer.
+
+```xml
+<manifestEntries>
+   <Main-Class>io.vertx.core.Launcher</Main-Class>
+   <Main-Verticle>ExampleVerticle</Main-Verticle>
+</manifestEntries>
+```
+
+#### Programmatiquement
+
+Les verticles sont déployables depuis le code de l’application :
+
+```java
+Vertx.vertx().deployVerticle(new ExampleVerticle());
+```
+
+### Déploiement avancé et scalabilité
+
+#### Dépendances nécessaires
+
+<img src="./assets/deploy-dependances.png" width="90%">
+
+#### Préciser des options de déploiement
+
+Les __DeploymentOptions__ permettent de spécifier divers critères utilisés par Vertx lors du démarrage des verticles, notamment le nombre d’instances d’un même verticle.
+
+```java
+DeploymentOptions opts=new DeploymentOptions().setInstances(3); 
+Vertx.vertx().deployVerticle(new ExampleVerticle(), opts);
+```
+
+Ici les trois instances d’__ExampleVerticle__ écouteront le port 8080. La redirection des requêtes sur telle ou telle instance est automatiquement réalisée par Vertx (stratégie __Round Robin__).
+
+#### Externaliser les options de déploiements
+
+Les options et le déploiement à proprement parlé peuvent être découplés.
+En effet, les informations comme le nombre d’instances d’un verticle ne sont que des paramètres pouvant être centralisés dans un fichier de configuration Json.
+
+```json
+{
+  "main": "com.ineat.ExampleVerticle",
+  "instances": 3,
+  "worker": true
+}
+```
+
+Le toolkit d’Eclipse simplifie une nouvelle fois la vie du développeur en mettant à disposition la classe __ServiceFactory__ qui, une fois ajoutée à l’instance Vertx, se chargera de collecter les options de déploiement spécifiées dans le fichier de configuration.
+
+```java
+vertx.registerVerticleFactory(new ServiceVerticleFactory());
+```
+
+En supposant que le fichier contenant les options de déploiement d’__ExampleVerticle__ se nomme __config-example-service.json__, le déploiement se fera alors comme suit :
+
+```java
+vertx.deployVerticle("service:config-example-service");
+```
+
+## Observabilité
+
+### Contrôler l'état d'une application
+
+#### Dépendances nécessaires
+
+<img src="./assets/monitor-dependances.png" width="55%">
+
+#### HealthCheck
+
+Le principal intérêt d’un healthcheck est de pouvoir surveiller le statut de l’application. Il permet aussi de contrôler l’état des briques liées à cette application (autres services, bases de données, ...) ce qui permettra d’établir un diagnostic précis en cas de panne et d’identifier quel composant pose problème.
+
+<img src="./assets/healthcheck-schema.png">
+
+Contrôler l’état de santé d’une application est facile grâce au __HealthCheckHandler__ (fourni par le module __vertx-health-check__). Cet handler est personnalisable puisqu’il est tout à fait possible d’ajouter des contrôles sous la forme de procédure en utilisant la méthode __register__ (prenant en paramètre une chaine qui permettra d’identifier cette procédure,
+et la procédure elle-même).
+
+```java
+HealthCheckHandler healthCheckHandler = HealthCheckHandler. create(vertx);
+healthCheckHandler.register("control-db", future -> {
+  dbClient.getConnection(connection -> { 
+    if (connection.failed())
+      future.complete(Status.KO()); 
+    else
+      future.complete(Status.OK());
+});
+healthCheckHandler.register("control-payment-service", future -> {...}); router.get("/health").handler(healthCheckHandler);
+```
+
+### Exposer des indicateurs - Théorie
+
+Les healthchecks sont des solutions fiables pour contrôler si une application est disponible. Cependant, il est possible d’aller plus loin en exposant des données utiles grâce aux métriques : la consommation CPU, la mémoire utilisée, le nombre de verticles déployés, ... __Micrometer__ est une solution parmi d’autres et pour laquelle Vertx fournit un module. Ainsi __vertx-micrometer-metrics__ contient tout le nécessaire pour remonter des métriques qui pourront être exploitées par des solutions comme __Prometheus__ ou __InfluxDb__, et présentées dans des dashboard __Grafana__.
+
+<img src="./assets/metrics-schema.png">
+
+### Exposer des indicateurs - Mise en pratique
+
+#### Dépendances nécessaires
+
+<img src="./assets/metrics-dependances.png">
+
+#### Activer la récupération des métriques
+
+Afin d’autoriser la récupération de métriques Micrometer par Vertx, on spécifie les __VertxOptions__ nécessaires.
+
+```java
+Vertx vertx = Vertx.vertx(new VertxOptions().setMetricsOptions(
+  new MicrometerMetricsOptions()
+    .setPrometheusOptions(new VertxPrometheusOptions()
+    .setEnabled(true))
+    .setEnabled(true))
+  );
+```
+
+#### Créer la route dédiée aux métriques
+
+La récupération des métriques peut se faire de diverses façons, la plus commune étant en appelant un endpoint dédié. Dans le cas où Prometheus est utilisé, le handler connecté à l’url __/metrics__ sera un __PrometheusScrapingHandler__. Lors d’instanciation de cet handler, il est possible de spécifier le nom la __MeterRegistry__ (objet auprès duquel les différentes sondes, appelées __Meter__, vont s’enregistrer). Si aucun nom n’est précisé, une registry par défaut sera créée.
+
+```java
+router.route("/metrics").handler(PrometheusScrapingHandler.create ("user-metrics-registry")) ;
+```
+
+#### Référencement et utilisation des sondes
+
+Les sondes sont référencées dans une __MeterRegistry__ accessible depuis presque n’importe où dans le code grâce à la classe __BackendRegistries__, sa méthode __getNow__ pouvant prendre en paramètre le nom de la registry passé lors de la création du __PrometheusScrapingHandler__.
+Il est tout à fait envisageable de référencer et utiliser des sondes depuis les handlers (par exemple pour comptabiliser le nombre d’appels à un endpoint sur un intervalle de temps donné).
+
+```java
+MeterRegistry reg = BackendRegistries.getNow("user-metrics-registry"); Counter counter = Counter.builder("user.api.number.calls").regis- ter(reg);
+//...
+counter.increment();
+```
+
+## Conclusion
+
+Alors que faut il retenir de Vertx ? Simplement qu’il permet de développer rapidement des applications réactives offrant d’excellentes performances, mais en restant simple à appréhender.
+
+En effet, quel que soit le framework ou toolkit, il n’a réellement d’intérêt que s’il est efficace et simple a utiliser. C’est une mission accomplie pour Vertx, qui a su en quelques années rassembler une importante communauté, mettre à disposition une documentation complète et parfaitement à jour, tout en fournissant régulièrement de nouvelles features très pratiques.
+
+Soulignons enfin que Vertx fut également un des principaux composant employé
+dans le développement de Quarkus, projet visant, entre autres, à remettre le langage Java dans la course à la performance.
+
+Vertx est donc LE toolkit que tout developpeur Java devrait connaître, alors n’hésitez plus et lancez vous !
+
+## Références
+
+- https://vertx.io/docs/ - Documentation officielle
+- https://vertx.io/blog/ - Le blog Vertx
+- https://senelda.com/blog/nodejs-vs-vertx-part2-detailed-investigation-2/ - Comparatif Vertx / Node JS
+- https://quarkus.io/ - Site officiel de Quarkus (projet s’appuyant en partie sur Vertx)
+- https://vertx.io/blog/eclipse-vert-x-goes-native/ - Générer une image native d’un projet Vertx
+
+## A propos d'Ineat
+
+Convaincu que l’innovation constitue la meilleure réponse aux évolutions de notre société, Ineat a pour vocation de guider et accompagner les entreprises dans leur processus de transformation digitale en les aidants à s’approprier les nouvelles technologies. 
+
+
+Ce guide a été écrit pas Mathias Deremer-Accettone
+
+Merci aux relecteurs : Emmanuel Peru, Ludovic Dussart, Mehdi Slimani, Lucas Declercq.
+
+La direction artistique et les illustrations sont l’oeuvre de Jean-François Tranchida.
+
+
+
