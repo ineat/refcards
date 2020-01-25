@@ -46,9 +46,6 @@ Ecrit par Mathias Deremer-Accettone
 11. [Conclusion](#references)
 12. [Références](#references)
 13. [A propos d'Ineat](#a-propos-dineat)
-14. [Remerciements](#remerciements)
-
-
 
 ## Vertx, kesako ?
 
@@ -946,11 +943,18 @@ Vertx est donc LE toolkit que tout developpeur Java devrait connaître, alors n�
 Convaincu que l’innovation constitue la meilleure réponse aux évolutions de notre société, Ineat a pour vocation de guider et accompagner les entreprises dans leur processus de transformation digitale en les aidants à s’approprier les nouvelles technologies. 
 
 
-Ce guide a été écrit pas Mathias Deremer-Accettone
+Ce guide a été écrit par __Mathias Deremer-Accettone__
 
-Merci aux relecteurs : Emmanuel Peru, Ludovic Dussart, Mehdi Slimani, Lucas Declercq.
+Version : V1.0.0
 
-La direction artistique et les illustrations sont l’oeuvre de Jean-François Tranchida.
+Date d’édition : Novembre 2019 
+
+Impression : Pixartprinting
+
+__Merci à nos relecteurs :__
+Emmanuel Peru, Ludovic Dussart, Mehdi Slimani, Lucas Declercq 
+
+La direction artistique et les illustrations sont l’œuvre d’__Ineat Studio__
 
 
 
