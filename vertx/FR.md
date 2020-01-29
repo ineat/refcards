@@ -823,7 +823,7 @@ Ici les trois instances d’__ExampleVerticle__ écouteront le port 8080. La red
 
 #### Externaliser les options de déploiements
 
-Les options et le déploiement à proprement parlé peuvent être découplés.
+Les options et le déploiement à proprement parler peuvent être découplés.
 En effet, les informations comme le nombre d’instances d’un verticle ne sont que des paramètres pouvant être centralisés dans un fichier de configuration Json.
 
 ```json
