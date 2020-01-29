@@ -19,9 +19,9 @@ Co-écrit par <Auteur 1> et <Auteur 2>.
 [Pour aller plus loin](#pour-aller-plus-loin)
 
 10. [Plus de commandes](#plus-de-commandes)
-19. [Glossaire](#glossaire)
-20. [Références](#references)
-21. [L'ours](#lours)
+11. [Glossaire](#glossaire)
+12. [Références](#references)
+13. [L'ours](#lours)
 
 ## Présentation
 
@@ -54,4 +54,4 @@ Ce guide a été écrit par <Auteur 1> et <Auteur 2>.
 
 Merci à nos relecteurs : <Relecteur 1>, <Relecteur 2>. 
 
-La direction artistique et les illustrations sont l'œuvre de Jean-François Tranchida.
+La direction artistique et les illustrations sont l'œuvre de <Directeur artistique>.
