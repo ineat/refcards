@@ -5,6 +5,7 @@ Liste des Refcards disponibles :
 * [Ansible](ansible) | [FR](ansible/FR.md) | [EN](ansible/EN.md)
 * [Git](git) | [FR](git/FR.md)
 * [Vertx](vertx) | [FR](vertx/FR.md)
+* [IntelliJ](intellij) | [FR](intellij/FR.md)
 * Docker
 * Kubernetes
 * Terraform
