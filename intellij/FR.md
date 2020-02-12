@@ -160,6 +160,12 @@ En attendant la sortie de Java 14 qui permettra de réduire le code boilerplate 
 >
 > Cette option permet d'exclure du reformatage tout code qui se trouve entre les commentaires `//@formatter:off` et `//@formatter:on` 
 
+### Rechercher/Remplacer
+
+|  | Windows/Linux 	| macOS 	|
+|-----------|-------	|-------	|
+| Rechercher dans le projet | `Ctrl`+`Maj`+`F` | `⇧⌘F` |
+| Remplacer dans le projet | `Ctrl`+`Maj`+`R` | `⇧⌘R` |
 
 ### Commenter
 
