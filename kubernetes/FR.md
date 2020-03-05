@@ -24,6 +24,16 @@ Co-écrit par Germain Lefebvre et .
 21. [L'ours](#lours)
 
 ## Présentation
+## Architecture
+### Master
+#### API Server
+#### Scheduler
+#### Admission Controller
+### Worker
+#### Kubelet
+### Client
+kubectl
+version identique entre client/server
 
 ## Principes de fonctionnement
 ## Objets Kubernetes
@@ -32,6 +42,8 @@ Co-écrit par Germain Lefebvre et .
 #### Deployment
 #### Service
 #### Ingress
+
+### Objets avancés
 #### ConfigMap
 #### StatefulSet
 #### CronJob
