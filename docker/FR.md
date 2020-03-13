@@ -127,7 +127,28 @@ Docker est disponible pour la plus part des OS.
 
 ## Exécuter un conteneur
 
-## Récupérer une image depuis un dépôt"
+Après l'installation de docker, on peut maintenant exécuter des conteneurs en ligne de commande. Si l'image que l'on souhaite exécuter n'existe pas en local, Docker la téléchargera automatiquement de dockerhub et la démarrera ensuite.
+
+Pour démarrer une image docker hello-world, on exécute la commande suivante
+> docker run --rm hello-world
+
+Après téléchargement de l'image et démarrage du conteneur, le texte `Hello from Docker!` s'affiche ainsi que toute les étapes de démarrage du conteneur.
+L'utilisation de l'option `--rm` supprime automatiquement le conteneur pour libérer de l'espace.
+
+## Récupérer une image depuis un dépôt
+
+Le moyen le plus simple d'avoir une image c'est de consulter la page hub.docker.com pour trouver une image déjà prête. Docker hub certifie déjà un bon nombre de comptes afin de s'assurer de l'authencité des images (officielles). Il y a aussi des images créées par de simples utilisateurs.
+
+Puisque par défaut docker télécharge les images de dockerhub, il suffit donc d'éxécuter la commande `pull` pour télécharger la dernière version de l'image souhaitée.
+> docker pull mongodb
+
+Pour télécharger une version spécifique il suffit d'ajouter un tag à la suite de nom de l'image.
+> docker pull mongodb:4.0.2
+
+Si l'image que l'on souhaite télécharger n'est pas pas hébergée par dockerhub, il faudra préciser le lien du dépôt sans `https` dans le nom de l'image comme suit:
+> $ docker pull mondepot.local:5000/mongoperso:maversion
+
+[!NOTE]: S'assurer d'être connecté au dépôt
 
 ## Construire une image
 
