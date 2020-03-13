@@ -11,7 +11,7 @@ RefCard d'utilisation de docker.
 4. [Installer docker](#installer-docker)
 5. [Exécuter un conteneur](#executer-un-conteneur)
 6. [Récupérer une image depuis un dépôt](#executer-une-image-depuis-un-depot)
-7. [Construire une image](#construire-une-image)
+7. [Construire une image avec Dockerfile](#construire-une-image-avec-dockerfile)
 8. [Versionner les images](#versionner-les-images)
 9. [Déployer une image dans un dépôt](#deployer-une-image-dans-un-depot)
 10. [Démarrer, Arrêter un conteneur](#demarrer-arreter-un-conteneur)
@@ -150,11 +150,51 @@ Si l'image que l'on souhaite télécharger n'est pas pas hébergée par dockerhu
 
 [!NOTE]: S'assurer d'être connecté au dépôt
 
-## Construire une image
+## Construire une image avec Dockerfile
+
+Dockerfile est un script qui contient un ensemble de commandes et d'instructions qui seront automatiquement exécutées séquentiellement dans l'environnement de docker pour créer une nouvelle image.
+
+```
+FROM mongo:4.0.2 (1)
+COPY init.json /init.json (2) 
+CMD mongoimport --host mongodb --db exampleDb --collection contacts --type json --file /init.json --jsonArray (3)
+```
+**(1)** Télécharge l'image mongo:4.0.2 comme base de l'image qui sera créée. La commande FROM doit toujours être la première du fichier dockerfile
+
+**(2)** Copie le fichier init.json dans le répertoire root et garde le même nom init.json. 
+
+**(3)** Exécute la commande mongoimport lorsqu'un nouveau conteneur est créé à partir de l'image.
+
+Une fois le fichier dockerfile prêt, on exécute la commande `build` de docker pour lancer la construction. Cette commande utilisée sans options crée une image sans nom.
+
+> docker build .
+
+![](images/docker-build.png)
+
+Pour donner un nom à l'image, il suffit de rajouter l'option `-t`
+
+> docker build -t mon-mongo .
+
+![](images/docker-build-t.png)
 
 ## Versionner les images
 
+La version par défaut quand on crée une image docker avec l'option -t est `latest`. Afin de reconnaître les images il est fortément recommander d'y ajouter des versions. Il suffit à la suite du nom de l'image ajouter `:version` pour que docker crée une image avec la version associée.
+
+> docker build -t mon-mongo:4.0.2 .
+
+![](images/docker-build-t-version.png)
+
 ## Déployer une image dans un dépôt
+
+Pour rendre disponible une image docker, il faut la déployer dans un dépôt. Pour ce faire, il faut se connecter au dépôt dockerhub ou celui privé exécuter la commande:
+
+**Déployer dans dockerhub**
+> docker push utilisateur/mon-mongo:4.0.2
+
+**Déployer dans un dépôt privé**
+> $ docker push mon-depot-artifactory/mon-mongo:4.0.2
+
 
 ## Démarrer, Arrêter un conteneur
 
