@@ -198,6 +198,16 @@ Pour rendre disponible une image docker, il faut la déployer dans un dépôt. P
 
 ## Démarrer, Arrêter un conteneur
 
+Une fois qu'un conteneur est en cours d'éxécution, on peut l'arrêter à l'aide de la commande `stop`.
+
+> docker stop mon-mongo (1)
+
+**(1)** nom du conteneur ou identifiant du conteneur
+
+L'état complet du conteneur est écrit sur le disque. Par conséquent, si l'on souhaite le réexécuter dans l'état où il se trouvait lors de son arrêt, si suffit d'utiliser la commande `start`.
+
+> docker start mon-mongo
+
 ## Volumes
 
 ## Réseau
