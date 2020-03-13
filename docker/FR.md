@@ -75,6 +75,56 @@ Le registry est un dépôt d'images publiques ou privées. Docker est configuré
 
 ## Installer docker
 
+Docker est disponible pour la plus part des OS. 
+
+### Installer Docker sous Windows 10
+
+> Les versions concernées ici sont windows 10 professionnel ou entreprise 64-bits
+
+1. S'assurer que la `Hyper-V` est activé sinon ouvrir Powershell et exécuter les commandes suivantes:
+    > Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+    > Enable-WindowsOptionalFeature -Online -FeatureName containers -All
+  
+  [!NOTE]: Rédémarrer l'ordinateur pour que l'activation d'Hyper-V soit active
+2. Créer un compte sur hub.docker.com puis télécharger dokcer-ce: https://hub.docker.com/editions/community/docker-ce-desktop-windows 
+
+### Installer docker sous mac
+
+> Les versions concernées sont celles supérieures ou égale à OS X 10.13
+
+1. Télécharger docker sous Mac https://hub.docker.com/editions/community/docker-ce-desktop-mac/
+2. Double cliquer sur `Docker.dmg` pour ouvrir l'installateur puis glisser l'icône `Docker.app` dans le dossier Applications.
+   ![](images/docker-app-drag.png)
+3. Double cliquer sur `Docker.app` dans le dossier Applications pour démarrer docker
+   ![](images/docker-app-in-apps.png)
+
+### Installer docker sous linux ubuntu
+
+> Les versions concernées sont Eoan 19.10, Bionic 18.04 (LTS), Xenial 16.04 (LTS), toutes en versions 64 bits.
+
+1. Désinstaller les versions antérieures de docker
+   > $ sudo apt-get remove docker docker-engine docker.io containerd runc
+2. Mettre à jour l'index des paquets
+   > $ sudo apt-get update
+3. Installer les paquets nécessaires pour permettre à `apt` de communiquer avec le dépôt via `https`
+   > $ sudo apt-get install \
+     apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+4. Ajouter la clé officielle de docker
+   > $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+5. Ajouter le dépôt pour les versions stables de docker
+   > $ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+6. Mettre à nouveau à jour l'index des paquets
+7. Installer la dernière version de docker
+   > $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+
 ## Exécuter un conteneur
 
 ## Récupérer une image depuis un dépôt"
