@@ -66,7 +66,7 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
 
 ## Présentation
 IntelliJ IDEA est l'IDE historique de JetBrains. 
-Il est plébiscité par la communauté des développeurs en raison de sa ergonomie, sa stabilité et des nombreuses fonctionnalités qu'il propose.
+Il est plébiscité par la communauté des développeurs en raison de son ergonomie, sa stabilité et des nombreuses fonctionnalités qu'il propose.
 
 Il supporte de nombreux langages : 
 
@@ -517,7 +517,7 @@ Ce plugin permet de naviguer dans un fichier uniquement via le clavier et de la 
 
 Plutôt que de se perdre dans de longues explications, regardez la démo du plugin qui détaille toutes ses fonctionnalités : https://tinyurl.com/qkxwf4d
 
-### Customer Postfix Templates
+### Custom Postfix Templates
 
 Peut-être le plugin le plus utile de la liste, il permet de rajouter la possibilité de créer ses propres postfix et d'utiliser ceux créés par la communauté.
 
@@ -535,7 +535,7 @@ Key Promoter va devenir votre collègue un peu pénible (mais qui ne veut que vo
 
 ### Presentation assistant
 
-La nemesis de Key Promoter, il affiche une notification à chaque fois qu'un raccourci clavier a été utilisé en indiquant le raccourci utilisé et la combinaison de touche à utiliser pour le reproduire.
+L'exact opposé de Key Promoter, il affiche une notification à chaque fois qu'un raccourci clavier a été utilisé en indiquant le raccourci utilisé et la combinaison de touche à utiliser pour le reproduire.
 Très utile lorsque l'on fait du pair programming avec quelqu'un qui maîtrise IntelliJ.
 
 ### SonarLint
