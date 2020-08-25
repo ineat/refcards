@@ -525,6 +525,11 @@ Peut-être le plugin le plus utile de la liste, il permet de rajouter la possibi
 
 Grazie permet d'ajouter un module de correction orthographique et grammaticale à IntelliJ en supportant une quinzaine de langues (dont le français !).
 
+### IDE Features Trainer
+
+Ce plugin permet d'apprendre les différentes fonctionnalités de l'IDE, par la pratique, et de manière interactive.
+Bref, un très bon complément à cette RefCard.
+
 ### Key Promoter X
 
 Key Promoter va devenir votre collègue un peu pénible (mais qui ne veut que votre bien) qui vous tape sur l'épaule à chaque fois que vous faites une action à la souris en te disant :
