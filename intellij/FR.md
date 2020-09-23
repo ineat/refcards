@@ -416,7 +416,7 @@ IntelliJ embarque un terminal embarqué qui utilise le shell de votre système, 
 
 ### Local history
 Lorsque GIT nous fait défaut (parce qu'il n'est pas encore mis en place, ou qu'il s'agit de modifications ayant lieu entre deux commits), il est également possible d'utiliser un historique local.
-Cet historique reprend l'intégralité des modifications ayant lieu sur l'ensemble du code source d'un projet sur les 5 derniers jours ouvrés.
+Cet historique (accessible via un simple clic droit ou via le menu "VCS") reprend l'intégralité des modifications ayant lieu sur l'ensemble du code source d'un projet sur les 5 derniers jours ouvrés.
 
 Il permet de revenir à une version précédente, de comparer des versions entre elles, de consulter l'historique d'une portion de code uniquement, ... 
 
@@ -425,7 +425,7 @@ Il permet de revenir à une version précédente, de comparer des versions entre
 ### Compare with clipboard
 Il est parfois utile de comparer deux portions de code entre elles. 
 De très bons outils existent déjà, mais IntelliJ permet également de faire ce type de comparaison avec le contenu du presse-papier, permettant ainsi de ne pas avoir à lancer une nouvelle application ou site permettant ce type de comparaison.
-
+Cette fonctionnalité est disponible via le clic droit ou via le menu "View".
 
 ### GIT
 
@@ -458,12 +458,15 @@ Pour accéder à cet historique, il faut sélectionner la portion de code à ins
 
 Créer un scratch file : `Ctrl`+`Shift`+`Alt`+`Insert` / `⇧⌘N`
 
-Il est parfois utile d'exécuter du code ou d'écrire un fichier JSON, mais sans l'intégrer dans le projet en cours.
-C'est pour cette raison que les Scratch files ont été créés.
+Nous avons souvent besoin d'écrire, éditer, exécuter du code/texte qui n'a pas vocation à être ajouté dans notre projet.
+Les Scratch files ont été créés dans cette optique.
 
-Ils permettent de créer une nouvelle classe, niveau fichier JSON, XML, YAML, texte, ... directement dans l'IDE, mais sans être créé dans le dossier du projet courant. 
+On peut ainsi : 
+- coder et exécuter un bout de code pour tester quelque chose rapidement
+- bénéficier du classpath du projet pour faire un traitement ponctuel sur les données de notre projet
+- reformater et manipuler du JSON en bénéficiant de toutes les fonctionnalités d'IntelliJ que l'on ne retrouve pas dans un éditeur de texte classique.
+- ...
 
-> Les scratch files peuvent être créées pour copier du JSON non formaté, afin de le formater et de le retravailler en bénéficiant de toutes les fonctionnalités d'IntelliJ que l'on ne retrouve pas dans un éditeur de texte classique.
 
 ### DB intégrée
 Il est également possible de consulter/requêter/générer des diagrammes sur les bases de données (SQL et Mongo).
