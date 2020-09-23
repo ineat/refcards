@@ -224,7 +224,13 @@ Nous vous conseillons de créer un raccourci dans `Preferences`(`Ctrl`+`Alt`+`S`
 
 ### Postfix completion
 La postfix completion vous permet de décorer une expression que vous venez de taper.
-Par exemple, en suffixant une expression par `.var`, vous permettrez de déclarer une variable locale, IntelliJ se chargera de définir le type, il ne restera plus qu'à définir le nom de la variable.
+
+Par exemple, en suffixant une expression par `.nn`, vous pouvez directement tester que cette valeur n'est pas nulle (il existe également le postfix `null` pour vérifier qu'une expression est nulle).
+![postfix-nn-before](assets/postfix-nn-before.png)
+
+![postfix-nn-after](assets/postfix-nn-after.png)
+
+Puis en suffixant une expression par `.var`, vous permettrez de déclarer une variable locale, IntelliJ se chargera de définir le type, il ne restera plus qu'à définir le nom de la variable.
 
 ![postfix-var-before](assets/postfix-var-before.png)
 
@@ -233,14 +239,15 @@ Par exemple, en suffixant une expression par `.var`, vous permettrez de déclare
 
 L'un des gros avantages de cette feature est qu'elle permet au développeur de rester dans son flot de pensée, et qu'il n'aura pas à revenir en début de ligne et taper manuellement le type attendu et l'affectation à cette nouvelle variable.
 
-Bien entendu, `.var` n'est pas le seul postfix mis à disposition. Parmi les plus utiles :
- 
+Voici une liste non exhaustive des postfix mis à disposition par IntelliJ IDEA :
+ * `.var` : extrait l'expression sous forme de variable `T variable = <expression>`
  * `.return` : préfixe l'expression avec un `return`
  * `.for` : si l'expression est une collection, elle est entourée d'un `for (T item : <expression>)`
  * `.nn` : entoure l'expression par un `if (<expression> != null)`
  * `.null` : entoure l'expression par un `if (<expression> == null)`
  * `.if` : si l'expression est booléenne, elle est entourée d'un `if`
  * `.lambda` : transforme l'expression en lambda `() -> <expression>`
+ * `.cast` : permet de caster l'expression courante en un autre type `(() <expression>)`
  * `.arg` : transforme l'expression en argument d'une fonction `<fonction>(<expression>)`
  * `.not` : transforme l'expression en sa négation `!<expression>`
  
