@@ -527,6 +527,13 @@ Ce plugin permet de naviguer dans un fichier uniquement via le clavier et de la 
 
 Plutôt que de se perdre dans de longues explications, regardez la démo du plugin qui détaille toutes ses fonctionnalités : https://tinyurl.com/qkxwf4d
 
+### Code with me
+
+La solution de JetBrains pour le travail en remote, donc indispensable.
+
+Une personne héberge une session et invite d'autres personnes qui peuvent travailler de manière synchrone ou non sur le projet.
+Ce outil permet donc de faire du pair/mob programming avec ses collègues, où qu'ils soient.
+
 ### Custom Postfix Templates
 
 Peut-être le plugin le plus utile de la liste, il permet de rajouter la possibilité de créer ses propres postfix et d'utiliser ceux créés par la communauté.
@@ -572,7 +579,6 @@ String manipulation est un plugin un peu fourre-tout qui permet de faire des op�
 
 Ce guide a été écrit par Clément Poissonnier.
 
-Merci à nos relecteurs : <Relecteur 1>, <Relecteur 2>. 
+Merci à nos relecteurs : Ludovic Dussart, Mathias Deremer-Accettone, Lucas Declercq. 
 
 La direction artistique et les illustrations sont l'œuvre de <Directeur artistique>.
-
