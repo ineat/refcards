@@ -108,7 +108,7 @@ Il est donc normal qu'un développeur qui souhaite tendre vers l'excellence appr
 
 De plus, l'IDE permet de donner du feedback en quelques secondes aux développeurs, ce qui permet d'ajuster son code au plus vite et de gagner beaucoup de temps.
 
-> Ce document a été produit en se basant sur IntelliJ IDEA 2019.3
+> Ce document a été produit en se basant sur IntelliJ IDEA 2020.3
 
 ![feedback-loop](assets/feedback-loop.png)
 
