@@ -40,16 +40,6 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
   * [Refactoring](#refactoring)
      * [Extraction](#extraction)
      * [Déplacer/renommer/supprimer/...](#déplacerrenommersupprimer)
-  * [Outils intégrés](#outils-intégrés)
-     * [Terminal intégré](#terminal-intégré)
-     * [Local history](#local-history)
-     * [Compare with clipboard](#compare-with-clipboard)
-     * [GIT](#git)
-        * [Commit partiel](#commit-partiel)
-        * [Historique sur une sélection](#historique-sur-une-sélection)
-     * [Scratch file](#scratch-file)
-     * [DB intégrée](#db-intégrée)
-     * [Command-line launcher](#command-line-launcher)
   * [Compilation, exécution et debugging](#compilation-exécution-et-debugging)
   * [Debugging](#debugging)
      * [Navigation basique](#navigation-basique)
@@ -71,7 +61,17 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
         * [Modifier l'état d'une variable](#modifier-létat-dune-variable)
      * [Stream debugger](#stream-debugger)
   * [Documentation](#documentation)
-  * [Plugins utiles](#plugins-utiles)
+  * [Outils intégrés](#outils-intégrés)
+       * [Terminal intégré](#terminal-intégré)
+       * [Local history](#local-history)
+       * [Compare with clipboard](#compare-with-clipboard)
+       * [GIT](#git)
+          * [Commit partiel](#commit-partiel)
+          * [Historique sur une sélection](#historique-sur-une-sélection)
+       * [Scratch file](#scratch-file)
+       * [DB intégrée](#db-intégrée)
+       * [Command-line launcher](#command-line-launcher)
+    * [Plugins utiles](#plugins-utiles)
      * [AceJump](#acejump)
      * [Code with me](#code-with-me)
      * [Custom Postfix Templates](#custom-postfix-templates)
@@ -423,87 +423,6 @@ Heureusement, les IDE sont là pour nous aider à faire des opérations de mani�
 | Inliner une variable, méthode, ... (inverse de l'extraction) | `Ctrl`+`Alt`+`N` | `⌥⌘N` |
 | Migrer de type (int -> String, long -> int, ...) | `Ctrl`+`Shift`+`F6` | `⌥⌘N` |
 
-## Outils intégrés
-Afin de ne pas interrompre son flot et ne pas sortir de l'outil, IntelliJ propose des outils qui font qu'il est possible de travailler sans sortir de son IDE.
-
-### Terminal intégré
-
-> Afficher/cacher le terminal `Alt`+`F12` / `⌥F12`
-
-IntelliJ embarque un terminal embarqué qui utilise le shell de votre système, mais il est possible de paramétrer IntelliJ pour utiliser le shell de votre choix. 
-
-> Le terminal est aussi accessible à l'aide de "Recent files" (`CTRL`+`E` / `⌘`+`E`), en tapant les premières lettres de "Terminal" puis `⏎`
-
-### Local history
-Lorsque GIT nous fait défaut (parce qu'il n'est pas encore mis en place, ou qu'il s'agit de modifications ayant lieu entre deux commits), il est également possible d'utiliser un historique local.
-Cet historique (accessible via un simple clic droit ou via le menu "VCS") reprend l'intégralité des modifications ayant lieu sur l'ensemble du code source d'un projet sur les 5 derniers jours ouvrés.
-
-Il permet de revenir à une version précédente, de comparer des versions entre elles, de consulter l'historique d'une portion de code uniquement, ... 
-
-> L'historique local ne remplace bien entendu pas un véritable outil de versioning !
-
-### Compare with clipboard
-Il est parfois utile de comparer deux portions de code entre elles. 
-De très bons outils existent déjà, mais IntelliJ permet également de faire ce type de comparaison avec le contenu du presse-papier, permettant ainsi de ne pas avoir à lancer une nouvelle application ou site permettant ce type de comparaison.
-Cette fonctionnalité est disponible via le clic droit ou via le menu "View".
-
-### GIT
-
-Bien que nous préconisions l'utilisation de Git à l'aide de lignes de commande, IntelliJ fournit des outils intéressants pour aider à la gestion du versioning avec une interface visuelle.
-
-|  | Windows/Linux 	| macOS 	|
-|-----------|-------	|-------	|
-| Commit | `Ctrl`+`K` | `⌘K` |
-| Rollback | `Ctrl`+`Alt`+`Z` | `⌥⌘Z` |
-
-#### Commit partiel
-
-IntelliJ permet de gérer des commits partiels de manière plus intuitive qu'avec la commande `git add -p <optional file>`.
- 
-Vous pouvez inclure/exclure des blocs de code du commit en cochant ou non la checkbox à côté de chaque bloc.
-
-![partial-commit](assets/partial-commit.png)
-
-
-#### Historique sur une sélection
-
-IntelliJ permet également de consulter l'historique d'une portion de code en particulier.
-Cette fonctionnalité est particulièrement utile lorsque l'on veut comprendre dans quel contexte une portion de code a été rajoutée/modifiée lors que l'on cherche à corriger ou comprendre un code peu clair.
-
-Pour accéder à cet historique, il faut sélectionner la portion de code à inspecter, faire un clic-droit, puis `Git` > `Show History for Selection`.
-
-
-
-### Scratch file
-
-Créer un scratch file : `Ctrl`+`Shift`+`Alt`+`Insert` / `⇧⌘N`
-
-Nous avons souvent besoin d'écrire, éditer, exécuter du code/texte qui n'a pas vocation à être ajouté dans notre projet.
-Les Scratch files ont été créés dans cette optique.
-
-On peut ainsi : 
-- coder et exécuter un bout de code pour tester quelque chose rapidement
-- bénéficier du classpath du projet pour faire un traitement ponctuel sur les données de notre projet
-- reformater et manipuler du JSON en bénéficiant de toutes les fonctionnalités d'IntelliJ que l'on ne retrouve pas dans un éditeur de texte classique.
-- ...
-
-
-### DB intégrée
-Il est également possible de consulter/requêter/générer des diagrammes sur les bases de données (SQL et Mongo).
-
-
-### Command-line launcher
-Sur Linux et macOS, il est possible de créer un launcher pour IntelliJ qui permettra d'ouvrir vos projets directement à partir du terminal.
-
-Pour activer cette fonctionnalité, allez sur `Tools` > `Create Command-line Launcher`.
-
-Une fois le launcher créé, à partir de son terminal, il suffira d'aller dans le répertoire du projet, et de taper la commande suivante pour ouvrir le projet dans IntelliJ.
-
-```bash
-idea .
-```
-
-
 ## Compilation, exécution et debugging
 
 |  | Windows/Linux 	| macOS 	|
@@ -701,6 +620,85 @@ Heureusement, il est possible de bénéficier de la documentation et de consulte
 | Afficher la liste des `p`aramètres acceptés par la méthode | `Ctrl`+`P` | `⌘P` |
 | Afficher la `J`avadoc de la méthode | `Ctrl`+`Q` | `⇧J` |
 
+## Outils intégrés
+Afin de ne pas interrompre son flot et ne pas sortir de l'outil, IntelliJ propose des outils qui font qu'il est possible de travailler sans sortir de son IDE.
+
+### Terminal intégré
+
+> Afficher/cacher le terminal `Alt`+`F12` / `⌥F12`
+
+IntelliJ embarque un terminal embarqué qui utilise le shell de votre système, mais il est possible de paramétrer IntelliJ pour utiliser le shell de votre choix. 
+
+> Le terminal est aussi accessible à l'aide de "Recent files" (`CTRL`+`E` / `⌘`+`E`), en tapant les premières lettres de "Terminal" puis `⏎`
+
+### Local history
+Lorsque GIT nous fait défaut (parce qu'il n'est pas encore mis en place, ou qu'il s'agit de modifications ayant lieu entre deux commits), il est également possible d'utiliser un historique local.
+Cet historique (accessible via un simple clic droit ou via le menu "VCS") reprend l'intégralité des modifications ayant lieu sur l'ensemble du code source d'un projet sur les 5 derniers jours ouvrés.
+
+Il permet de revenir à une version précédente, de comparer des versions entre elles, de consulter l'historique d'une portion de code uniquement, ... 
+
+> L'historique local ne remplace bien entendu pas un véritable outil de versioning !
+
+### Compare with clipboard
+Il est parfois utile de comparer deux portions de code entre elles. 
+De très bons outils existent déjà, mais IntelliJ permet également de faire ce type de comparaison avec le contenu du presse-papier, permettant ainsi de ne pas avoir à lancer une nouvelle application ou site permettant ce type de comparaison.
+Cette fonctionnalité est disponible via le clic droit ou via le menu "View".
+
+### GIT
+
+Bien que nous préconisions l'utilisation de Git à l'aide de lignes de commande, IntelliJ fournit des outils intéressants pour aider à la gestion du versioning avec une interface visuelle.
+
+|  | Windows/Linux 	| macOS 	|
+|-----------|-------	|-------	|
+| Commit | `Ctrl`+`K` | `⌘K` |
+| Rollback | `Ctrl`+`Alt`+`Z` | `⌥⌘Z` |
+
+#### Commit partiel
+
+IntelliJ permet de gérer des commits partiels de manière plus intuitive qu'avec la commande `git add -p <optional file>`.
+ 
+Vous pouvez inclure/exclure des blocs de code du commit en cochant ou non la checkbox à côté de chaque bloc.
+
+![partial-commit](assets/partial-commit.png)
+
+
+#### Historique sur une sélection
+
+IntelliJ permet également de consulter l'historique d'une portion de code en particulier.
+Cette fonctionnalité est particulièrement utile lorsque l'on veut comprendre dans quel contexte une portion de code a été rajoutée/modifiée lors que l'on cherche à corriger ou comprendre un code peu clair.
+
+Pour accéder à cet historique, il faut sélectionner la portion de code à inspecter, faire un clic-droit, puis `Git` > `Show History for Selection`.
+
+
+
+### Scratch file
+
+Créer un scratch file : `Ctrl`+`Shift`+`Alt`+`Insert` / `⇧⌘N`
+
+Nous avons souvent besoin d'écrire, éditer, exécuter du code/texte qui n'a pas vocation à être ajouté dans notre projet.
+Les Scratch files ont été créés dans cette optique.
+
+On peut ainsi : 
+- coder et exécuter un bout de code pour tester quelque chose rapidement
+- bénéficier du classpath du projet pour faire un traitement ponctuel sur les données de notre projet
+- reformater et manipuler du JSON en bénéficiant de toutes les fonctionnalités d'IntelliJ que l'on ne retrouve pas dans un éditeur de texte classique.
+- ...
+
+
+### DB intégrée
+Il est également possible de consulter/requêter/générer des diagrammes sur les bases de données (SQL et Mongo).
+
+
+### Command-line launcher
+Sur Linux et macOS, il est possible de créer un launcher pour IntelliJ qui permettra d'ouvrir vos projets directement à partir du terminal.
+
+Pour activer cette fonctionnalité, allez sur `Tools` > `Create Command-line Launcher`.
+
+Une fois le launcher créé, à partir de son terminal, il suffira d'aller dans le répertoire du projet, et de taper la commande suivante pour ouvrir le projet dans IntelliJ.
+
+```bash
+idea .
+```
 
 ## Plugins utiles
 
