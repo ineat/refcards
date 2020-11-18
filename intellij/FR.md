@@ -19,6 +19,7 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
      * [Générer du code](#générer-du-code)
      * [Manipuler du code](#manipuler-du-code)
      * [Reformater](#reformater)
+     * [Rechercher/Remplacer](#rechercherremplacer)
      * [Commenter](#commenter)
   * [Navigation](#navigation)
      * [Rechercher et ouvrir](#rechercher-et-ouvrir)
@@ -50,12 +51,32 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
      * [DB intégrée](#db-intégrée)
      * [Command-line launcher](#command-line-launcher)
   * [Compilation, exécution et debugging](#compilation-exécution-et-debugging)
-     * [Compilation &amp; exécution](#compilation--exécution)
-     * [Debugging](#debugging)
+  * [Debugging](#debugging)
+     * [Navigation basique](#navigation-basique)
+     * [Navigation avancée](#navigation-avancée)
+        * [Smart step into](#smart-step-into)
+        * [Run to cursor](#run-to-cursor)
+        * [Drop frame](#drop-frame)
+        * [Show execution point](#show-execution-point)
+     * [Breakpoints](#breakpoints)
+        * [Configuration de breakpoint](#configuration-de-breakpoint)
+        * [Types de breakpoints](#types-de-breakpoints)
+           * [Conditional breakpoint](#conditional-breakpoint)
+           * [Method breakpoint](#method-breakpoint)
+           * [Field breakpoint](#field-breakpoint)
+           * [Exception breakpoint](#exception-breakpoint)
+     * [Observer et modifier l'état du système](#observer-et-modifier-létat-du-système)
+        * [Watches](#watches)
+        * [Evaluate](#evaluate)
+        * [Modifier l'état d'une variable](#modifier-létat-dune-variable)
+     * [Stream debugger](#stream-debugger)
   * [Documentation](#documentation)
   * [Plugins utiles](#plugins-utiles)
      * [AceJump](#acejump)
-     * [Customer Postfix Templates](#customer-postfix-templates)
+     * [Code with me](#code-with-me)
+     * [Custom Postfix Templates](#custom-postfix-templates)
+     * [Grazie](#grazie)
+     * [IDE Features Trainer](#ide-features-trainer)
      * [Key Promoter X](#key-promoter-x)
      * [Presentation assistant](#presentation-assistant)
      * [SonarLint](#sonarlint)
@@ -375,7 +396,6 @@ Pour cela, il suffit de :
 
 ![multi-selection](assets/multi-selection.png)
 
-
 ## Refactoring
 Le refactoring est une pratique nécessaire pour produire du code de qualité.
 Le fait de modifier du code sans en modifier son comportement observable implique d'être particulièrement précautionneux (même avec une suite de test unitaire).
@@ -486,26 +506,189 @@ idea .
 
 ## Compilation, exécution et debugging
 
-### Compilation & exécution
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
 | Compiler un projet | `Ctrl`+`F9` | `⌘F9` |
 | Exécuter la configuration courante | `Shift`+`F10` | `⌃R` |
+| Exécuter la configuration courante en debug | `Shift`+`F9` | `⌃D` |
 | Exécuter la portion de code courante | `Ctrl`+`Shift`+`F10` | `⇧⌃R` |
+| Exécuter la portion de code courante en debug | `Ctrl`+`Shift`+`F9` | `⇧⌃D` |
 
 > L'exécution de la portion de code courante est particulièrement pratique dans les tests, car elle est contextuelle.
 > Elle permet d'exécuter facilement un test en particulier si le curseur est dans le corps de la méthode, ou la classe de test dans son ensemble si le curseur est en dehors du corps d'une méthode.
 
-### Debugging
+## Debugging
+
+### Navigation basique
 
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
-| Exécuter la configuration courante en debug | `Shift`+`F9` | `⌃D` |
-| Exécuter la portion de code courante en debug | `Ctrl`+`Shift`+`F9` | `⇧⌃D` |
 | Step over | `F8` | `F8` |
 | Step into | `F7` | `F7` |
 | Step out | `Shift`+`F7` | `⇧F7` |
 | Resume program | `Shift`+`F7` | `⌘⌥R` |
+
+### Navigation avancée
+
+#### Smart step into
+
+Smart step into permet de sélectionner la méthode dans laquelle vous souhaitez entrer lorsqu'il y a plusieurs appels de méthode dans une seule ligne.
+
+| Windows/Linux 	| macOS 	|
+|-------	|-------	|
+| `Shift`+`F7`| `⇧F7` |
+
+#### Run to cursor
+
+Run to cursor permet de continuer l'exécution jusqu'à l'endroit où se trouve le curseur.
+
+| Windows/Linux 	| macOS 	|
+|-------	|-------	|
+| `Alt`+`F9`| `⌥F9` |
+
+> Il est également possible de cliquer directement sur le numéro de ligne
+
+> Si un point d'arrêt existe entre le curseur et l'endroit où s'est arrêté le debugger, alors l'exécution sera interrompue sur le point d'arrêt.
+> Il est possible de forcer l'exécution en ignorant les points d'arrêt intermédiaire (Windows/Linux : `Ctrl`+`Alt`+`F9`, macOs : `⌥⌘F9)
+
+#### Drop frame
+
+Il arrive souvent que l'on se rende compte que l'on est allé trop loin lors d'une session de debug, et que la partie sur laquelle nous voulions inspecter l'état du système a été dépassée.
+IntelliJ ne permet pas à proprement parler de revenir en arrière, mais il permet d'exécuter à nouveau un appel de méthode. 
+
+Il suffit le plus souvent de faire un clic-droit sur la frame courante et de sélectionner "Drop frame".
+
+> Attention : le fait de faire un "drop frame" ne "revert" pas l'état du système à l'état dans lequel il était avant l'exécution du code que l'on a "droppé". 
+> Ca peut être problématique dans certains cas, il faut donc être vigilant !
+
+> Astuce : Il est possible de cacher les frames liées aux frameworks/librairies en faisant cette simple manipulation 
+>![debug-hide-lib-frames](assets/debug-hide-lib-frames.png)
+
+
+#### Show execution point
+
+Cette action permet de retourner à l'endroit où le debugger s'est arrêté.
+
+| Windows/Linux 	| macOS 	|
+|-------	|-------	|
+| `Alt`+`F10`| `⌥F10` |
+
+### Breakpoints
+
+|  | Windows/Linux 	| macOS 	|
+|-----------|-------	|-------	|
+| Créer/supprimer un breakpoint | `Ctrl`+`F8` | `⌘F8` |
+| Voir tous les breakpoints | `Ctrl`+`Shift`+`F8`  | `⌘⇧F8` |
+
+#### Configuration de breakpoint
+
+Lorsqu'une ligne ayant un breakpoint est exécutée, il est possible de rajouter un log sans modifier le code source.
+
+Il suffit de faire un clic droit sur le breakpoint, puis de cliquer sur "More" (ou de taper deux fois `Ctrl`+`Shift`+`F8` sur Windows/Linux ou `⇧⌘F8` sur macOS)
+
+![debug-edit-breakpoint](assets/debug-edit-breakpoint.png)
+
+Ensuite, remplissez le champ "Evaluate and log" : 
+![debug-update-breakpoint-evaluate-and-log](assets/debug-update-breakpoint-evaluate-and-log.png)
+
+#### Types de breakpoints
+
+##### Conditional breakpoint
+
+Il est possible de créer un breakpoint qui arrête l'exécution du programme lorsqu'un prédicat est respecté.
+
+Exemple : 
+
+![debug-conditional-breakpoint](assets/debug-conditional-breakpoint.png)
+
+##### Method breakpoint
+
+En plaçant un breakpoint sur une méthode (que ce soit sur une interface ou une classe), il est possible d'avoir un point d'arrêt à chaque fois que la méthode (ou une de ses implémentations) est appelée.
+
+Il est possible de paramétrer ce breakpoint et de préciser si l'on souhaite que l'exécution s'arrête lorsque l'on entre dans la méthode, lorsque l'on en sort, ou les deux.
+
+![debug-breakpoint-method](assets/debug-breakpoint-method.png)
+
+##### Field breakpoint
+
+De la même manière, il est possible de placer un breakpoint sur un champ, afin d'interrompre l'exécution à chaque fois qu'un champ est lu ou modifié.
+
+Il est possible de paramétrer ce breakpoint et de préciser si l'on souhaite que l'exécution s'arrête lorsque le champ est lu, modifié, ou les deux.
+
+![debug-breakpoint-field](assets/debug-breakpoint-field.png)
+
+##### Exception breakpoint
+
+Lorsqu'une session de debug déclenche une exception, il est souvent trop tard. 
+Le contexte d'exécution ne permet plus d'accéder aux variables et il est parfois difficile de comprendre ce qui a réellement déclenché une exception.
+
+IntelliJ permet de définir des breakpoints associés à une exception, pour que le traitement s'arrête avant que l'exception ne soit déclenchée.
+
+Il suffit d'aller dans la fenêtre de déclaration des breakpoints, d'ajouter un "Java Exception Breakpoint", puis de choisir l'exception souhaitée.
+
+![debug-breakpoint-field](assets/debug-breakpoint-exception-1.png)
+
+![debug-breakpoint-field](assets/debug-breakpoint-exception-2.png)
+
+Désormais, lorsque cette exception sera sur le point d'être déclenchée, le debugger s'arrêtera en vous informant qu'une exception est sur le point d'être levée.
+
+![debug-breakpoint-field](assets/debug-breakpoint-exception-3.png)
+
+### Observer et modifier l'état du système
+ 
+#### Watches 
+Lors d'une session de debug, il est souvent utile d'observer l'état des variables instanciées.
+
+L'ensemble des variables est disponible dans le panneau dédié : 
+
+![debug-panel-variables](assets/debug-panel-variables.png)
+
+Les "watches" permettent d'accéder en lecture à l'état des objets courant, et d'ajouter des informations dans le panneau "Variables" :
+
+![debug-panel-variables-with-watch](assets/debug-panel-variables-with-watch.png)
+
+Pour créer un nouveau "watch", il suffit de cliquer sur le "+" situé dans le panneau "Variables" : 
+
+![debug-new-watch](assets/debug-new-watch.png)
+
+#### Evaluate 
+La fenêtre "Evaluate" vous permet d'exécuter n'importe quel code comme s'il était exécuté dans l'application, le tout sans changer le code source.
+
+Elle peut être utilisée pour tester des assertions, appliquer un changement à une variable, ...
+
+![debug-evaluate](assets/debug-evaluate.png)
+
+| Windows/Linux 	| macOS 	|
+|-------	|-------	|
+| `Alt`+`F8` | `⌥F8` |
+
+
+#### Modifier l'état d'une variable
+Il est également possible de modifier l'état d'une variable directement via le panneau "Variable"
+ 
+![debug-set-value](assets/debug-set-value.png)
+
+| Windows/Linux 	| macOS 	|
+|-------	|-------	|
+| `F2` | `F2` |
+
+### Stream debugger
+
+Les streams sont un outil très utile en Java, mais qui est parfois difficile à débugger.
+Afin de rendre l'analyse des streams moins difficile, IntelliJ embarque un mode de visualisation de debug dédié.
+
+Pour l'activer, lors d'une session de debug, il faut cliquer sur ce bouton :  
+
+![debug-stream-debugger-button](assets/debug-stream-debugger-button.png)
+
+Une fenêtre s'affiche, avec deux modes de visualisation :
+
+L'un qui reprend l'ensemble des opérations (flat mode):  
+![debug-stream-debugger-flat-mode](assets/debug-stream-debugger-flat-mode.png)
+
+L'autre qui permet de visualiser les opérations de manière individuelle (split mode) : 
+![debug-stream-debugger-split-mode](assets/debug-stream-debugger-split-mode.png)
+
 
 ## Documentation
 
