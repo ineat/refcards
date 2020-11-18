@@ -71,7 +71,8 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
        * [Scratch file](#scratch-file)
        * [DB intégrée](#db-intégrée)
        * [Command-line launcher](#command-line-launcher)
-    * [Plugins utiles](#plugins-utiles)
+       * [Client HTTP](#client-http)
+  * [Plugins utiles](#plugins-utiles)
      * [AceJump](#acejump)
      * [Code with me](#code-with-me)
      * [Custom Postfix Templates](#custom-postfix-templates)
@@ -699,6 +700,50 @@ Une fois le launcher créé, à partir de son terminal, il suffira d'aller dans 
 ```bash
 idea .
 ```
+
+### Client HTTP
+
+JetBrains propose une alternative à Postman directement dans son IDE qui, bien qu'elle ne bénéficie pas d'une interface graphique, permet de faire beaucoup de chose.
+
+Parmi les features qu'elle supporte : 
+- requête sous forme de fichier, qui permettent le partage via GIT
+- gestion de l'authentification
+- gestion des environnements
+- gestion des données sensibles (identifiants, clé d'API, ...)
+- log des appels passés
+- scripting pour manipuler les réponses et requêtes
+- framework de test simplifié
+
+Pour tester ce client HTTP, créez un fichier "HTTP Request", et écrivez vos requêtes ainsi : 
+````
+### GET all products
+GET https://{{host}}/products
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+> {%
+client.test("Status", function(){
+    client.assert(response.status === 200, "Response status is not 200'")
+});
+ %}
+
+
+### GET product by id
+GET https://{{host}}/products/1
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+> {%
+client.test("Body", function(){
+    client.assert(response.body["id"] === "1", "Id is not '1'")
+});
+
+client.test("Status", function(){
+    client.assert(response.status === 200, "Response status is not 200'")
+});
+ %}
+
+````
 
 ## Plugins utiles
 
