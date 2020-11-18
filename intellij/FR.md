@@ -185,8 +185,8 @@ En attendant la sortie de Java 14 qui permettra de réduire le code boilerplate 
 
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
-| Rechercher dans le projet | `Ctrl`+`Maj`+`F` | `⇧⌘F` |
-| Remplacer dans le projet | `Ctrl`+`Maj`+`R` | `⇧⌘R` |
+| Rechercher dans le projet | `Ctrl`+`Shift`+`F` | `⇧⌘F` |
+| Remplacer dans le projet | `Ctrl`+`Shift`+`R` | `⇧⌘R` |
 
 ### Commenter
 
@@ -353,7 +353,7 @@ Elle propose l'intégralité des choix qui correspondent à ce que l'utilisateur
 
 #### Smart
 
-`Ctrl+Maj+Space` / `⌃⇧Space`
+`Ctrl+Shift+Space` / `⌃⇧Space`
 
 
 La smart completion suggère des choix cohérents avec le contexte dans lequel le curseur se trouve.
