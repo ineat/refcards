@@ -119,7 +119,7 @@ L'objectif de ce document est de centraliser les fonctionnalités les plus utile
 
 ## Transverse
 
-> S'il faut retenir un seul raccourci dans IntelliJ, il s'agit de celui de la recherche d'une action ("Find action") par son nom (Ctrl+Shift+A sur Windows/Linux et ⇧⌘A sur macOS).
+> S'il faut retenir un seul raccourci dans IntelliJ, il s'agit de celui de la recherche d'une action ("Find action") par son nom (`Ctrl`+`Shift`+`A` sur Windows/Linux et `⇧⌘A` sur macOS).
 > Ce raccourci permet de retrouver n'importe quelle autre action par une simple recherche textuelle.
 
 ### Étendre/réduire sa sélection
@@ -130,7 +130,7 @@ Il suffit d'utiliser de placer son curseur à l'endroit voulu :
 
 ![expand-selection-step-1](assets/expand-selection-step-1.png)
 
-Puis d'utiliser le raccourci `Ctrl+W` (`⌥↑` sur macOS) autant de fois que nécessaire.
+Puis d'utiliser le raccourci `Ctrl`+`W` (`⌥↑` sur macOS) autant de fois que nécessaire.
 
 ![expand-selection-step-2](assets/expand-selection-step-2.png)
 
@@ -630,7 +630,7 @@ Afin de ne pas interrompre son flot et ne pas sortir de l'outil, IntelliJ propos
 
 IntelliJ embarque un terminal embarqué qui utilise le shell de votre système, mais il est possible de paramétrer IntelliJ pour utiliser le shell de votre choix. 
 
-> Le terminal est aussi accessible à l'aide de "Recent files" (`CTRL`+`E` / `⌘`+`E`), en tapant les premières lettres de "Terminal" puis `⏎`
+> Le terminal est aussi accessible à l'aide de "Recent files" (`Ctrl`+`E` / `⌘`+`E`), en tapant les premières lettres de "Terminal" puis `⏎`
 
 ### Local history
 Lorsque GIT nous fait défaut (parce qu'il n'est pas encore mis en place, ou qu'il s'agit de modifications ayant lieu entre deux commits), il est également possible d'utiliser un historique local.
