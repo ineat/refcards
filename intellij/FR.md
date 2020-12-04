@@ -1,7 +1,7 @@
 # IntelliJ RefCard
 *Version française*
 
-RefCard d'utilisation d'IntelliJ IDEA
+RefCard d'utilisation d'IntelliJ IDEA 2020.3
 
 Écrit par Clément Poissonnier.
 
@@ -13,7 +13,7 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
 -->
 
   * [Présentation](#présentation)
-  * [Transverse](#transverse)
+  * [Général](#général)
      * [Étendre/réduire sa sélection](#étendreréduire-sa-sélection)
      * [Faire des actions contextuelles](#faire-des-actions-contextuelles)
      * [Générer du code](#générer-du-code)
@@ -65,7 +65,7 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
        * [Terminal intégré](#terminal-intégré)
        * [Local history](#local-history)
        * [Compare with clipboard](#compare-with-clipboard)
-       * [GIT](#git)
+       * [Git](#git)
           * [Commit partiel](#commit-partiel)
           * [Historique sur une sélection](#historique-sur-une-sélection)
        * [Scratch file](#scratch-file)
@@ -87,8 +87,10 @@ Pour regénérer le sommaire : https://github.com/ekalinin/github-markdown-toc
 
 
 ## Présentation
-IntelliJ IDEA est l'IDE historique de JetBrains. 
-Il est plébiscité par la communauté des développeurs en raison de son ergonomie, sa stabilité et des nombreuses fonctionnalités qu'il propose.
+
+IntelliJ IDEA est l'IDE historique de JetBrains.
+
+Par rapport à son concurrent historique, Eclipse, il apporte de grandes améliorations en termes de stabilité, de gestion des plugins et d'ergonomie.
 
 Il supporte de nombreux langages : 
 
@@ -109,24 +111,26 @@ Il est donc normal qu'un développeur qui souhaite tendre vers l'excellence appr
 
 De plus, l'IDE permet de donner du feedback en quelques secondes aux développeurs, ce qui permet d'ajuster son code au plus vite et de gagner beaucoup de temps.
 
-> Ce document a été produit en se basant sur IntelliJ IDEA 2020.3
-
 ![feedback-loop](assets/feedback-loop.png)
 
 Crédits : [Arnaud Lemaire](https://twitter.com/Lilobase/status/1144365295701770248)
 
-L'objectif de ce document est de centraliser les fonctionnalités les plus utiles et apportant un gain significatif de productivité, sans être exhaustif, pour s'améliorer dans sa pratique quotidienne du développement.
+L'objectif de ce document est de centraliser les fonctionnalités les plus utiles, qui apportent un gain significatif de productivité.
+Il ne sera pas exhaustif, mais permettra de s'améliorer dans sa pratique quotidienne du développement.
 
-## Transverse
+
+## Général
 
 > S'il faut retenir un seul raccourci dans IntelliJ, il s'agit de celui de la recherche d'une action ("Find action") par son nom (`Ctrl`+`Shift`+`A` sur Windows/Linux et `⇧⌘A` sur macOS).
 > Ce raccourci permet de retrouver n'importe quelle autre action par une simple recherche textuelle.
 
 ### Étendre/réduire sa sélection
+
 En tant que développeur, nous passons énormément de temps à sélectionner du texte (pour le copier, le supprimer, le remplacer, ...).
+
 IntelliJ permet de sélectionner du code de manière "intelligente", en prenant en compte les parenthèses, les guillemets et autres symboles spécifiques à un langage.
 
-Il suffit d'utiliser de placer son curseur à l'endroit voulu : 
+Il suffit de placer son curseur à l'endroit voulu : 
 
 ![expand-selection-step-1](assets/expand-selection-step-1.png)
 
@@ -173,6 +177,7 @@ En attendant la sortie de Java 14 qui permettra de réduire le code boilerplate 
 
 
 ### Reformater
+
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
 | Reformater le code | `Ctrl`+`Alt`+`L` | `⌥⌘L` |
@@ -200,7 +205,9 @@ En attendant la sortie de Java 14 qui permettra de réduire le code boilerplate 
 
 
 ## Navigation
+
 ### Rechercher et ouvrir
+
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
 | Rechercher partout | double `⇧` | double `⇧` |
@@ -245,6 +252,7 @@ Nous vous conseillons de créer un raccourci dans `Preferences`(`Ctrl`+`Alt`+`S`
 ## Productivité
 
 ### Postfix completion
+
 La postfix completion vous permet de décorer une expression que vous venez de taper.
 
 Par exemple, en suffixant une expression par `.nn`, vous pouvez directement tester que cette valeur n'est pas nulle (il existe également le postfix `null` pour vérifier qu'une expression est nulle).
@@ -275,11 +283,11 @@ Voici une liste non exhaustive des postfix mis à disposition par IntelliJ IDEA 
  
 > A noter qu'il est également possible de transformer une expression en sa négation en suffixant par `!` et en appuyant sur `TAB`.
 
-Aller plus loin
 > [Custom Postfix Templates](https://plugins.jetbrains.com/plugin/9862-custom-postfix-templates) est un plugin particulièrement puissant qui permet de définir ses propres postfix, et d'utiliser ceux créées par la communauté. 
 > Ces nouveaux postfix permettent notamment d'ajouter le support des librairies très utilisées (Mockito, AssertJ, Vavr, ...), et de transformer facilement des types en d'autres (String -> Integer, Array -> List, ...)
 
 ### Live template
+
 Le live templating permettent également de générer un squelette de code, mais sans être contextualisé en fonction de l'expression en cours de rédaction.
 Il a donc un fonctionnement très proche de celui des postfix, et l'on retrouve globalement les mêmes actions.
 
@@ -328,6 +336,7 @@ Là où les live templates tirent leur épingle du jeu, c'est grâce à la possi
 Ainsi, on peut créer un template pour créer un test, utiliser un bloc de code que l'on utilise souvent, créer du code rapidement lors d'un live coding, ...
 
 ### Configurer les templates
+
 Lors de la création d'une classe, d'un test, ou autre, IntelliJ utilise une structure templatisée qu'il est possible de modifier.
 
 Par exemple, si vous utilisez systématiquement AssertJ à la place des assertions JUnit, nous vous encourageons à modifier le template de classe de test afin de remplacer l'import défini par défaut.
@@ -338,6 +347,7 @@ import static org.assertj.core.api.Assertions.*;
 ```
 
 ### Auto completion
+
 Comme tout IDE qui se respecte, IntelliJ propose de l'auto-complétion. 
 
 > Pour toutes les auto-complétions, il est possible d'insérer le contenu suggéré (avec la touche ⏎) ou de remplacer l'expression sur laquelle on se trouve (avec la touche TAB)
@@ -365,6 +375,7 @@ Elle ne proposera que les choix qui correspondent au type attendu dans l'express
 
 
 #### Statement completion
+
 `Ctrl+Shift+⏎` / `⇧⌘⏎`
 
 Cette fonctionnalité particulièrement utile permet de finaliser l'expression courante, en rajoutant les parenthèses, accolades, points-virgules, ... le tout en reformatant automatiquement la ligne.
@@ -379,6 +390,7 @@ Par exemple :
 
 
 ### Multi curseur
+
 Avoir plusieurs curseurs permet de faire des modifications en masse.
 Il y a plusieurs manières d'avoir plusieurs curseurs sur un fichier : 
  
@@ -389,6 +401,7 @@ Il y a plusieurs manières d'avoir plusieurs curseurs sur un fichier :
 ![multi-cursor](assets/multi-cursor.png)
  
 ### Multi sélection
+
 Il est parfois nécessaire de sélectionner plusieurs occurrences d'un même mot.
 Pour cela, il suffit de :
 
@@ -398,6 +411,7 @@ Pour cela, il suffit de :
 ![multi-selection](assets/multi-selection.png)
 
 ## Refactoring
+
 Le refactoring est une pratique nécessaire pour produire du code de qualité.
 Le fait de modifier du code sans en modifier son comportement observable implique d'être particulièrement précautionneux (même avec une suite de test unitaire).
 Heureusement, les IDE sont là pour nous aider à faire des opérations de manière automatique, et donc beaucoup plus rapide et sûre que si elles avaient été manuelles.
@@ -405,6 +419,7 @@ Heureusement, les IDE sont là pour nous aider à faire des opérations de mani�
 > L'ensemble des techniques ci-dessous peuvent être trouvées dans le menu "Refactor this" : `Ctrl`+`Alt`+`Shift`+`T` (`⌃T` sur macOS)
 
 ### Extraction
+
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
 | Extraire dans une **`v`**ariable | `Ctrl`+`Alt`+`V` | `⌥⌘V` |
@@ -557,6 +572,7 @@ Désormais, lorsque cette exception sera sur le point d'être déclenchée, le d
 ### Observer et modifier l'état du système
  
 #### Watches 
+
 Lors d'une session de debug, il est souvent utile d'observer l'état des variables instanciées.
 
 L'ensemble des variables est disponible dans le panneau dédié : 
@@ -572,6 +588,7 @@ Pour créer un nouveau "watch", il suffit de cliquer sur le "+" situé dans le p
 ![debug-new-watch](assets/debug-new-watch.png)
 
 #### Evaluate 
+
 La fenêtre "Evaluate" vous permet d'exécuter n'importe quel code comme s'il était exécuté dans l'application, le tout sans changer le code source.
 
 Elle peut être utilisée pour tester des assertions, appliquer un changement à une variable, ...
@@ -584,6 +601,7 @@ Elle peut être utilisée pour tester des assertions, appliquer un changement à
 
 
 #### Modifier l'état d'une variable
+
 Il est également possible de modifier l'état d'une variable directement via le panneau "Variable"
  
 ![debug-set-value](assets/debug-set-value.png)
@@ -622,6 +640,7 @@ Heureusement, il est possible de bénéficier de la documentation et de consulte
 | Afficher la `J`avadoc de la méthode | `Ctrl`+`Q` | `⇧J` |
 
 ## Outils intégrés
+
 Afin de ne pas interrompre son flot et ne pas sortir de l'outil, IntelliJ propose des outils qui font qu'il est possible de travailler sans sortir de son IDE.
 
 ### Terminal intégré
@@ -633,6 +652,7 @@ IntelliJ embarque un terminal embarqué qui utilise le shell de votre système, 
 > Le terminal est aussi accessible à l'aide de "Recent files" (`Ctrl`+`E` / `⌘`+`E`), en tapant les premières lettres de "Terminal" puis `⏎`
 
 ### Local history
+
 Lorsque GIT nous fait défaut (parce qu'il n'est pas encore mis en place, ou qu'il s'agit de modifications ayant lieu entre deux commits), il est également possible d'utiliser un historique local.
 Cet historique (accessible via un simple clic droit ou via le menu "VCS") reprend l'intégralité des modifications ayant lieu sur l'ensemble du code source d'un projet sur les 5 derniers jours ouvrés.
 
@@ -641,13 +661,16 @@ Il permet de revenir à une version précédente, de comparer des versions entre
 > L'historique local ne remplace bien entendu pas un véritable outil de versioning !
 
 ### Compare with clipboard
+
 Il est parfois utile de comparer deux portions de code entre elles. 
 De très bons outils existent déjà, mais IntelliJ permet également de faire ce type de comparaison avec le contenu du presse-papier, permettant ainsi de ne pas avoir à lancer une nouvelle application ou site permettant ce type de comparaison.
 Cette fonctionnalité est disponible via le clic droit ou via le menu "View".
 
-### GIT
+### Git
 
 Bien que nous préconisions l'utilisation de Git à l'aide de lignes de commande, IntelliJ fournit des outils intéressants pour aider à la gestion du versioning avec une interface visuelle.
+
+Si vous n'êtes pas à l'aise avec l'utilisation de Git, nous vous recommandons vivement la lecture [de notre Refcard sur le sujet](https://github.com/ineat/refcards/blob/master/git/FR.md) !
 
 |  | Windows/Linux 	| macOS 	|
 |-----------|-------	|-------	|
@@ -687,10 +710,12 @@ On peut ainsi :
 
 
 ### DB intégrée
+
 Il est également possible de consulter/requêter/générer des diagrammes sur les bases de données (SQL et Mongo).
 
 
 ### Command-line launcher
+
 Sur Linux et macOS, il est possible de créer un launcher pour IntelliJ qui permettra d'ouvrir vos projets directement à partir du terminal.
 
 Pour activer cette fonctionnalité, allez sur `Tools` > `Create Command-line Launcher`.
@@ -798,8 +823,9 @@ SonarLint permet donc de faire des analyses Sonar directement dans son IDE et d'
 String manipulation est un plugin un peu fourre-tout qui permet de faire des opérations sur des chaînes de caractère (transformation de casse, tri, encodage/décodage, ...).
 
 ## Sources
- * https://www.jetbrains.com/help/idea
- * https://github.com/tomsquest/intellij-master-presentation
+ 
+* https://www.jetbrains.com/help/idea
+* https://github.com/tomsquest/intellij-master-presentation
 
 ## L'ours
 
