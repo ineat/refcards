@@ -335,6 +335,37 @@ for (int i = 0; i < ; i++) {
 Là où les live templates tirent leur épingle du jeu, c'est grâce à la possibilité de créer ses propres templates.
 Ainsi, on peut créer un template pour créer un test, utiliser un bloc de code que l'on utilise souvent, créer du code rapidement lors d'un live coding, ...
 
+### Emmet
+
+Grace à une syntaxe proche des sélecteurs CSS, Emmet permet également d'écrire une structure de code très rapidement en HTML ou CSS.
+Une simple expression suivie d'une tabulation transformera le tout en une structure HTML prête à être complétée.
+
+Par exemple `ul>li.item$*5` produira : 
+```html
+<ul>
+    <li class="item1"></li>
+    <li class="item2"></li>
+    <li class="item3"></li>
+    <li class="item4"></li>
+    <li class="item5"></li>
+</ul>
+```
+
+`(header>ul.nav>li*5)+footer` produira : 
+
+````html
+<header>
+    <ul class="nav">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</header>
+<footer></footer>
+````
+
 ### Configurer les templates
 
 Lors de la création d'une classe, d'un test, ou autre, IntelliJ utilise une structure templatisée qu'il est possible de modifier.
