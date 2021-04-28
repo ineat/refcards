@@ -6,14 +6,11 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "core-js": "^3.11.0",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "debug": "2.6.9",
-    "express": "4.16.4"
+    "webpack": "^5.36.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
