@@ -16,7 +16,7 @@ https://nodejs.org
 
 # Installation
 
-After installing NodeJs, you'll need to install the dependancies with npm :
+After installing NodeJs, you'll need to install the dependencies with npm :
 
 ```
 npm install
