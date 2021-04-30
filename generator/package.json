@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently 'npm run start:generate' 'npm run start:web'",
+    "start": "concurrently \"npm run start:generate\" \"npm run start:web\"",
     "start:web": "http-server",
     "start:generate": "nodemon --watch ./index.js",
     "test": "jasmine test/*",
@@ -12,7 +12,7 @@
     "generator": "node ./index.js"
   },
   "dependencies": {
-    "copy-webpack-plugin": "^8.1.1",
+    "buffer": "^6.0.3",
     "es6-interface": "^3.1.4",
     "highlight.js": "^10.7.2",
     "import-local": "^3.0.2",

@@ -1,6 +1,5 @@
 /**
  * Helpers
- * This functions are used by the Custom Renderer
  */
 const escapeTest = /[&<>"']/;
 const escapeReplace = /[&<>"']/g;

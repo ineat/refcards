@@ -1,5 +1,6 @@
 const marked = require('marked');
 const fs =require ('fs');
+const fse = require('fs-extra');
 const {render_upgrade} = require('./CustomRenderer');
 const logger = require('./Logger');
 const hljs   = require('highlight.js');
@@ -39,11 +40,22 @@ function htmlGenerator(path){
     return HtmlBase +marked(text, {renderer:render_upgrade(metadataExtractor(path))}) + "\n </body>\n </html>";
 }
 
-/**
- * Return the two specifics colors of a refcards thanks to his path
- * @param path
- * @returns {string[]}
- */
+function createFolder() {
+    fs.mkdir('public/git', (err) => {
+        logger.info("Refcard Git créée!");
+    });
+
+    fs.mkdir('public/git/assets', (err) => {
+        logger.info("Refcard Git créée!");
+    });
+    try {
+        fse.copySync('../git/assets', 'public/git/assets', {overwrite: true});
+    } catch (err) {
+        if (err) throw err;
+    }
+
+}
+
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/(\[\/\/\]: #) \(color1:(#\w*);color2:(#\w*);color3:(#\w*)\)/);
@@ -84,5 +96,4 @@ function CreateAllRefcards(pathList) {
     }
 }
 
-
-module.exports = {refcardCreator,metadataExtractor,htmlGenerator,getTitle,CreateAllRefcards};
+module.exports = {createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};
