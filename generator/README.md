@@ -1,11 +1,11 @@
 # Refcards Generator 
 
-The goal of this generator is ffddd automatically generate statics HTML pages from the Markdown Refcards.
+The goal of this generator is to automatically generate statics HTML pages from the Markdown Refcards.
 
 
 # Prerequisites
 
-Here are the needed techsfdnologies :
+Here are the needed technologies :
     - Node v12 minimum 
     - Npm 
 
