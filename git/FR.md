@@ -760,7 +760,7 @@ Permet de lister les références du dépôt local.
 * `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit.
 
 ##### Fetch
-* `git config --global git fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement.
+* `git config --global fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement.
 
 ##### Pull
 * `git config --global pull.rebase merges` : Conserve les commits de *merge* quand ils existent sur la branche d'où viennent les modifications.
