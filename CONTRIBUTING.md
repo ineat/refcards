@@ -39,3 +39,9 @@ La branche comportant les modifications sera revue et mergée par un autre colla
 ## Revue du contenu
 N'oubliez pas que les RefCards font parti de la vitrine technologie de la société. La revue du contenu permet d'éviter les fautes d'orthographe et de grammaire.
 
+## Convention ajout d'une Refcard
+Si vous souhaitez ajouter une Refcard il faudra ajouter au debut de votre fichier Markdown une ligne contenant les deux couleurs spécifiques(au format hexadecimal) à votre Refcard pour la génération HTML.
+Elle devra être comme ceci : 
+```
+[//]: # (color1:#000000;color2:#111111)
+```

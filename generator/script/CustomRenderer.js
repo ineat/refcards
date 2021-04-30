@@ -14,7 +14,7 @@ exports.render_upgrade = function (color) {
         if (href === null) {
             return text;
         }
-        let out = `<a class="links" style="${color}" href="${href}"`;
+        let out = `<a class="links" style="color :${color[1]}" href="${href}"`;
         if (title) {
             out += ` title="${title}"`;
         }
@@ -23,7 +23,7 @@ exports.render_upgrade = function (color) {
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="${color}">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${color[1]}">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
@@ -35,7 +35,7 @@ exports.render_upgrade = function (color) {
     }
 
     render.codespan = function(text) {
-        return `<code class="codespan" style="${color}">${text}</code>`;
+        return `<code class="codespan" style="color: ${color[1]}">${text}</code>`;
     }
 
     render.code = function(code, infostring, escaped) {
@@ -50,7 +50,7 @@ exports.render_upgrade = function (color) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        return `<pre><code class="code" style="${color}">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
+        return `<pre style="background-color: ${color[0]}"><code class="code">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
     }
 
     render.image = function(href, title, text) {
@@ -59,7 +59,7 @@ exports.render_upgrade = function (color) {
             return text;
         }
 
-        let out = `<img src="/git/assets/   ${href}" style="${color}" alt="${text}"`;
+        let out = `<img src="/git/${href}" style="${color}" alt="${text}"`;
         if (title) {
             out += ` title="${title}"`;
         }

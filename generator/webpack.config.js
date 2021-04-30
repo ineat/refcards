@@ -18,7 +18,7 @@ let config = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: '../git/assets', to: "public/git"   }
+                { from: '../git/assets', to: "../../public/git/assets"   }
             ]
         })
     ],
