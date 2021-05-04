@@ -6,7 +6,8 @@
     "start": "node ./index.js",
     "build": "webpack",
     "dev": "webpack --mode development",
-    "test": "jasmine test/markedCustomRenderer.test.js"
+    "test": "jasmine test/CustomRenderer.test.js",
+    "serv": "webpack serve"
   },
   "dependencies": {
     "buffer": "^6.0.3",
@@ -17,6 +18,7 @@
     "marked": "^2.0.3",
     "os": "^0.1.1",
     "parser.js": "^1.0.0",
+    "sanitize-html": "^2.3.3",
     "stream-http": "^3.2.0",
     "util": "^0.12.3",
     "winston": "^3.3.3"
