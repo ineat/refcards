@@ -70,7 +70,6 @@ exports.render_upgrade = function (color_items) {
         return `<img src="${href}" alt="${text}" title="${title ? title : ""}"${this.options.xhtml ? '/>' : '>'}`;
     }
 
-
     return render;
 
 }
