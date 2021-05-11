@@ -6,11 +6,12 @@
     "start": "node ./index.js",
     "build": "webpack",
     "dev": "webpack --mode development",
-    "test": "jasmine test/CustomRenderer.test.js",
-    "serv": "webpack serve"
+    "test": "jasmine test/*",
+    "serve": "webpack serve"
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "es6-interface": "^3.1.4",
     "http": "0.0.1-security",
     "https": "^1.0.0",
     "https-browserify": "^1.0.0",
@@ -24,7 +25,9 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "detect-newline": "^3.1.0",
     "jasmine": "^3.7.0",
+    "js-yaml": "^4.1.0",
     "webpack": "^5.36.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"

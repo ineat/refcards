@@ -23,3 +23,9 @@ Then you can start the generation using :
 ```
 npm run start
 ```
+
+You can run unit tests using :
+
+```
+npm run test
+```
