@@ -67,6 +67,7 @@ exports.render_upgrade = function (color) {
         return out;
     }
 
+
     return render;
 
 }
