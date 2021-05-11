@@ -1,3 +1,6 @@
+
+[//]: # (grey)
+
 # Git RefCard
 *Version française*
 

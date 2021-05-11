@@ -1,6 +1,5 @@
 const marked = require('marked');
-const {cleanUrl} = require("marked/src/helpers");
-const module1 = require('../index');
+const {cleanUrl,escape} = require("marked/src/helpers");
 
 
 
@@ -29,14 +28,14 @@ exports.render_upgrade = function (couleur) {
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
-            return `<h${level} class="class1" style="${couleur}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
+            return `<h${level} class="heading${level}" style="${couleur}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
         }
         // ignore IDs
-        return `<h${level} class="classe1" style="${couleur}">${text}</h${level}>\n`;
+        return `<h${level} class="heading${level}" style="${couleur}">${text}</h${level}>\n`;
     }
 
     render.codespan = function(text) {
-        return `<code class="class1" style="${couleur}">${text}</code>`;
+        return `<code class="codespan" style="${couleur}">${text}</code>`;
     }
 
     render.code = function(code, infostring, escaped) {
@@ -51,11 +50,7 @@ exports.render_upgrade = function (couleur) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        if (!lang) {
-            return `<pre><code class="class1" style="${couleur}">${code}</code></pre>`;
-        }
-
-        return `<pre><code class="class1" style="${couleur}">${code}</code></pre>`;
+        return `<pre><code class="code" style="${couleur}">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
     }
 
     render.image = function(href, title, text) {
@@ -71,6 +66,7 @@ exports.render_upgrade = function (couleur) {
         out += this.options.xhtml ? '/>' : '>';
         return out;
     }
+
 
     return render;
 

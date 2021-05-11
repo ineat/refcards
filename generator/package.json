@@ -7,7 +7,8 @@
     "build": "webpack",
     "dev": "webpack --mode development",
     "test": "jasmine test/*",
-    "serve": "webpack serve"
+    "serve": "webpack serve",
+    "app": "npm run start && npm run serve"
   },
   "dependencies": {
     "buffer": "^6.0.3",

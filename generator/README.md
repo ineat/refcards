@@ -18,11 +18,13 @@ You'll need to install the dependencies with npm :
 npm install
 ```
 
-Then you can start the generation using :
+Then you can start the generation and the server using :
 
 ```
-npm run start
+npm run app
 ```
+Then in your browser go to : <http://localhost:3000>
+
 
 You can run unit tests using :
 
