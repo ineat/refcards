@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let config = {
     entry: "./index.js",
@@ -13,6 +14,24 @@ let config = {
         publicPath:"/assets/",
         watchContentBase: true
     },
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpe?g|gif|svg|md|pdf)$/i,
+                loader: 'file-loader',
+                options: {
+                    emitFile: true,
+                },
+            },
+        ],
+    },
+    // plugins: [
+    //     new CopyWebpackPlugin({
+    //         patterns: [
+    //             { from: '../git/assets', to: "public/git"   }
+    //         ]
+    //     })
+    // ],
     externals: {
         'fs':'require("fs")',
         'buffer': 'require("buffer")',
