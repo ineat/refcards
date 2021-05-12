@@ -1,5 +1,5 @@
 const marked = require('marked');
-const logger = require("../script/Logger");
+const logger = require("../index");
 const {render_upgrade} = require('../script/CustomRenderer');
 
 describe('Test custom renderer', () => {
