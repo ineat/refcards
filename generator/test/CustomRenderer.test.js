@@ -1,12 +1,12 @@
 const marked = require('marked');
-const logger = require("../script/Logger");
+const logger = require("../index");
 const {render_upgrade} = require('../script/CustomRenderer');
 
 describe('Test renderer upgraded', () => {
     logger.info("testing header token");
     it('should add class attribute to header token', () => {
         const header = marked("# test",{renderer:render_upgrade("red")})
-        expect(header).toBe('<h1 class="class1" style="red" id="test">test</h1>\n');
+        expect(header).toBe('<h1 class="heading1" style="red" id="test">test</h1>\n');
     });
 
     logger.info("testing link token");
@@ -18,13 +18,13 @@ describe('Test renderer upgraded', () => {
     logger.info("testing code token");
     it('should add class attribute to code token', () => {
         const code = marked("```sh\ntest\n```",{renderer:render_upgrade("red")})
-        expect(code).toBe('<pre><code class="class1" style="red">test\n</code></pre>');
+        expect(code).toBe('<pre><code class="code" style="red">test\n</code></pre>');
     });
 
     logger.info("testing codespan token");
     it('should add class attribute to codespan token', () => {
         const codespan = marked("`test`",{renderer:render_upgrade("red")})
-        expect(codespan).toBe('<p><code class="class1" style="red">test</code></p>\n');
+        expect(codespan).toBe('<p><code class="codespan" style="red">test</code></p>\n');
     });
 
     logger.info("testing blockquote token");

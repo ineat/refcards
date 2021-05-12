@@ -24,7 +24,7 @@ const HtmlBase = "<!DOCTYPE html>\n" +
     "<body>\n";
 
 const html = HtmlBase +marked(text, {
-    renderer:render_upgrade()
+    renderer:render_upgrade("red")
 }) + "\n </body>\n </html>";
 
 

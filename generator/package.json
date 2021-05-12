@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./index.js",
+    "start": "node ./index.js && npm run serve",
     "build": "webpack",
     "dev": "webpack --mode development",
     "test": "jasmine test/*",
     "serve": "webpack serve",
-    "app": "npm run start && npm run serve"
+    "generator": "node ./index.js"
   },
   "dependencies": {
     "buffer": "^6.0.3",
