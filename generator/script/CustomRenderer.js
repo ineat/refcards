@@ -1,5 +1,5 @@
 const marked = require('marked');
-const {cleanUrl} = require("marked/src/helpers");
+const {cleanUrl,escape} = require("marked/src/helpers");
 const module1 = require('../index');
 
 
