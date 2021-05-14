@@ -60,7 +60,7 @@ exports.render_upgrade = function (color) {
             return text;
         }
 
-        let out = `<img src="../git/${href}" style="${color}" alt="${text}"`;
+        let out = `<img src="git/${href}" style="${color}" alt="${text}"`;
         if (title) {
             out += ` title="${title}"`;
         }
