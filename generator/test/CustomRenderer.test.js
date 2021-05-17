@@ -1,5 +1,5 @@
 const marked = require('marked');
-const logger = require("../index");
+const logger = require("../script/Logger");
 const {render_upgrade} = require('../script/CustomRenderer');
 
 describe('Test renderer upgraded', () => {
@@ -11,26 +11,26 @@ describe('Test renderer upgraded', () => {
 
     logger.info("testing link token");
     it('should add class attribute to link token', () => {
-        const link = marked("[test](test)",{renderer:render_upgrade("red")})
-        expect(link).toBe('<p><a class="links" style="red" href="test">test</a></p>\n');
+        const link = marked("[test](test)",{renderer:render_upgrade(["red","blue"])})
+        expect(link).toBe('<p><a class="links" style="color :blue" href="test">test</a></p>\n');
     });
 
     logger.info("testing code token");
     it('should add class attribute to code token', () => {
-        const code = marked("```sh\ntest\n```",{renderer:render_upgrade("red")})
-        expect(code).toBe('<pre><code class="code" style="red">test\n</code></pre>');
+        const code = marked("```sh\ntest\n```",{renderer:render_upgrade(["red","blue"])})
+        expect(code).toBe('<pre style="background-color: red"><code class="code">test\n</code></pre>');
     });
 
     logger.info("testing codespan token");
     it('should add class attribute to codespan token', () => {
-        const codespan = marked("`test`",{renderer:render_upgrade("red")})
-        expect(codespan).toBe('<p><code class="codespan" style="red">test</code></p>\n');
+        const codespan = marked("`test`",{renderer:render_upgrade(["red","blue"])})
+        expect(codespan).toBe('<p><code class="codespan" style="color: blue">test</code></p>\n');
     });
 
     logger.info("testing blockquote token");
     it('should add class attribute to blockquote token', () => {
-        const blockquote = marked(">test",{renderer:render_upgrade("red")})
-        expect(blockquote).toBe('<blockquote class="blockquotes" style="red">\n<p>test</p>\n</blockquote>\n');
+        const blockquote = marked(">test",{renderer:render_upgrade(["red","blue"])})
+        expect(blockquote).toBe('<blockquote class="blockquotes" style="color: blue">\n<p>test</p>\n</blockquote>\n');
     });
 
     logger.info("testing image token");

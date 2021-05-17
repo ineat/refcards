@@ -17,8 +17,8 @@ function htmlGenerator(path){
 
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
-    const match = text.match(/(\[\/\/\]: #) \((\w*)\)/);
-    return match[2];
+    const match = text.match(/(\[\/\/\]: #) \(color1:(#\w*);color2:(#\w*)\)/);
+    return [match[2],match[3]];
 }
 
 function refcardCreator(path) {
