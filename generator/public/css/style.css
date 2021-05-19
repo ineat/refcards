@@ -1,0 +1,113 @@
+h1,
+h2,
+h3,
+h4 {
+  color: black;
+  text-align: center;
+}
+blockquote {
+  margin-left: 7%;
+  border-left: red solid;
+}
+blockquote .codespan {
+  color: black!important;
+}
+blockquote ul {
+  list-style-type: none;
+  margin-left: 0%;
+  padding-left: 3%;
+}
+blockquote pre {
+  color: black;
+}
+pre {
+  padding-left: 3%;
+  margin-left: 3%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-right: 3%;
+}
+p,
+h5,
+ul,
+ol {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+ul blockquote {
+  border-left: none!important;
+  margin-left: 2%;
+  color: black!important;
+}
+img {
+  max-width: 95%;
+}
+@media (max-width: 640px) {
+  * {
+    box-sizing: border-box;
+  }
+  /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+  body {
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+  /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+  img,
+  table,
+  td,
+  blockquote,
+  code,
+  pre,
+  textarea,
+  input,
+  iframe,
+  object,
+  embed,
+  video {
+    max-width: 100%;
+  }
+  /* conserver le ratio des images */
+  img {
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* gestion des mots longs */
+  textarea,
+  table,
+  td,
+  th,
+  code,
+  pre,
+  samp {
+    -webkit-hyphens: auto;
+    /* césure propre */
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    /* passage à la ligne forcé */
+  }
+  pre {
+    width: 95%;
+  }
+  code,
+  pre,
+  samp {
+    white-space: pre-wrap;
+    /* passage à la ligne spécifique pour les éléments à châsse fixe */
+  }
+  /* masquer les éléments superflus */
+  .hide_mobile {
+    display: none !important;
+  }
+  /* Un message personnalisé */
+  body:before {
+    content: "Version mobile du site";
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: #777;
+  }
+}

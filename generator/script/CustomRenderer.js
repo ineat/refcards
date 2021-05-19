@@ -4,7 +4,7 @@ const {cleanUrl,escape} = require("marked/src/helpers");
 
 
 /**
- * Modify the renderer to add html classes for the tokens in the function
+ * Modify the renderer to add html classes for the tokens in the function and add style properties using the colors in parameters
  * @type renderer
  */
 exports.render_upgrade = function (color) {
@@ -23,15 +23,15 @@ exports.render_upgrade = function (color) {
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${color[1]}">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${color[1]};border-left : ${color[1]} solid;">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
-            return `<h${level} class="heading${level}" style="${color}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
+            return `<h${level} class="heading${level}" style="color: ${color[2]}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
         }
         // ignore IDs
-        return `<h${level} class="heading${level}" style="${color}">${text}</h${level}>\n`;
+        return `<h${level} class="heading${level}" style="color: ${color[2]}"">${text}</h${level}>\n`;
     }
 
     render.codespan = function(text) {
@@ -50,7 +50,7 @@ exports.render_upgrade = function (color) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        return `<pre style="background-color: ${color[0]}"><code class="code">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
+        return `<pre style="background-color: ${color[0]}"><code class="code" style="color: ${color[2]}">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
     }
 
     render.image = function(href, title, text) {
@@ -59,7 +59,7 @@ exports.render_upgrade = function (color) {
             return text;
         }
 
-        let out = `<img src="git/${href}" style="${color}" alt="${text}"`;
+        let out = `<img src="git/${href}" alt="${text}"`;
         if (title) {
             out += ` title="${title}"`;
         }
