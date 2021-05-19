@@ -21,7 +21,7 @@ marked.setOptions({
 /**
  * Return the title of the refcards to be created using his path
  * @param path
- * @returns *[]
+ * @returns string
  */
 function getTitle(path) {
     const match = path.match(/(\.\.\/)(\w*)\/(\w*).md/);
@@ -56,6 +56,11 @@ function createFolder() {
 
 }
 
+/**
+ * Return the two specifics colors of a refcards thanks to his path
+ * @param path
+ * @returns {string[]}
+ */
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/(\[\/\/\]: #) \(color1:(#\w*);color2:(#\w*);color3:(#\w*)\)/);
