@@ -11,7 +11,7 @@ describe('Test htmlCreator', () => {
     logger.info("testing metadataExtractor function");
     it('should extract the metadata of the refcard from the path', () => {
         const metadata = htmlCreator.metadataExtractor('../git/FR.md');
-        expect(metadata).toEqual(["#fde8de","#ef3428"]);
+        expect(metadata).toEqual(["#fde8de","#ef3428","#3c2e16"]);
     });
 
 })

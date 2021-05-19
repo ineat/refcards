@@ -8,12 +8,17 @@
     "start:generate": "nodemon --watch ./index.js",
     "test": "jasmine test/*",
     "build": "npm run generator",
+    "style": "lessc public/css/style.less public/css/style.css",
     "generator": "node ./index.js"
   },
   "dependencies": {
     "buffer": "^6.0.3",
     "copy-webpack-plugin": "^8.1.1",
     "es6-interface": "^3.1.4",
+    "highlight.js": "^10.7.2",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "https-browserify": "^1.0.0",
     "import-local": "^3.0.2",
     "marked": "^2.0.3",
     "os": "^0.1.1",
