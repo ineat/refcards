@@ -1,3 +1,5 @@
+[//]: # (color1:#fef2e1;color2:#2e4995;color3:#2e2b77)
+
 # Ansible RefCard
 *English version*
 

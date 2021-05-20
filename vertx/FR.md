@@ -1,3 +1,5 @@
+[//]: # (color1:#F6CDF3;color2:#B236A9;color3:#252A80)
+
 # Vertx RefCard
 
 *Version française*
