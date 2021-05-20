@@ -15,17 +15,6 @@ let config = {
         publicPath:"/assets/",
         watchContentBase: true
     },
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpe?g|gif|svg|md|pdf)$/i,
-                loader: 'file-loader',
-                options: {
-                    emitFile: true,
-                },
-            },
-        ],
-    },
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
