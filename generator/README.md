@@ -21,7 +21,7 @@ npm install
 Then you can start the generation and the server using :
 
 ```
-npm run app
+npm run start
 ```
 Then in your browser go to : <http://localhost:3000>
 
