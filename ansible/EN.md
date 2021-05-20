@@ -1,3 +1,7 @@
+[//]: # (main_color:#fef2e1)
+[//]: # (second_color:#2e4995)
+[//]: # (third_color:#2e2b77)
+
 # Ansible RefCard
 *English version*
 
