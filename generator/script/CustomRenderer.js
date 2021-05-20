@@ -2,9 +2,9 @@ const marked = require('marked');
 const {cleanUrl} = require("marked/src/helpers");
 const escape = require('escape-html');
 
-MAIN_COLOR_INDEX = 0;
-SECOND_COLOR_INDEX = 1;
-THIRD_COLOR_INDEX = 2;
+const MAIN_COLOR_INDEX = 0;
+const SECOND_COLOR_INDEX = 1;
+const THIRD_COLOR_INDEX = 2;
 
 
 /**
