@@ -34,10 +34,17 @@ function getTitle(path) {
  * @returns string
  */
 function htmlGenerator(path){
-    let title = getTitle(path);
-    let text = fs.readFileSync(path, 'utf8');
-    const HtmlBase = `<!DOCTYPE html>\n \n<html>\n \n   <head>\n     <title> ${title} Refcard</title>\n        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">\n     <link rel='stylesheet' href='css/style.css'>\n   </head>\n<body>\n`;
-    return HtmlBase +marked(text, {renderer:render_upgrade(metadataExtractor(path))}) + "\n </body>\n </html>";
+    return `<!DOCTYPE html>
+<html lang="${getTitle(path)[1]}">
+    <head>
+        <title> ${getTitle(path)[0]} Refcard</title>
+        <link rel='stylesheet' href='css/style.css'>
+    </head>
+    <body>
+        ${marked(fs.readFileSync(path, 'utf8'), {renderer:render_upgrade(metadataExtractor(path))})}
+    </body>
+</html>
+`;
 }
 
 function createFolder() {
@@ -63,8 +70,13 @@ function createFolder() {
  */
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
-    const match = text.match(/(\[\/\/\]: #) \(color1:(#\w*);color2:(#\w*);color3:(#\w*)\)/);
-    return [match[2],match[3],match[4]];
+    const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
+    let res = []
+    for (let pas=0;pas<match.length;pas++) {
+        let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
+        res.push(int[1]);
+    }
+    return res;
 }
 
 /**
