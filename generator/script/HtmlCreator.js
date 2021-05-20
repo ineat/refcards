@@ -50,6 +50,7 @@ function htmlGenerator(path){
 }
 
 
+
 /**
  * Create a folder with the name of the refcard extracted from the path
  */
