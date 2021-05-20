@@ -36,7 +36,7 @@ describe('Test custom renderer', () => {
     logger.info("testing image token render");
     it('should add class attribute to image token', () => {
         const image = marked("![test](test.png)",{renderer:render_upgrade("red")})
-        expect(image).toBe('<p><img src="git/test.png" alt="test"></p>\n');
+        expect(image).toBe('<p><img src="test.png" alt="test"></p>\n');
     });
 
 });
