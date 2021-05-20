@@ -67,7 +67,17 @@ exports.render_upgrade = function (color_items) {
         if (href === null) {
             return text;
         }
+<<<<<<< HEAD
         return `<img src="${href}" alt="${text}" title="${title ? title : ""}"${this.options.xhtml ? '/>' : '>'}`;
+=======
+
+        let out = `<img src="${href}" alt="${text}"`;
+        if (title) {
+            out += ` title="${title}"`;
+        }
+        out += this.options.xhtml ? '/>' : '>';
+        return out;
+>>>>>>> 5c7af29 (feat(generator): ajout de la génération de toutes les refcards d'un coup)
     }
 
 

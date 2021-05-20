@@ -94,6 +94,7 @@ function createFolder(path) {
 }
 
 
+
 /**
  * Return the three specifics colors of a refcards thanks to his path
  * @param path
@@ -153,8 +154,7 @@ function refcardCreator(path) {
     fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
         logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
-    })
-}
+    }}
 
 /**
  * Create all the refcards in the github repository
