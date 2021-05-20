@@ -7,6 +7,4 @@ const pathList = PathCreator.createPaths();
 logger.info('Starting refcard generation');
 HtmlCreator.CreateAllRefcards(pathList);
 
-//button = document.createElement("button");
-//button.innerHTML = "test";
-//document.body.appendChild(button);
+module.exports = logger;
