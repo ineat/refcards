@@ -2,6 +2,7 @@ const marked = require('marked');
 const {render_upgrade} = require("./script/CustomRenderer");
 const winston = require("winston");
 const fs =require ('fs');
+const fse = require('fs-extra');
 
 const logger = winston.createLogger({
     transports: [
@@ -27,9 +28,21 @@ const html = HtmlBase +marked(text, {
     renderer:render_upgrade("red")
 }) + "\n </body>\n </html>";
 
+fs.mkdir('public/git', (err) => {
+    logger.info("Refcard Git créée!");
+});
 
+fs.mkdir('public/git/assets', (err) => {
+    logger.info("Refcard Git créée!");
+});
 
-fs.writeFile('public/git.html',html, function(err){
+try {
+    fse.copySync('../git/assets', 'public/git/assets', {overwrite: true});
+} catch (err) {
+    if (err) throw err;
+}
+
+fs.writeFile('public/git.html',html, (err) => {
     if (err) throw err;
     logger.info("Refcard Git créée!");
 });

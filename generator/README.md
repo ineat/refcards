@@ -6,7 +6,7 @@ The goal of this generator is to automatically generate statics HTML pages from 
 # Prerequisites
 
 Here are the needed technologies :
-    - Node v12 minimum 
+    - Node v14 minimum 
     - Npm 
 
 
@@ -23,7 +23,7 @@ Then you can start the generation and the server using :
 ```
 npm run start
 ```
-Then in your browser go to : <http://localhost:3000>
+Then in your browser go to : <http://localhost:8080>
 
 
 You can run unit tests using :
