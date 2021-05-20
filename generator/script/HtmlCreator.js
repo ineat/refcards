@@ -75,7 +75,6 @@ function htmlGenerator(path){
 `;
 }
 
-
 /**
  * Create a folder with the name of the refcard extracted from the path
  */
@@ -94,8 +93,6 @@ function createFolder(path) {
         if (err) throw err;
     }
 }
-
-
 
 /**
  * Return the three specifics colors of a refcards thanks to his path

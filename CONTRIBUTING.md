@@ -41,7 +41,8 @@ N'oubliez pas que les RefCards font parti de la vitrine technologie de la socié
 
 ## Convention ajout d'une Refcard
 
-Si vous souhaitez ajouter une Refcard il faudra ajouter au debut de votre fichier Markdown une ligne contenant les trois couleurs spécifiques(au format hexadecimal) à votre Refcard pour la génération HTML.
+Si vous souhaitez ajouter une Refcard, il faudra ajouter au debut de votre fichier Markdown une ligne contenant les couleurs spécifiques (au format hexadecimal) à votre Refcard pour la génération HTML.
+
 Elle devra être comme ceci : 
 ```
 [//]: # (main: #000000)
