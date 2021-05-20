@@ -12,7 +12,7 @@ describe('Test custom renderer', () => {
     logger.info("testing link token render");
     it('should add class attribute and style attribute to link token', () => {
         const link = marked("[test](test)",{renderer:render_upgrade(["red","blue"])})
-        expect(link).toBe('<p><a class="links" style="color :blue" href="test">test</a></p>\n');
+        expect(link).toBe('<p><a class="links" style="color :blue" href="test" title="">test</a></p>\n');
     });
 
     logger.info("testing code token render");
@@ -36,7 +36,7 @@ describe('Test custom renderer', () => {
     logger.info("testing image token render");
     it('should add class attribute to image token', () => {
         const image = marked("![test](test.png)",{renderer:render_upgrade("red")})
-        expect(image).toBe('<p><img src="test.png" alt="test"></p>\n');
+        expect(image).toBe('<p><img src="test.png" alt="test" title=""></p>\n');
     });
 
 });

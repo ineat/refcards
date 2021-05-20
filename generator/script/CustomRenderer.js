@@ -1,6 +1,10 @@
 const marked = require('marked');
-const {cleanUrl,escape} = require("marked/src/helpers");
+const {cleanUrl} = require("marked/src/helpers");
+const escape = require('escape-html');
 
+MAIN_COLOR_INDEX = 0;
+SECOND_COLOR_INDEX = 1;
+THIRD_COLOR_INDEX = 2;
 
 
 /**
@@ -14,28 +18,24 @@ exports.render_upgrade = function (color) {
         if (href === null) {
             return text;
         }
-        let out = `<a class="links" style="color :${color[1]}" href="${href}"`;
-        if (title) {
-            out += ` title="${title}"`;
-        }
-        out += `>${text}</a>`;
-        return out;
+        return `<a class="links" style="color :${color[SECOND_COLOR_INDEX]}" href="${href}" title="${title ? title : ""}">${text}</a>`;
+
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${color[1]};border-left : ${color[1]} solid;">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${color[SECOND_COLOR_INDEX]}">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
-            return `<h${level} class="heading${level}" style="color: ${color[2]}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
+            return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
         }
         // ignore IDs
-        return `<h${level} class="heading${level}" style="color: ${color[2]}"">${text}</h${level}>\n`;
+        return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</h${level}>\n`;
     }
 
     render.codespan = function(text) {
-        return `<code class="codespan" style="color: ${color[1]}">${text}</code>`;
+        return `<code class="codespan" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</code>`;
     }
 
     render.code = function(code, infostring, escaped) {
@@ -50,7 +50,7 @@ exports.render_upgrade = function (color) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        return `<pre style="background-color: ${color[0]}"><code class="code" style="color: ${color[2]}">` + (escaped ? code:escape(code,true)) + `</code></pre>`;
+        return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code">${escaped ? code:escape(code)}</code></pre>`;
     }
 
     render.image = function(href, title, text) {
@@ -58,13 +58,7 @@ exports.render_upgrade = function (color) {
         if (href === null) {
             return text;
         }
-
-        let out = `<img src="${href}" alt="${text}"`;
-        if (title) {
-            out += ` title="${title}"`;
-        }
-        out += this.options.xhtml ? '/>' : '>';
-        return out;
+        return `<img src="${href}" alt="${text}" title="${title ? title : ""}"${this.options.xhtml ? '/>' : '>'}`;
     }
 
 
