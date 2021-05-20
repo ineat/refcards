@@ -2,9 +2,11 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../:\Users\ldavid\Documents\Refcards\refcards\refcards-generator\.idea/dataSources/
+/../../../../../../../../:\Users\ldavid\Documents\Refcards\refcards\generator\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 .idea/**
 node_modules
+dist/**
+public
