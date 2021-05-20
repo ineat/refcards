@@ -3,6 +3,7 @@ const fs =require ('fs');
 const fse = require('fs-extra');
 const {render_upgrade} = require('./CustomRenderer');
 const logger = require('./Logger');
+const hljs   = require('highlight.js');
 
 
 /**
@@ -10,7 +11,6 @@ const logger = require('./Logger');
  */
 marked.setOptions({
     highlight: function(code, lang) {
-        const hljs = require('highlight.js');
         const language = hljs.getLanguage(lang) ? lang : 'shell';
         return hljs.highlight(code, { language }).value;
     }
@@ -33,10 +33,12 @@ function getTitle(path) {
  * @returns string
  */
 function htmlGenerator(path){
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
     return `<!DOCTYPE html>
-<html lang=${getTitle(path)[1]}>
+<html lang=${refcardLang}>
     <head>
-        <title> ${getTitle(path)[0]} Refcard</title>
+        <title> ${titleElement} Refcard</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>

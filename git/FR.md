@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 [//]: # (main_color: #fde8de)
 [//]: # (second_color: #ef3428)
 [//]: # (third_color: #3c2e16)
+=======
+[//]: # (main: #fde8de)
+[//]: # (second: #ef3428)
+>>>>>>> 6b5725f (fix(generator): review of the code)
 
 # Git RefCard
 *Version française*

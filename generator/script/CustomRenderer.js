@@ -21,6 +21,7 @@ exports.render_upgrade = function (color_items) {
             return text;
         }
         return `<a class="links" style="color :${second_color}" href="${href}" title="${title ? title : ""}">${text}</a>`;
+
     }
 
     render.blockquote = function(quote) {
@@ -59,6 +60,7 @@ exports.render_upgrade = function (color_items) {
         }
 
         code = code.replace(/\n$/, '') + '\n';
+
         return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
@@ -67,17 +69,7 @@ exports.render_upgrade = function (color_items) {
         if (href === null) {
             return text;
         }
-<<<<<<< HEAD
         return `<img src="${href}" alt="${text}" title="${title ? title : ""}"${this.options.xhtml ? '/>' : '>'}`;
-=======
-
-        let out = `<img src="${href}" alt="${text}"`;
-        if (title) {
-            out += ` title="${title}"`;
-        }
-        out += this.options.xhtml ? '/>' : '>';
-        return out;
->>>>>>> 5c7af29 (feat(generator): ajout de la génération de toutes les refcards d'un coup)
     }
 
 
