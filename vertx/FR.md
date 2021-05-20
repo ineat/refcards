@@ -1,4 +1,6 @@
-[//]: # (color1:#F6CDF3;color2:#B236A9;color3:#252A80)
+[//]: # (main: #F6CDF3)
+[//]: # (second: #B236A9)
+[//]: # (third: #252A80)
 
 # Vertx RefCard
 

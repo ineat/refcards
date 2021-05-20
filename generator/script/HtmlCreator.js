@@ -7,7 +7,7 @@ const hljs   = require('highlight.js');
 
 
 /**
- * Ajout d'un highlighter pour les balises <code>
+ * Add an highlighter for the tokens <code>
  */
 marked.setOptions({
     highlight: function(code, lang) {
@@ -21,7 +21,7 @@ marked.setOptions({
 /**
  * Return the title of the refcards to be created using his path
  * @param path
- * @returns string
+ * @returns [string]
  */
 function getTitle(path) {
     const match = path.match(/(\.\.\/)(\w*)\/(\w*).md/);
@@ -35,36 +35,39 @@ function getTitle(path) {
  */
 function htmlGenerator(path){
     return `<!DOCTYPE html>
-<html lang="${getTitle(path)[1]}">
+<html lang=${getTitle(path)[1]}>
     <head>
         <title> ${getTitle(path)[0]} Refcard</title>
-        <link rel='stylesheet' href='css/style.css'>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+        <link rel='stylesheet' href='../css/style.css'>
     </head>
     <body>
-        ${marked(fs.readFileSync(path, 'utf8'), {renderer:render_upgrade(metadataExtractor(path))})}
+        ${marked(fs.readFileSync(path, 'utf8'),{renderer:render_upgrade(metadataExtractor(path))})}
     </body>
 </html>
 `;
 }
 
-function createFolder() {
-    fs.mkdir('public/git', (err) => {
-        logger.info("Refcard Git créée!");
-    });
 
-    fs.mkdir('public/git/assets', (err) => {
-        logger.info("Refcard Git créée!");
+/**
+ * Create a folder with the name of the refcard extracted from the path
+ */
+function createFolder(path) {
+    fs.mkdir(`public/${getTitle(path)[0]}/assets`, (err) => {
+        logger.info(`Directory ${getTitle(path)[0]}/assets created!`);
     });
     try {
-        fse.copySync('../git/assets', 'public/git/assets', {overwrite: true});
+        fse.copySync(`../${getTitle(path)[0]}/assets`, `public/${getTitle(path)[0]}/assets`, {overwrite: true});
+        logger.info(`assets copied from ../${getTitle(path)[0]}/assets`)
     } catch (err) {
         if (err) throw err;
     }
 
 }
 
+
 /**
- * Return the two specifics colors of a refcards thanks to his path
+ * Return the three specifics colors of a refcards thanks to his path
  * @param path
  * @returns {string[]}
  */
@@ -72,11 +75,14 @@ function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
     let res = []
-    for (let pas=0;pas<match.length;pas++) {
-        let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
-        res.push(int[1]);
+    if (match) {
+        for (let pas = 0; pas < match.length; pas++) {
+            let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
+            res.push(int[1]);
+        }
+        return res;
     }
-    return res;
+    return ["#B2F2F4","#43B44B","#447BBB"];
 }
 
 /**
@@ -84,21 +90,23 @@ function metadataExtractor(path) {
  * @param path
  */
 function refcardCreator(path) {
-    const pathStruct = {
-        title : getTitle(path)
+    const files = fs.readdirSync(`../${getTitle(path)[0]}`, { withFileTypes:true});
+    let bool = false;
+    for (let pas=0;pas<files.length;pas++) {
+        if (files[pas].name === "assets") {
+            bool = true;
+        }
     }
     let text = htmlGenerator(path);
-    fs.mkdir(`public/${pathStruct.title[0]}`, {recursive:true},function(err) {
-        if (err) {
-            console.log(err)
-        }
-        else {
-            console.log(`Directory ${pathStruct.title[0]} created`)
-        }
-    })
-    fs.writeFile(`public/${pathStruct.title[0]}/${pathStruct.title[0]}.${pathStruct.title[1]}.html`,text,function(err){
+    fs.mkdir(`public/${getTitle(path)[0]}`, (err) => {
+        logger.info(`directory ${getTitle(path)[0]} created`);
+    });
+    if (bool === true) {
+        createFolder(path);
+    }
+    fs.writeFile(`public/${getTitle(path)[0]}/${getTitle(path)[0]}.${getTitle(path)[1]}.html`,text,function(err){
         if (err) throw err;
-        logger.info(`Refcard ${pathStruct.title[0]} ${pathStruct.title[1]} generated!`);
+        logger.info(`Refcard ${getTitle(path)[0]} ${getTitle(path)[1]} generated!`);
     })
 }
 
@@ -113,4 +121,4 @@ function CreateAllRefcards(pathList) {
     }
 }
 
-module.exports = {createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};
+module.exports = {CreateAllRefcards,createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};
