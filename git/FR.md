@@ -1,4 +1,5 @@
-[//]: # (color1:#fde8deff;color2:#ef3428ff)
+[//]: # (main: #fde8de)
+[//]: # (second: #ef3428)
 
 # Git RefCard
 *Version française*

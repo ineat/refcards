@@ -5,14 +5,14 @@ const {render_upgrade} = require('../script/CustomRenderer');
 describe('Test renderer upgraded', () => {
     logger.info("testing header token");
     it('should add class attribute to header token', () => {
-        const header = marked("# test",{renderer:render_upgrade("red")})
-        expect(header).toBe('<h1 class="heading1" style="red" id="test">test</h1>\n');
+        const header = marked("# test",{renderer:render_upgrade(["red","blue"])})
+        expect(header).toBe('<h1 class="heading1" style="color: blue" id="test">test</h1>\n');
     });
 
     logger.info("testing link token");
     it('should add class attribute to link token', () => {
         const link = marked("[test](test)",{renderer:render_upgrade(["red","blue"])})
-        expect(link).toBe('<p><a class="links" style="color :blue" href="test">test</a></p>\n');
+        expect(link).toBe('<p><a class="links" style="color :blue" href="test" title="">test</a></p>\n');
     });
 
     logger.info("testing code token");
@@ -36,7 +36,7 @@ describe('Test renderer upgraded', () => {
     logger.info("testing image token");
     it('should add class attribute to image token', () => {
         const image = marked("![test](test.png)",{renderer:render_upgrade("red")})
-        expect(image).toBe('<p><img src="git/test.png" style="red" alt="test"></p>\n');
+        expect(image).toBe('<p><img src="test.png" alt="test" title=""></p>\n');
     });
 
 });
