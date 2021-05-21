@@ -6,7 +6,7 @@ describe('Test custom renderer', () => {
     logger.info("testing header token render");
     it('should add class attribute to header token', () => {
         const header = marked("# test",{renderer:render_upgrade(["red","blue","black"])})
-        expect(header).toBe('<h1 class="heading1" style="color: black" id="test">test</h1>\n');
+        expect(header).toBe('<h1 class="heading1" style="color: blue" id="test">test</h1>\n');
     });
 
     logger.info("testing link token render");
@@ -30,7 +30,7 @@ describe('Test custom renderer', () => {
     logger.info("testing blockquote token render");
     it('should add class  and style attribute to blockquote token', () => {
         const blockquote = marked(">test",{renderer:render_upgrade(["red","blue"])})
-        expect(blockquote).toBe('<blockquote class="blockquotes" style="color: blue;border-left : blue solid;">\n<p>test</p>\n</blockquote>\n');
+        expect(blockquote).toBe('<blockquote class="blockquotes" style="color: blue;border-left: blue solid;">\n<p>test</p>\n</blockquote>\n');
     });
 
     logger.info("testing image token render");
