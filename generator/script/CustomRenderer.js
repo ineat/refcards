@@ -23,7 +23,7 @@ exports.render_upgrade = function (color) {
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${color[SECOND_COLOR_INDEX]}">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${color[SECOND_COLOR_INDEX]};border-left: ${color[SECOND_COLOR_INDEX]} solid;">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
@@ -50,7 +50,7 @@ exports.render_upgrade = function (color) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code">${escaped ? code:escape(code)}</code></pre>`;
+        return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code" style="color: ${color[THIRD_COLOR_INDEX]}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
     render.image = function(href, title, text) {
