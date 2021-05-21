@@ -11,11 +11,7 @@ describe('Test custom renderer', () => {
 
     logger.info("testing link token render");
     it('should add class attribute and style attribute to link token', () => {
-<<<<<<< HEAD
         const link = marked("[test](test)",{renderer:render_upgrade({main_color:"red",second_color:"blue"})})
-=======
-        const link = marked("[test](test)",{renderer:render_upgrade(["red","blue"])})
->>>>>>> 6b5725f (fix(generator): review of the code)
         expect(link).toBe('<p><a class="links" style="color :blue" href="test" title="">test</a></p>\n');
     });
 
@@ -39,17 +35,8 @@ describe('Test custom renderer', () => {
 
     logger.info("testing image token render");
     it('should add class attribute to image token', () => {
-<<<<<<< HEAD
         const image = marked("![test](test.png)",{renderer:render_upgrade({main_color:"red"})})
         expect(image).toBe('<p><img src="test.png" alt="test" title=""></p>\n');
-=======
-        const image = marked("![test](test.png)",{renderer:render_upgrade("red")})
-<<<<<<< HEAD
-        expect(image).toBe('<p><img src="test.png" alt="test"></p>\n');
->>>>>>> 5c7af29 (feat(generator): ajout de la génération de toutes les refcards d'un coup)
-=======
-        expect(image).toBe('<p><img src="test.png" alt="test" title=""></p>\n');
->>>>>>> 6b5725f (fix(generator): review of the code)
     });
 
 });
