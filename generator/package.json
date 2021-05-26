@@ -3,17 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run start:generate\" \"npm run start:web\"",
+    "start": "concurrently \"npm run start:generate\" \"npm run start:web\" \"npm run style\"",
     "start:web": "http-server",
     "start:generate": "nodemon --watch ./index.js",
     "test": "jasmine test/*",
-    "build": "npm run generator",
-    "style": "lessc public/css/style.less public/css/style.css",
-    "generator": "node ./index.js"
+    "style": "lessc public/css/style.less public/css/style.css"
   },
   "dependencies": {
     "buffer": "^6.0.3",
     "es6-interface": "^3.1.4",
+    "handlebars": "^4.7.7",
     "highlight.js": "^10.7.2",
     "import-local": "^3.0.2",
     "marked": "^2.0.3",

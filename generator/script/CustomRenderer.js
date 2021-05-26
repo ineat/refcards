@@ -28,7 +28,8 @@ exports.render_upgrade = function (color) {
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
-            return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
+            let html = this.options.headerPrefix + slugger.slug(raw);
+            return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
         }
         // ignore IDs
         return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</h${level}>\n`;

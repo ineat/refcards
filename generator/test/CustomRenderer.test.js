@@ -6,7 +6,7 @@ describe('Test custom renderer', () => {
     logger.info("testing header token render");
     it('should add class attribute to header token', () => {
         const header = marked("# test",{renderer:render_upgrade(["red","blue","black"])})
-        expect(header).toBe('<h1 class="heading1" style="color: blue" id="test">test</h1>\n');
+        expect(header).toBe('<h1 class="heading1" style="color: blue" id="test"><a class="anchor" href="#test"><img src="../assets/anchor.svg" alt></a>test</h1>\n');
     });
 
     logger.info("testing link token render");

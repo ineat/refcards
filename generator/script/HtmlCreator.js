@@ -3,7 +3,6 @@ const fs =require ('fs');
 const fse = require('fs-extra');
 const {render_upgrade} = require('./CustomRenderer');
 const logger = require('./Logger');
-const hljs   = require('highlight.js');
 
 
 /**
@@ -19,7 +18,7 @@ marked.setOptions({
 
 
 /**
- * Return the title of the refcards to be created using his path
+ * Return the title and the language of the refcards to be created using his path
  * @param path
  * @returns [string]
  */
@@ -50,7 +49,7 @@ function htmlGenerator(path){
 
 
 /**
- * Create a folder with the name of the refcard extracted from the path
+ * Create a folder with the name of the refcard extracted from the path and copy assets from the path into this folder
  */
 function createFolder(path) {
     fs.mkdir(`public/${getTitle(path)[0]}/assets`, (err) => {
@@ -104,18 +103,19 @@ function refcardCreator(path) {
     if (bool === true) {
         createFolder(path);
     }
-    fs.writeFile(`public/${getTitle(path)[0]}/${getTitle(path)[0]}.${getTitle(path)[1]}.html`,text,function(err){
+    fs.writeFile(`public/${getTitle(path)[0]}/${getTitle(path)[1]}.html`,text,function(err){
         if (err) throw err;
         logger.info(`Refcard ${getTitle(path)[0]} ${getTitle(path)[1]} generated!`);
     })
 }
 
 /**
- * Create all the refcards in the github repository
+ * Create all the refcards in the github repository and copy assets used by every html pages
  * @param pathList
- * @constructor
  */
 function CreateAllRefcards(pathList) {
+    fse.copySync(`assets`, `public/assets`, {overwrite: true});
+    logger.info("assets copied from assets to public/assets")
     for (let pas=0; pas<pathList.length;pas++) {
         refcardCreator(pathList[pas])
     }
