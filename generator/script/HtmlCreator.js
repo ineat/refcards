@@ -76,7 +76,7 @@ function htmlGenerator(path){
 }
 
 /**
- * Create a folder with the name of the refcard extracted from the path
+ * Create a folder with the name of the refcard extracted from the path and copy assets from the path into this folder
  */
 function createFolder(path) {
     const titleElement = getTitle(path)[0];
@@ -110,7 +110,6 @@ function metadataExtractor(path) {
             let item = {[name]: color};
             Object.assign(res, item)
         }
-
         return res;
     }
     return {
@@ -156,9 +155,8 @@ function refcardCreator(path) {
     }}
 
 /**
- * Create all the refcards in the github repository
+ * Create all the refcards in the github repository and copy assets used by every html pages
  * @param pathList
- * @constructor
  */
 function CreateAllRefcards(pathList) {
     for (let path of pathList) {
