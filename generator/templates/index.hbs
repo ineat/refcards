@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ineat Refcards</title>
+
+
+</head>
+<body>
+<h1>Ineat Refcards</h1>
+    <div class="hbs">
+        {{#each refcards}}
+            {{#if this.first}}
+                <h2>{{this.title}}</h2>
+            {{/if}}
+            <a href={{this.path}}>Refcard {{this.title}} {{this.name}}</a>
+        {{/each}}
+    </div>
+</body>
+</html>
