@@ -24,8 +24,8 @@ marked.setOptions({
  * @returns [string]
  */
 function getTitle(path) {
-    const match = path.match(/(\.\.\/)(\w*)\//);
-    return match[2];
+    const match = path.match(/(\.\.\/)(\w*)\/(\w*).md/);
+    return [match[2],match[3]];
 }
 
 /**
@@ -82,6 +82,8 @@ function metadataExtractor(path) {
             let item = {[name]: color};
             Object.assign(res, item)
         }
+
+        return res;
     }
     return {
         main_color: "#B2F2F4",
@@ -111,11 +113,21 @@ function refcardCreator(path) {
     if (isAssetsPresents) {
         createFolder(path);
     }
-    fs.writeFile(`public/${titleElement}/${titleElement}.${refcardLang}.html`,text,function(err){
+    fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
         logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
     })
 }
 
+/**
+ * Create all the refcards in the github repository
+ * @param pathList
+ * @constructor
+ */
+function CreateAllRefcards(pathList) {
+    for (let pas=0; pas<pathList.length;pas++) {
+        refcardCreator(pathList[pas])
+    }
+}
 
 module.exports = {CreateAllRefcards,createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};

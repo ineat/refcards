@@ -5,7 +5,7 @@ describe('Test htmlCreator', () => {
     logger.info("testing getTitle function");
     it('should extract the title of the refcard from the path', () => {
         const header = htmlCreator.getTitle('../git/FR.md');
-        expect(header).toBe("git");
+        expect(header).toEqual(["git","FR"]);
     });
 
     logger.info("testing metadataExtractor function");
