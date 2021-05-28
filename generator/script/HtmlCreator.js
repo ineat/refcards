@@ -42,10 +42,12 @@ function createFolder() {
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
-    let res = []
-    for (let pas=0;pas<match.length;pas++) {
-        let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
-        res.push(int[1]);
+    let res = {}
+    for (let pas of match) {
+        const [name] = pas.match(/\w+/);
+        let [color] = pas.match(/#\w+/);
+        let item = {[name]: color};
+        Object.assign(res, item)
     }
     return res;
 }
