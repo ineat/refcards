@@ -4,8 +4,9 @@ const escape = require('escape-html');
 
 const MAIN_COLOR_KEY= "main_color";
 const SECOND_COLOR_KEY= "second_color";
+const THIRD_COLOR_KEY= "third_color";
 /**
- * Modify the renderer to add html classes for the tokens in the function
+ * Modify the renderer to add html classes for the tokens in the function and add style properties using the colors in parameters
  * @param color_items an object containing the key / value colors
  * @type renderer
  */
@@ -13,6 +14,7 @@ exports.render_upgrade = function (color_items) {
     const render = new marked.Renderer();
     const first_color = color_items[MAIN_COLOR_KEY];
     const second_color = color_items[SECOND_COLOR_KEY];
+    const third_color = color_items[THIRD_COLOR_KEY];
     render.link = function(href, title, text) {
         if (href === null) {
             return text;
@@ -22,15 +24,15 @@ exports.render_upgrade = function (color_items) {
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${second_color}">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
-            return `<h${level} class="heading${level}" style="color: ${second_color}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
+          return `<h${level} class="heading${level}" style="color: ${third_color}" id="` + this.options.headerPrefix + slugger.slug(raw) + `">${text}</h${level}>\n`;
         }
         // ignore IDs
-        return `<h${level} class="heading${level}" style="color: ${second_color}">${text}</h${level}>\n`;
+        return `<h${level} class="heading${level}" style="${third_color}">${text}</h${level}>\n`;
     }
 
     render.codespan = function(text) {
@@ -49,7 +51,7 @@ exports.render_upgrade = function (color_items) {
 
         code = code.replace(/\n$/, '') + '\n';
 
-        return `<pre style="background-color: ${first_color}"><code class="code">${escaped ? code:escape(code)}</code></pre>`;
+        return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
     render.image = function(href, title, text) {
