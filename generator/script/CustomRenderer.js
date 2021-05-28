@@ -24,7 +24,7 @@ exports.render_upgrade = function (color_items) {
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {

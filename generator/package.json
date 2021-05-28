@@ -7,8 +7,8 @@
     "start:web": "http-server",
     "start:generate": "nodemon --watch ./index.js",
     "test": "jasmine test/*",
-    "build": "npm run generator",
-    "style": "lessc public/css/style.less public/css/style.css",
+    "build": "concurrently  \"npm run style\" \"npm run generator\"",
+    "style": "lessc styles/style.less public/css/style.css",
     "generator": "node ./index.js"
   },
   "dependencies": {
@@ -35,6 +35,7 @@
     "http-server": "0.12.3",
     "jasmine": "^3.7.0",
     "js-yaml": "^4.1.0",
+    "less": "^4.1.1",
     "nodemon": "2.0.7"
   }
 }
