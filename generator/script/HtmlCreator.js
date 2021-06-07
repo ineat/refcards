@@ -38,10 +38,36 @@ function htmlGenerator(path){
     <head>
         <title> ${getTitle(path)[0]} Refcard</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
-        <link rel='stylesheet' href='../css/style.css'>
+        <link rel='stylesheet' href='../css/refcards-style.css'>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body>
-        ${marked(fs.readFileSync(path, 'utf8'),{renderer:render_upgrade(metadataExtractor(path))})}
+    <div class="first-page" style="background-color: ${metadataExtractor(path)[1]}">
+        <div class="buttons">
+            <a href="../index.html">
+                <img src="../assets/back-logo.svg" alt="fleche retour">
+            </a>
+            <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
+            <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        </div>
+        <img src="" alt="">
+        <div class="band">
+            <img src="assets/logo-${getTitle(path)[0]}.png" alt="logo ${getTitle(path)[0]}">
+            <img src="../assets/ineat-logo.svg" alt="logo ineat">
+        </div>
+        <a href="https://github.com/ineat/refcards">
+            <img src="../assets/github_fabbutton.svg" alt="logo github" id="github">
+        </a>
+    </div>
+    <div class="buttons-on-page">
+        <a href="../index.html">
+            <img src="../assets/back-logo-black.svg" alt="fleche retour">
+        </a>
+        <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
+        <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+    </div>
+        ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
+        </div>
     </body>
 </html>
 `;
