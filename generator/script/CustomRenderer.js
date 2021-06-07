@@ -2,7 +2,6 @@ const marked = require('marked');
 const {cleanUrl} = require("marked/src/helpers");
 const escape = require('escape-html');
 
-
 const MAIN_COLOR_KEY= "main_color";
 const SECOND_COLOR_KEY= "second_color";
 const THIRD_COLOR_KEY= "third_color";
