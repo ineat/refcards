@@ -21,6 +21,6 @@ describe('Test htmlCreator', () => {
         const titreElement = htmlCreator.getTitle(path)[0];
         htmlCreator.createFolder(path)
         const folder = fs.readdirSync(`public/${titreElement}`);
-        expect(folder[0]).toEqual(`assets`);
+        expect(folder).toContain(`assets`);
     })
 })

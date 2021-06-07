@@ -9,4 +9,3 @@
 .idea/**
 node_modules
 dist/**
-public

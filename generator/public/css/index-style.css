@@ -1,0 +1,237 @@
+@charset "UTF-8";
+div .layout {
+  margin: 40px;
+}
+div .layout .links {
+  float: right;
+  height: 50px;
+}
+div .layout .links span {
+  position: relative;
+  top: 16%;
+}
+div .layout .links a {
+  margin-left: 30px;
+  font-family: Montserrat, Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #787a7c;
+}
+div .content {
+  text-align: center;
+  margin-top: 90px;
+}
+div .menu {
+  margin-top: 35px;
+  width: 168px;
+  height: 40px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-bottom: 35px;
+  visibility: hidden;
+}
+div .refcards-page p {
+  font-family: Montserrat, Serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  color: #000000;
+}
+div p.alternative-page-title {
+  position: relative;
+  bottom: 140px;
+  width: 180px;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 24px !important;
+  line-height: 140%;
+  /* identical to box height, or 34px */
+  margin-left: 20px;
+  text-align: center;
+  margin-bottom: -68px;
+  color: white !important;
+}
+div .footer {
+  margin-top: 100px;
+  justify-content: space-around;
+  margin-bottom: 80px;
+  display: flex;
+}
+div .footer a {
+  text-decoration: none;
+  font-family: Montserrat, Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
+div .list-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: 100px;
+  margin-right: 200px;
+  text-transform: capitalize;
+}
+
+.list-content a {
+  text-decoration: none;
+}
+
+.github {
+  position: absolute;
+  top: 80%;
+  right: 5%;
+}
+
+body {
+  background: no-repeat right bottom url("../assets/vector.svg");
+}
+
+@media (max-width: 1320px) {
+  .github {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+  }
+}
+@media (max-width: 830px) {
+  div .list-content {
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  div p.alternative-page-title {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (max-width: 640px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+  body {
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+  img,
+table,
+td,
+blockquote,
+code,
+pre,
+textarea,
+input,
+iframe,
+object,
+embed,
+video {
+    max-width: 100%;
+  }
+
+  /* conserver le ratio des images */
+  img {
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* gestion des mots longs */
+  textarea,
+table,
+td,
+th,
+code,
+pre,
+samp {
+    -webkit-hyphens: auto;
+    /* césure propre */
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    /* passage à la ligne forcé */
+  }
+
+  pre {
+    width: 95%;
+  }
+
+  code,
+pre,
+samp {
+    white-space: pre-wrap;
+    /* passage à la ligne spécifique pour les éléments à châsse fixe */
+  }
+
+  /* masquer les éléments superflus */
+  .hide_mobile {
+    display: none !important;
+  }
+
+  /* Un message personnalisé */
+  body:before {
+    content: "Version mobile du site";
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: #777;
+  }
+
+  .links {
+    float: unset;
+    text-align: center;
+    margin-top: 25px;
+    display: flex;
+    margin-right: 10%;
+    margin-left: 7%;
+  }
+  .links a {
+    text-align: center;
+    margin-left: 100px;
+  }
+
+  body {
+    background-image: none;
+  }
+
+  div .list-content {
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .github {
+    position: absolute;
+    top: 37%;
+    right: 40%;
+  }
+
+  .content h1 {
+    margin-top: 200px;
+  }
+
+  div .layout .links span {
+    position: relative;
+    top: 1%;
+  }
+}
+/*# sourceMappingURL=index-style.css.map */
+
+/*# sourceMappingURL=index-style.css.map */
