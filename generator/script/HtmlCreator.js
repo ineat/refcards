@@ -11,7 +11,6 @@ const hljs   = require('highlight.js');
  */
 marked.setOptions({
     highlight: function(code, lang) {
-        const hljs = require('highlight.js');
         const language = hljs.getLanguage(lang) ? lang : 'shell';
         return hljs.highlight(code, { language }).value;
     }
@@ -34,10 +33,12 @@ function getTitle(path) {
  * @returns string
  */
 function htmlGenerator(path){
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
     return `<!DOCTYPE html>
-<html lang=${getTitle(path)[1]}>
+<html lang=${refcardLang}>
     <head>
-        <title> ${getTitle(path)[0]} Refcard</title>
+        <title> ${titleElement} Refcard</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/style.css'>
     </head>
@@ -53,12 +54,13 @@ function htmlGenerator(path){
  * Create a folder with the name of the refcard extracted from the path
  */
 function createFolder(path) {
-    fs.mkdir(`public/${getTitle(path)[0]}/assets`, (err) => {
-        logger.info(`Directory ${getTitle(path)[0]}/assets created!`);
+    const titleElement = getTitle(path)[0];
+    fs.mkdir(`public/${titleElement}/assets`, (err) => {
+        logger.info(`Directory ${titleElement}/assets created!`);
     });
     try {
-        fse.copySync(`../${getTitle(path)[0]}/assets`, `public/${getTitle(path)[0]}/assets`, {overwrite: true});
-        logger.info(`assets copied from ../${getTitle(path)[0]}/assets`)
+        fse.copySync(`../${titleElement}/assets`, `public/${titleElement}/assets`, {overwrite: true});
+        logger.info(`assets copied from ../${titleElement}/assets`)
     } catch (err) {
         if (err) throw err;
     }
@@ -101,8 +103,8 @@ function refcardCreator(path) {
     const refcardLang = getTitle(path)[1];
     const files = fs.readdirSync(`../${titleElement}`, { withFileTypes:true});
     let isAssetsPresents = false;
-    for (let pas of files) {
-        if (pas.name !== undefined && pas.name === "assets") {
+    for (let file of files) {
+        if (file.name !== undefined && file.name === "assets") {
             isAssetsPresents = true;
         }
     }
@@ -125,8 +127,8 @@ function refcardCreator(path) {
  * @constructor
  */
 function CreateAllRefcards(pathList) {
-    for (let pas=0; pas<pathList.length;pas++) {
-        refcardCreator(pathList[pas])
+    for (let path of pathList) {
+        refcardCreator(path)
     }
 }
 

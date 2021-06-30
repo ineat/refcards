@@ -8,7 +8,7 @@ function getAllRefcardsDirectories() {
     const files = fs.readdirSync('..', { withFileTypes:true});
     let refcardDirectories = [];
     for (let pas of files) {
-        if (pas.isDirectory() && pas.name !== ".idea" && pas.name !== "generator") {
+        if (pas.isDirectory() && pas.name !== ".idea" && pas.name !== "generator" && pas.name !== ".github") {
             refcardDirectories.push(pas);
         }
     }
@@ -34,4 +34,4 @@ function createPaths() {
     return pathList
 }
 
-module.exports = {createPaths};
+module.exports = {createPaths,getAllRefcardsDirectories};
