@@ -12,7 +12,7 @@ describe('Test htmlCreator', () => {
     logger.info("testing metadataExtractor function");
     it('should extract the metadata of the refcard from the path', () => {
         const metadata = htmlCreator.metadataExtractor('../git/FR.md');
-        expect(metadata).toEqual(jasmine.objectContaining({main_color:"#fde8de",second_color:"#ef3428",third_color:"#3c2e16"}));
+        expect(metadata).toEqual(expect.objectContaining({main_color:"#fde8de",second_color:"#ef3428",third_color:"#3c2e16"}));
     });
 
     logger.info("testing createFolder fonction");
