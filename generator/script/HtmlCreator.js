@@ -55,9 +55,12 @@ function htmlGenerator(path){
  */
 function createFolder(path) {
     const titleElement = getTitle(path)[0];
-    fs.mkdir(`public/${titleElement}/assets`, (err) => {
-        logger.info(`Directory ${titleElement}/assets created!`);
-    });
+    const directory = fs.existsSync(`public/${titleElement}`);
+    if (!directory) {
+        fs.mkdir(`public/${titleElement}/assets`, (err) => {
+            logger.info(`Directory ${titleElement}/assets created!`);
+        });
+    }
     try {
         fse.copySync(`../${titleElement}/assets`, `public/${titleElement}/assets`, {overwrite: true});
         logger.info(`assets copied from ../${titleElement}/assets`)
@@ -109,9 +112,18 @@ function refcardCreator(path) {
         }
     }
     let text = htmlGenerator(path);
-    fs.mkdir(`public/${titleElement}`, (err) => {
-        logger.info(`Directory ${titleElement} created`);
-    });
+    const publicDirectory = fs.readdirSync('public');
+    let directoryAlreadyExist = false;
+    for (let directory of publicDirectory) {
+        if (directory.name === `${titleElement}`) {
+            directoryAlreadyExist = true;
+        }
+    }
+    if (!directoryAlreadyExist) {
+        fs.mkdir(`public/${titleElement}`, (err) => {
+            logger.info(`Directory ${titleElement} created`);
+        });
+    }
     if (isAssetsPresents) {
         createFolder(path);
     }
