@@ -1,3 +1,7 @@
+[//]: # (main_color: #F6CDF3)
+[//]: # (second_color: #B236A9)
+[//]: # (third_color: #252A80)
+
 # Vertx RefCard
 
 *Version française*

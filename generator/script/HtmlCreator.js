@@ -7,11 +7,10 @@ const hljs   = require('highlight.js');
 
 
 /**
- * Ajout d'un highlighter pour les balises <code>
+ * Add an highlighter for the tokens <code>
  */
 marked.setOptions({
     highlight: function(code, lang) {
-        const hljs = require('highlight.js');
         const language = hljs.getLanguage(lang) ? lang : 'shell';
         return hljs.highlight(code, { language }).value;
     }
@@ -21,11 +20,11 @@ marked.setOptions({
 /**
  * Return the title of the refcards to be created using his path
  * @param path
- * @returns string
+ * @returns [string]
  */
 function getTitle(path) {
-    const match = path.match(/(\.\.\/)(\w*)\//);
-    return match[2];
+    const match = path.match(/(\.\.\/)(\w*)\/(\w*).md/);
+    return [match[2],match[3]];
 }
 
 /**
@@ -34,51 +33,68 @@ function getTitle(path) {
  * @returns string
  */
 function htmlGenerator(path){
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
     return `<!DOCTYPE html>
-<html lang="${getTitle(path)[1]}">
+<html lang=${refcardLang}>
     <head>
-        <title> ${getTitle(path)[0]} Refcard</title>
-        <link rel='stylesheet' href='css/style.css'>
+        <title> ${titleElement} Refcard</title>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+        <link rel='stylesheet' href='../css/style.css'>
     </head>
     <body>
-        ${marked(fs.readFileSync(path, 'utf8'), {renderer:render_upgrade(metadataExtractor(path))})}
+        ${marked(fs.readFileSync(path, 'utf8'),{renderer:render_upgrade(metadataExtractor(path))})}
     </body>
 </html>
 `;
 }
 
-function createFolder() {
-    fs.mkdir('public/git', (err) => {
-        logger.info("Refcard Git créée!");
-    });
 
-    fs.mkdir('public/git/assets', (err) => {
-        logger.info("Refcard Git créée!");
-    });
+/**
+ * Create a folder with the name of the refcard extracted from the path
+ */
+function createFolder(path) {
+    const titleElement = getTitle(path)[0];
+    const directory = fs.existsSync(`public/${titleElement}`);
+    if (!directory) {
+        fs.mkdir(`public/${titleElement}/assets`, (err) => {
+            logger.info(`Directory ${titleElement}/assets created!`);
+        });
+    }
     try {
-        fse.copySync('../git/assets', 'public/git/assets', {overwrite: true});
+        fse.copySync(`../${titleElement}/assets`, `public/${titleElement}/assets`, {overwrite: true});
+        logger.info(`assets copied from ../${titleElement}/assets`)
     } catch (err) {
         if (err) throw err;
     }
 
 }
 
+
 /**
- * Return the two specifics colors of a refcards thanks to his path
+ * Return the three specifics colors of a refcards thanks to his path
  * @param path
- * @returns {string[]}
+ * @returns {{main_color: string, second_color: string, third_color: string}}
  */
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
     let res = {}
-    for (let pas of match) {
-        const [name] = pas.match(/\w+/);
-        let [color] = pas.match(/#\w+/);
-        let item = {[name]: color};
-        Object.assign(res, item)
+    if (match) {
+        for (let pas of match) {
+            const [name] = pas.match(/\w+/);
+            let [color] = pas.match(/#\w+/);
+            let item = {[name]: color};
+            Object.assign(res, item)
+        }
+
+        return res;
     }
-    return res;
+    return {
+        main_color: "#B2F2F4",
+        second_color: "#43B44B",
+        third_color: "#447BBB"
+    };
 }
 
 /**
@@ -86,16 +102,46 @@ function metadataExtractor(path) {
  * @param path
  */
 function refcardCreator(path) {
-    logger.info('Starting refcard generation');
-    const pathStruct = {
-        title : getTitle(path)
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
+    const files = fs.readdirSync(`../${titleElement}`, { withFileTypes:true});
+    let isAssetsPresents = false;
+    for (let file of files) {
+        if (file.name !== undefined && file.name === "assets") {
+            isAssetsPresents = true;
+        }
     }
-    let text = htmlGenerator(path)
-    fs.writeFile(`public/${pathStruct.title}.html`,text,function(err){
+    let text = htmlGenerator(path);
+    const publicDirectory = fs.readdirSync('public');
+    let directoryAlreadyExist = false;
+    for (let directory of publicDirectory) {
+        if (directory.name === `${titleElement}`) {
+            directoryAlreadyExist = true;
+        }
+    }
+    if (!directoryAlreadyExist) {
+        fs.mkdir(`public/${titleElement}`, (err) => {
+            logger.info(`Directory ${titleElement} created`);
+        });
+    }
+    if (isAssetsPresents) {
+        createFolder(path);
+    }
+    fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
-        logger.info(`Refcard ${pathStruct.title} generated!`);
+        logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
     })
 }
 
+/**
+ * Create all the refcards in the github repository
+ * @param pathList
+ * @constructor
+ */
+function CreateAllRefcards(pathList) {
+    for (let path of pathList) {
+        refcardCreator(path)
+    }
+}
 
-module.exports = {createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};
+module.exports = {CreateAllRefcards,createFolder,refcardCreator,metadataExtractor,htmlGenerator,getTitle};

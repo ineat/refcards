@@ -1,5 +1,8 @@
 const HtmlCreator = require("./script/HtmlCreator");
+const PathCreator = require("./script/PathCreator");
+const logger = require("./script/Logger");
 
-const path = "../git/FR.md";
-HtmlCreator.createFolder();
-HtmlCreator.refcardCreator(path);
+const pathList = PathCreator.createPaths();
+logger.info('Starting refcard generation');
+HtmlCreator.CreateAllRefcards(pathList);
+
