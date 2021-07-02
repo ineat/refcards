@@ -20,7 +20,6 @@ exports.render_upgrade = function (color_items) {
             return text;
         }
         return `<a class="links" style="color :${second_color}" href="${href}" title="${title ? title : ""}">${text}</a>`;
-
     }
 
     render.blockquote = function(quote) {
@@ -59,7 +58,6 @@ exports.render_upgrade = function (color_items) {
         }
 
         code = code.replace(/\n$/, '') + '\n';
-
         return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
