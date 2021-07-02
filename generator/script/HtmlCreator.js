@@ -42,7 +42,7 @@ function htmlGenerator(path){
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body>
-    <div class="first-page" style="background-color: ${metadataExtractor(path)[1]}">
+    <div class="first-page" style="background-color: ${metadataExtractor(path).second_color}">
         <div class="buttons">
             <a href="../index.html">
                 <img src="../assets/back-logo.svg" alt="fleche retour">
