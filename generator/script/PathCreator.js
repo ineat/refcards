@@ -7,9 +7,9 @@ const fs = require('fs');
 function getAllRefcardsDirectories() {
     const files = fs.readdirSync('..', { withFileTypes:true});
     let refcardDirectories = [];
-    for (let pas=1; pas<files.length; pas++) {
-        if ((files[pas].isDirectory())&&(files[pas].name!==".idea")&&(files[pas].name!=="generator")) {
-            refcardDirectories.push(files[pas]);
+    for (let pas of files) {
+        if (pas.isDirectory() && pas.name !== ".idea" && pas.name !== "generator" && pas.name !== ".github") {
+            refcardDirectories.push(pas);
         }
     }
     return refcardDirectories;
@@ -23,44 +23,42 @@ function getAllRefcardsDirectories() {
 function createPaths() {
     let pathList = [];
     const refcardList = getAllRefcardsDirectories();
-    for (let pas=0; pas<refcardList.length;pas++) {
-        let dir = fs.readdirSync(`../${refcardList[pas].name}`,{ withFileTypes:true});
-        for (let pas2=0; pas2<dir.length;pas2++) {
-            if (dir[pas2].name.endsWith(".md")) {
-                pathList.push(`../${refcardList[pas].name}/${dir[pas2].name}`);
+    for (let refcardDir of refcardList) {
+        let dir = fs.readdirSync(`../${refcardDir.name}`,{ withFileTypes:true});
+        for (let refcardFiles of dir) {
+            if (refcardFiles.name.endsWith(".md")) {
+                pathList.push(`../${refcardDir.name}/${refcardFiles.name}`);
             }
         }
     }
     return pathList
 }
 
+
 /**
  * Return an object "refcards" containing all the data to compile the handlebars template
  * @returns {{}}
  */
-function createObject() {
-    let objectList = {};
-    objectList["refcards"] = [];
+function prepareHandlebarsContextObject() {
+    let handlebarsContext = {};
+    handlebarsContext.refcards = [];
     const refcardList = getAllRefcardsDirectories();
-    for (let pas=0; pas<refcardList.length;pas++) {
-        let dir = fs.readdirSync(`../${refcardList[pas].name}`,{ withFileTypes:true});
+    for (let pas of refcardList) {
+        let dir = fs.readdirSync(`../${pas.name}`,{ withFileTypes:true});
         let cpt = 0;
-        for (let pas2=0; pas2<dir.length;pas2++) {
-            if (dir[pas2].name.endsWith(".md")) {
+        for (let refcardFile of dir) {
+            if (refcardFile.name.endsWith(".md")) {
                 cpt+=1;
-                let copy = dir[pas2].name;
-                let name = dir[pas2].name.replace(".md","");
+                let copy = refcardFile.name;
+                let name = refcardFile.name.replace(".md","");
                 let path = copy.replace(".md",".html");
-                if (cpt === 1) {
-                    objectList["refcards"].push({title : refcardList[pas].name, name:name, path:`${refcardList[pas].name}/${path}`,first:true});
-                }
-                else{
-                    objectList["refcards"].push({title : refcardList[pas].name, name:name, path:`${refcardList[pas].name}/${path}`,first:false});
-                }
+                var firstPagePictoExist  = fs.existsSync(`assets/${pas.name}-page.svg`);
+
+                handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:cpt===1 , pageVisual : firstPagePictoExist});
+
             }
         }
     }
-    return objectList
+    return handlebarsContext
 }
-
-module.exports = {createPaths,createObject};
+module.exports = {createPaths,prepareHandlebarsContextObject,getAllRefcardsDirectories};

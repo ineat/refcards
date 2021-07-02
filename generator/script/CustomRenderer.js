@@ -2,49 +2,49 @@ const marked = require('marked');
 const {cleanUrl} = require("marked/src/helpers");
 const escape = require('escape-html');
 
-const MAIN_COLOR_INDEX = 0;
-const SECOND_COLOR_INDEX = 1;
-const THIRD_COLOR_INDEX = 2;
-
-
+const MAIN_COLOR_KEY= "main_color";
+const SECOND_COLOR_KEY= "second_color";
+const THIRD_COLOR_KEY= "third_color";
 /**
  * Modify the renderer to add html classes for the tokens in the function and add style properties using the colors in parameters
+ * @param color_items an object containing the key / value colors
  * @type renderer
  */
-exports.render_upgrade = function (color) {
+exports.render_upgrade = function (color_items) {
     const render = new marked.Renderer();
-
+    const first_color = color_items[MAIN_COLOR_KEY];
+    const second_color = color_items[SECOND_COLOR_KEY];
+    const third_color = color_items[THIRD_COLOR_KEY];
     render.link = function(href, title, text) {
         if (href === null) {
             return text;
         }
-        return `<a class="links" style="color :${color[SECOND_COLOR_INDEX]}" href="${href}" title="${title ? title : ""}">${text}</a>`;
-
+        return `<a class="links" style="color :${second_color}" href="${href}" title="${title ? title : ""}">${text}</a>`;
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${color[SECOND_COLOR_INDEX]};border-left: ${color[SECOND_COLOR_INDEX]} solid;">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">${quote}</blockquote>`;
     }
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
             let html = this.options.headerPrefix + slugger.slug(raw);
             if (level === 2) {
-                return `</div>\n
-                        <div class="h2-part">\n
-                            <h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
+                return `</div>
+                        <div class="h2-part">
+                            <h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
             } else {
-                return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
+                return `<h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
             }
         }
         // ignore IDs
-        return `</div>\n
-                <div class="h2-part">\n
-                    <h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</h${level}>\n`;
+        return `</div>
+                <div class="h2-part">
+                    <h${level} class="heading${level}" style="color: ${second_color}">${text}</h${level}>`;
     }
 
     render.codespan = function(text) {
-        return `<code class="codespan" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</code>`;
+        return `<code class="codespan" style="color: ${second_color}">${text}</code>`;
     }
 
     render.code = function(code, infostring, escaped) {
@@ -57,9 +57,8 @@ exports.render_upgrade = function (color) {
             }
         }
 
-        code = code.replace(/\n$/, '') + '\n';
-
-        return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code" style="color: ${color[THIRD_COLOR_INDEX]}">${escaped ? code:escape(code)}</code></pre>`;
+        code = code.replace(/$/, '');
+        return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
     render.image = function(href, title, text) {

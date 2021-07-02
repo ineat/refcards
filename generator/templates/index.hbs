@@ -35,7 +35,12 @@
                         {{#if this.first}}
                             <div class="refcards-page">
                                 <a href="{{this.path}}">
-                                    <img src="assets/{{this.title}}-page.svg" alt="{{this.title}} refcard page">
+                                    {{#if this.pageVisual}}
+                                        <img src="assets/{{this.title}}-page.svg" alt="{{this.title}} refcard page">
+                                        {{else}}
+                                        <img src="assets/alternative-page.svg" alt="{{this.title}} refcard page">
+                                        <p class="alternative-page-title">RefCard {{this.title}}</p>
+                                    {{/if}}
                                 </a>
                                 <a href="{{this.path}}">
                                     <p>{{this.title}}</p>

@@ -3,17 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run style\" \"npm run start:generate\" \"npm run start:web\"",
+    "start": "concurrently \"npm run style:watch\" \"npm run start:generate\" \"npm run start:web\"",
     "start:web": "http-server",
     "start:generate": "node ./index.js",
     "test": "jasmine test/*",
-    "style": "sass --watch styles/:public/css/"
+    "style": "sass styles/:public/css/",
+    "style:watch": "sass --watch styles/:public/css/",
+    "build": "concurrently \"npm run style\" \"npm run start:generate\""
   },
   "dependencies": {
     "buffer": "^6.0.3",
     "es6-interface": "^3.1.4",
     "handlebars": "^4.7.7",
     "highlight.js": "^10.7.2",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "https-browserify": "^1.0.0",
     "import-local": "^3.0.2",
     "marked": "^2.0.3",
     "os": "^0.1.1",

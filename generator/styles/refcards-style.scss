@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 * {
-  font-family: Jost;
+  font-family: Jost, Serif;
   font-style: normal;
   font-weight: normal;
 }
@@ -10,6 +10,10 @@
   position:absolute;
   top:110vh;
   right:10px;
+}
+
+body > .h2-part h2:nth-child(1) {
+  display:none;
 }
 
 @media (max-width:570px) {
@@ -61,7 +65,7 @@ pre {
   margin-right: 3%;
 
   span {
-    font-family: PT Mono;
+    font-family: PT Mono, Serif;
   }
 }
 
@@ -163,7 +167,7 @@ body {
     left: 120px;
     height: 200px;
     width: 350px;
-    font-family: Jost;
+    font-family: Jost, Serif;
     font-style: normal;
     font-weight: bold;
     font-size: 46px;
@@ -179,7 +183,7 @@ body {
     right: 150px;
     height: 12%;
     width: 200px;
-    font-family: Jost;
+    font-family: Jost, Serif;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
@@ -207,7 +211,7 @@ body {
   background-color: white;
 
   h1 {
-    font-family: Jost;
+    font-family: Jost, Serif;
     font-style: normal;
     font-weight: bold;
     font-size: 48px;
@@ -310,6 +314,10 @@ body {
       margin-top: 30%;
       width: 35%;
     }
+  }
+
+  .band > img:nth-child(2) {
+    margin-top:30px;
   }
 
   .buttons {

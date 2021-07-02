@@ -1,6 +1,6 @@
-[//]: # (main: #fde8de)
-[//]: # (second: #ef3428)
-[//]: # (third: #3c2e16)
+[//]: # (main_color: #fde8de)
+[//]: # (second_color: #ef3428)
+[//]: # (third_color: #3c2e16)
 
 # Git RefCard
 *Version française*

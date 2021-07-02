@@ -3,6 +3,7 @@ const fs =require ('fs');
 const fse = require('fs-extra');
 const {render_upgrade} = require('./CustomRenderer');
 const logger = require('./Logger');
+const hljs   = require('highlight.js');
 
 
 /**
@@ -10,7 +11,6 @@ const logger = require('./Logger');
  */
 marked.setOptions({
     highlight: function(code, lang) {
-        const hljs = require('highlight.js');
         const language = hljs.getLanguage(lang) ? lang : 'shell';
         return hljs.highlight(code, { language }).value;
     }
@@ -33,16 +33,18 @@ function getTitle(path) {
  * @returns string
  */
 function htmlGenerator(path){
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
     return `<!DOCTYPE html>
-<html lang=${getTitle(path)[1]}>
+<html lang=${refcardLang}>
     <head>
-        <title> ${getTitle(path)[0]} Refcard</title>
+        <title> ${titleElement} Refcard</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body>
-    <div class="first-page" style="background-color: ${metadataExtractor(path)[1]}">
+    <div class="first-page" style="background-color: ${metadataExtractor(path).second_color}">
         <div class="buttons">
             <a href="../index.html">
                 <img src="../assets/back-logo.svg" alt="fleche retour">
@@ -78,36 +80,44 @@ function htmlGenerator(path){
  * Create a folder with the name of the refcard extracted from the path and copy assets from the path into this folder
  */
 function createFolder(path) {
-    fs.mkdir(`public/${getTitle(path)[0]}/assets`, (err) => {
-        logger.info(`Directory ${getTitle(path)[0]}/assets created!`);
-    });
+    const titleElement = getTitle(path)[0];
+    const directory = fs.existsSync(`public/${titleElement}`);
+    if (!directory) {
+        fs.mkdir(`public/${titleElement}/assets`, (err) => {
+            logger.info(`Directory ${titleElement}/assets created!`);
+        });
+    }
     try {
-        fse.copySync(`../${getTitle(path)[0]}/assets`, `public/${getTitle(path)[0]}/assets`, {overwrite: true});
-        logger.info(`assets copied from ../${getTitle(path)[0]}/assets`)
+        fse.copySync(`../${titleElement}/assets`, `public/${titleElement}/assets`, {overwrite: true});
+        logger.info(`assets copied from ../${titleElement}/assets`)
     } catch (err) {
         if (err) throw err;
     }
-
 }
-
 
 /**
  * Return the three specifics colors of a refcards thanks to his path
  * @param path
- * @returns {string[]}
+ * @returns {{main_color: string, second_color: string, third_color: string}}
  */
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
-    let res = []
+    let res = {}
     if (match) {
-        for (let pas = 0; pas < match.length; pas++) {
-            let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
-            res.push(int[1]);
+        for (let pas of match) {
+            const [name] = pas.match(/\w+/);
+            let [color] = pas.match(/#\w+/);
+            let item = {[name]: color};
+            Object.assign(res, item)
         }
         return res;
     }
-    return ["#B2F2F4","#43B44B","#447BBB"];
+    return {
+        main_color: "#B2F2F4",
+        second_color: "#FC2860",
+        third_color: "#447BBB"
+    };
 }
 
 /**
@@ -115,23 +125,34 @@ function metadataExtractor(path) {
  * @param path
  */
 function refcardCreator(path) {
-    const files = fs.readdirSync(`../${getTitle(path)[0]}`, { withFileTypes:true});
-    let bool = false;
-    for (let pas=0;pas<files.length;pas++) {
-        if (files[pas].name === "assets") {
-            bool = true;
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
+    const files = fs.readdirSync(`../${titleElement}`, { withFileTypes:true});
+    let isAssetsPresents = false;
+    for (let file of files) {
+        if (file.name !== undefined && file.name === "assets") {
+            isAssetsPresents = true;
         }
     }
     let text = htmlGenerator(path);
-    fs.mkdir(`public/${getTitle(path)[0]}`, (err) => {
-        logger.info(`directory ${getTitle(path)[0]} created`);
-    });
-    if (bool === true) {
+    const publicDirectory = fs.readdirSync('public');
+    let directoryAlreadyExist = false;
+    for (let directory of publicDirectory) {
+        if (directory.name === `${titleElement}`) {
+            directoryAlreadyExist = true;
+        }
+    }
+    if (!directoryAlreadyExist) {
+        fs.mkdir(`public/${titleElement}`, (err) => {
+            logger.info(`Directory ${titleElement} created`);
+        });
+    }
+    if (isAssetsPresents) {
         createFolder(path);
     }
-    fs.writeFile(`public/${getTitle(path)[0]}/${getTitle(path)[1]}.html`,text,function(err){
+    fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
-        logger.info(`Refcard ${getTitle(path)[0]} ${getTitle(path)[1]} generated!`);
+        logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
     })
 }
 
@@ -140,10 +161,15 @@ function refcardCreator(path) {
  * @param pathList
  */
 function CreateAllRefcards(pathList) {
-    fse.copySync(`assets`, `public/assets`, {overwrite: true});
-    logger.info("assets copied from assets to public/assets")
-    for (let pas=0; pas<pathList.length;pas++) {
-        refcardCreator(pathList[pas])
+    if (!fs.existsSync(`public/assets`)) {
+        fs.mkdir(`public/assets}`, (err) => {
+            logger.info(`Directory assets created`);
+        });
+    }
+    fse.copySync(`assets`,`public/assets`,{overwrite:true});
+    logger.info(`global assets copied`)
+    for (let path of pathList) {
+        refcardCreator(path)
     }
 }
 
