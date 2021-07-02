@@ -40,6 +40,7 @@ La branche comportant les modifications sera revue et mergée par un autre colla
 N'oubliez pas que les RefCards font parti de la vitrine technologie de la société. La revue du contenu permet d'éviter les fautes d'orthographe et de grammaire.
 
 ## Convention ajout d'une Refcard
+
 Si vous souhaitez ajouter une Refcard il faudra ajouter au debut de votre fichier Markdown une ligne contenant les trois couleurs spécifiques(au format hexadecimal) à votre Refcard pour la génération HTML.
 Elle devra être comme ceci : 
 ```
@@ -47,3 +48,4 @@ Elle devra être comme ceci :
 [//]: # (second: #111111)
 [//]: # (third: #222222)
 ```
+

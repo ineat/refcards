@@ -7,9 +7,9 @@ const fs = require('fs');
 function getAllRefcardsDirectories() {
     const files = fs.readdirSync('..', { withFileTypes:true});
     let refcardDirectories = [];
-    for (let pas=1; pas<files.length; pas++) {
-        if ((files[pas].isDirectory())&&(files[pas].name!==".idea")&&(files[pas].name!=="generator")) {
-            refcardDirectories.push(files[pas]);
+    for (let pas of files) {
+        if (pas.isDirectory() && pas.name !== ".idea" && pas.name !== "generator" && pas.name !== ".github") {
+            refcardDirectories.push(pas);
         }
     }
     return refcardDirectories;
@@ -23,16 +23,17 @@ function getAllRefcardsDirectories() {
 function createPaths() {
     let pathList = [];
     const refcardList = getAllRefcardsDirectories();
-    for (let pas=0; pas<refcardList.length;pas++) {
-        let dir = fs.readdirSync(`../${refcardList[pas].name}`,{ withFileTypes:true});
-        for (let pas2=0; pas2<dir.length;pas2++) {
-            if (dir[pas2].name.endsWith(".md")) {
-                pathList.push(`../${refcardList[pas].name}/${dir[pas2].name}`);
+    for (let refcardDir of refcardList) {
+        let dir = fs.readdirSync(`../${refcardDir.name}`,{ withFileTypes:true});
+        for (let refcardFiles of dir) {
+            if (refcardFiles.name.endsWith(".md")) {
+                pathList.push(`../${refcardDir.name}/${refcardFiles.name}`);
             }
         }
     }
     return pathList
 }
+
 
 /**
  * Return an object "refcards" containing all the data to compile the handlebars template

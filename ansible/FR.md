@@ -2,6 +2,7 @@
 [//]: # (second: #2e4995)
 [//]: # (third: #2e2b77)
 
+
 # Ansible RefCard
 *Version française*
 

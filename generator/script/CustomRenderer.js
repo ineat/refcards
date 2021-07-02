@@ -7,19 +7,24 @@ const SECOND_COLOR_INDEX = 1;
 const THIRD_COLOR_INDEX = 2;
 
 
+const MAIN_COLOR_KEY= "main_color";
+const SECOND_COLOR_KEY= "second_color";
+const THIRD_COLOR_KEY= "third_color";
 /**
  * Modify the renderer to add html classes for the tokens in the function and add style properties using the colors in parameters
+ * @param color_items an object containing the key / value colors
  * @type renderer
  */
-exports.render_upgrade = function (color) {
+exports.render_upgrade = function (color_items) {
     const render = new marked.Renderer();
-
+    const first_color = color_items[MAIN_COLOR_KEY];
+    const second_color = color_items[SECOND_COLOR_KEY];
+    const third_color = color_items[THIRD_COLOR_KEY];
     render.link = function(href, title, text) {
         if (href === null) {
             return text;
         }
         return `<a class="links" style="color :${color[SECOND_COLOR_INDEX]}" href="${href}" title="${title ? title : ""}">${text}</a>`;
-
     }
 
     render.blockquote = function(quote) {
@@ -58,7 +63,6 @@ exports.render_upgrade = function (color) {
         }
 
         code = code.replace(/\n$/, '') + '\n';
-
         return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code" style="color: ${color[THIRD_COLOR_INDEX]}">${escaped ? code:escape(code)}</code></pre>`;
     }
 

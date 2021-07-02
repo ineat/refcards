@@ -75,39 +75,49 @@ function htmlGenerator(path){
 
 
 /**
- * Create a folder with the name of the refcard extracted from the path and copy assets from the path into this folder
+ * Create a folder with the name of the refcard extracted from the path
  */
 function createFolder(path) {
-    fs.mkdir(`public/${getTitle(path)[0]}/assets`, (err) => {
-        logger.info(`Directory ${getTitle(path)[0]}/assets created!`);
-    });
+    const titleElement = getTitle(path)[0];
+    const directory = fs.existsSync(`public/${titleElement}`);
+    if (!directory) {
+        fs.mkdir(`public/${titleElement}/assets`, (err) => {
+            logger.info(`Directory ${titleElement}/assets created!`);
+        });
+    }
     try {
-        fse.copySync(`../${getTitle(path)[0]}/assets`, `public/${getTitle(path)[0]}/assets`, {overwrite: true});
-        logger.info(`assets copied from ../${getTitle(path)[0]}/assets`)
+        fse.copySync(`../${titleElement}/assets`, `public/${titleElement}/assets`, {overwrite: true});
+        logger.info(`assets copied from ../${titleElement}/assets`)
     } catch (err) {
         if (err) throw err;
     }
-
 }
 
 
 /**
  * Return the three specifics colors of a refcards thanks to his path
  * @param path
- * @returns {string[]}
+ * @returns {{main_color: string, second_color: string, third_color: string}}
  */
 function metadataExtractor(path) {
     let text = fs.readFileSync(path,'utf-8');
     const match = text.match(/\[\/\/\]: # \(\w*: (#\w*)\)/g);
-    let res = []
+    let res = {}
     if (match) {
-        for (let pas = 0; pas < match.length; pas++) {
-            let int = match[pas].match(/\[\/\/\]: # \(\w*: (#\w*)\)/);
-            res.push(int[1]);
+        for (let pas of match) {
+            const [name] = pas.match(/\w+/);
+            let [color] = pas.match(/#\w+/);
+            let item = {[name]: color};
+            Object.assign(res, item)
         }
+
         return res;
     }
-    return ["#B2F2F4","#43B44B","#447BBB"];
+    return {
+        main_color: "#B2F2F4",
+        second_color: "#43B44B",
+        third_color: "#447BBB"
+    };
 }
 
 /**
@@ -115,35 +125,45 @@ function metadataExtractor(path) {
  * @param path
  */
 function refcardCreator(path) {
-    const files = fs.readdirSync(`../${getTitle(path)[0]}`, { withFileTypes:true});
-    let bool = false;
-    for (let pas=0;pas<files.length;pas++) {
-        if (files[pas].name === "assets") {
-            bool = true;
+    const titleElement = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
+    const files = fs.readdirSync(`../${titleElement}`, { withFileTypes:true});
+    let isAssetsPresents = false;
+    for (let file of files) {
+        if (file.name !== undefined && file.name === "assets") {
+            isAssetsPresents = true;
         }
     }
     let text = htmlGenerator(path);
-    fs.mkdir(`public/${getTitle(path)[0]}`, (err) => {
-        logger.info(`directory ${getTitle(path)[0]} created`);
-    });
-    if (bool === true) {
+    const publicDirectory = fs.readdirSync('public');
+    let directoryAlreadyExist = false;
+    for (let directory of publicDirectory) {
+        if (directory.name === `${titleElement}`) {
+            directoryAlreadyExist = true;
+        }
+    }
+    if (!directoryAlreadyExist) {
+        fs.mkdir(`public/${titleElement}`, (err) => {
+            logger.info(`Directory ${titleElement} created`);
+        });
+    }
+    if (isAssetsPresents) {
         createFolder(path);
     }
-    fs.writeFile(`public/${getTitle(path)[0]}/${getTitle(path)[1]}.html`,text,function(err){
+    fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
-        logger.info(`Refcard ${getTitle(path)[0]} ${getTitle(path)[1]} generated!`);
+        logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
     })
 }
 
 /**
- * Create all the refcards in the github repository and copy assets used by every html pages
+ * Create all the refcards in the github repository
  * @param pathList
+ * @constructor
  */
 function CreateAllRefcards(pathList) {
-    fse.copySync(`assets`, `public/assets`, {overwrite: true});
-    logger.info("assets copied from assets to public/assets")
-    for (let pas=0; pas<pathList.length;pas++) {
-        refcardCreator(pathList[pas])
+    for (let path of pathList) {
+        refcardCreator(path)
     }
 }
 

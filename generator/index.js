@@ -18,3 +18,4 @@ const outFile = "./public/index.html";
 
 fs.writeFileSync(outFile,result);
 logger.info("index.html generated");
+
