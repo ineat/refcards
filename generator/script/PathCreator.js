@@ -64,4 +64,4 @@ function createObject() {
     return objectList
 }
 
-module.exports = {createPaths,createObject};
+module.exports = {createPaths,createObject,getAllRefcardsDirectories};

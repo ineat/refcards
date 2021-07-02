@@ -24,11 +24,11 @@ exports.render_upgrade = function (color_items) {
         if (href === null) {
             return text;
         }
-        return `<a class="links" style="color :${color[SECOND_COLOR_INDEX]}" href="${href}" title="${title ? title : ""}">${text}</a>`;
+        return `<a class="links" style="color :${second_color}" href="${href}" title="${title ? title : ""}">${text}</a>`;
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${color[SECOND_COLOR_INDEX]};border-left: ${color[SECOND_COLOR_INDEX]} solid;">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">\n${quote}</blockquote>\n`;
     }
 
     render.heading = function(text, level, raw, slugger) {
@@ -37,19 +37,19 @@ exports.render_upgrade = function (color_items) {
             if (level === 2) {
                 return `</div>\n
                         <div class="h2-part">\n
-                            <h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
+                            <h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
             } else {
-                return `<h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
+                return `<h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
             }
         }
         // ignore IDs
         return `</div>\n
                 <div class="h2-part">\n
-                    <h${level} class="heading${level}" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</h${level}>\n`;
+                    <h${level} class="heading${level}" style="color: ${second_color}">${text}</h${level}>\n`;
     }
 
     render.codespan = function(text) {
-        return `<code class="codespan" style="color: ${color[SECOND_COLOR_INDEX]}">${text}</code>`;
+        return `<code class="codespan" style="color: ${second_color}">${text}</code>`;
     }
 
     render.code = function(code, infostring, escaped) {
@@ -63,7 +63,7 @@ exports.render_upgrade = function (color_items) {
         }
 
         code = code.replace(/\n$/, '') + '\n';
-        return `<pre style="background-color: ${color[MAIN_COLOR_INDEX]}"><code class="code" style="color: ${color[THIRD_COLOR_INDEX]}">${escaped ? code:escape(code)}</code></pre>`;
+        return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 
     render.image = function(href, title, text) {
