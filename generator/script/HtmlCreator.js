@@ -67,6 +67,9 @@ function htmlGenerator(path){
         </a>
         <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
         <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        <div class="little-menu">
+            <img src="assets/logo-${getTitle(path)[0]}.png" alt="logo ${getTitle(path)[0]}">
+        </div>
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
