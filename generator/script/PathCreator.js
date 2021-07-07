@@ -51,12 +51,7 @@ function createObject() {
                 let copy = refcardFile.name;
                 let name = refcardFile.name.replace(".md","");
                 let path = copy.replace(".md",".html");
-                if (cpt === 1) {
-                    objectList["refcards"].push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:true});
-                }
-                else{
-                    objectList["refcards"].push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:false});
-                }
+                objectList["refcards"].push({title : pas.name, name:name, path:`${pas.name}/${path}`,first: cpt === 1});
             }
         }
     }
