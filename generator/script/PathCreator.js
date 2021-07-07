@@ -34,4 +34,28 @@ function createPaths() {
     return pathList
 }
 
-module.exports = {createPaths,getAllRefcardsDirectories};
+/**
+ * Return an object "refcards" containing all the data to compile the handlebars template
+ * @returns {{}}
+ */
+function prepareHandlebarsContextObject() {
+    let handlebarsContext = {};
+    handlebarsContext.refcards = [];
+    const refcardList = getAllRefcardsDirectories();
+    for (let pas of refcardList) {
+        let dir = fs.readdirSync(`../${pas.name}`,{ withFileTypes:true});
+        let cpt = 0;
+        for (let refcardFile of dir) {
+            if (refcardFile.name.endsWith(".md")) {
+                cpt+=1;
+                let copy = refcardFile.name;
+                let name = refcardFile.name.replace(".md","");
+                let path = copy.replace(".md",".html");
+                handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first: cpt === 1});
+            }
+        }
+    }
+    return handlebarsContext
+}
+
+module.exports = {createPaths,prepareHandlebarsContextObject,getAllRefcardsDirectories};
