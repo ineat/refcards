@@ -138,6 +138,12 @@ function refcardCreator(path) {
  * @param pathList
  */
 function CreateAllRefcards(pathList) {
+    if (!fs.existsSync(`public/assets`)) {
+        fs.mkdir(`public/assets`, (err) => {
+            logger.info(`Directory assets created`);
+        });
+    }
+    fse.copySync(`assets`,`public/assets`,{overwrite:true})
     for (let path of pathList) {
         refcardCreator(path)
     }

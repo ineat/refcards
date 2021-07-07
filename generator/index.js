@@ -9,7 +9,7 @@ logger.info('Starting refcard generation');
 HtmlCreator.CreateAllRefcards(pathList);
 
 
-const objects = PathCreator.createObject();
+const objects = PathCreator.prepareHandlebarsContextObject();
 const source = fs.readFileSync('./templates/index.hbs').toString();
 const template = handlebars.compile(source,{strict:true});
 const result = template(objects);
