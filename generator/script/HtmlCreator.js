@@ -73,6 +73,7 @@ function htmlGenerator(path){
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
+        <script src="../Menu.js"></script>
     </body>
 </html>
 `;
