@@ -12,6 +12,10 @@
   right:10px;
 }
 
+body > .h2-part h2:nth-child(1) {
+  display:none;
+}
+
 @media (max-width:570px) {
   #github {
     visibility:hidden;
@@ -310,6 +314,10 @@ body {
       margin-top: 30%;
       width: 35%;
     }
+  }
+
+  .band > img:nth-child(2) {
+    margin-top:30px;
   }
 
   .buttons {

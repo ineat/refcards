@@ -39,6 +39,7 @@ div {
     box-sizing: border-box;
     border-radius: 4px;
     margin-bottom: 35px;
+    visibility: hidden;
   }
 
   .refcards-page p {
@@ -50,6 +51,23 @@ div {
     text-align: center;
     color: #000000;
   }
+
+  p.alternative-page-title {
+    position:relative;
+    bottom:140px;
+    width:180px;
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 24px!important;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    margin-left:20px;
+    text-align: center;
+    margin-bottom:-68px;
+
+    color:white !important;
+  }
+
 
   .footer {
     margin-top: 100px;
@@ -106,6 +124,12 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  div p.alternative-page-title {
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 

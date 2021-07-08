@@ -39,9 +39,9 @@ function createPaths() {
  * Return an object "refcards" containing all the data to compile the handlebars template
  * @returns {{}}
  */
-function createObject() {
-    let objectList = {};
-    objectList["refcards"] = [];
+function prepareHandlebarsContextObject() {
+    let handlebarsContext = {};
+    handlebarsContext.refcards = [];
     const refcardList = getAllRefcardsDirectories();
     for (let pas of refcardList) {
         let dir = fs.readdirSync(`../${pas.name}`,{ withFileTypes:true});
@@ -52,16 +52,15 @@ function createObject() {
                 let copy = refcardFile.name;
                 let name = refcardFile.name.replace(".md","");
                 let path = copy.replace(".md",".html");
-                if (cpt === 1) {
-                    objectList["refcards"].push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:true});
+                if (fs.existsSync(`assets/${pas.name}-page.svg`)) {
+                    handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:cpt===1 , pageVisual : true});
                 }
-                else{
-                    objectList["refcards"].push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:false});
+                else {
+                    handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:cpt===1, pageVisual : false});
                 }
             }
         }
     }
-    return objectList
+    return handlebarsContext
 }
-
-module.exports = {createPaths,createObject,getAllRefcardsDirectories};
+module.exports = {createPaths,prepareHandlebarsContextObject,getAllRefcardsDirectories};

@@ -114,7 +114,7 @@ function metadataExtractor(path) {
     }
     return {
         main_color: "#B2F2F4",
-        second_color: "#43B44B",
+        second_color: "#FC2860",
         third_color: "#447BBB"
     };
 }
@@ -152,13 +152,21 @@ function refcardCreator(path) {
     fs.writeFile(`public/${titleElement}/${refcardLang}.html`,text,function(err){
         if (err) throw err;
         logger.info(`Refcard ${titleElement} ${refcardLang} generated!`);
-    }}
+    })
+}
 
 /**
  * Create all the refcards in the github repository and copy assets used by every html pages
  * @param pathList
  */
 function CreateAllRefcards(pathList) {
+    if (!fs.existsSync(`public/assets`)) {
+        fs.mkdir(`public/assets}`, (err) => {
+            logger.info(`Directory assets created`);
+        });
+    }
+    fse.copySync(`assets`,`public/assets`,{overwrite:true});
+    logger.info(`global assets copied`)
     for (let path of pathList) {
         refcardCreator(path)
     }
