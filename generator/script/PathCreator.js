@@ -34,6 +34,7 @@ function createPaths() {
     return pathList
 }
 
+
 /**
  * Return an object "refcards" containing all the data to compile the handlebars template
  * @returns {{}}
@@ -51,11 +52,13 @@ function prepareHandlebarsContextObject() {
                 let copy = refcardFile.name;
                 let name = refcardFile.name.replace(".md","");
                 let path = copy.replace(".md",".html");
-                handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first: cpt === 1});
+                var firstPagePictoExist  = fs.existsSync(`assets/${pas.name}-page.svg`);
+
+                handlebarsContext.refcards.push({title : pas.name, name:name, path:`${pas.name}/${path}`,first:cpt===1 , pageVisual : firstPagePictoExist});
+
             }
         }
     }
     return handlebarsContext
 }
-
 module.exports = {createPaths,prepareHandlebarsContextObject,getAllRefcardsDirectories};

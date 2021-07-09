@@ -20,20 +20,27 @@ exports.render_upgrade = function (color_items) {
             return text;
         }
         return `<a class="links" style="color :${second_color}" href="${href}" title="${title ? title : ""}">${text}</a>`;
-
     }
 
     render.blockquote = function(quote) {
-        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">\n${quote}</blockquote>\n`;
+        return `<blockquote class="blockquotes" style="color: ${second_color};border-left: ${second_color} solid;">${quote}</blockquote>`;
     }
 
     render.heading = function(text, level, raw, slugger) {
         if (this.options.headerIds) {
             let html = this.options.headerPrefix + slugger.slug(raw);
-            return `<h${level} class="heading${level}" style="color: ${third_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n`;
+            if (level === 2) {
+                return `</div>
+                        <div class="h2-part">
+                            <h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
+            } else {
+                return `<h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
+            }
         }
         // ignore IDs
-        return `<h${level} class="heading${level}" style="${third_color}">${text}</h${level}>\n`;
+        return `</div>
+                <div class="h2-part">
+                    <h${level} class="heading${level}" style="color: ${second_color}">${text}</h${level}>`;
     }
 
     render.codespan = function(text) {
@@ -50,8 +57,7 @@ exports.render_upgrade = function (color_items) {
             }
         }
 
-        code = code.replace(/\n$/, '') + '\n';
-
+        code = code.replace(/$/, '');
         return `<pre style="background-color: ${first_color}"><code class="code" style="color: ${third_color}">${escaped ? code:escape(code)}</code></pre>`;
     }
 

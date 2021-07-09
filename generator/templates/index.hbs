@@ -3,18 +3,62 @@
 <head>
     <meta charset="utf-8">
     <title>Ineat Refcards</title>
-
+    <link rel='stylesheet' href='./css/index-style.css'>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 </head>
 <body>
-<h1>Ineat Refcards</h1>
-    <div class="hbs">
-        {{#each refcards}}
-            {{#if this.first}}
-                <h2>{{this.title}}</h2>
-            {{/if}}
-            <a href={{this.path}}>Refcard {{this.title}} {{this.name}}</a>
-        {{/each}}
+    <div class="content">
+        <div class="layout">
+            <img src="assets/ineat-logo.svg" alt="Logo ineat">
+            <div class="links">
+                <!-- Place this tag where you want the button to render. -->
+                <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+                <a href="https://www.ineat-group.com/">Qui sommes nous ?</a>
+                <a href="">Le concept</a>
+            </div>
+        </div>
+        <div class="content">
+            <h1>RefCards des technologies utilisées chez Ineat</h1>
+            <div class="list">
+                <div class="selector">
+                    <select name="sorting by" class="menu">
+                        <option disabled selected hidden>Trier par</option>
+                        <option>Ordre Alphabétique</option>
+                        <option>Date de publication</option>
+                        <option>Temps de lecture</option>
+                    </select>
+                </div>
+                <div class="list-content">
+                    {{#each refcards}}
+                        {{#if this.first}}
+                            <div class="refcards-page">
+                                <a href="{{this.path}}">
+                                    {{#if this.pageVisual}}
+                                        <img src="assets/{{this.title}}-page.svg" alt="{{this.title}} refcard page">
+                                        {{else}}
+                                        <img src="assets/alternative-page.svg" alt="{{this.title}} refcard page">
+                                        <p class="alternative-page-title">RefCard {{this.title}}</p>
+                                    {{/if}}
+                                </a>
+                                <a href="{{this.path}}">
+                                    <p>{{this.title}}</p>
+                                </a>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+            <a href="https://github.com/ineat/refcards">
+                <img src="assets/github_fabbutton.svg" alt="Logo github" class="github">
+            </a>
+        </div>
+        <div class="footer">
+            <a href="https://www.ineat-group.com/">Ineat Group</a>
+            <a href="https://astekgroup.fr/">Astek Group</a>
+            <a href="https://github.com/ineat">Repo Github</a>
+        </div>
     </div>
 </body>
 </html>
