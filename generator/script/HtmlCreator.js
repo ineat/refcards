@@ -74,7 +74,7 @@ function htmlGenerator(path){
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
-        <script defer src="../script/SceneCreator.js">
+        <script defer src="../script/SceneCreator.js"></script>
     </body>
 </html>
 `;
