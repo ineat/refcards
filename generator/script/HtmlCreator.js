@@ -42,6 +42,7 @@ function htmlGenerator(path){
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="../script/ScrollMagic.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: ${metadataExtractor(path).second_color}">
@@ -73,7 +74,7 @@ function htmlGenerator(path){
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
-        <script src="../Menu.js"></script>
+        <script defer src="../script/SceneCreator.js">
     </body>
 </html>
 `;
@@ -172,6 +173,13 @@ function CreateAllRefcards(pathList) {
     }
     fse.copySync(`assets`,`public/assets`,{overwrite:true});
     logger.info(`global assets copied`)
+    if (!fs.existsSync(`public/script`)) {
+        fs.mkdir(`public/script`, (err) => {
+            logger.info(`Directory script created`);
+        });
+    }
+    fse.copySync(`script/front-script`, `public/script`, {overwrite: true});
+    logger.info(`scripts copied from script/front-script`)
     for (let path of pathList) {
         refcardCreator(path)
     }
