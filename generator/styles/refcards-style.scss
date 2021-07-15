@@ -6,6 +6,15 @@
     top: 750px;
   }
 
+  .buttons .internationalization select {
+    position:absolute;
+    top:-22px;
+  }
+
+  .buttons-on-page .internationalization select {
+    top:-35px;
+  }
+
   .band {
     height:220vh!important;
   }
@@ -175,10 +184,6 @@
   right:10px;
 }
 
-body > .h2-part h2:nth-child(1) {
-  display:none;
-}
-
 @media (max-width:570px) {
   #github {
     visibility:hidden;
@@ -268,6 +273,33 @@ img {
 .buttons {
   height:10vh;
 
+  .internationalization {
+    width:90px;
+    position:absolute;
+    right:10px;
+    top:7px;
+
+    img {
+      width:25px;
+      position:relative;
+      right:60px;
+    }
+
+    select{
+      position:relative;
+      bottom:26px;
+      left:44px;
+      background-color:unset;
+      border:unset;
+      color:white;
+
+      option {
+        background-color:white;
+        color:black;
+      }
+    }
+  }
+
   a {
     text-decoration:none;
   }
@@ -297,6 +329,33 @@ img {
   top: -1px;
   padding: calc(1em + 1px) 1em 1em;
   background-color:white;
+
+  .internationalization {
+    width:90px;
+    position:absolute;
+    right:10px;
+    top:26px;
+
+    img {
+      width:25px;
+      position:relative;
+      right:60px;
+    }
+
+    select{
+      position:relative;
+      bottom:26px;
+      left:44px;
+      background-color:unset;
+      border:unset;
+      color:black;
+
+      option {
+        background-color:white;
+        color:black;
+      }
+    }
+  }
 
   span {
     position: relative;
@@ -418,7 +477,8 @@ body {
   box-shadow: 0px 8px 32px rgba(35, 32, 28, 0.06);
 
   img {
-    width:100px;
+    width: auto;
+    height:60px;
     position:relative;
     right:30px;
     top:10px;

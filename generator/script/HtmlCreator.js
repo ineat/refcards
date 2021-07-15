@@ -27,6 +27,47 @@ function getTitle(path) {
     return [match[2],match[3]];
 }
 
+
+/**
+ * Return a div containing the different langages availables
+ * @param path
+ * @returns {string}
+ */
+function createDivInternationalization (path){
+    const refcardTitle = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
+    if (refcardLang === "EN") {
+        return`<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>`
+    } else {
+        const englishAvailable = fs.existsSync(`public/${refcardTitle}/EN.html`);
+        if (englishAvailable) {
+            return `<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+                <option value="EN.html">EN</option>
+            </select>
+    </div>`
+        }
+        else {
+            return `<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+            </select>
+    </div>`
+        }
+    }
+
+}
+
+
 /**
  * Return the html code of a markdown file thanks to his path
  * @param path
@@ -35,6 +76,7 @@ function getTitle(path) {
 function htmlGenerator(path){
     const titleElement = getTitle(path)[0];
     const refcardLang = getTitle(path)[1];
+    const divInternationalization = createDivInternationalization(path);
     return `<!DOCTYPE html>
 <html lang=${refcardLang}>
     <head>
@@ -52,6 +94,7 @@ function htmlGenerator(path){
             </a>
             <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
             <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+            ${divInternationalization}
         </div>
         <img src="" alt="">
         <div class="band">
@@ -71,6 +114,7 @@ function htmlGenerator(path){
         <div class="little-menu">
             <img src="assets/logo-${getTitle(path)[0]}.png" alt="logo ${getTitle(path)[0]}">
         </div>
+        ${divInternationalization}
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
