@@ -496,6 +496,11 @@ body {
   inset:unset !important;
   top:100px !important;
   right:160px !important;
+  visibility: hidden;
+}
+
+.isPinned {
+  visibility: visible !important;
 }
 
 
@@ -529,7 +534,6 @@ body > div:nth-child(7) ol {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    min-width: 30%;
   }
 
   .anchor img {
