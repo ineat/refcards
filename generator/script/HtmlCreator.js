@@ -84,7 +84,7 @@ function htmlGenerator(path){
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <script src="../script/ScrollMagic.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: ${metadataExtractor(path).second_color}">
