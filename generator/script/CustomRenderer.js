@@ -5,6 +5,8 @@ const escape = require('escape-html');
 const MAIN_COLOR_KEY= "main_color";
 const SECOND_COLOR_KEY= "second_color";
 const THIRD_COLOR_KEY= "third_color";
+
+
 /**
  * Modify the renderer to add html classes for the tokens in the function and add style properties using the colors in parameters
  * @param color_items an object containing the key / value colors
@@ -30,9 +32,11 @@ exports.render_upgrade = function (color_items) {
         if (this.options.headerIds) {
             let html = this.options.headerPrefix + slugger.slug(raw);
             if (level === 2) {
-                return `</div>
-                        <div class="h2-part">
-                            <h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
+                return `</div>\n
+                        <div class="h2-part" id=\"div-${html}\">\n
+                            <h${level} class="heading${level}" style="color: ${second_color}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>\n
+                            <div class="title-menu-container"><p class="title-menu" id="${html}">${text}</p></div>\n`
+
             } else {
                 return `<h${level} class="heading${level}" style="color: ${second_color}" id="${html}"><a class="anchor" href="#${html}"><img src="../assets/anchor.svg" alt></a>${text}</h${level}>`;
             }

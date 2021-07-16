@@ -27,6 +27,47 @@ function getTitle(path) {
     return [match[2],match[3]];
 }
 
+
+/**
+ * Return a div containing the different langages availables
+ * @param path
+ * @returns {string}
+ */
+function createDivInternationalization (path){
+    const refcardTitle = getTitle(path)[0];
+    const refcardLang = getTitle(path)[1];
+    if (refcardLang === "EN") {
+        return`<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>`
+    } else {
+        const englishAvailable = fs.existsSync(`public/${refcardTitle}/EN.html`);
+        if (englishAvailable) {
+            return `<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+                <option value="EN.html">EN</option>
+            </select>
+    </div>`
+        }
+        else {
+            return `<div class="internationalization">
+        <img src="../assets/${refcardLang}.png" alt="${refcardLang} flag">
+            <select onchange="location= this.value">
+                <option selected>${refcardLang}</option>
+            </select>
+    </div>`
+        }
+    }
+
+}
+
+
 /**
  * Return the html code of a markdown file thanks to his path
  * @param path
@@ -35,6 +76,7 @@ function getTitle(path) {
 function htmlGenerator(path){
     const titleElement = getTitle(path)[0];
     const refcardLang = getTitle(path)[1];
+    const divInternationalization = createDivInternationalization(path);
     return `<!DOCTYPE html>
 <html lang=${refcardLang}>
     <head>
@@ -42,6 +84,7 @@ function htmlGenerator(path){
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: ${metadataExtractor(path).second_color}">
@@ -51,6 +94,7 @@ function htmlGenerator(path){
             </a>
             <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
             <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+            ${divInternationalization}
         </div>
         <img src="" alt="">
         <div class="band">
@@ -67,13 +111,19 @@ function htmlGenerator(path){
         </a>
         <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
         <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        <div class="little-menu">
+            <img src="assets/logo-${getTitle(path)[0]}.png" alt="logo ${getTitle(path)[0]}">
+        </div>
+        ${divInternationalization}
     </div>
         ${marked(fs.readFileSync(path, 'utf8'), {renderer: render_upgrade(metadataExtractor(path))})}
         </div>
+        <script defer src="../script/SceneCreator.js"></script>
     </body>
 </html>
 `;
 }
+
 
 /**
  * Create a folder with the name of the refcard extracted from the path and copy assets from the path into this folder
@@ -167,6 +217,13 @@ function CreateAllRefcards(pathList) {
     }
     fse.copySync(`assets`,`public/assets`,{overwrite:true});
     logger.info(`global assets copied`)
+    if (!fs.existsSync(`public/script`)) {
+        fs.mkdir(`public/script`, (err) => {
+            logger.info(`Directory script created`);
+        });
+    }
+    fse.copySync(`script/front-script`, `public/script`, {overwrite: true});
+    logger.info(`scripts copied from script/front-script`)
     for (let path of pathList) {
         refcardCreator(path)
     }

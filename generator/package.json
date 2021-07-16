@@ -24,6 +24,7 @@
     "os": "^0.1.1",
     "parser.js": "^1.0.0",
     "sanitize-html": "^2.3.3",
+    "scrollmagic": "^2.0.8",
     "stream-http": "^3.2.0",
     "util": "^0.12.3",
     "winston": "^3.3.3"

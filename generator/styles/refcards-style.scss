@@ -1,5 +1,177 @@
 @charset "UTF-8";
 
+@media (max-width: 640px) {
+  body > div:nth-child(7) ol {
+    width: 350px;
+    top: 750px;
+  }
+
+  .buttons .internationalization select {
+    position:absolute;
+    top:-22px;
+  }
+
+  .buttons-on-page .internationalization select {
+    top:-35px;
+  }
+
+  .band {
+    height:220vh!important;
+  }
+
+  .buttons-on-page {
+    span {
+      left: 40px;
+      top: 24px;
+    }
+
+    img {
+      margin-top: 0;
+      position: relative;
+      top: -12px;
+      right: 55px;
+    }
+  }
+
+  .little-menu {
+    height: 120px;
+    width: 300px;
+
+    img {
+      position: relative;
+      right: 40px;
+      top: 0px;
+    }
+  }
+
+  .title-menu {
+    margin-left: -38% !important;
+    top: 65px !important;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+  body {
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+  img,
+  table,
+  td,
+  blockquote,
+  code,
+  pre,
+  textarea,
+  input,
+  iframe,
+  object,
+  embed,
+  video {
+    max-width: 100%;
+  }
+
+  /* conserver le ratio des images */
+  img {
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* gestion des mots longs */
+  textarea,
+  table,
+  td,
+  th,
+  code,
+  pre,
+  samp {
+    -webkit-hyphens: auto;
+    /* césure propre */
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    /* passage à la ligne forcé */
+  }
+
+  pre {
+    width: 95%;
+  }
+
+  code,
+  pre,
+  samp {
+    white-space: pre-wrap;
+    /* passage à la ligne spécifique pour les éléments à châsse fixe */
+  }
+
+  /* masquer les éléments superflus */
+  .hide_mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width:650px) and (max-width:1150px) {
+  body > p:nth-child(5) {
+    width:30%;
+    -webkit-hyphens: auto;
+    /* césure propre */
+    -moz-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    /* passage à la ligne forcé */
+    left:1px;
+    text-align:center;
+  }
+}
+
+@media(max-width:700px) {
+  .buttons-on-page {
+    a:nth-child(2) {
+      visibility:hidden;
+      color:black;
+    }
+
+    span {
+      position:absolute;
+      left : 86px;
+      top:38px;
+    }
+  }
+}
+
+@media (max-width:1150px) {
+  .buttons {
+    a:nth-child(2) {
+      visibility:hidden;
+    }
+
+    span {
+      position: absolute;
+      top: 37px;
+      right: 400px;
+    }
+  }
+
+  .buttons-on-page {
+    a:nth-child(2) {
+      visibility: hidden;
+    }
+
+    span {
+      position: absolute;
+      top: 37px;
+      right:400px;
+    }
+  }
+}
+
 * {
   font-family: Jost, Serif;
   font-style: normal;
@@ -10,10 +182,6 @@
   position:absolute;
   top:110vh;
   right:10px;
-}
-
-body > .h2-part h2:nth-child(1) {
-  display:none;
 }
 
 @media (max-width:570px) {
@@ -105,6 +273,33 @@ img {
 .buttons {
   height:10vh;
 
+  .internationalization {
+    width:90px;
+    position:absolute;
+    right:10px;
+    top:7px;
+
+    img {
+      width:25px;
+      position:relative;
+      right:60px;
+    }
+
+    select{
+      position:relative;
+      bottom:26px;
+      left:44px;
+      background-color:unset;
+      border:unset;
+      color:white;
+
+      option {
+        background-color:white;
+        color:black;
+      }
+    }
+  }
+
   a {
     text-decoration:none;
   }
@@ -134,6 +329,33 @@ img {
   top: -1px;
   padding: calc(1em + 1px) 1em 1em;
   background-color:white;
+
+  .internationalization {
+    width:90px;
+    position:absolute;
+    right:10px;
+    top:26px;
+
+    img {
+      width:25px;
+      position:relative;
+      right:60px;
+    }
+
+    select{
+      position:relative;
+      bottom:26px;
+      left:44px;
+      background-color:unset;
+      border:unset;
+      color:black;
+
+      option {
+        background-color:white;
+        color:black;
+      }
+    }
+  }
 
   span {
     position: relative;
@@ -199,6 +421,15 @@ body {
   > h1:nth-child(3) {
     display: none;
   }
+
+  > div:nth-child(7) {
+    h2:nth-child(1) {
+      display:none;
+    }
+    .title-menu {
+      display:none;
+    }
+  }
 }
 
 .band {
@@ -236,7 +467,43 @@ body {
   }
 }
 
-#sommaire + ol {
+.little-menu {
+  width:350px;
+  position:absolute;
+  height:150px;
+  top:0px;
+  right:110px;
+  background: #FFFFFF;
+  box-shadow: 0px 8px 32px rgba(35, 32, 28, 0.06);
+
+  img {
+    width: auto;
+    height:60px;
+    position:relative;
+    right:30px;
+    top:10px;
+  }
+}
+
+.title-menu-container {
+  top: 80px;
+}
+
+.title-menu {
+  margin: unset !important;
+  width: 260px !important;
+  font-weight: bold;
+  inset:unset !important;
+  top:100px !important;
+  right:160px !important;
+}
+
+.isPinned {
+  visibility: visible !important;
+}
+
+
+body > div:nth-child(7) ol {
   width: 300px;
   position: absolute;
   right: 100px;
@@ -256,16 +523,16 @@ body {
 
 .h2-part:nth-child(2n) {
   background-color: #F9F9F9;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .h2-part{
+  padding-bottom :30px;
+  padding-top: 30px;
+
   img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    min-width: 45%;
   }
 
   .anchor img {
@@ -279,41 +546,53 @@ body {
   }
 }
 
-@media (min-width:650px) and (max-width:1150px) {
-  body > p:nth-child(5) {
-    width:30%;
-    -webkit-hyphens: auto;
-    /* césure propre */
-    -moz-hyphens: auto;
-    hyphens: auto;
-    word-wrap: break-word;
-    /* passage à la ligne forcé */
-    left:1px;
-    text-align:center;
+
+@media (max-width: 570px) {
+  #github {
+    visibility: hidden;
+  }
+
+  .little-menu {
+    right: unset;
+    left: 100px;
+  }
+
+  .title-menu {
+    right: unset !important;
+    left: 120px !important;
   }
 }
 
+@media (max-width : 835px) {
+  body > p:nth-child(5) {
+    width:200px;
+  }
+}
 
-
-
-@media (max-width:750px) {
+@media (max-width: 980px) {
+  body > p:nth-child(5) {
+    position:absolute;
+    left:0px;
+  }
+}
+@media (max-width: 750px) {
   .buttons-on-page span {
     position: absolute;
     left: 486px;
     top: 40px;
+    visibility: hidden;
   }
 
   .band {
-    position:relative;
-    top:-100px;
-    left:100px;
-
-    > img:nth-child(1) {
-      position: absolute;
-      margin-left: 31%;
-      margin-top: 30%;
-      width: 35%;
-    }
+    position: relative;
+    top: -100px;
+    left: 100px;
+  }
+  .band > img:nth-child(1) {
+    position: absolute;
+    margin-left: 31%;
+    margin-top: 30%;
+    width: 35%;
   }
 
   .band > img:nth-child(2) {
@@ -332,143 +611,24 @@ body {
   }
 
   body > p:nth-child(5) {
-    color:black;
-    position:absolute;
-    font-size:xx-large;
-    left:140px;
-    text-align:center;
-    top:200px;
-    width:240px;
+    color: black;
+    position: absolute;
+    font-size: xx-large;
+    left: 140px;
+    text-align: center;
+    top: 200px;
+    width: 240px;
   }
 
   body > p:nth-child(6) {
-    position:absolute;
-    top:380px;
-    left:160px;
+    position: absolute;
+    top: 380px;
+    left: 160px;
   }
 
-  #sommaire + ol {
-    position:absolute;
-    left:60px;
-  }
-
-}
-
-@media(max-width:700px) {
-  .buttons-on-page {
-    a:nth-child(2) {
-      visibility:hidden;
-      color:black;
-    }
-
-    span {
-      position:absolute;
-      left : 86px;
-      top:38px;
-    }
+  body > div:nth-child(7) ol {
+    position: absolute;
+    left: 60px;
   }
 }
 
-@media (max-width:1150px) {
-  .buttons {
-    a:nth-child(2) {
-      visibility:hidden;
-    }
-
-    span {
-      margin-left:0;
-      position:absolute;
-      top:21px;
-      left:130px;
-    }
-  }
-}
-
-
-@media (max-width: 640px) {
-  #sommaire + ol {
-    width:350px;
-    top:750px;
-  }
-
-  .buttons-on-page {
-    span{
-      left:40px;
-      top:24px;
-    }
-
-    img {
-      margin-top:0;
-      position:relative;
-      top:-12px;
-      right:55px;
-    }
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  /* passer body (et tous les éléments de largeur fixe) en largeur automatique */
-  body {
-    width: auto;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
-  img,
-  table,
-  td,
-  blockquote,
-  code,
-  pre,
-  textarea,
-  input,
-  iframe,
-  object,
-  embed,
-  video {
-    max-width: 100%;
-  }
-
-  /* conserver le ratio des images */
-  img {
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* gestion des mots longs */
-  textarea,
-  table,
-  td,
-  th,
-  code,
-  pre,
-  samp {
-    -webkit-hyphens: auto;
-    /* césure propre */
-    -moz-hyphens: auto;
-    hyphens: auto;
-    word-wrap: break-word;
-    /* passage à la ligne forcé */
-  }
-
-  pre {
-    width: 95%;
-  }
-
-  code,
-  pre,
-  samp {
-    white-space: pre-wrap;
-    /* passage à la ligne spécifique pour les éléments à châsse fixe */
-  }
-
-  /* masquer les éléments superflus */
-  .hide_mobile {
-    display: none !important;
-  }
-}

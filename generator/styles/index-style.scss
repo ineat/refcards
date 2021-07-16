@@ -30,7 +30,7 @@ div {
     margin-top: 90px;
   }
 
-  .menu {
+  #menu {
     margin-top: 35px;
     width: 168px;
     height: 40px;
@@ -223,6 +223,10 @@ body {
       text-align: center;
       margin-left: 100px;
     }
+  }
+
+  body {
+    background-image: none;
   }
 
   div .list-content {
