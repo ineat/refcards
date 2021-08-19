@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: #FC2860">
@@ -14,6 +15,13 @@
             </a>
             <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
             <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+            <div class="internationalization">
+        <img src="../assets/EN.png" alt="EN flag">
+            <select onchange="location= this.value">
+                <option selected>EN</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>
         </div>
         <img src="" alt="">
         <div class="band">
@@ -30,20 +38,40 @@
         </a>
         <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
         <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        <div class="little-menu">
+            <img src="assets/logo-docker.png" alt="logo docker">
+        </div>
+        <div class="internationalization">
+        <img src="../assets/EN.png" alt="EN flag">
+            <select onchange="location= this.value">
+                <option selected>EN</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>
     </div>
         <h1 class="heading1" style="color: #FC2860" id="docker-refcard"><a class="anchor" href="#docker-refcard"><img src="../assets/anchor.svg" alt></a>Docker RefCard</h1><p><em>English version</em></p>
 <p>RefCard for Docker usage.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #FC2860" id="docker-definitions"><a class="anchor" href="#docker-definitions"><img src="../assets/anchor.svg" alt></a>Docker definitions</h2><p><strong>Layer</strong> - A set of read-only files to provision the system.</p>
+
+                        <div class="h2-part" id="div-docker-definitions">
+
+                            <h2 class="heading2" style="color: #FC2860"><a class="anchor" href="#docker-definitions"><img src="../assets/anchor.svg" alt></a>Docker definitions</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="docker-definitions">Docker definitions</p></div>
+<p><strong>Layer</strong> - A set of read-only files to provision the system.</p>
 <p><strong>Image</strong> - An ordered collection of root filesystem changes, used to execute code in docker container. May have a parent image.</p>
 <p><strong>Container</strong> - A runnable instance of image.</p>
 <p><strong>Registry</strong> - Central place where images live.</p>
 <p><strong>Docker machine</strong> - A VM to run Docker containers.</p>
 <p><strong>Docker compose</strong> - An utility to run multiple containers as a system.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #FC2860" id="useful-commands"><a class="anchor" href="#useful-commands"><img src="../assets/anchor.svg" alt></a>Useful commands</h2><h4 class="heading4" style="color: #FC2860" id="donwload-an-image"><a class="anchor" href="#donwload-an-image"><img src="../assets/anchor.svg" alt></a>Donwload an image</h4><p><code class="codespan" style="color: #FC2860">docker pull image_name</code></p>
+
+                        <div class="h2-part" id="div-useful-commands">
+
+                            <h2 class="heading2" style="color: #FC2860"><a class="anchor" href="#useful-commands"><img src="../assets/anchor.svg" alt></a>Useful commands</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="useful-commands">Useful commands</p></div>
+<h4 class="heading4" style="color: #FC2860" id="donwload-an-image"><a class="anchor" href="#donwload-an-image"><img src="../assets/anchor.svg" alt></a>Donwload an image</h4><p><code class="codespan" style="color: #FC2860">docker pull image_name</code></p>
 <h4 class="heading4" style="color: #FC2860" id="start-and-stop-container"><a class="anchor" href="#start-and-stop-container"><img src="../assets/anchor.svg" alt></a>Start and stop container</h4><p><code class="codespan" style="color: #FC2860">docker [start | restart | stop] [container_name | container_full_id | container_startwith_id]</code></p>
 <h4 class="heading4" style="color: #FC2860" id="show-history-of-an-image"><a class="anchor" href="#show-history-of-an-image"><img src="../assets/anchor.svg" alt></a>Show history of an image</h4><p><code class="codespan" style="color: #FC2860">docker history [image_name | image_full_id | image_startwith_id]</code></p>
 <h4 class="heading4" style="color: #FC2860" id="create-an-image-tag"><a class="anchor" href="#create-an-image-tag"><img src="../assets/anchor.svg" alt></a>Create an image tag</h4><p><code class="codespan" style="color: #FC2860">docker tag sourtce_image[:tag] target_image[:tag]</code></p>
@@ -54,11 +82,17 @@
 <h4 class="heading4" style="color: #FC2860" id="follow-a-container-logs"><a class="anchor" href="#follow-a-container-logs"><img src="../assets/anchor.svg" alt></a>Follow a container logs</h4><p><code class="codespan" style="color: #FC2860">docker logs -ft [container_name | container_id]</code></p>
 <h4 class="heading4" style="color: #FC2860" id="example-filesystem-and-port-mappings"><a class="anchor" href="#example-filesystem-and-port-mappings"><img src="../assets/anchor.svg" alt></a>Example filesystem and port mappings</h4><p><code class="codespan" style="color: #FC2860">docker run -it --rm -p 8080:8080 -v /path/to/agent.jar:/agent.jar -e JAVA_OPTS=”-javaagent:/agent.jar” tomcat:9.0.14-jre11</code></p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #FC2860" id="useful-cleanup-commands"><a class="anchor" href="#useful-cleanup-commands"><img src="../assets/anchor.svg" alt></a>Useful cleanup commands</h2><h4 class="heading4" style="color: #FC2860" id="kill-all-running-containers"><a class="anchor" href="#kill-all-running-containers"><img src="../assets/anchor.svg" alt></a>Kill all running containers</h4><p><code class="codespan" style="color: #FC2860">docker kill $(docker ps -q)</code></p>
+
+                        <div class="h2-part" id="div-useful-cleanup-commands">
+
+                            <h2 class="heading2" style="color: #FC2860"><a class="anchor" href="#useful-cleanup-commands"><img src="../assets/anchor.svg" alt></a>Useful cleanup commands</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="useful-cleanup-commands">Useful cleanup commands</p></div>
+<h4 class="heading4" style="color: #FC2860" id="kill-all-running-containers"><a class="anchor" href="#kill-all-running-containers"><img src="../assets/anchor.svg" alt></a>Kill all running containers</h4><p><code class="codespan" style="color: #FC2860">docker kill $(docker ps -q)</code></p>
 <h4 class="heading4" style="color: #FC2860" id="remove-all-stopped-containers"><a class="anchor" href="#remove-all-stopped-containers"><img src="../assets/anchor.svg" alt></a>Remove all stopped containers</h4><p><code class="codespan" style="color: #FC2860">docker rm $(docker ps -aq)</code></p>
 <h4 class="heading4" style="color: #FC2860" id="delete-dangling-images"><a class="anchor" href="#delete-dangling-images"><img src="../assets/anchor.svg" alt></a>Delete dangling images</h4><p><code class="codespan" style="color: #FC2860">docker rmi $(docker images -qf dangling=true)</code></p>
 
         </div>
+        <script defer src="../script/SceneCreator.js"></script>
     </body>
 </html>

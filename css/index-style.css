@@ -24,7 +24,7 @@ div .content {
   text-align: center;
   margin-top: 90px;
 }
-div .menu {
+div #menu {
   margin-top: 35px;
   width: 168px;
   height: 40px;
@@ -126,6 +126,7 @@ body {
     width: auto;
     margin: 0;
     padding: 0;
+    background-image: none;
   }
 
   /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */

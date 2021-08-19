@@ -23,11 +23,11 @@
             <h1>RefCards des technologies utilisées chez Ineat</h1>
             <div class="list">
                 <div class="selector">
-                    <select name="sorting by" class="menu">
+                    <select name="sorting by" id="menu">
                         <option disabled selected hidden>Trier par</option>
-                        <option>Ordre Alphabétique</option>
+                        <option value="name">Ordre Alphabétique</option>
                         <option>Date de publication</option>
-                        <option>Temps de lecture</option>
+                        <option value="size">Temps de lecture</option>
                     </select>
                 </div>
                 <div class="list-content">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="refcards-page">
                                 <a href="docker/EN.html">
-                                        <img src="assets/alternative-page.svg" alt="docker refcard page">
+                                        <img class="alternative-page" src="assets/alternative-page.svg" alt="docker refcard page">
                                         <p class="alternative-page-title">RefCard docker</p>
                                 </a>
                                 <a href="docker/EN.html">
@@ -76,5 +76,6 @@
             <a href="https://github.com/ineat">Repo Github</a>
         </div>
     </div>
+    <script defer src="Sort.js"></script>
 </body>
 </html>

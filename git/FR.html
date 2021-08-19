@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: #ef3428">
@@ -14,6 +15,12 @@
             </a>
             <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
             <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+            <div class="internationalization">
+        <img src="../assets/FR.png" alt="FR flag">
+            <select onchange="location= this.value">
+                <option selected>FR</option>
+            </select>
+    </div>
         </div>
         <img src="" alt="">
         <div class="band">
@@ -30,13 +37,27 @@
         </a>
         <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
         <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        <div class="little-menu">
+            <img src="assets/logo-git.png" alt="logo git">
+        </div>
+        <div class="internationalization">
+        <img src="../assets/FR.png" alt="FR flag">
+            <select onchange="location= this.value">
+                <option selected>FR</option>
+            </select>
+    </div>
     </div>
         <h1 class="heading1" style="color: #ef3428" id="git-refcard"><a class="anchor" href="#git-refcard"><img src="../assets/anchor.svg" alt></a>Git RefCard</h1><p><em>Version française</em></p>
 <p>RefCard d&#39;utilisation de Git 2.22.0</p>
 <p>Co-écrit par Ludovic Dussart et Gabin Darras.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="sommaire"><a class="anchor" href="#sommaire"><img src="../assets/anchor.svg" alt></a>Sommaire</h2><ol>
+
+                        <div class="h2-part" id="div-sommaire">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#sommaire"><img src="../assets/anchor.svg" alt></a>Sommaire</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="sommaire">Sommaire</p></div>
+<ol>
 <li><a class="links" style="color :#ef3428" href="#présentation" title="">Présentation</a></li>
 <li><a class="links" style="color :#ef3428" href="#principes-de-fonctionnement" title="">Principes de fonctionnement</a></li>
 <li><a class="links" style="color :#ef3428" href="#cheat-sheet" title="">Cheat Sheet</a><ul>
@@ -68,8 +89,13 @@
 <li><a class="links" style="color :#ef3428" href="#lours" title="">L&#39;ours</a></li>
 </ol>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="présentation"><a class="anchor" href="#présentation"><img src="../assets/anchor.svg" alt></a>Présentation</h2><p>Git est un gestionnaire de version qui enregistre (historise) l&#39;évolution des modifications opérées sur un fichier ou un ensemble de fichiers au fil du temps.</p>
+
+                        <div class="h2-part" id="div-présentation">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#présentation"><img src="../assets/anchor.svg" alt></a>Présentation</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="présentation">Présentation</p></div>
+<p>Git est un gestionnaire de version qui enregistre (historise) l&#39;évolution des modifications opérées sur un fichier ou un ensemble de fichiers au fil du temps.</p>
 <p>Créé en 2005 (à l&#39;initiative de Linus Torvalds, le créateur de Linux), ce nouveau système offre les promesses suivantes :</p>
 <ul>
 <li>vitesse </li>
@@ -82,8 +108,13 @@
 <p><img src="assets/git_trends.png" alt="git_trends" title="">
 Crédits : <a class="links" style="color :#ef3428" href="https://blog.gitprime.com/git-didnt-beat-svn-github-did" title="">GitPrime</a></p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="principes-de-fonctionnement"><a class="anchor" href="#principes-de-fonctionnement"><img src="../assets/anchor.svg" alt></a>Principes de fonctionnement</h2><p>Pour utiliser Git de manière optimale, il est nécessaire de comprendre comment il fonctionne pour versionner vos fichiers.</p>
+
+                        <div class="h2-part" id="div-principes-de-fonctionnement">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#principes-de-fonctionnement"><img src="../assets/anchor.svg" alt></a>Principes de fonctionnement</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="principes-de-fonctionnement">Principes de fonctionnement</p></div>
+<p>Pour utiliser Git de manière optimale, il est nécessaire de comprendre comment il fonctionne pour versionner vos fichiers.</p>
 <h3 class="heading3" style="color: #ef3428" id="le-modèle-objet-git"><a class="anchor" href="#le-modèle-objet-git"><img src="../assets/anchor.svg" alt></a>Le modèle objet Git</h3><h4 class="heading4" style="color: #ef3428" id="le-sha-1"><a class="anchor" href="#le-sha-1"><img src="../assets/anchor.svg" alt></a>Le <strong>SHA-1</strong></h4><p>Git manipule des objets qui sont identifiés et vérifiés par une chaîne de contrôle <strong>unique</strong> sur 40 caractères (empreinte SHA-1).
 Concept très important, cette empreinte est calculée en fonction du contenu du fichier ou de la structure du répertoire considéré. </p>
 <p>Une empreinte SHA-1 ressemble à ceci :</p>
@@ -156,8 +187,13 @@ Quand vous réalisez des actions dans Git, la quasi-totalité d’entre elles ne
 <blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><p> <a class="links" style="color :#ef3428" href="https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Rudiments-de-Git" title="">Inspiration : Git - Rudiments</a></p>
 <p> <a class="links" style="color :#ef3428" href="https://alexgirard.com/git-book/intro/modele-objet-git/" title="">Crédits : Git-book</a></p>
 </blockquote></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="cheat-sheet"><a class="anchor" href="#cheat-sheet"><img src="../assets/anchor.svg" alt></a>Cheat Sheet</h2><h3 class="heading3" style="color: #ef3428" id="règles--bonnes-pratiques"><a class="anchor" href="#règles--bonnes-pratiques"><img src="../assets/anchor.svg" alt></a>Règles &amp; bonnes pratiques</h3><ul>
+
+                        <div class="h2-part" id="div-cheat-sheet">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#cheat-sheet"><img src="../assets/anchor.svg" alt></a>Cheat Sheet</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="cheat-sheet">Cheat Sheet</p></div>
+<h3 class="heading3" style="color: #ef3428" id="règles--bonnes-pratiques"><a class="anchor" href="#règles--bonnes-pratiques"><img src="../assets/anchor.svg" alt></a>Règles &amp; bonnes pratiques</h3><ul>
 <li>Créez une branche pour tout nouveau développement (cf. <a class="links" style="color :#ef3428" href="#workflow-de-branches-et-conventions" title="">Workflow de branches et conventions</a>)</li>
 <li>Préfixez le nom de votre branche par un <strong>type</strong> (cf. <a class="links" style="color :#ef3428" href="#workflow-de-branches-et-conventions" title="">Workflow de branches et conventions</a>)</li>
 <li>Un commit = une tâche (cf. <a class="links" style="color :#ef3428" href="#ajout-interactif" title="">Ajout interactif</a>)</li>
@@ -218,17 +254,32 @@ git add .</code></pre><p>Ajoute toutes les modifications de tous les fichiers à
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git pull &lt;remote&gt; &lt;branch&gt;</code></pre><p>Met à jour l&#39;état d&#39;un dépôt distant dans votre dépôt local et fusionne les changements dans votre espace de travail (WD).</p>
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git push -u &lt;remote&gt; &lt;branch&gt;</code></pre><p>Publie les commits de la branche spécifiée sur le dépôt distant (<code class="codespan" style="color: #ef3428">-u</code> définit le upstream). Utilisez <code class="codespan" style="color: #ef3428">&lt;branch&gt;:&lt;new name&gt;</code> pour publier la branche sous un nom différent.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="débuter-avec-un-projet"><a class="anchor" href="#débuter-avec-un-projet"><img src="../assets/anchor.svg" alt></a>Débuter avec un projet</h2><pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git init &lt;nom du projet&gt;</code></pre><p>Création d&#39;un nouveau dépôt local (<code class="codespan" style="color: #ef3428">.git/</code>) avec le nom donné.</p>
+
+                        <div class="h2-part" id="div-débuter-avec-un-projet">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#débuter-avec-un-projet"><img src="../assets/anchor.svg" alt></a>Débuter avec un projet</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="débuter-avec-un-projet">Débuter avec un projet</p></div>
+<pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git init &lt;nom du projet&gt;</code></pre><p>Création d&#39;un nouveau dépôt local (<code class="codespan" style="color: #ef3428">.git/</code>) avec le nom donné.</p>
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git clone &lt;url du dépôt distant&gt;</code></pre><p>Clone un dépôt distant avec l&#39;entièreté de son contenu dans votre dépôt local. L&#39;option <code class="codespan" style="color: #ef3428">-b</code> permet de ne cloner que le contenu d&#39;une branche spécifique.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="configuration-minimale"><a class="anchor" href="#configuration-minimale"><img src="../assets/anchor.svg" alt></a>Configuration minimale</h2><pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git config --global user.name &quot;&lt;votre identité&gt;&quot;</code></pre><p>Définit le texte qui sera associé aux commits de tous les projets. Pour le configurer localement, retirer le <code class="codespan" style="color: #ef3428">--global</code>.</p>
+
+                        <div class="h2-part" id="div-configuration-minimale">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#configuration-minimale"><img src="../assets/anchor.svg" alt></a>Configuration minimale</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="configuration-minimale">Configuration minimale</p></div>
+<pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git config --global user.name &quot;&lt;votre identité&gt;&quot;</code></pre><p>Définit le texte qui sera associé aux commits de tous les projets. Pour le configurer localement, retirer le <code class="codespan" style="color: #ef3428">--global</code>.</p>
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git config --global user.email &quot;&lt;votre adresse email&gt;&quot;</code></pre><p>Définit l&#39;adresse email qui sera associée aux commits de tous les projets. Pour la configurer localement, retirer le <code class="codespan" style="color: #ef3428">--global</code>.</p>
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git config --global alias.lg &quot;log --color --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit&quot;</code></pre><p>Définit un <strong>alias</strong> <code class="codespan" style="color: #ef3428">lg</code> proposant une vue moins verbeuse et plus exploitable du <code class="codespan" style="color: #ef3428">git log</code>. Vous pouvez ajouter n&#39;importe quelles autres options à la suite de <code class="codespan" style="color: #ef3428">git lg</code>.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="ignorer-des-fichiers-gitignore"><a class="anchor" href="#ignorer-des-fichiers-gitignore"><img src="../assets/anchor.svg" alt></a>Ignorer des fichiers (.gitignore)</h2><blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><p> <a class="links" style="color :#ef3428" href="https://fr.atlassian.com/git/tutorials/saving-changes/gitignore" title="">Inspiration : Atlassian - gitignore</a></p>
+
+                        <div class="h2-part" id="div-ignorer-des-fichiers-gitignore">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#ignorer-des-fichiers-gitignore"><img src="../assets/anchor.svg" alt></a>Ignorer des fichiers (.gitignore)</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ignorer-des-fichiers-gitignore">Ignorer des fichiers (.gitignore)</p></div>
+<blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><p> <a class="links" style="color :#ef3428" href="https://fr.atlassian.com/git/tutorials/saving-changes/gitignore" title="">Inspiration : Atlassian - gitignore</a></p>
 </blockquote><p>Git offre un mécanisme pour <strong>ignorer</strong> des fichiers de votre espace de travail. Les fichiers à ignorer sont généralement des artefacts de build  (<code class="codespan" style="color: #ef3428">target</code> sous Maven, <code class="codespan" style="color: #ef3428">dist</code> ou <code class="codespan" style="color: #ef3428">build</code> sous NPM par exemple) et des fichiers générés par la machine qui sont dérivés de votre dépôt de source ou qui ne devraient pas être commités (<code class="codespan" style="color: #ef3428">/node_modules </code>, <code class="codespan" style="color: #ef3428">/.idea</code>, le code compilé, etc).
 Les éléments renseignés dans le <code class="codespan" style="color: #ef3428">.gitignore</code> n&#39;apparaitront plus dans le résultat des commandes <code class="codespan" style="color: #ef3428">git status</code>, <code class="codespan" style="color: #ef3428">git add</code>, etc.</p>
 <ol>
@@ -247,8 +298,13 @@ Les éléments renseignés dans le <code class="codespan" style="color: #ef3428"
 <pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">echo debug.log &gt;&gt; .gitignore
 git rm debug.log
 git commit -m &quot;chore(.gitignore): Start ignoring debug.log&quot;</code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="workflow-type-dun-développement-avec-git"><a class="anchor" href="#workflow-type-dun-développement-avec-git"><img src="../assets/anchor.svg" alt></a>Workflow type d&#39;un développement avec Git</h2><p>Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.</p>
+
+                        <div class="h2-part" id="div-workflow-type-dun-développement-avec-git">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#workflow-type-dun-développement-avec-git"><img src="../assets/anchor.svg" alt></a>Workflow type d&#39;un développement avec Git</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="workflow-type-dun-développement-avec-git">Workflow type d&#39;un développement avec Git</p></div>
+<p>Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens avec Git.</p>
 <p><img src="assets/aday.svg" alt="aday" title=""></p>
 <blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><ul>
 <li>Pour initier ou récupérer un projet : <a class="links" style="color :#ef3428" href="#débuter-avec-un-projet" title="">Débuter avec un projet</a></li>
@@ -364,8 +420,13 @@ git commit -m &quot;chore(.gitignore): Start ignoring debug.log&quot;</code></pr
 </li>
 </ol>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="workflow-de-branches-et-conventions"><a class="anchor" href="#workflow-de-branches-et-conventions"><img src="../assets/anchor.svg" alt></a>Workflow de branches et conventions</h2><p>Afin de maîtriser efficacement le cycle de vie de vos développements, il est nécessaire d&#39;imposer des règles et des processus pour la gestion des branches de votre projet. Le workflow le plus courant est celui <strong>de branche par fonctionnalité</strong> :</p>
+
+                        <div class="h2-part" id="div-workflow-de-branches-et-conventions">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#workflow-de-branches-et-conventions"><img src="../assets/anchor.svg" alt></a>Workflow de branches et conventions</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="workflow-de-branches-et-conventions">Workflow de branches et conventions</p></div>
+<p>Afin de maîtriser efficacement le cycle de vie de vos développements, il est nécessaire d&#39;imposer des règles et des processus pour la gestion des branches de votre projet. Le workflow le plus courant est celui <strong>de branche par fonctionnalité</strong> :</p>
 <ul>
 <li>Chaque fonctionnalité est développée dans une branche prévue à cet effet plutôt que dans la branche <code class="codespan" style="color: #ef3428">master</code>. Grâce à cette encapsulation, plusieurs développeurs peuvent travailler aisément sur une même fonctionnalité sans modifier la base de code principale. Cela signifie également que la branche <code class="codespan" style="color: #ef3428">master</code> ne contiendra jamais de code bogué : un avantage non négligeable pour les environnements d&#39;intégration continue.</li>
 <li>Ce fonctionnement va permettre de proposer les modifications présentes sur une branche aux plateformes de versioning de manière isolée. Il est alors extrêmement facile pour votre équipe de faire des retours sur le travail effectué.</li>
@@ -405,8 +466,13 @@ git commit -m &quot;chore(.gitignore): Start ignoring debug.log&quot;</code></pr
 <li><a class="links" style="color :#ef3428" href="https://docs.gitlab.com/ee/workflow/gitlab_flow.html" title="">Gitlab Flow</a> </li>
 </ul>
 </blockquote></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="conventions-de-commits"><a class="anchor" href="#conventions-de-commits"><img src="../assets/anchor.svg" alt></a>Conventions de commits</h2><p>Avec l&#39;adoption croissante de l&#39;outil auprès des communautés OSS notamment, un besoin d&#39;uniformisation de la description des commits s&#39;est rapidement fait sentir.
+
+                        <div class="h2-part" id="div-conventions-de-commits">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#conventions-de-commits"><img src="../assets/anchor.svg" alt></a>Conventions de commits</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="conventions-de-commits">Conventions de commits</p></div>
+<p>Avec l&#39;adoption croissante de l&#39;outil auprès des communautés OSS notamment, un besoin d&#39;uniformisation de la description des commits s&#39;est rapidement fait sentir.
 Impulsée par les équipes Angular notamment, une convention de commit a rapidement fait l&#39;unanimité et est à présent décrite <a class="links" style="color :#ef3428" href="https://www.conventionalcommits.org/" title="">sous forme d&#39;une spécification</a>.</p>
 <p> Cette spécification fournit un ensemble simple de règles pour créer un historique de commit explicite et lisible. Cette convention est liée à <a class="links" style="color :#ef3428" href="https://semver.org/" title="">SemVer</a>, en décrivant les fonctionnalités, les correctifs et les modifications importantes apportées aux messages de commit.</p>
 <p>Le message du commit doit être structuré comme suit :</p>
@@ -440,8 +506,13 @@ Impulsée par les équipes Angular notamment, une convention de commit a rapidem
 <li>Vous pouvez générer automatiquement un CHANGELOG issue de vos commits, basés sur ces conventions : <a class="links" style="color :#ef3428" href="https://github.com/conventional-changelog" title="">Conventional-changelog</a></li>
 </ul>
 </blockquote></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="pour-aller-plus-loin"><a class="anchor" href="#pour-aller-plus-loin"><img src="../assets/anchor.svg" alt></a>Pour aller plus loin</h2><h3 class="heading3" style="color: #ef3428" id="plus-de-commandes"><a class="anchor" href="#plus-de-commandes"><img src="../assets/anchor.svg" alt></a>Plus de Commandes</h3><blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><p>Utilisez <code class="codespan" style="color: #ef3428">git</code> + <strong>TABULATION</strong> pour que le terminal vous propose les commandes</p>
+
+                        <div class="h2-part" id="div-pour-aller-plus-loin">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#pour-aller-plus-loin"><img src="../assets/anchor.svg" alt></a>Pour aller plus loin</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="pour-aller-plus-loin">Pour aller plus loin</p></div>
+<h3 class="heading3" style="color: #ef3428" id="plus-de-commandes"><a class="anchor" href="#plus-de-commandes"><img src="../assets/anchor.svg" alt></a>Plus de Commandes</h3><blockquote class="blockquotes" style="color: #ef3428;border-left: #ef3428 solid;"><p>Utilisez <code class="codespan" style="color: #ef3428">git</code> + <strong>TABULATION</strong> pour que le terminal vous propose les commandes</p>
 <p>Utilisez <strong>TABULATION</strong> n&#39;importe quand pour que Git auto-complète votre commande (commandes, noms de branches, etc)</p>
 </blockquote><pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git help everyday</code></pre><p>Un guide step-by-step d&#39;un usage de Git à la journée.</p>
 <h4 class="heading4" style="color: #ef3428" id="wd--index"><a class="anchor" href="#wd--index"><img src="../assets/anchor.svg" alt></a>WD &amp; Index</h4><pre style="background-color: #fde8de"><code class="code" style="color: #3c2e16">git clean -f</code></pre><p>Supprime les fichiers non trackés du WD. Utilisez l&#39;option <code class="codespan" style="color: #ef3428">-d</code> pour supprimer également les répertoires.</p>
@@ -717,8 +788,13 @@ Le reflog vous permet de revenir sur les commits même s&#39;ils ne sont pas ré
 </li>
 </ol>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="utiliser-une-plateforme-de-versioning"><a class="anchor" href="#utiliser-une-plateforme-de-versioning"><img src="../assets/anchor.svg" alt></a>Utiliser une plateforme de versioning</h2><p>Une plateforme de versioning s&#39;appuie sur Git pour vous proposer un hébergement <strong>décentralisé</strong> de votre code source et bien d&#39;autres fonctionnalités (WYSIWYG, bug tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes <code class="codespan" style="color: #ef3428">fetch</code>, <code class="codespan" style="color: #ef3428">pull</code> et <code class="codespan" style="color: #ef3428">push</code>.</p>
+
+                        <div class="h2-part" id="div-utiliser-une-plateforme-de-versioning">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#utiliser-une-plateforme-de-versioning"><img src="../assets/anchor.svg" alt></a>Utiliser une plateforme de versioning</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="utiliser-une-plateforme-de-versioning">Utiliser une plateforme de versioning</p></div>
+<p>Une plateforme de versioning s&#39;appuie sur Git pour vous proposer un hébergement <strong>décentralisé</strong> de votre code source et bien d&#39;autres fonctionnalités (WYSIWYG, bug tracker, documentation, CI/CD, etc). Ces plateformes proposent des dépôts distants qui interagiront avec votre dépôt local via les commandes <code class="codespan" style="color: #ef3428">fetch</code>, <code class="codespan" style="color: #ef3428">pull</code> et <code class="codespan" style="color: #ef3428">push</code>.</p>
 <h3 class="heading3" style="color: #ef3428" id="configurer-votre-authentification-sur-la-plateforme"><a class="anchor" href="#configurer-votre-authentification-sur-la-plateforme"><img src="../assets/anchor.svg" alt></a>Configurer votre authentification sur la plateforme</h3><p>Vous pouvez contacter les serveurs distants de deux façons :</p>
 <h4 class="heading4" style="color: #ef3428" id="via-https"><a class="anchor" href="#via-https"><img src="../assets/anchor.svg" alt></a>Via HTTPS</h4><p>En saisissant votre identifiant et votre mot de passe (à chaque <code class="codespan" style="color: #ef3428">push</code> ou <code class="codespan" style="color: #ef3428">fetch</code>) </p>
 <ul>
@@ -761,8 +837,13 @@ Le reflog vous permet de revenir sur les commits même s&#39;ils ne sont pas ré
 <li>Dépendant du résultat du <strong>code review</strong> de votre soumission, soit votre branche sera intégrée à <code class="codespan" style="color: #ef3428">develop</code>, soit vous devrez la retravailler avant son intégration.</li>
 </ol>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="glossaire"><a class="anchor" href="#glossaire"><img src="../assets/anchor.svg" alt></a>Glossaire</h2><h3 class="heading3" style="color: #ef3428" id="head"><a class="anchor" href="#head"><img src="../assets/anchor.svg" alt></a>HEAD</h3><p><code class="codespan" style="color: #ef3428">HEAD</code> est un pointeur sur la référence de la branche actuelle, qui est à son tour un pointeur sur le dernier commit réalisé sur cette branche. Ceci signifie que <code class="codespan" style="color: #ef3428">HEAD</code> sera le parent du prochain commit à créer. C’est généralement plus simple de penser <code class="codespan" style="color: #ef3428">HEAD</code> comme l’instantané de votre dernière validation.
+
+                        <div class="h2-part" id="div-glossaire">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#glossaire"><img src="../assets/anchor.svg" alt></a>Glossaire</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="glossaire">Glossaire</p></div>
+<h3 class="heading3" style="color: #ef3428" id="head"><a class="anchor" href="#head"><img src="../assets/anchor.svg" alt></a>HEAD</h3><p><code class="codespan" style="color: #ef3428">HEAD</code> est un pointeur sur la référence de la branche actuelle, qui est à son tour un pointeur sur le dernier commit réalisé sur cette branche. Ceci signifie que <code class="codespan" style="color: #ef3428">HEAD</code> sera le parent du prochain commit à créer. C’est généralement plus simple de penser <code class="codespan" style="color: #ef3428">HEAD</code> comme l’instantané de votre dernière validation.
 Git utilise d&#39;autres références de ce type comme </p>
 <ul>
 <li><code class="codespan" style="color: #ef3428">ORIG_HEAD</code> : état de la <code class="codespan" style="color: #ef3428">HEAD</code> avant un <code class="codespan" style="color: #ef3428">git reset</code></li>
@@ -773,8 +854,13 @@ Git utilise d&#39;autres références de ce type comme </p>
 <h3 class="heading3" style="color: #ef3428" id="index"><a class="anchor" href="#index"><img src="../assets/anchor.svg" alt></a>Index</h3><p>L’index est la zone qui contient les modifications du prochain commit que vous ferez. C&#39;est la « zone de préparation » alimentée par <code class="codespan" style="color: #ef3428">git add</code>. C’est ce que Git examine lorsque vous lancez <code class="codespan" style="color: #ef3428">git commit</code>.</p>
 <h3 class="heading3" style="color: #ef3428" id="le-répertoire-de-travail-wd"><a class="anchor" href="#le-répertoire-de-travail-wd"><img src="../assets/anchor.svg" alt></a>Le répertoire de travail (WD)</h3><p>Aussi nommé <code class="codespan" style="color: #ef3428">Working Tree</code>, c&#39;est l&#39;endroit où vous modifiez vos fichiers. Il faut penser le répertoire de travail comme un bac à sable où vous pouvez essayer vos modifications avant de les transférer dans votre index puis les valider dans votre historique, ou les jeter à la poubelle (<code class="codespan" style="color: #ef3428">clean</code>).</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #ef3428" id="références"><a class="anchor" href="#références"><img src="../assets/anchor.svg" alt></a>Références</h2><ul>
+
+                        <div class="h2-part" id="div-références">
+
+                            <h2 class="heading2" style="color: #ef3428"><a class="anchor" href="#références"><img src="../assets/anchor.svg" alt></a>Références</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="références">Références</p></div>
+<ul>
 <li><a class="links" style="color :#ef3428" href="https://git-scm.com/book/fr/v2" title="">Documentation officielle de Git</a></li>
 <li><a class="links" style="color :#ef3428" href="http://ndpsoftware.com/git-cheatsheet.html" title="">Cheat Sheet visuelle</a></li>
 <li><a class="links" style="color :#ef3428" href="https://nvie.com/posts/a-successful-git-branching-model/" title="">Worflow GitFlow</a></li>
@@ -791,5 +877,6 @@ Linus Torvalds</p>
 <p>Git (<em>noun</em>): <em>an unpleasant or contemptible person.</em></p>
 </blockquote>
         </div>
+        <script defer src="../script/SceneCreator.js"></script>
     </body>
 </html>

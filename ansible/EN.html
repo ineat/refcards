@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
         <link rel='stylesheet' href='../css/refcards-style.css'>
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
     </head>
     <body>
     <div class="first-page" style="background-color: #2e4995">
@@ -14,6 +15,13 @@
             </a>
             <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
             <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+            <div class="internationalization">
+        <img src="../assets/EN.png" alt="EN flag">
+            <select onchange="location= this.value">
+                <option selected>EN</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>
         </div>
         <img src="" alt="">
         <div class="band">
@@ -30,6 +38,16 @@
         </a>
         <a href="https://github.com/ineat/refcards/discussions/new" class="hide_mobile">Une erreur ? Une question ? Éditer cette page sur Github</a>
         <a class="github-button" href="https://github.com/ineat/refcards" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ineat/refcards on GitHub">Star</a>
+        <div class="little-menu">
+            <img src="assets/logo-ansible.png" alt="logo ansible">
+        </div>
+        <div class="internationalization">
+        <img src="../assets/EN.png" alt="EN flag">
+            <select onchange="location= this.value">
+                <option selected>EN</option>
+                <option value="FR.html">FR</option>
+            </select>
+    </div>
     </div>
         <h1 class="heading1" style="color: #2e4995" id="ansible-refcard"><a class="anchor" href="#ansible-refcard"><img src="../assets/anchor.svg" alt></a>Ansible RefCard</h1><p><em>English version</em></p>
 <p>RefCard for Ansible usage.</p>
@@ -60,8 +78,13 @@
   ansible python module location = /usr/lib/python2.7/site-packages/ansible
   executable location = /bin/ansible
   python version = 2.7.5 (default, Apr 11 2018, 07:36:10) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)]</code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="upgrade-your-ansible-version"><a class="anchor" href="#upgrade-your-ansible-version"><img src="../assets/anchor.svg" alt></a>Upgrade your Ansible version</h2><p>Ansible give their Roadmap for v2.7 : <a class="links" style="color :#2e4995" href="https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html" title="">https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html</a></p>
+
+                        <div class="h2-part" id="div-upgrade-your-ansible-version">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#upgrade-your-ansible-version"><img src="../assets/anchor.svg" alt></a>Upgrade your Ansible version</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="upgrade-your-ansible-version">Upgrade your Ansible version</p></div>
+<p>Ansible give their Roadmap for v2.7 : <a class="links" style="color :#2e4995" href="https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html" title="">https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html</a></p>
 <p>Ansible provides porting guides to help you keeping up-to-date:</p>
 <ul>
 <li><a class="links" style="color :#2e4995" href="https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.0.html" title="">Ansible 2.0 Porting Guide</a></li>
@@ -72,8 +95,13 @@
 <li><a class="links" style="color :#2e4995" href="https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.7.html" title="">Ansible 2.7 Porting Guide</a></li>
 </ul>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-definitions"><a class="anchor" href="#ansible-definitions"><img src="../assets/anchor.svg" alt></a>Ansible Definitions</h2><h3 class="heading3" style="color: #2e4995" id="ansible-facts"><a class="anchor" href="#ansible-facts"><img src="../assets/anchor.svg" alt></a>Ansible Facts</h3><p>The Facts are variables used by Ansible to persist data through hosts and executions. There are native facts are stored on local server (disk or in-memory) and user facts defined by Human actions. It is important to get that facts are stored by group of actions OR by host.</p>
+
+                        <div class="h2-part" id="div-ansible-definitions">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-definitions"><img src="../assets/anchor.svg" alt></a>Ansible Definitions</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-definitions">Ansible Definitions</p></div>
+<h3 class="heading3" style="color: #2e4995" id="ansible-facts"><a class="anchor" href="#ansible-facts"><img src="../assets/anchor.svg" alt></a>Ansible Facts</h3><p>The Facts are variables used by Ansible to persist data through hosts and executions. There are native facts are stored on local server (disk or in-memory) and user facts defined by Human actions. It is important to get that facts are stored by group of actions OR by host.</p>
 <h3 class="heading3" style="color: #2e4995" id="ansible-hosts"><a class="anchor" href="#ansible-hosts"><img src="../assets/anchor.svg" alt></a>Ansible Hosts</h3><p>The Hosts are just servers that the Ansible Server can reach trhough its preferred protocol.</p>
 <h3 class="heading3" style="color: #2e4995" id="ansible-inventories"><a class="anchor" href="#ansible-inventories"><img src="../assets/anchor.svg" alt></a>Ansible Inventories</h3><p>The Inventories are list of Hosts defined by FQDN and tidied in groups. Groups can be composed with hosts or group of hosts. Hosts can be aliased to make the list customisable.</p>
 <h3 class="heading3" style="color: #2e4995" id="ansible-tasks"><a class="anchor" href="#ansible-tasks"><img src="../assets/anchor.svg" alt></a>Ansible Tasks</h3><p>The Tasks are the actions launched on remote Hosts. Tasks are written in YAML langage in a descriptive structure way making the read and write uniform through any tasks in the world.</p>
@@ -83,23 +111,38 @@
 <h3 class="heading3" style="color: #2e4995" id="ansible-handlers"><a class="anchor" href="#ansible-handlers"><img src="../assets/anchor.svg" alt></a>Ansible Handlers</h3><p>Ansible Handlers are action triggers called from tasks and run at the end of a play. A Handler is a tasks defined by its name and called with its name.</p>
 <h3 class="heading3" style="color: #2e4995" id="ansible-modules"><a class="anchor" href="#ansible-modules"><img src="../assets/anchor.svg" alt></a>Ansible Modules</h3><p>Modules are scripts written in Python and making uniform actions possible in giving common inputs for users and generating outputs regarding the command played in the module.</p>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-configuration"><a class="anchor" href="#ansible-configuration"><img src="../assets/anchor.svg" alt></a>Ansible Configuration</h2><p>Configuration can be made and used in a file which will be searched for in the following order:</p>
+
+                        <div class="h2-part" id="div-ansible-configuration">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-configuration"><img src="../assets/anchor.svg" alt></a>Ansible Configuration</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-configuration">Ansible Configuration</p></div>
+<p>Configuration can be made and used in a file which will be searched for in the following order:</p>
 <ul>
 <li>ansible.cfg (in the current directory)</li>
 <li>~/.ansible.cfg (in the home directory)</li>
 <li>/etc/ansible/ansible.cfg</li>
 </ul>
 </div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-adhoc-commands"><a class="anchor" href="#ansible-adhoc-commands"><img src="../assets/anchor.svg" alt></a>Ansible AdHoc Commands</h2><p>AdHoc commands are commands launched on the fly with writting any complex structured files.</p>
+
+                        <div class="h2-part" id="div-ansible-adhoc-commands">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-adhoc-commands"><img src="../assets/anchor.svg" alt></a>Ansible AdHoc Commands</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-adhoc-commands">Ansible AdHoc Commands</p></div>
+<p>AdHoc commands are commands launched on the fly with writting any complex structured files.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible localhost -m ping
 ansible localhost -m setup
 ansible localhost -m debug -a <span class="hljs-string">&#x27;myVar&#x27;</span>
 ansible localhost -m shell -a <span class="hljs-string">&#x27;uptime&#x27;</span>
 ansible all -i inventories/servers -m ping</code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-inventories-1"><a class="anchor" href="#ansible-inventories-1"><img src="../assets/anchor.svg" alt></a>Ansible Inventories</h2><p>Ansible Inventories make possible to gather servers in a single file to run commands on all these hosts. Inventories are usually organized by environments (a file by env) to let the group_vars operate on tasks and roles.</p>
+
+                        <div class="h2-part" id="div-ansible-inventories-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-inventories-1"><img src="../assets/anchor.svg" alt></a>Ansible Inventories</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-inventories-1">Ansible Inventories</p></div>
+<p>Ansible Inventories make possible to gather servers in a single file to run commands on all these hosts. Inventories are usually organized by environments (a file by env) to let the group_vars operate on tasks and roles.</p>
 <p>Inventory definition:</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-string">server.domain.fr</span>
 <span class="hljs-string">server[01-09].domain.fr</span>
@@ -124,8 +167,13 @@ ansible all -i inventories/servers -m ping</code></pre></div>
 
 [<span class="hljs-string">windows</span>]
 <span class="hljs-string">win01</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-tasks-1"><a class="anchor" href="#ansible-tasks-1"><img src="../assets/anchor.svg" alt></a>Ansible Tasks</h2><p>A task is a YAML structure able to perform actions through Ansible.</p>
+
+                        <div class="h2-part" id="div-ansible-tasks-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-tasks-1"><img src="../assets/anchor.svg" alt></a>Ansible Tasks</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-tasks-1">Ansible Tasks</p></div>
+<p>A task is a YAML structure able to perform actions through Ansible.</p>
 <p>Task definition :</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">The</span> <span class="hljs-string">task</span> <span class="hljs-string">name</span> <span class="hljs-string">to</span> <span class="hljs-string">make</span> <span class="hljs-string">things</span> <span class="hljs-string">clearly</span>
   <span class="hljs-attr">become:</span> <span class="hljs-literal">yes</span>
@@ -160,8 +208,13 @@ ansible all -i inventories/servers -m ping</code></pre></div>
     <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Task</span> <span class="hljs-string">when</span> <span class="hljs-string">block</span> <span class="hljs-string">failed</span>
   <span class="hljs-attr">always:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Task</span> <span class="hljs-string">always</span> <span class="hljs-string">run</span> <span class="hljs-string">before/after</span> <span class="hljs-string">block</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-playbooks-1"><a class="anchor" href="#ansible-playbooks-1"><img src="../assets/anchor.svg" alt></a>Ansible Playbooks</h2><p>A playbook is the gathering between hosts where will be applied tasks.</p>
+
+                        <div class="h2-part" id="div-ansible-playbooks-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-playbooks-1"><img src="../assets/anchor.svg" alt></a>Ansible Playbooks</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-playbooks-1">Ansible Playbooks</p></div>
+<p>A playbook is the gathering between hosts where will be applied tasks.</p>
 <p><strong>Install package on RHEL servers</strong></p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-bullet">-</span> <span class="hljs-attr">hosts:</span> [<span class="hljs-string">redhat</span>]
   <span class="hljs-attr">become:</span> <span class="hljs-literal">true</span>
@@ -174,8 +227,13 @@ ansible all -i inventories/servers -m ping</code></pre></div>
   <span class="hljs-attr">roles:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span>
   <span class="hljs-bullet">-</span> <span class="hljs-string">kubernetes</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-variables-1"><a class="anchor" href="#ansible-variables-1"><img src="../assets/anchor.svg" alt></a>Ansible Variables</h2><h3 class="heading3" style="color: #2e4995" id="variable-definition"><a class="anchor" href="#variable-definition"><img src="../assets/anchor.svg" alt></a>Variable Definition</h3><p>A Ansible variable is defined in <em>group_vars</em>, <em>host_vars</em>, <em>role vars</em>, <em>CLI vars</em> and is called in Jinja Templating way : <code class="codespan" style="color: #2e4995">{{ my_variable }}</code>. You can call variables everywhere in Ansible (tasks, variables, template, ...)</p>
+
+                        <div class="h2-part" id="div-ansible-variables-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-variables-1"><img src="../assets/anchor.svg" alt></a>Ansible Variables</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-variables-1">Ansible Variables</p></div>
+<h3 class="heading3" style="color: #2e4995" id="variable-definition"><a class="anchor" href="#variable-definition"><img src="../assets/anchor.svg" alt></a>Variable Definition</h3><p>A Ansible variable is defined in <em>group_vars</em>, <em>host_vars</em>, <em>role vars</em>, <em>CLI vars</em> and is called in Jinja Templating way : <code class="codespan" style="color: #2e4995">{{ my_variable }}</code>. You can call variables everywhere in Ansible (tasks, variables, template, ...)</p>
 <h3 class="heading3" style="color: #2e4995" id="variable-typology"><a class="anchor" href="#variable-typology"><img src="../assets/anchor.svg" alt></a>Variable Typology</h3><p>You can have 3 types of variables:</p>
 <ul>
 <li>String</li>
@@ -210,8 +268,13 @@ set_facts / registered vars
 role (and include_role) params
 include params
 extra vars (always win precedence)</code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-plays"><a class="anchor" href="#ansible-plays"><img src="../assets/anchor.svg" alt></a>Ansible Plays</h2><p>A sufficient list of attributes for Ansible Play when running a playbook:</p>
+
+                        <div class="h2-part" id="div-ansible-plays">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-plays"><img src="../assets/anchor.svg" alt></a>Ansible Plays</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-plays">Ansible Plays</p></div>
+<p>A sufficient list of attributes for Ansible Play when running a playbook:</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-bullet">-</span> <span class="hljs-attr">hosts:</span> <span class="hljs-string">webservers</span>
   <span class="hljs-attr">accelerate:</span> <span class="hljs-literal">no</span>
   <span class="hljs-attr">accelerate_port:</span> <span class="hljs-number">5099</span>
@@ -267,8 +330,13 @@ extra vars (always win precedence)</code></pre></div>
     <span class="hljs-bullet">-</span> <span class="hljs-string">&lt;task&gt;</span>
   <span class="hljs-attr">post_tasks:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">&lt;task&gt;</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-roles-1"><a class="anchor" href="#ansible-roles-1"><img src="../assets/anchor.svg" alt></a>Ansible Roles</h2><h3 class="heading3" style="color: #2e4995" id="structure-of-a-role"><a class="anchor" href="#structure-of-a-role"><img src="../assets/anchor.svg" alt></a>Structure of a role</h3><p>Role directories strucutre:</p>
+
+                        <div class="h2-part" id="div-ansible-roles-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-roles-1"><img src="../assets/anchor.svg" alt></a>Ansible Roles</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-roles-1">Ansible Roles</p></div>
+<h3 class="heading3" style="color: #2e4995" id="structure-of-a-role"><a class="anchor" href="#structure-of-a-role"><img src="../assets/anchor.svg" alt></a>Structure of a role</h3><p>Role directories strucutre:</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">roles/
 └── my-role
     ├── defaults
@@ -313,8 +381,13 @@ extra vars (always win precedence)</code></pre></div>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-bullet">-</span> <span class="hljs-attr">yum:</span>
     <span class="hljs-attr">name:</span> <span class="hljs-string">httpd-{{</span> <span class="hljs-string">apache_version</span> <span class="hljs-string">}}</span>
     <span class="hljs-attr">state:</span> <span class="hljs-string">present</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="including-and-importing-playbooks-or-tasks-or-roles"><a class="anchor" href="#including-and-importing-playbooks-or-tasks-or-roles"><img src="../assets/anchor.svg" alt></a>Including and importing playbooks or tasks or roles</h2><h3 class="heading3" style="color: #2e4995" id="include-tasks"><a class="anchor" href="#include-tasks"><img src="../assets/anchor.svg" alt></a>Include tasks</h3><p>Both <code class="codespan" style="color: #2e4995">import_task</code> and <code class="codespan" style="color: #2e4995">include_task</code> work.</p>
+
+                        <div class="h2-part" id="div-including-and-importing-playbooks-or-tasks-or-roles">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#including-and-importing-playbooks-or-tasks-or-roles"><img src="../assets/anchor.svg" alt></a>Including and importing playbooks or tasks or roles</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="including-and-importing-playbooks-or-tasks-or-roles">Including and importing playbooks or tasks or roles</p></div>
+<h3 class="heading3" style="color: #2e4995" id="include-tasks"><a class="anchor" href="#include-tasks"><img src="../assets/anchor.svg" alt></a>Include tasks</h3><p>Both <code class="codespan" style="color: #2e4995">import_task</code> and <code class="codespan" style="color: #2e4995">include_task</code> work.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-bullet">-</span> <span class="hljs-attr">hosts:</span> [<span class="hljs-string">redhat</span>]
   <span class="hljs-attr">tasks:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">import_tasks:</span> <span class="hljs-string">roles/example/tasks/main.yml</span>
@@ -334,16 +407,26 @@ extra vars (always win precedence)</code></pre></div>
   <span class="hljs-attr">tasks:</span>
   <span class="hljs-bullet">-</span> <span class="hljs-attr">import_role:</span>
       <span class="hljs-attr">name:</span> <span class="hljs-string">example</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-options"><a class="anchor" href="#ansible-options"><img src="../assets/anchor.svg" alt></a>Ansible Options</h2><p>Ansible offre des possibilités plus avancées qui aident à la vérification, au débuggage et poussent sur le plan non destructif des exécutions.</p>
+
+                        <div class="h2-part" id="div-ansible-options">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-options"><img src="../assets/anchor.svg" alt></a>Ansible Options</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-options">Ansible Options</p></div>
+<p>Ansible offre des possibilités plus avancées qui aident à la vérification, au débuggage et poussent sur le plan non destructif des exécutions.</p>
 <h3 class="heading3" style="color: #2e4995" id="filter-with-inventory"><a class="anchor" href="#filter-with-inventory"><img src="../assets/anchor.svg" alt></a>Filter with Inventory</h3><p>Option <code class="codespan" style="color: #2e4995">--limit</code> or <code class="codespan" style="color: #2e4995">-l</code> filters playbook runtime by server (host or alias), inventory groups and understand the exclusions.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible-playbook -i hosts.yml playbook.yml --limit &#x27;linux,!debian&#x27;</code></pre><h3 class="heading3" style="color: #2e4995" id="filter-by-tag"><a class="anchor" href="#filter-by-tag"><img src="../assets/anchor.svg" alt></a>Filter by Tag</h3><p>Option <code class="codespan" style="color: #2e4995">--tag</code> or <code class="codespan" style="color: #2e4995">-t</code> filters playbook tasks on tags set through attribut <code class="codespan" style="color: #2e4995">tags:</code> on Plays and Tasks. Exclusion is possible on Tag filter.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible-playbook -i host.yml playbook.yml --tags &#x27;config,service,!reload&#x27;</code></pre><h3 class="heading3" style="color: #2e4995" id="run-in-dry-run"><a class="anchor" href="#run-in-dry-run"><img src="../assets/anchor.svg" alt></a>Run in Dry-Run</h3><p>Option <code class="codespan" style="color: #2e4995">--check</code> runs playbook without applying any modification on server and reveals the state for every Task (ok, changed, failed). Dry-Run mode make verifications easy.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible-playbook -i host.yml playbook.yml --check</code></pre><p>Dry-Run mode is not plenty compatible with shell module because no state is returned on running shell scripts or commands.</p>
 <h3 class="heading3" style="color: #2e4995" id="mode-differences"><a class="anchor" href="#mode-differences"><img src="../assets/anchor.svg" alt></a>Mode Differences</h3><p>Option <code class="codespan" style="color: #2e4995">--diff</code> show differences between Ansible and Server sides and is closely linked to files (copy, template modules). Differences mode is a good way to see changes on servers.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible-playbook -i host.yml playbook.yml --diff</code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-modules-1"><a class="anchor" href="#ansible-modules-1"><img src="../assets/anchor.svg" alt></a>Ansible Modules</h2><h3 class="heading3" style="color: #2e4995" id="location"><a class="anchor" href="#location"><img src="../assets/anchor.svg" alt></a>Location</h3><p>Store your modules on :</p>
+
+                        <div class="h2-part" id="div-ansible-modules-1">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-modules-1"><img src="../assets/anchor.svg" alt></a>Ansible Modules</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-modules-1">Ansible Modules</p></div>
+<h3 class="heading3" style="color: #2e4995" id="location"><a class="anchor" href="#location"><img src="../assets/anchor.svg" alt></a>Location</h3><p>Store your modules on :</p>
 <ul>
 <li>Local side (current dir) : Create your Ansibel Module directly in your ansible rundir in a directory <code class="codespan" style="color: #2e4995">library</code>,</li>
 <li>Server side (all users) : Define the path with the attribute <code class="codespan" style="color: #2e4995">library</code> in <code class="codespan" style="color: #2e4995">/etc/ansible/ansible.cfg</code>.<pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77"><span class="hljs-attr">library</span>        = /usr/share/my_modules/</code></pre></li>
@@ -389,8 +472,13 @@ extra vars (always win precedence)</code></pre></div>
     <span class="hljs-keyword">if</span> self.check_mode:
         <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
     <span class="hljs-comment"># Keep doing actions if check_mode is false</span></code></pre></div>
-                        <div class="h2-part">
-                            <h2 class="heading2" style="color: #2e4995" id="ansible-vault"><a class="anchor" href="#ansible-vault"><img src="../assets/anchor.svg" alt></a>Ansible Vault</h2><h3 class="heading3" style="color: #2e4995" id="vault-configuration"><a class="anchor" href="#vault-configuration"><img src="../assets/anchor.svg" alt></a>Vault Configuration</h3><p>Ansible Vault Password configuration can be done in several ways:</p>
+
+                        <div class="h2-part" id="div-ansible-vault">
+
+                            <h2 class="heading2" style="color: #2e4995"><a class="anchor" href="#ansible-vault"><img src="../assets/anchor.svg" alt></a>Ansible Vault</h2>
+
+                            <div class="title-menu-container"><p class="title-menu" id="ansible-vault">Ansible Vault</p></div>
+<h3 class="heading3" style="color: #2e4995" id="vault-configuration"><a class="anchor" href="#vault-configuration"><img src="../assets/anchor.svg" alt></a>Vault Configuration</h3><p>Ansible Vault Password configuration can be done in several ways:</p>
 <ul>
 <li>Attribute <code class="codespan" style="color: #2e4995">vault_password_file</code> in file <code class="codespan" style="color: #2e4995">ansible.cfg</code>,</li>
 <li>Env variable <code class="codespan" style="color: #2e4995">ANSIBLE_VAULT_PASSWORD_FILE</code>,</li>
@@ -410,5 +498,6 @@ ansible-playbook --vault-id dev@dfile-dev-password site.yml
 ansible-playbook --vault-id prod@prompt site.yml</code></pre><p>You can also provide multiple vault resolvers to roll on multiple environments. Example for Dev with password file and Prod with prompt.</p>
 <pre style="background-color: #fef2e1"><code class="code" style="color: #2e2b77">ansible-playbook --vault-id dev@dev-password --vault-id prod@prompt site.yml</code></pre>
         </div>
+        <script defer src="../script/SceneCreator.js"></script>
     </body>
 </html>
