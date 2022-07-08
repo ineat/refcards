@@ -5,6 +5,7 @@ RefCard for Ansible usage.
 
 Written by Germain LEFEBVRE on December 2018 for Ansible v2.7 usage.
 
+Update by Nicolas Mercier on April 2022 for Ansible v2.12 usage.
 
 **Table of Contents**
 1. [Context](#context)
@@ -18,8 +19,12 @@ Written by Germain LEFEBVRE on December 2018 for Ansible v2.7 usage.
 1. [Ansible Variables](#ansible-variables)
 1. [Ansible Plays](#ansible-plays)
 1. [Ansible Roles](#ansible-roles)
-1. [Ansible Modules](#ansible-modules)
-1. [Ansible Vault](#ansible-vault)
+1. [Import de Playbooks, Tasks et Roles](#Including-and-importing-playbooks-tasks-and-roles)
+1. [Ansible Options](#ansible-options)
+3. [Ansible Modules](#ansible-modules)
+4. [Ansible Vault](#ansible-vault)
+1. [Ansible Galaxy](#ansible-galaxy)
+3. [Extension par utilisation](#extension-by-use)
 
 
 
@@ -33,7 +38,7 @@ Operating System distribution and version:
 cat /etc/redhat-release
 ```
 ```
-CentOS Linux release 7.5.1804 (Core)
+Rocky Linux release 8.5 (Green Obsidian)
 ```
 
 Python version:
@@ -41,7 +46,7 @@ Python version:
 python --version
 ```
 ```
-Python 2.7.5
+Python 3.8.8
 ```
 
 Ansible version:
@@ -49,17 +54,20 @@ Ansible version:
 ansible --version
 ```
 ```
-ansible 2.7.1
+ansible [core 2.12.1]
   config file = /etc/ansible/ansible.cfg
-  configured module search path = [u'/home/ansible/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
-  ansible python module location = /usr/lib/python2.7/site-packages/ansible
-  executable location = /bin/ansible
-  python version = 2.7.5 (default, Apr 11 2018, 07:36:10) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)]
+  configured module search path = ['/home/ansible/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.8/site-packages/ansible
+  ansible collection location = /home/ansible/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.8.8 (default, Nov  9 2021, 13:31:34) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]
+  jinja version = 3.0.3
+  libyaml = True
 ```
 
 
 ## Upgrade your Ansible version
-Ansible give their Roadmap for v2.7 : [https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html](https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html)
+Ansible give their Roadmap for v2.12 : [https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html)
 
 
 Ansible provides porting guides to help you keeping up-to-date:
@@ -69,6 +77,7 @@ Ansible provides porting guides to help you keeping up-to-date:
 * [Ansible 2.5 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.5.html)
 * [Ansible 2.6 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.6.html)
 * [Ansible 2.7 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.7.html)
+* * [Ansible 2.10 Porting Guide](https://docs.ansible.com/ansible/2.10/porting_guides/porting_guide_2.10.html)
 
 ## Ansible Definitions
 ### Ansible Facts
@@ -190,7 +199,17 @@ Task definition :
 
 
 ## Ansible Playbooks
-A playbook is the gathering between hosts where will be applied tasks.
+A playbook is used to apply tasks to inventory servers.
+It is a repeatable, reusable and simple multi-machine deployment and configuration management system.
+
+Playbooks can:
+
+  - declare the configurations
+
+  - orchestrate the steps of any manual process ordered, on several sets of machines, in a defined order
+
+  - launch tasks synchronously or asynchronously
+
 
 **Install package on RHEL servers**
 ```yaml
@@ -410,7 +429,13 @@ Task at `roles/example/tasks/main.yml`
 ```
 
 
-## Including and importing playbooks or tasks or roles
+## Including and importing playbooks, tasks and roles
+### Include playbook
+Only `import_playbook` works for including a whole playbook in another one.
+```yaml
+- import_playbook: install_apache.yml
+```
+
 ### Include tasks
 Both `import_task` and `include_task` work.
 ```yaml
@@ -420,14 +445,8 @@ Both `import_task` and `include_task` work.
   - include_tasks: roles/example/tasks/main.yml
 ```
 
-### Include tasks but filter on tag in ansible-playbook command
-Only `import_tasks` works and evaluates tags from tasks.
-
-### Include playbook
-Only `import_playbook` works for including a whole playbook in another one.
-```yaml
-- import_playbook: install_apache.yml
-```
+### Include tasks filtering by tag
+Only the `import_tasks` call allows to include tasks and filter them using Tags. **Important**: The `include_tasks` calls need to include the tags to be propagated, otherwise the tasks will not run.
 
 ### Include a whole role
 Both `import_role` and `include_role` can be used to call tasks from a role. This will include the whole role `example`.
@@ -612,3 +631,38 @@ You can also provide multiple vault resolvers to roll on multiple environments. 
 ansible-playbook --vault-id dev@dev-password --vault-id prod@prompt site.yml
 ```
 
+## Ansible Galaxy
+
+Ansible Galaxy is a free site to search, download, rate and review all kinds of community-developed Ansible roles and can be a great way to start your automation projects. It can also be used to create the "skeleton" of a role.
+
+```
+ansible-galaxy init my_name_role
+````
+
+## Extension by use
+
+Ansible is first and foremost a deployment tool for standardizing server-side actions and centralizing the configuration of deployed applications.
+
+### Verifications
+Ansible can, however, be used for a whole other use.
+The implementation of Dry-Run mode makes it possible to check the status of servers without making any changes.
+It becomes easy to use it as a verification tool in order to control any changes made on the servers.
+
+### Idempotency
+Idempotence is the faculty of an action not to apply change when it is not necessary.
+The repeatability of the action must not be destructive (state *changed*) and must go back to its good configuration (state *ok*).
+
+A playbook is idempotent when it no longer causes a *changed* state when passing through. Idempotence is said to be perfect when, at a time t, the actions are changing on the first launch and are no longer so on all the following ones.
+
+### Patterns and regular expressions
+An Ansible template can refer to a single host, an IP address, an inventory group, a set of groups, or all hosts in your inventory. Patterns are very flexible: you can exclude or require subsets of hosts, use wildcards or regular expressions, etc. Ansible runs on all inventory hosts included in the template.
+We can also combine the different Models.
+
+```
+- limitation to one host
+  . ansible -m [module] -a "[module options]" --limit "host1"
+- limitation to multiple hosts or groups
+  . ansible -m [module] -a "[module options]" --limit "host1,host2" or "group1,group2"
+- Exclusion of a group
+  . ansible -m [module] -a "[module options]" --limit "allgroup,!group2"
+```

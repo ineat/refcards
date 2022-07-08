@@ -5,6 +5,8 @@ RefCard d'utilisation de Ansible.
 
 Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
 
+Mis à jour par Nicolas MERCIER en Avril 2022 pour Ansible v2.12.1.
+
 **Sommaire**
 1. [Contexte](#context)
 1. [Version Ansible à jour](#version-ansible-à-jour)
@@ -21,11 +23,12 @@ Ecrit par Germain LEFEBVRE en December 2018 pour Ansible v2.7.
 1. [Ansible Options](#ansible-options)
 1. [Ansible Modules](#ansible-modules)
 1. [Ansible Vault](#ansible-vault)
-1. [Extension par utilisation](#extension-par-utilisation)
+1. [Ansible Galaxy](#ansible-galaxy)
+3. [Extension par utilisation](#extension-par-utilisation)
 
    
 
-### Context
+### Contexte
 Voici la liste des versions des paquets utilisés pour réaliser la RefCard.
 
 Distribution et version :
@@ -33,7 +36,7 @@ Distribution et version :
 cat /etc/redhat-release
 ```
 ```
-CentOS Linux release 7.5.1804 (Core)
+Rocky Linux release 8.5 (Green Obsidian)
 ```
 
 Version Python:
@@ -41,7 +44,7 @@ Version Python:
 python --version
 ```
 ```
-Python 2.7.5
+Python 3.8.8
 ```
 
 Version Ansible:
@@ -49,17 +52,21 @@ Version Ansible:
 ansible --version
 ```
 ```
-ansible 2.7.1
+ansible [core 2.12.1]
   config file = /etc/ansible/ansible.cfg
-  configured module search path = [u'/home/ansible/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
-  ansible python module location = /usr/lib/python2.7/site-packages/ansible
-  executable location = /bin/ansible
-  python version = 2.7.5 (default, Apr 11 2018, 07:36:10) [GCC 4.8.5 20150623 (Red Hat 4.8.5-28)]
+  configured module search path = ['/home/ansible/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.8/site-packages/ansible
+  ansible collection location = /home/ansible/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.8.8 (default, Nov  9 2021, 13:31:34) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]
+  jinja version = 3.0.3
+  libyaml = True
 ```
 
 
 ## Version Ansible à jour
-Ansible dévoile sa Roadmap pour la v2.7 : [https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html](https://docs.ansible.com/ansible/2.7/roadmap/ROADMAP_2_7.html)
+Ansible dévoile sa Roadmap pour la v2.12 : [https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html)
+
 
 
 Ansible met à disposition des guides de portage pour aider à rester à jour :
@@ -69,36 +76,37 @@ Ansible met à disposition des guides de portage pour aider à rester à jour :
 * [Ansible 2.5 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.5.html)
 * [Ansible 2.6 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.6.html)
 * [Ansible 2.7 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.7.html)
+* [Ansible 2.10 Porting Guide](https://docs.ansible.com/ansible/2.10/porting_guides/porting_guide_2.10.html)
 
 ## Définitions des objets
-### Facts
+### Ansible Facts
 Les Facts sont des variables utilisées par Ansible pour persister des données entre les machines et leurs exécutions au sein d'une séquence d'un playbook. Chaque machine possède ses propres facts, comportant des données sur le système. Il est également possible d'injecter des facts.
 
-### Hosts
+### Ansible Hosts
 Les Hosts sont les serveurs joignables par le Master Ansible sur lesquels sont appliquées les actions.
 
-### Inventories
+### Ansible Inventories
 Les Inventories comportent la liste des serveurs identifiés par IP/FQDN et organisés dans des groupes. Les groupes peuvent être constitués de serveurs ou de groupes de serveurs. Les serveurs peuvent être aliasés pour faciliter la lisibilité globale.
 
-### Tasks
+### Ansible Tasks
 Les Tasks sont des actions exécutées sur les serveurs distants. Les tâches sont écrites en YAML. La structure descriptive des actions permet de faciliter la lecture, d'unifier et d'homogénéiser l'écriture.
 
-### Variables
+### Ansible Variables
 Les Variables apportent la possibilité de modifier les valeurs au sein des tâches. Elles puevent avoir une portée locale à une séquence ou une portée globale à tous les playbooks.
 
-### Plays
+### Ansible Plays
 Les Plays sont des séquences d'actions, comportent des tâches et des inventaires. Ils permettent d'appliquer une liste de tâches sur un ensemble de serveurs.
 
-### Playbooks
-Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont des fichiers lancés avec la commande ansible-playbook.
+### Ansible Playbooks
+Les Playbooks regroupent des ensembles de Plays pour arriver à un but. Les Playbooks sont des fichiers lancés avec la commande ansible-playbook au format YAML.
 
-### Roles
+### Ansible Roles
 Les Roles sont des regroupements de tâches servant dans un même but. Ils sont appelés par les playbooks et permettent une meilleure lisibilité et facilité d'écriture. Les Roles ont pour vocation de devenir génériques, réutilisables et personnalisables grace aux variables.
 
-### Handlers
+### Ansible Handlers
 Les Handlers sont des actions appelées lorsqu'elles sont déclenchées par des tâches. Le déclenchement se fait à l'exécution d'une tâche, mais son exécution s'effectue à la fin de la séquence d'actions.
 
-### Modules
+### Ansible Modules
 Les Modules sont des scripts écrits en Python qui constituent les tâches. Une tâche appelle un module à l'aide du YAML qui sera ensuite exécuté sur le serveur distant. Les modules permettent d'uniformiser les actions à appliquer.
 
 
@@ -116,6 +124,8 @@ Il est nécessaire de lui passer en argument les serveurs (ou groupe de serveurs
 ```sh
 ansible localhost -m ping
 ansible localhost -m setup
+ansible localhost -m debug -a 'myVar'
+ansible localhost -m shell -a 'uptime'
 ansible all -i inventories/servers -m ping
 ```
 Il est également possible de les joindre à des inventaires.
@@ -127,6 +137,7 @@ ansible redhat -i inventories/hosts -m shell -a 'uptime'
 ## Ansible Inventories
 Les inventaires rassemblent les tâches et roles à appliquer sur des serveurs ou groupes de serveurs.
 Ils sont généralement organisés par environnement pour utiliser toute la puissance des variables et notamment des group_vars.
+
 Définition d'un inventaire :
 ```yaml
 server.domain.fr
@@ -162,27 +173,27 @@ Définition de Task :
 ```yaml
 - name: The task name to make things clearly
   become: yes
-  become_method: sudo
-  become_user: root
+  become_method: sudo # élévation de privilèges
+  become_user: root # utilisateur pour l'élévation de privilège
   check_mode: yes
   diff: no
   remote_user: ansible
   ignore_errors: True
   import_tasks: more_handlers
   include_tasks: other-tasks.yml
-  notify: restart apache
-  register: my_register
+  notify: restart apache # utilisation de Handler pour redémarrer un service
+  register: my_register # enregistrement du résultat de la tâche
   changed_when: False
   failed_when: False
   vars:
     - myvar: toto
     myfiles:
       -  default.conf
-  loop:
+  loop: # boucle
     - item1
     - ["item2", "item3"]
     - { name: "item4", description: "Desc Item 4" }
-  when:
+  when: # condition
     - my_register is defined
     - ansible_distribution == "CentOS"
     - ansible_distribution_major_version == "7" 
@@ -200,6 +211,15 @@ Définition de Task :
 
 ## Ansible Playbooks
 Un Playbook permet d'appliquer des tâches sur les serveurs de l'inventaire.
+C'est un système de gestion de configuration et de déploiement multi-machine repoductible, réutilisable et simple.
+
+Les playbooks peuvent :
+
+  - déclarer des configurations
+
+  - orchestrer les étapes de tout processus manuel commandé, sur plusieurs ensembles de machines, dans un ordre défini
+
+  - lancer des tâches de manière synchrone ou asynchrone
 
 **Installer un paquet sur les serveurs Redhat**
 ```yaml
@@ -222,7 +242,7 @@ Un Playbook permet d'appliquer des tâches sur les serveurs de l'inventaire.
 
 
 ## Ansible Variables
-### Variable Definition
+### Définition d'une Variable
 
 Une variable Ansible peut être définie à plusieurs endroits, notamment dans les *group_vars*, *host_vars*, *role vars*, *CLI vars* et est appelée à l'aide du Templating Jinja : `{{ my_variable }}`. Les variables peuvent être appelées dans tous les objets Ansible (tasks, variables, template, ...).
 
@@ -245,7 +265,7 @@ my_dict:
     item2: value2
 ```
 
-### Variable precedence
+### Priorité des variables
 Les variables Ansible peuvent être définies à plusieurs endroits comme `group_vars`, `playbooks`, `roles`, etc... et sont évaluées par priorité. Voici la liste des priorités en commençant par la plus faible :
 ```
 Valeur en ligne de commande
@@ -335,7 +355,9 @@ Une liste conséquente d'attributs d'un Play Ansible au sein d'un Playbook :
 
 
 ## Ansible Roles
-### Structure of a role
+### Structure d'un role
+Un rôle Ansible a une structure de répertoires définie avec huit répertoires standard principaux. Vous devez inclure au moins un de ces répertoires dans chaque rôle. Vous pouvez omettre tous les répertoires que le rôle n'utilise pas.
+
 Arboresence de répertoire d'un rôle Ansible :
 ```
 roles/
@@ -356,11 +378,23 @@ roles/
 
 Liste des fichiers potentiels et leurs fonctions au sein du rôle :
 * `my-role/defaults/main.yml` définit les variables par défaut du rôle,
-* `my-role/files/file` est un fichier (sans variables Jinja) à copier sur le serveur distant,
+* `my-role/files/file` est un fichier (sans variables Jinja) à copier ou à déployer sur le serveur distant, comme des scripts par exemple.
 * `my-role/handlers/main.yml` définit les Handlers déclenchables,
-* `my-role/tasks/main.yml` est le fichier de tâches par défaut appelé à l'appel du rôle,
+* `my-role/tasks/main.yml` est le fichier de tâches par défaut exécutée par le rôle,
 * `my-role/templates/template.yml.j2` est un fichier (avec variables Jinja) à copier,
 * `my-role/vars/main.yml` définit les variables à surcharger.
+
+#### Role avec une simple tâche
+```yaml
+- command: cat /etc/hosts
+```
+#### Role avec copie d'un fichier
+Le fichier situé dans `roles/example/files/my-file.sh` et la tâche à `roles/example/tasks/main.yml`.
+```yaml
+- copy:
+    src: my-file.sh
+    dest: /tmp/my-file.sh
+```
 
 #### Génération et copie d'un Template
 Fichier Template `roles/example/templates/my-template.sh.j2`
@@ -395,7 +429,7 @@ Fichier Task `roles/example/tasks/main.yml`.
 Le Handler `Restart Apache` sera déclenché à l'exécution de la Task `copy` (état *changed*).
 
 #### Variables par défaut du rôle
-Ficheir Variables `roles/example/defaults/main.yml`
+Fichier Variables `roles/example/defaults/main.yml`
 ```yaml
 apache_version: '2.4.2'
 ```
@@ -569,7 +603,7 @@ def process(self):
 
 ## Ansible Vault
 
-### Vault Configuration
+### Configuration de Vault
 
 La configuration du mot de passe dans Ansible Vault se fait sous plusieurs angles :
 * Attribut `vault_password_file` dans le fichier `ansible.cfg`,
@@ -578,7 +612,7 @@ La configuration du mot de passe dans Ansible Vault se fait sous plusieurs angle
 * Argument de commande `--ask-vault-pass` pour demander le mot de passe.
 
 
-### Vault Fichier
+### Fichier Vault
 Un fichier peut être encrypté complètement.
 ```
 ansible-vault create foo.yml
@@ -591,7 +625,7 @@ ansible-vault view foo.yml
 ansible-vault decrypt foo.yml
 ```
 
-### Vault Variables
+### Variables Vault
 Une variable peut être encryptée, au lieu du fichier, pour faciliter l'accès au fichier en clair sans dévoiler les valeurs sensibles.
 ```
 ansible-vault encrypt_string --name 'mykey' 'mysecret'
@@ -613,7 +647,16 @@ Il est également possible de fournir plusieurs mots de passe pour dérouler les
 ansible-playbook --vault-id dev@dev-password --vault-id prod@prompt site.yml
 ```
 
+## Ansible Galaxy
+
+Ansible Galaxy est un site gratuit pour rechercher, télécharger, évaluer et examiner toutes sortes de rôles Ansible développés par la communauté et peut être un excellent moyen de démarrer vos projets d'automatisation. Il peut servir aussi à la création du "squelette" d'un role.
+
+```
+ansible-galaxy init my_name_role
+````
+
 ## Extension par utilisation
+
 Ansible est en premier lieu un outil de déploiement permettant d'homogénéiser les actions coté serveur et de centraliser la configuration des applications déployées.
 
 ### Vérifications
@@ -626,3 +669,17 @@ L'idempotence est la facultée d'une action à ne pas appliquer de changement qu
 La répétabilité de l'action ne doit pas être destructrice (état *changed*) et doit remonter quant à sa bonne configuration (état *ok*).
 
 Un playbook est idempotent dès lors qu'il ne provoque plus d'état *changed* à son passage. L'idempotence est dite parfaite quand, à un instant t, les actions sont changeantes sur le premier lancement et ne le sont plus sur tous les suivants.
+
+### Modèles et expressions régulières
+Un modèle Ansible peut faire référence à un seul hôte, une adresse IP, un groupe d'inventaire, un ensemble de groupes ou tous les hôtes de votre inventaire. Les modèles sont très flexibles : vous pouvez exclure ou exiger des sous-ensembles d'hôtes, utiliser des caractères génériques ou des expressions régulières, etc. Ansible s'exécute sur tous les hôtes d'inventaire inclus dans le modèle.
+Nous pouvons aussi combiner les différents Modèles.
+
+```
+- limitation à un hôte
+  . ansible -m [module] -a "[module options]" --limit "host1"
+- limitation à plusieurs hôtes ou groupes
+  . ansible -m [module] -a "[module options]" --limit "host1,host2" ou "group1,group2"
+- Exclusion d'un groupe
+  . ansible -m [module] -a "[module options]" --limit "allgroup,!group2"
+```
+
