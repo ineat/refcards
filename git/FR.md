@@ -775,6 +775,7 @@ Permet de lister les références du dépôt local.
 ##### Rebase
 * `git config --global rebase.autosquash true` : Positionne les commits de `fixup` automatiquement lors d'un `rebase -i` (option `--autosquash`).
 * `git config --global rebase.autoStash true` : `stash` les modifications de votre WD avant un `pull`, et applique ce `stash` juste après.
+* `git config --global sequence.editor interactive-rebase-tool` : utilise [interactive-rebase-tool](https://github.com/MitMaro/git-interactive-rebase-tool) lors des `rebase -i`.
 
 ##### Autres
 * `git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'` : Configure la commande à lancer lors de l'utilisation de `git difftool -t vscode`.
@@ -892,6 +893,8 @@ Git vous propose une liste d'actions documentées dont voici les principales :
 Vous devez positionner les commandes à la place des `pick` en fonction de ce que vous voulez faire. Git va ensuite dépiler l'ensemble des commandes et vous demander d'effectuer des actions quand nécessaires (saisie d'un nouveau message, résolution de conflits, etc).
 
 Il est important de noter que tous les commits concernés par le `rebase` seront réécrits, même ceux laissés tels quels.
+
+> Vous pouvez utiliser [git-interactive-rebase-tool](https://github.com/MitMaro/git-interactive-rebase-tool) pour vous simplifier la vie lors des rebases interactifs.
 
 #### Rebase --onto
 
