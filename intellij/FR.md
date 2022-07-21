@@ -145,7 +145,7 @@ Que ce soit pour indiquer la présence de code mort, de code smells, d'erreurs o
 
 Ces actions correctives peuvent être déclenchées en mettant son curseur sur la partie souhaitée, puis en utilisant un raccourci indispensable : 
 
-> Show context action : `ALT`+`⏎` / `⌘⏎` sur macOS
+> Show context action : `ALT`+`⏎` / `⌥⏎` sur macOS
 
 ### Générer du code
 
