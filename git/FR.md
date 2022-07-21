@@ -1,9 +1,9 @@
 # Git RefCard
 *Version française*
 
-RefCard d'utilisation de Git 2.22.0
+RefCard d'utilisation de Git 2.37.0
 
-Co-écrit par Ludovic Dussart et Gabin Darras.
+Écrit par Ludovic Dussart.
 
 ## Sommaire
 
@@ -23,6 +23,7 @@ Co-écrit par Ludovic Dussart et Gabin Darras.
 [Pour aller plus loin](#pour-aller-plus-loin)
 
 10. [Plus de commandes](#plus-de-commandes)
+10. [Enrichir le configuration de Git](#enrichir-la-configuration-de-git)
 11. [Création de tag](#création-de-tag)
 12. [Fusion de branche](#fusion-de-branche)
 13. [Rebasage de branche](#rebasage-de-branche)
@@ -270,7 +271,7 @@ git reset <optional file>
 Déplace les modifications d'un ou plusieurs fichiers, de la zone d'index au WD.
 
 ```shell
-git checkout <file>
+git restore <file>
 ```
 Annule les modifications locales d'un fichier.
 
@@ -309,12 +310,12 @@ git branch <branch name>
 Crée une nouvelle branche (depuis la `HEAD`) avec le nom donné. Modifiez le nom d'une branche avec l'option ` -m <old-name> <new-name>`.
 
 ```shell
-git checkout <branch name>
+git switch <branch name>
 ```
-Bascule la `HEAD` sur la branche désignée et met à jour le répertoire  de travail. Utilisez `git checkout -` pour basculer sur la référence précédente.
+Bascule la `HEAD` sur la branche désignée et met à jour le répertoire de travail. Utilisez `git switch -` pour basculer sur la référence précédente.
 
 ```shell
-git checkout -b <branch name> <optional base-ref>
+git switch -c <branch name> <optional base-ref>
 ```
 Crée une nouvelle branche et se positionne dessus. Un second paramètre `<base-ref>` initie la branche depuis l'objet ciblé.
 
@@ -466,12 +467,12 @@ Ce chapitre a pour objectif de vous guider pas à pas dans vos usages quotidiens
 
     Exemple : `git pull origin develop` 
 
-2. Créez votre nouvelle branche depuis un instantané (généralement une autre branche) : `git checkout -b <nom de votre branche> <référence à l'instantané de départ>`
+2. Créez votre nouvelle branche depuis un instantané (généralement une autre branche) : `git switch -c <nom de votre branche> <référence à l'instantané de départ>`
 
     Exemples : 
-    * `git checkout -b <type>/<branch description> develop`
-    * `git checkout -b <type>/<branch description> 38a1303`
-    * `git checkout -b <type>/<branch description> 1.0.0`
+    * `git switch -c <type>/<branch description> develop`
+    * `git switch -c <type>/<branch description> 38a1303`
+    * `git switch -c <type>/<branch description> 1.0.0`
 
 ### 2. Versionnez vos modifications 
 
@@ -651,6 +652,13 @@ git add -N <optional file>
 ```
 Indique à Git que les modifications sur le fichier seront ajoutées plus tard. **Indispensable** pour *indexer* les nouveaux fichiers (sans leurs modifications) avant le `git add -p`.
 
+#### Checkout
+
+```shell
+git sparse-checkout set <path>
+```
+Permet de ne récupérer qu'une partie des fichiers d'un projet. Pratique sur des projets mono-repository.
+
 #### Commit
 
 ```shell
@@ -685,8 +693,12 @@ git rebase --onto <nouvelle branche> <ancienne branche> <branche courante>
 ```
 Permet de changer la branche de rattachement de la branche courante. cf. [Rebase --onto](#rebase---onto).
 
-
 #### Autour du commit
+
+```shell
+git shortlog
+```
+Affiche les commits regroupés par auteur.
 
 ```shell
 git difftool 
@@ -745,12 +757,12 @@ git show-ref
 ```
 Permet de lister les références du dépôt local.
 
-#### Enrichir la configuration de Git
+### Enrichir la configuration de Git
 
 > * L'option `--system` permet de définir une configuration à un système entier.
 > * `export LANG=<locale>` permet de changer la langue d'affichage des messages de Git (ex : `export LANG=en_US.UTF-8`)
 
-##### Core
+#### Core
 * `git config --global core.editor <path/to/tool>` : Permet d'utiliser un autre éditeur que `vi` ou `vim` 
     * Pour Notepad++ (Windows) par exemple : 
     ```shell
@@ -761,31 +773,32 @@ Permet de lister les références du dépôt local.
 * `git config --global core.excludesFile <path/to/.gitignore>` : Permet de définir un `.gitignore` global.
 * `git config --global alias.<name> "<definition>"` : Permet de définir un alias réutilisable.
 
-##### Commit
+#### Commit
 * `git config --global commit.template <path/to/template>`: Permet de définir un template par défaut pour les messages de commit.
 
-##### Fetch
+#### Fetch
 * `git config --global fetch.prune true` : La commande `fetch` sera jouée avec l'option `--prune` automatiquement.
 
-##### Pull
+#### Pull
 * `git config --global pull.rebase merges` : Conserve les commits de *merge* quand ils existent sur la branche d'où viennent les modifications.
 
-##### Merge
+#### Merge
 * `git config --global merge.ff only` : N'autorise que les fusions en **fast-forward** (pour se pré-munir des commits de *merge*).
 * `git config --global merge.tool kdiff3` : Configure l'outil `kdiff3` pour la résolution de conflits.
     * `git config --global diff.tool kdiff3` : Configure l'outil `kdiff3` pour l'affichage des différences.
 * `git config --global mergetool.keepBackup false` : Supprime les fichiers `.orig` après la résolution des conflits.
 * `git config --global mergetool.keepTemporaries false` : Supprime les fichiers temporaires après la résolution des conflits.
 
-##### Rebase
+#### Rebase
 * `git config --global rebase.autosquash true` : Positionne les commits de `fixup` automatiquement lors d'un `rebase -i` (option `--autosquash`).
 * `git config --global rebase.autoStash true` : `stash` les modifications de votre WD avant un `pull`, et applique ce `stash` juste après.
 * `git config --global sequence.editor interactive-rebase-tool` : utilise [interactive-rebase-tool](https://github.com/MitMaro/git-interactive-rebase-tool) lors des `rebase -i`.
 
-##### Autres
+#### Autres
 * `git config --global difftool.vscode.cmd 'code --wait --diff $LOCAL $REMOTE'` : Configure la commande à lancer lors de l'utilisation de `git difftool -t vscode`.
 * `git config --global rerere.enabled true` : Active [`git-rerere`](https://git-scm.com/docs/git-rerere), i.e Git se souviendra de certaines résolutions de conflits et les réappliquera automatiquement dans les futures résolutions pour des conflits similaires .
 * `git config --global pager.branch false` : Permet de visualiser l'ensemble des branches en dehors du mode édition. L'attribut `pager` fonctionne pour d'autres commandes comme `tag`, `log`, `diff`, etc.
+* `git config --global help.autoCorrect immediate` : Si vous tapez mal une commande, Git corrigera votre saisie pour jouer la commande déduite automatiquement (testez avec `git stats` par exemple).
 
 ### Création de tag 
 
@@ -831,7 +844,7 @@ Le `fast-forward` permet d'obtenir un historique **linéaire** après une fusion
 
 #### Fusionnez votre branche 
 
-1. Placez-vous sur la branche qui va recevoir les nouvelles modifications : `git checkout <nom de la branche de réception>`
+1. Placez-vous sur la branche qui va recevoir les nouvelles modifications : `git switch <nom de la branche de réception>`
 2. Fusionnez votre branche dessus en privilégiant le `fast-forward` : `git merge <type>/<branch description> --ff-only`
     * Résolvez les conflits si besoin
         * Invoquez `git merge --continue` après la résolution
@@ -970,6 +983,7 @@ Voici un cas d'utilisation où le `stash` est utile :
 > * Préférez le `git stash apply` au `git stash pop` pour conserver vos anciens stashs
 > * Faites le ménage via `git stash drop <stash>` si certains `stash`s ne sont plus utiles
 > * Utilisez `git stash apply <stash>` (exemple : `git stash apply stash@{0}`) pour appliquer votre `stash` au WD
+> * Utilisez `git stash -p` pour ne remiser qu'une partie de vos modifications.
 
 ### Gestion des conflits
 
@@ -1091,7 +1105,8 @@ Aussi nommé `Working Tree`, c'est l'endroit où vous modifiez vos fichiers. Il 
 * [Git Reflog](https://fr.atlassian.com/git/tutorials/rewriting-history/git-reflog)
 
 
-Ce guide a été écrit par Ludovic Dussart et Gabin Darras.
+Ce guide a été écrit par Ludovic Dussart avec l'aide de Gabin Darras en juillet 2019.
+Dernière mise à jour en juillet 2022.
 
 Merci à nos relecteurs : Kelsey Rider, Antoine Caron, Lucas Declercq, Mathias Deremer-Accettone, Pamela Rossignol, Emmanuel Peru, Clément Poissonnier.
 
