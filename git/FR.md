@@ -659,6 +659,11 @@ git commit --fixup <commit>
 Crée un commit de `fixup` destiné à être intégré dans le commit `<commit>` lors d'un `rebase -i --autosquash`. 
 
 ```shell
+git commit -p
+```
+Crée un commit après une phase d'ajout interactif.
+
+```shell
 git cherry-pick <ref>
 ```
 Applique la référence d'objet (commits, branche, etc) à la branche courante en créant un nouveau commit.
