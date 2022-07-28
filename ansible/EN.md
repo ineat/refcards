@@ -70,14 +70,7 @@ ansible [core 2.12.1]
 Ansible give their Roadmap for v2.12 : [https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_12.html)
 
 
-Ansible provides porting guides to help you keeping up-to-date:
-* [Ansible 2.0 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.0.html)
-* [Ansible 2.3 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.3.html)
-* [Ansible 2.4 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.4.html)
-* [Ansible 2.5 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.5.html)
-* [Ansible 2.6 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.6.html)
-* [Ansible 2.7 Porting Guide](https://docs.ansible.com/ansible/2.7/porting_guides/porting_guide_2.7.html)
-* * [Ansible 2.10 Porting Guide](https://docs.ansible.com/ansible/2.10/porting_guides/porting_guide_2.10.html)
+Ansible provides porting guides to help you keeping up-to-date: [Ansible Porting Guides](https://docs.ansible.com/ansible/latest/porting_guides/porting_guides.html)
 
 ## Ansible Definitions
 ### Ansible Facts
