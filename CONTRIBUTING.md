@@ -1,22 +1,22 @@
 # Contribution
 
-## Oganisation du repository
-Le repository comporte les RefCards concernant des technologies. Il doit exister un répertoire par Technologie. Si des besoins sont différents par technologie, des sous-répertoires au premier doivent petre créés.
+## Repository organization
+The repository contains refcards concerning some technologies. One directory must exist by technology. If needs are different by technology, sub-directories must be created first.
 
-Le `README.md` liste toutes les technologies disponibles sur le repository. toute nouvelle technologie doit y être ajoutée avec le lien vers chacun des fichier de langue.
+The `README.md` lists all the technologies available on the repository. Any new technology must be added there with the link to each of the language files.
 
-## Convention de nommage
+## Naming conventions
 
-Les conventions de nommages et de typographie :
-***Répertoires*
-* Les répertoires à la racines sont écrits en minuscules
-* Les réperotires doivent comporter les versions des RefCards par langue
-**Fichiers**
-* Les fichiers sont nommés par langue dans le format `ISO 639-1` en extension `.md`
+Naming and typography conventions:
+***Directories*
+* Root directories are written in lowercase
+* The directories must contain the refcard versions, by language 
+**Files**
+* The files are named by language, according to the `ISO 639-1` spec and the extension must be `.md`
 **README.md**
-* Le `README.md` doit comporter chaque technologie présente
-* Les technologies doivent afficher les langues disponibles
-* Les langues doivent pointer vers les fichiers en question
+* The `README.md` must include each technology present
+* Technologies must display available languages
+* Languages must point to the related files
 
 
 Example :
@@ -32,10 +32,10 @@ refcards
 └── etc...
 ```
 
-## Publication des modifications
-La contribution doit passer par une nouvelle branche du repository.
-La branche comportant les modifications sera revue et mergée par un autre collaborateur référent sur la technologie.
+## Changes Publications 
+The contribution must be allong the new branch some repository. 
+The branch make change will be reviewed and merged by an another maintainer of the technology.
 
-## Revue du contenu
-N'oubliez pas que les RefCards font parti de la vitrine technologie de la société. La revue du contenu permet d'éviter les fautes d'orthographe et de grammaire.
+## Reviews
+Don’t forgot that the refcards are parts of company technology showcase. The review allows to avoid some misspellings for example.
 
