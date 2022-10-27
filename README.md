@@ -1,7 +1,7 @@
 # Refcards
 
-## Contenu
-Liste des Refcards disponibles :
+## Content
+List of available refcards :
 * [Ansible](ansible) | [FR](ansible/FR.md) | [EN](ansible/EN.md)
 * [Git](git) | [FR](git/FR.md) | [EN](git/EN.md)
 * [Vertx](vertx) | [FR](vertx/FR.md)
@@ -12,4 +12,4 @@ Liste des Refcards disponibles :
 
 
 ## Contribution
-La contribution est ouverte à tous et doit suivre quelques règles simples présentées dans [CONTRIBUTING.md](CONTRIBUTING.md).
+The contribution is open to all and should follow the simples rules inside the [CONTRIBUTING.md](CONTRIBUTING.md).
