@@ -12,7 +12,7 @@ Written by Ludovic Dussart.
 3. [Cheat Sheet](#cheat-sheet)
     * [Rules and good practices](#rules-good-practices)
     * [Who ? What ? How?](#who--what--how-)
-    * [Frequent orders](#frequent-orders)
+    * [Frequent commands](#frequent-commands)
 4. [Start with a project](#start-with-a-project)
 5. [Minimum configuration](#minimum-configuration)
 6. [Ignore files (.gitignore)](#ignore-files-gitignore)
@@ -22,7 +22,7 @@ Written by Ludovic Dussart.
 
 [To go further](#to-go-further)
 
-10. [More Orders](#more-orders)
+10. [More Commands](#more-commands)
 10. [Enrich the Git configuration](#enrich-the-git-configuration)
 11. [Tag creation](#tag-creation)
 12. [Branch merge](#branch-merge)
@@ -197,7 +197,7 @@ The standard use of Git takes place in 3 steps:
 * I made a bad manipulation and I lost my modifications: cf. [Reflog](#reflog-your-safety-net)
 * I have finished working on my task and I must propose it to my team: cf. [Submit a merge request](#submit-a-branch-merge-request)
 
-### Frequent Orders
+### Frequent Commands
 #### Setup
 
 ```shell
@@ -617,7 +617,7 @@ The commit message should be structured as follows:
 
 ## For further
 
-### More Orders
+### More Commands
 
 > Use `git` + **TAB** to have the terminal prompt you with the commands
 >
